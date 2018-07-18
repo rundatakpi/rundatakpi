@@ -30,8 +30,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.run.framework.excel.exception.InvalidExtensionNameException;
-import com.run.framework.excel.exception.NullExcelHeaderException;
+import com.cn.run.kpi.exception.InvalidExtensionNameException;
+import com.cn.run.kpi.exception.NullExcelHeaderException;
 
 public class ExcelUtil<T> {
 	

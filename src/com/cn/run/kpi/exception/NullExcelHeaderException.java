@@ -1,4 +1,4 @@
-package com.run.framework.excel.exception;
+package com.cn.run.kpi.exception;
 
 public class NullExcelHeaderException extends RuntimeException{
 
