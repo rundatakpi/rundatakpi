@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--时段定义-->
+<propertie>
+	<element key ="0" begin="00:00" end="05:00" value="凌晨"/>
+	<element key ="1" begin="05:00" end="08:00" value="早上"/>
+	<element key ="2" begin="08:00" end="11:00" value="上午"/>
+	<element key ="3" begin="11:00" end="13:00" value="中午"/>
+	<element key ="4" begin="13:00" end="15:00" value="下午"/>
+	<element key ="5" begin="15:00" end="19:00" value="晚上"/>
+	<element key ="6" begin="19:00" end="21:00" value="半夜"/>
+	<element key ="7" begin="21:00" end="24:00" value="深夜"/>
+</propertie>

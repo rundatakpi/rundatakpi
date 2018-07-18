@@ -1,0 +1,178 @@
+@charset "utf-8";
+
+/*首页*/
+
+.scrollbody{overflow:hidden;}
+
+
+/*日志查询*/
+.top{height:39px; line-height:39px; background:url(../images/topbg.png) repeat-x; min-width: 1366px;}
+.logo{margin:7px 0px 0px 20px;}
+.welcome{margin-right:15px; color:#fff;}
+.main{min-width: 1366px;}
+
+/*.tab{margin:12px 18px;}*/
+.tabHd{height:36px; line-height:36px; padding:10px 18px 0px 18px; /*background:url(../images/tabhdbg.png) repeat-x bottom #99ccff;*/ background-color:#99ccff;}
+.tabHd ul{height:36px; /*border-left:1px solid #5082e6;*/}
+.tabHd li{height:36px; line-height:36px; margin-right:10px; padding-right:1px; background:url(../images/tabrbg.png) no-repeat right center; /*padding-bottom:4px; background:url(../images/tabhditembg.png) repeat-x; border-top:1px solid #5082e6; border-right:1px solid #5082e6;*/}
+.tabHd li .tabL{padding-left:1px; background:url(../images/tablbg.png) no-repeat left center;}
+.tabHd li .tabC{background:url(../images/tabcbg.png) repeat-x;}
+.tabHd li:hover{/*background:url(../images/tabhditembghover.png) repeat-x;*/}
+.tabHd li:hover a{background-position:18px -71px; color:#5082e6;}
+.tabHd a{display:block; height:32px; line-height:32px; padding:0px 18px 4px 37px;}
+.tabHd a.navIcon_1{background:url(../images/navicon_1.png) no-repeat 18px 9px;}
+.tabHd a.navIcon_2{background:url(../images/navicon_2.png) no-repeat 18px 9px;}
+.tabHd a.navIcon_3{background:url(../images/navicon_3.png) no-repeat 18px 9px;}
+.tabHd a.navIcon_4{background:url(../images/navicon_4.png) no-repeat 18px 9px;}
+.tabHd li.slt{/*background:url(../images/tabhditembgslt.png) repeat-x;*/ background:url(../images/tabsltbg.png) repeat-x;}
+.tabHd li.slt .tabL{background:url(../images/tabsltbg.png) repeat-x;}
+.tabHd li.slt .tabC{background:url(../images/tabsltbg.png) repeat-x;}
+.tabHd li.slt a{background-position:18px -70px; color:#5082e6; font-weight:bold;}
+.hide{/*display:none;*/ visibility:hidden;}
+
+.tabBd{position:relative; margin:0px 18px;}
+.tabBdBox{position:absolute; top:0px; left:0px; width:100%;}
+.sift{position:relative; margin-bottom:8px; padding-right:92px; padding-left:15px; padding-bottom:8px; border-bottom:1px solid #d1d9e9;}
+.siftBox{height:24px; line-height:24px; padding:10px 0px;}
+.radioLabel{margin-left:20px;}
+.radioLabel input{margin:5px 10px 0px 0px;}
+.siftCalendar{margin-left:10px;}
+.calendar{width:153px; height:24px; padding-left:7px; background:url(../images/calendarbg_1.png) no-repeat; border:none; color:#333;}
+.calendarSep{margin:0px 8px; color:#999;}
+.marginR35{margin-right:35px;}
+.normalInput{width:175px; height:22px; line-height:22px; background-color:#fff; border:1px solid #ccc;}
+.siftOrangeBtn{display:inline-block; bottom:15px;width:56px; height:28px; line-height:28px; background:url(../images/orangebtn.png) no-repeat; text-align:center; color:#fff; font-weight:bold;}
+.siftOrangeBtn:hover{background:url(../images/orangebtnhover.png) no-repeat;}
+.selectZtree_inp{width:177px;height:22px;line-height:22px;border:1px solid #ccc;outline:none;text-indent:10px;background: url(../images/selectZtree_inp.png) right 0 no-repeat;}
+.selectZtree .ztree{display:none;position: absolute;width:167px;height:215px;overflow:auto;border:1px solid #ccc;border-top:none;background: #fff; z-index:10;}
+.selectZtree.w340 .selectZtree_inp{width:338px;}
+.selectZtree.w340 .ztree{width:328px;}
+.popRadioList .r-radio-item{margin:2px 0;color:#333;}
+.title{height:36px; line-height:36px; padding:0px 12px; background:url(../images/title.png) repeat-x;}
+.title h3{padding-left:27px; color:#fff;}
+.titleIcon_1{background:url(../images/titleicon_1.png) no-repeat left center;}
+.exportLink{padding-left:18px; background:url(../images/exportlink.png) no-repeat left center; color:#fff;}
+.exportLinkhover{display:block; margin-top:10px;margin-right:10px;padding-left:18px; background:url(../images/exportLinkhover.png) no-repeat left center; color:#297acc;}
+
+/*日志统计*/
+.chkLabel{margin-right:25px;}
+.chkLabel input{margin:6px 8px 0px 0px;}
+.useTimeLink a{color:#2970ff; text-decoration:underline;}
+.useTimeLink a.link{color:#2970ff; text-decoration:underline;}
+.useTimeLink a.visited{color:#8c0cce;}
+/*.useTimeLink a:hover{color:#0f0;}
+.useTimeLink a:active{color:#00f;}*/
+
+/*top10用户*/
+.contentbox li{width:49%;}
+.toptitle{height:30px; line-height:30px; background:url(../images/titlebg.png) no-repeat left; background-size:100% 100%; border-left:5px solid #ffa64c; border-bottom:1px solid #7399e5;margin-top:15px;}
+.toptitle .toptitlebg1{position:absolute;width:100px;height:30px;background:url(../images/toptitlebg1.png) no-repeat 13px 6px;padding-left:34px;line-height: 30px;font-weight: bold;color:#fff;}
+.morebtn{width:8px;height:8px; margin:10px 10px 0px 0px; background:url(../images/morebtn.png) no-repeat;}
+.morebtn:hover{background:url(../images/morebtnhover.png) no-repeat;}
+.toptitlebg2 .toptitlebg1{width:100px;height:30px;background:url(../images/toptitlebg2.png) no-repeat 12px 6px;padding-left:34px;line-height: 30px;font-weight: bold;color:#fff;}
+.toptitlebg3 .toptitlebg1{width:100px;height:30px;background:url(../images/toptitlebg3.png) no-repeat 12px 6px;padding-left:34px;line-height: 30px;font-weight: bold;color:#fff;}
+.toptitlebg4 .toptitlebg1{width:118px;height:30px;background:url(../images/toptitlebg4.png) no-repeat 12px 6px;padding-left:34px;line-height: 30px;font-weight: bold;color:#fff;}
+
+.echartsbox{/*width:100%;*/height:350px; padding:15px 10px 7px 10px; border-right:1px solid #ddd;border-bottom:1px solid #ddd;border-left:1px solid #ddd;}
+#Top5businesspie{width:54%;height:350px;}
+#Top5businessbar{margin-top:9px;width:45%;height:300px;}
+/*首页表格样式修改*/
+.contentbox .r-grid-bd-box table td{border-right: none;}
+.contentbox .r-grid-layout{position:static;}
+.contentbox .r-grid-handle{border-right:none;}
+/*表格中的序号样式*/
+.numorange{display:inline-block;width:19px;height:18px;line-height:18px;margin-top:6px;background:url(../images/numorange.png) no-repeat;color:#fff;}
+.numblue{display:inline-block;width:19px;height:18px;line-height:18px;margin-top:6px;background:url(../images/numblue.png) no-repeat;color:#fff;}
+.daysel{width:75px;height:19px;margin:5px 30px 0px 0px;/*position:relative;top:35px;right:-4px;*/}
+#keyword,#Top10nokey{/*margin-top:12px;*/}
+
+/*模型管理*/
+.header{height:42px;line-height:42px;margin:0px 18px 12px 18px;border-bottom:1px solid #4775cb;color:#7399e5;font-weight:bold;}
+.modellogomin{display:inline-block;padding-left:35px;background:url(../images/modellogomin.png) no-repeat 10px center;}
+.backbtn{width:59px;height:24px;margin-top:12px;background:url(../images/backbtn.png) no-repeat;}
+.backbtn:hover{background:url(../images/backbtnhover.png) no-repeat;}
+.moduleBox{margin:12px 18px;position:relative;}
+.mainContent{padding-bottom:6px;}
+.mainContent .mainContentli{width:32%;height:283px;/*margin-right:40px;*/margin:0px 0.5% 10px 0.5%; border:1px solid #869dcb;}
+/*.mainContent .marginR0{margin-right:0px;}*/
+.modallogo{display:inline-block;width:140px;height:51px;line-height:51px;padding-left:60px;margin-left:30px;/*background:url(../images/modallogo.png) no-repeat;*/}
+.modallogo_1{background:url(../images/modallogo_1.png) no-repeat;}
+.modallogo_2{background:url(../images/modallogo_2.png) no-repeat;}
+.modallogo_3{height:54px; background:url(../images/modallogo_3.png) no-repeat;}
+.modallogo_4{background:url(../images/modallogo_4.png) no-repeat;}
+
+.enabled{display:inline-block;width:54px;height:24px;background:url(../images/enabled.png) no-repeat;margin-top:13.5px;}
+.enabledclick{display:inline-block;width:54px;height:24px;background:url(../images/enabledhover.png) no-repeat;margin-top:13.5px;}
+.enabled:hover{background:url(../images/enabledhover.png) no-repeat;}
+.modeldisabled{display:inline-block;width:68px;height:24px;background:url(../images/disabled.png) no-repeat;margin-top:13.5px;margin-left:8px;}
+.modeldisabledclick{display:inline-block;width:68px;height:24px;background:url(../images/disabledhover.png) no-repeat;margin-top:13.5px;margin-left:8px;}
+.modeldisabled:hover{background:url(../images/disabledhover.png) no-repeat;}
+.boxtop{margin-top:40px;margin-bottom:22px;}
+.graybox{height:165px;margin:5px;background:#ebf0fa;}
+.section{height:105px;padding:15px 40px 0 40px;line-height:33px;}
+.section input{width:70px;height:24px;padding-left:5px;border:1px solid #333;}
+.footer{margin-bottom:10px;margin-top:10px;}
+.savebtn{display:inline-block;width:59px;height:24px;background:url(../images/savebtn.png) no-repeat;margin-right:8px;margin-left:36%;}
+.savebtn:hover{background:url(../images/savebtnhover.png) no-repeat;}
+.resetbtn{display:inline-block;width:59px;height:24px;background:url(../images/resetbtn.png) no-repeat;}
+.resetbtn:hover{background:url(../images/resetbtnhover.png) no-repeat;}
+.workday{height:105px;padding:15px 15px 0 15px;}
+.selinput{margin-top:3px;margin-right:6px;border:1px solid #c4c4c4;border-radius:5px;}
+.chectime li{margin-right:29px;margin-bottom:12px;}
+.addtime .timeli{width:80px;height:24px;line-height:24px;margin-top:15px;margin-right:10px;text-align:center;border:1px solid #333;background:#fff;}
+.addtime .btnli{margin-top:16px;margin-right:10px;}
+.addtime span{display:inline-block;width:80px;height:24px;line-height:24px;text-align:center;}
+.addtime img{position:relative;top:-33px;left:38px;}
+.addtimebtn{display:inline-block;width:54px;height:24px;background:url(../images/addtimebtn.png) no-repeat;}
+.addtimebtn:hover{background:url(../images/addtimebtnhover.png) no-repeat;}
+.weekend{height:105px;padding-top:15px;}
+.weekend ul{width:230px;margin:0 auto;}
+.weekend li{margin-bottom:12px;}
+.timebox{width:94px;height:24px;padding-left:5px;border:1px solid #333;background:#fff;}
+.timebox span{display:inline-block;margin:2px 5px 0 5px;}
+.timeinputsm{width:19px;height:20px;text-align:center;border:none;margin-top:2px;font-size:11px;}
+.dis{display:none;}
+.showimg{display:inline-block;}
+.lookcolor:link{color:#0068b7;text-decoration:underline;}
+.lookcolor:visited{color:#8c0cce;}
+
+.tableborder{/*width:323px;*/height:250px;border:1px solid #e9e9e9;margin:10px 17px;}
+/*弹出框改变*/
+.tableborder .r-grid th{border-left:none;}
+.tableborder .r-grid{margin:0px;}
+.modelbtn{display:inline-block;width:55px;height:24px;line-height:22px;padding-left:25px;margin-top:-30px;background:url(../images/modelbtn.png) no-repeat;color:#fff;}
+.modelbtn:hover{background:url(../images/modelbtnhover.png) no-repeat;}
+
+.versionNum{height:20px;color:#333;margin-right:10px;text-align:right;}
+#keyword th .r-grid-omit,#Top10nokey th .r-grid-omit{color:#297acc;}
+/*#popCreatelogdetail .r-window-title{background:url(../images/modeltitlebg.png) no-repeat;}*/
+
+.btnhide{display:none;}
+.btnshow{display:block;}
+
+/*节日弹出框*/
+/*#popholiday .r-window-title{height:26px; line-height:26px; border-bottom:none; background:url(../images/mymodeltitlebg.png) no-repeat;}
+#popholiday .r-window-cnt{width:358px; height:250px; background:url(../images/modelholidaybg.png) no-repeat ;}
+#popholiday .r-window-main{width:auto;}
+#popholiday .r-window-title-txt{display:inline-block; height:26px; line-height:30px;font-size:13px;}
+#popholiday .r-window-title-oplist{padding-top:5px;}*/
+#holidaytable{width:300px; height:250px;}
+#indexlogdetailtable{padding:0 5px;}
+#holidaytable .r-grid-tableLayout{border:none;}
+.bigbox{width:100%; height:100%;overflow:auto;}
+/*checkbox自定义*/
+.chklabel{width:18px; height:18px; background:url(../images/checkboxbg.png) no-repeat;margin-right:8px;}
+.chklabel[canAble='disable']{background:url(../images/checkboxdisablebg.png) no-repeat;}
+.chklabel[canAble='able']:hover{width:18px; height:18px; background:url(../images/checkboxhover.png) no-repeat;margin-right:8px;}
+.chkbox{margin-top:4px;margin-right:30px;}
+.chkname{margin-top:-4px;}
+.namechk[canAble='able']:checked + label{background:url(../images/checkedbtn.png) no-repeat;}
+
+.chkradiolabel{width:12px; height:12px;margin-right:8px;margin-top:2px;background:url(../images/radiobtn.png) no-repeat;}
+.chkradiolabel:hover{width:12px; height:12px;margin-right:8px;margin-top:2px;background:url(../images/radiohover.png) no-repeat;}
+.radiochk:checked + label{background:url(../images/radiochecked.png) no-repeat;}
+.chectime .chkname{margin-top:-1px;}
+.chectime .chkbox{margin-right:25px;}
+.liner{margin-top:4px;}
+.jqCloudBox{border-right:1px solid #ddd; border-bottom:1px solid #ddd; border-left:1px solid #ddd;}
+.chart{width:100%; height:366px;}

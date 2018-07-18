@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<body>
+	<div id="kpibody">
+        <div id="page-wrapper" style="padding-top: 10px">
+			<div class="row">
+				<div class="col-lg-12" margin-bottom="50px" style="width: 1200px;">
+				    <ul id="" class="nav nav-tabs">
+					    <li class="active"><a href="#kpi1" data-toggle="tab"><strong>kpi1</strong></a></li>
+						<li><a href="#kpi2" data-toggle="tab"><strong>kpi2</strong></a></li>
+						<li><a href="#kpi3" data-toggle="tab"><strong>kpi3</strong></a></li>
+						<li><a href="#kpi4" data-toggle="pill"><strong>kpi4</strong></a></li>
+					</ul>
+				</div> 
+			</div>
+			<div id="kpitabcontent" class="tab-content">
+				<div class="tab-pane fade in active" id="kpi1">
+					<h1>kpi1</h1>
+				</div>
+				<div class="tab-pane fade" id="kpi2">
+					<h1>kpi2</h1>
+				</div>
+				<div class="tab-pane fade" id="kpi3">
+					<h1>kpi3</h1>
+				</div>
+				<div class="tab-pane fade" id="kpi4">
+					<h1>kpi4</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+	//页面载入。
+	$(function() {
+	  	_intoPage('#kpi1', "/kpi/kpi1.html");
+	  	_intoPage('#kpi2', "/kpi/kpi2.html");
+	  	_intoPage('#kpi3', "/kpi/kpi3.html");
+	  	_intoPage('#kpi4', "/kpi/kpi4.html");
+	});
+</script> 
+</html>  

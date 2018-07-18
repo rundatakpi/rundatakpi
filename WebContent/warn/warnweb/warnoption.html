@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<body>
+	<div id="content">
+	   <div class="panel-body form-inline">       
+    		<div class="panel-body form-inline" id="div_cross_protocol" style="width:2220px;">
+    			<label class="control-label" for="sel_search_orderstatus">查询内容：</label> 
+                <input type="text" class="form-control" id="warnresult_search_content" value="" name="protocolname" placeholder="查询内容">
+                 &nbsp;
+                 
+                <label class="control-label" for="sel_search_warngrade">通知对象：</label>  
+ 				<div class="form-group" id="div_warngrade_protocol">
+					<select id="test1" class="form-control show-tick selectpicker" > 
+ 						<option value="">谢硕</option>
+ 						<option value="">谢硕2</option>
+ 						<option value="">谢硕3</option>                         
+					</select>
+				</div> 
+                &nbsp;
+                
+                <label class="control-label" for="sel_search_warngrade">报警等级：</label>  
+ 				<div class="form-group" id="div_warngrade_protocol">
+					<select id="test2" class="form-control show-tick selectpicker" > 
+ 						<option value="">轻微</option>
+ 						<option value="">严重</option>                         
+					</select>
+				</div> 
+                 &nbsp;
+                 
+                <label class="control-label" for="sel_search_warngrade">报警来源：</label>  
+ 				<div class="form-group" id="div_warngrade_protocol">
+					<select id="test3" class="form-control show-tick selectpicker" > 
+ 						<option value="">数据中心</option>                     
+					</select>
+				</div> 
+   			</div>     
+   			
+   			<div class="panel-body form-inline" id="div_cross_protocol" style="width:2220px;">
+    			<label class="control-label" for="sel_search_orderstatus">开始时间：</label>  
+                <input type="text" class="form-control startTime" id="cross_startTime" />
+                &nbsp;
+                
+                <label class="control-label" for="sel_search_orderstatus">结束时间：</label> 
+                <input type="text" class="form-control endTime" id="cross_endTime" />
+                &nbsp;
+                
+                <div class="form-group" style="margin-left: 10px">
+           	 		<button type="button" class="btn btn-info" onclick="reloadwarnResultTable()">查询</button>
+            		<button type="reset" class="btn btn-info">重置</button>
+            		<button type="button" class="btn btn-info">导出</button>
+          		</div>
+   			</div>  
+		</div>
+	</div>
+ 
+    <div class="panel-body form-inline"  style="width:1020px;">
+		<table class="table table-bordered text-center" id="reportTable" style="width: 1020px;">
+		    <thead style="width: 769px;">
+				<tr> 
+				<th>编号</th>
+					<th>地市</th> 
+					<th>告警来源</th>
+					<th>告警类型</th>
+					<th>监测项</th>
+					<th>详细监测项</th>
+					<th>节点IP</th>
+					<th>告警等级</th>
+					<th>告警时间</th> 
+					<th>负责人</th>
+					<th>通知对象</th>	 
+					<th>通知对象角色</th>
+					<th>联系方式</th>
+					<th>上报状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>							 
+	    </table>
+   </div>
+</body>	
+<!-- <script type="text/javascript" src="warnweb/warnoption/warnoption.js"></script>  -->
+   

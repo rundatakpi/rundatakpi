@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.run.framework.shiro.user.dao.impl.UserDaoImpl">
+
+	<resultMap id="BaseResultMap" type="com.run.framework.shiro.user.entity.User">
+		<id column="id" property="id"></id>
+		<result column="USERNAME" property="userName"></result>
+		<result column="ROLENAME" property="roleName"></result>
+		<result column="PASSWORD" property="password"></result>
+		<result column="PID" property="pid"></result>
+		<result column="STATUS" property="status"></result>
+		<result column="DEP_ID" property="deptId"></result>
+		<result column="ROLE_ID" property="roleId"></result>
+		<result column="CREATE_TIME" property="createTime"></result>
+		<result column="CREATE_BY" property="createBy"></result>
+		<result column="UPDATE_TIME" property="updateTime"></result>
+		<result column="UPDATE_BY" property="updateBy"></result>
+		<association property="dept" javaType="com.run.framework.shiro.department.entity.Dept"
+			resultMap="deptMap" columnPrefix="dept_"/>
+	</resultMap>
+	
+	<resultMap id="deptMap" type="com.run.framework.shiro.department.entity.Dept">
+		<id column="ID" property="id" javaType="java.lang.Integer"/>
+		<result column="DEPTNAME" property="deptName" javaType="java.lang.String"/>
+		<result column="CREATTIME" property="creatTime" javaType="java.util.Date"/>
+		<result column="CREATNAME" property="creatName" javaType="java.lang.String"/>
+		<result column="UPDATETIME" property="updateTime" javaType="java.util.Date"/>
+		<result column="UPDATENAME" property="updateName" javaType="java.lang.String"/>
+		<result column="PID" property="pId" javaType="java.lang.Integer"/>
+		<result column="DEPTNO" property="deptNo" javaType="java.lang.String"/>
+		<result column="DEPTLEVEL" property="deptLevel" javaType="java.lang.String"/>
+	</resultMap>
+	
+	<resultMap id="roleMap" type="com.run.framework.shiro.role.entity.Role">
+		<id column="id" property="id"></id>
+		<result column="NAME" property="name"></result>
+		<result column="IS_SYSTEM" property="isSystem"></result>
+		<result column="STATUS" property="status"></result>
+		<result column="DESCRIPTION" property="description"></result>
+		<result column="CREATE_TIME" property="createTime"></result>
+		<result column="CREATE_BY" property="createBy"></result>
+		<result column="UPDATE_TIME" property="updateTime"></result>
+		<result column="UPDATE_BY" property="updateBy"></result>
+	</resultMap>
+
+	<sql id="dy_where">
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="null != id and '' != id" >
+				AND ID = #{id}
+			</if>
+			<if test="null != userName and '' != userName" >
+				and USERNAME like CONCAT(CONCAT('%',#{userName}),'%')
+			</if>
+			<if test="null != password and '' != password" >
+				AND PASSWORD = #{password}
+			</if>
+			<if test="null != pid and '' != pid" >
+				AND PID = #{pid}
+			</if>
+			<if test="null != status and '' != status" >
+				AND STATUS = #{status}
+			</if>
+			<if test="null != deptId and '' != deptId" >
+				AND DEP_ID in (select dp.id from t_dept dp start with dp.pid = #{deptId} connect by prior dp.id = dp.pid ) 
+			</if>
+			<if test="null != roleId and '' != roleId" >
+				AND ROLE_ID = #{roleId}
+			</if>
+			<if test="null != createTime and '' != createTime" >
+				AND CREATE_TIME = #{createTime}
+			</if>
+			<if test="null != createBy and '' != createBy" >
+				AND CREATE_BY = #{createBy}
+			</if>
+			<if test="null != updateTime and '' != updateTime" >
+				AND UPDATE_TIME = #{updateTime}
+			</if>
+			<if test="null != updateBy and '' != updateBy" >
+				AND UPDATE_BY = #{updateBy}
+			</if>
+			<if test="null != startRow and '' != startRow" >
+				AND NO &gt; #{startRow}
+			</if>
+		</trim>
+	</sql>
+
+	<select id="retrieve" parameterType="map" resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM T_USERS
+		<include refid="dy_where"/>
+	</select>
+	
+	<select id="listCheck" parameterType="map" resultMap="BaseResultMap">
+		SELECT * FROM T_USERS WHERE 1=1
+		<if test="null != id and '' != id" >
+				AND ID != #{id}
+		</if>
+		<if test="null != userName and '' != userName" >
+				AND USERNAME = #{userName}
+		</if>
+	</select>
+
+	<select id="list" resultMap="BaseResultMap"	parameterType="map">
+		SELECT * FROM (SELECT ua.*, ROWNUM no FROM (
+		SELECT u.*,d.DEPTNAME as dept_deptName, 
+		(select WMSYS.WM_CONCAT(r.NAME) from T_ROLE r left join T_user_2_ROLE ur on r.id = ur.role_id where ur.user_ID = u.ID ) as rolename 
+		FROM T_USERS u 
+		LEFT JOIN T_DEPT d on u.DEP_ID = d.ID 
+		<if test="null != orderby and '' != orderby" >
+				ORDER BY u.${orderby}
+		</if>
+		<if test="null != order and '' != order" >
+				${order}
+		</if>
+		) ua
+		WHERE 1=1
+		<if test="null != endRow and '' != endRow" >
+				AND ROWNUM &lt;= #{endRow}
+		</if>
+		)
+		<include refid="dy_where"/>
+	</select>
+	
+	<select id="listChildren" resultMap="BaseResultMap">
+		SELECT * FROM (SELECT ua.*, ROWNUM no FROM (SELECT u.*, 
+		d.DEPTNAME as dept_deptName, r.NAME as role_name
+		FROM T_USERS u
+		LEFT JOIN T_DEPT d on u.DEP_ID = d.ID 
+		LEFT JOIN T_ROLE r on u.ROLE_ID = r.ID ORDER BY u.DEP_ID) ua
+		CONNECT BY NOCYCLE PRIOR 
+		ua.ID = ua.PID
+		START WITH
+		<if test="id != null">
+		ua.ID = #{id}
+		</if>)
+		WHERE 1 = 1
+		<if test="null != startRow and '' != startRow" >
+			AND NO &gt; #{startRow}
+		</if>
+		<if test="null != endRow and '' != endRow" >
+			AND ROWNUM &lt;= #{endRow}
+		</if>
+	</select>
+	
+	<select id="count" resultType="Integer" parameterType="map">
+		SELECT count(*) FROM T_USERS u
+		<if test="null != userName and '' != userName" >
+			where USERNAME like CONCAT(CONCAT('%',#{userName}),'%')
+		</if>
+	</select>
+
+	<insert id="insert" parameterType="map">
+		<!-- <selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			<![CDATA[ SELECT T_USERS_SEQ.nextval FROM dual ]]>
+		</selectKey> -->
+		INSERT INTO T_USERS
+		(ID, USERNAME, PASSWORD, PID, STATUS, DEP_ID, ROLE_ID, CREATE_TIME, CREATE_BY, UPDATE_TIME, UPDATE_BY)
+		VALUES(#{id}, #{userName}, #{password}, #{pid}, #{status}, #{deptId}, #{roleId}, #{createTime}, #{createBy}, 
+		#{updateTime},#{updateBy})
+	</insert>
+	
+	<select id="getPrimaryKey" resultType="Integer">
+		SELECT T_USERS_SEQ.nextval FROM dual
+	</select>
+
+	<update id="update" parameterType="map">
+		UPDATE T_USERS
+		<trim prefix="set" suffixOverrides=",">
+			<if test="null != userName">
+				USERNAME = #{userName},
+			</if>
+			<if test="null != password">
+				PASSWORD = #{password},
+			</if>
+			<if test="null != pid">
+				PID = #{pid},
+			</if>
+			<if test="null != status">
+				STATUS = #{status},
+			</if>
+			<if test="null != deptId">
+				DEP_ID = #{deptId},
+			</if>
+			<if test="null != roleId">
+				ROLE_ID = #{roleId},
+			</if>
+			<if test="null != createTime">
+				CREATE_TIME = #{createTime},
+			</if>
+			<if test="null != createBy">
+				CREATE_BY = #{createBy},
+			</if>
+			<if test="null != updateTime">
+				UPDATE_TIME = #{updateTime},
+			</if>
+			<if test="null != updateBy">
+				UPDATE_BY = #{updateBy},
+			</if>
+		</trim>
+		WHERE ID=#{id}
+	</update>
+
+	<delete id="delete" parameterType="map">
+		DELETE FROM T_USERS
+		<include refid="dy_where"/>
+	</delete>
+</mapper>

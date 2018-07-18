@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+	<div id="content">
+	   <div class="panel-body form-inline">       
+    		<div class="panel-body form-inline" id="div_cross_protocol" style="width:2220px;">
+   				<label class="control-label" for="sel_search_orderstatus">查询内容：</label> 
+                <input type="text" class="form-control" id="warnresult_search_content" value="" name="protocolname" placeholder="查询内容">
+                &nbsp;
+                
+                <label class="control-label" for="sel_search_warngrade">报警等级：</label>  
+ 				<div class="form-group" id="div_warngrade_protocol">
+					<select id="sel_search_warngrade" class="form-control show-tick selectpicker" > 
+ 						<option value="">报警等级</option>
+ 						<option value="轻微">轻微</option>
+ 						<option value="严重">严重</option>                         
+					</select>
+				</div> 
+                &nbsp;
+                
+                <label class="control-label" for="sel_search_warngrade">报警来源：</label>  
+ 				<div class="form-group" id="div_warngrade_protocol">
+					<select id="sel_search_warnsource" class="form-control show-tick selectpicker" >
+ 						<option value="">报警来源</option>                     
+ 						<option value="数据中心">数据中心</option>                     
+					</select>
+				</div>
+   			</div>
+   			
+   			<div class="panel-body form-inline" id="div_cross_protocol" style="width:2220px;">
+    			<label class="control-label" for="sel_search_orderstatus">开始时间：</label>  
+                <input type="text" class="form-control startTime" id="cross_startTime" />
+                &nbsp;
+                
+                <label class="control-label" for="sel_search_orderstatus">结束时间：</label> 
+                <input type="text" class="form-control endTime" id="cross_endTime" />
+                &nbsp;
+                
+                <div class="form-group" style="margin-left: 10px">
+           	 		<button type="button" class="btn btn-info" onclick="reloadWarnResultTable()">查询</button>
+            		<button type="reset" class="btn btn-info" onclick="resetWarnResultTable()">重置</button>
+            		<button type="button" class="btn btn-info" onclick="exportWarnResultTable()">导出</button>
+          		</div>
+   			</div>    
+		</div>
+	</div>
+ 
+    <div class="panel-body form-inline"  style="width:1020px;">
+		<table class="table table-bordered text-center" id="warnResultTable" style="width: 1020px;">
+		    <thead style="width: 769px;">
+				<tr>
+				    <th></th>
+				    <th>编号</th>
+					<th>地市</th> 
+					<th>告警来源</th>
+					<th>告警类型</th>
+					<th>集群</th>
+					<th>监测项</th>
+					<th>详细监测项</th>
+					<th>节点名称</th>
+					<th>节点IP</th>
+					<th>异常结果</th>
+					<th>告警时间</th>
+					<th>告警等级</th>
+					<th>状态</th>
+					<th>操作</th>
+					<th>负责人</th>	
+					<th>解决时间</th>
+				</tr>
+			</thead>							 
+	    </table>
+   </div>
+</body>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/bootstrop/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/datatable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="../js/datatable/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="../js/datatable/extend.dataTables.js"></script>
+<script type="text/javascript" src="../js/bootstrap-select.js"></script>
+<script type="text/javascript" src="../js/bootstrap-multiselect.js"></script>
+<script type="text/javascript" src="../js/_core.js"></script>
+<!-- DatePicker -->
+<script type="text/javascript" src="../js/datePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="../js/date2.js"></script>
+<script type="text/javascript" src="../js/layer/layer.js"></script>	
+<script type="text/javascript" src="../js/layer/layer.ext.js"></script>	
+<script type="text/javascript" src="../warn/warnweb/warnresult/warnresult.js"></script> 
+   

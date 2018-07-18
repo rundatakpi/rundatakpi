@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- 加载配置文件
+	<context:property-placeholder location="classpath:db.properties" /> -->
+	
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/db.properties</value>
+				<value>classpath:/resources.properties</value>
+			</list>
+		</property>
+	</bean>
+	  
+	<!-- 数据库连接池 1-->
+	<bean id="dataSource1" class="com.alibaba.druid.pool.DruidDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.orcl.driverClassName}" />
+		<property name="url" value="${jdbc.orcl.url}" />
+		<property name="username" value="${jdbc.orcl.username}" />
+		<property name="password" value="${jdbc.orcl.password}" />
+		<property name="maxActive" value="10" />
+		<property name="maxIdle" value="5" />
+		<!-- 配置获取连接等待超时的时间 --> 
+  		<property name="maxWait" value="10000" />
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 --> 
+ 		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+ 		 <!-- 这里建议配置为TRUE，防止取到的连接不可用 --> 
+  		<property name="testOnBorrow" value="true" /> 
+  		<property name="testOnReturn" value="false" />
+  		<!-- 监控数据库 -->  
+     	<property name="proxyFilters">  
+         <list>  
+             <ref bean="log-filter" />  
+         </list>   
+     </property>  
+	</bean>
+	<!-- 数据库连接池2 -->
+	<bean id="dataSource2" class="com.alibaba.druid.pool.DruidDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.zdr.driverClassName}" />
+		<property name="url" value="${jdbc.zdr.url}" />
+		<property name="username" value="${jdbc.zdr.username}" />
+		<property name="password" value="${jdbc.zdr.password}" />
+		<property name="maxActive" value="10" />
+		<property name="maxIdle" value="5" />
+		<!-- 配置获取连接等待超时的时间 --> 
+  		<property name="maxWait" value="10000" />
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 --> 
+ 		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+ 		 <!-- 这里建议配置为TRUE，防止取到的连接不可用 --> 
+  		<property name="testOnBorrow" value="true" /> 
+  		<property name="testOnReturn" value="false" />
+  		<!-- 监控数据库 -->  
+     	<property name="proxyFilters">  
+         <list>  
+             <ref bean="log-filter" />  
+         </list>   
+        </property>
+	</bean>
+	<!-- 数据库连接池 3-->
+	<!-- <bean id="dataSource3" class="com.alibaba.druid.pool.DruidDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.gbase.driverClassName}" />
+		<property name="url" value="${jdbc.gbase.url}" />
+		<property name="username" value="${jdbc.gbase.username}" />
+		<property name="password" value="${jdbc.gbase.password}" />
+		<property name="maxActive" value="10" />
+		<property name="maxIdle" value="5" />
+  		<property name="maxWait" value="10000" />
+ 		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+  		<property name="testOnBorrow" value="true" /> 
+  		<property name="testOnReturn" value="false" />
+     	<property name="proxyFilters">  
+         <list>  
+             <ref bean="log-filter" />  
+         </list>
+          </property>   
+	</bean> -->
+	 <!--创建jdbc数据源 -->
+	<bean id="dataSource3" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.gbase.driverClassName}" />
+		<property name="jdbcUrl" value="${jdbc.gbase.url}" />
+		<property name="user" value="${jdbc.gbase.username}" />
+		<property name="password" value="${jdbc.gbase.password}" />
+		<property name="autoCommitOnClose" value="true" />
+		<property name="checkoutTimeout" value="${cpool.checkoutTimeout}" />
+		<property name="initialPoolSize" value="${cpool.minPoolSize}" />
+		<property name="minPoolSize" value="${cpool.minPoolSize}" />
+		<property name="maxPoolSize" value="${cpool.maxPoolSize}" />
+		<property name="maxIdleTime" value="${cpool.maxIdleTime}" />
+		<property name="acquireIncrement" value="${cpool.acquireIncrement}" />
+		<property name="maxIdleTimeExcessConnections" value="${cpool.maxIdleTimeExcessConnections}" />
+	</bean>
+	 
+	 <bean id="multipleDataSource" class="com.run.oam.commons.MultipleDataSource">  
+        <property name="defaultTargetDataSource" ref="dataSource1"/>  
+         <property name="targetDataSources">  
+       		 <map key-type="java.lang.String">  
+           		 <entry value-ref="dataSource1" key="dataSource1"></entry>   
+           		 <entry value-ref="dataSource2" key="dataSource2"></entry>  
+           		 <entry value-ref="dataSource3" key="dataSource3"></entry>  
+      		  </map>  
+   		 </property>  
+    </bean>  
+
+</beans>
