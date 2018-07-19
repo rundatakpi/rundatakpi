@@ -2,7 +2,8 @@
 <html>
 <meta charset="utf-8">
 <body>
-    <div id="test1">test11</div>
+    <div id="test1" onclick="getWarnMessage();">test11</div>
+    <button onclick="copyText()">Copy Text</button>
 	test1
 </body>
 
@@ -10,5 +11,25 @@
 	$(function() {
 		$("#test1").val("testkpi1")
 	});
+	
+	function copyText() {
+		var url = "/rundatakpi/warn/list"
+		$.ajax({
+			url: url,
+			type: "post",
+			dataType: "json",
+			success: function(data) {
+				console.log("data = " + JSON.stringify(data));
+				
+				var value = data["warnMessage"][0].warnContent;
+				console.log(value);
+				$("#test1").html(value);
+			}
+		});
+	}
+	
+	function getWarnMessage() {
+		console.log("copyText");
+	}
 </script> 
 </html>  

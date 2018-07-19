@@ -13,7 +13,7 @@
         <property name="statementExecutableSqlLogEnable" value="true" />
       </bean>
       
-    <bean id="dataSourceExchange" class="com.run.oam.commons.DataSourceAspect"/>
+    <bean id="dataSourceExchange" class="com.cn.run.kpi.commons.DataSourceAspect"/>
       
 	<!-- mapper配置 -->
 	<!-- 让spring管理sqlsessionfactory 使用mybatis和spring整合包中的 -->

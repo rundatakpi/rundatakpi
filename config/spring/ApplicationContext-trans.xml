@@ -58,7 +58,7 @@ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		<aop:advisor advice-ref="dataSourceExchange" pointcut-ref="transactionPointCut" order="1"/>
 	</aop:config>
 	
-	<bean id="applicationContext" class="com.run.oam.commons.SpringApplicationContext"/>	
+<!-- 	<bean id="applicationContext" class="com.cn.run.kpi.commons.SpringApplicationContext"/>	 -->
 	<context:component-scan base-package="com.**"/>  	
 	
 </beans>

@@ -12,13 +12,13 @@ public class LogDataInfo implements Serializable{
 	/*数据源描述*/
 	private String dataSourceDescription;
 	/*大协议编码*/
-	private String bigProtocolCode;
+	private String protocolTypeCode;
 	/*大协议描述*/
-	private String bigProtocolDescription;
+	private String protocolTypeDescription;
 	/*小协议编码*/
-	private String smallProtocolCode;
+	private String protocolCode;
 	/*小协议描述*/
-	private String smallProtocolDescription;
+	private String protocolDescription;
 	/*入库条数*/
 	private long inputDataNumber;
 	/*入库率*/
@@ -28,68 +28,70 @@ public class LogDataInfo implements Serializable{
 	/*数据准确率*/
 	private String dataAccuracy;
 	
-	
-	
 	public String getDataSourceCode() {
 		return dataSourceCode;
-	}
-	public void setDataSourceCode(String dataSourceCode) {
-		this.dataSourceCode = dataSourceCode;
 	}
 	public String getDataSourceDescription() {
 		return dataSourceDescription;
 	}
-	public void setDataSourceDescription(String dataSourceDescription) {
-		this.dataSourceDescription = dataSourceDescription;
+	public String getProtocolTypeCode() {
+		return protocolTypeCode;
 	}
-	public String getBigProtocolCode() {
-		return bigProtocolCode;
+	public String getProtocolTypeDescription() {
+		return protocolTypeDescription;
 	}
-	public void setBigProtocolCode(String bigProtocolCode) {
-		this.bigProtocolCode = bigProtocolCode;
+	public String getProtocolCode() {
+		return protocolCode;
 	}
-	public String getBigProtocolDescription() {
-		return bigProtocolDescription;
-	}
-	public void setBigProtocolDescription(String bigProtocolDescription) {
-		this.bigProtocolDescription = bigProtocolDescription;
-	}
-	public String getSmallProtocolCode() {
-		return smallProtocolCode;
-	}
-	public void setSmallProtocolCode(String smallProtocolCode) {
-		this.smallProtocolCode = smallProtocolCode;
-	}
-	public String getSmallProtocolDescription() {
-		return smallProtocolDescription;
-	}
-	public void setSmallProtocolDescription(String smallProtocolDescription) {
-		this.smallProtocolDescription = smallProtocolDescription;
+	public String getProtocolDescription() {
+		return protocolDescription;
 	}
 	public long getInputDataNumber() {
 		return inputDataNumber;
 	}
-	public void setInputDataNumber(long inputDataNumber) {
-		this.inputDataNumber = inputDataNumber;
-	}
 	public String getStorageRate() {
 		return storageRate;
-	}
-	public void setStorageRate(String storageRate) {
-		this.storageRate = storageRate;
 	}
 	public String getDataFeildNumber() {
 		return dataFeildNumber;
 	}
-	public void setDataFeildNumber(String dataFeildNumber) {
-		this.dataFeildNumber = dataFeildNumber;
-	}
 	public String getDataAccuracy() {
 		return dataAccuracy;
+	}
+	public void setDataSourceCode(String dataSourceCode) {
+		this.dataSourceCode = dataSourceCode;
+	}
+	public void setDataSourceDescription(String dataSourceDescription) {
+		this.dataSourceDescription = dataSourceDescription;
+	}
+	public void setProtocolTypeCode(String protocolTypeCode) {
+		this.protocolTypeCode = protocolTypeCode;
+	}
+	public void setProtocolTypeDescription(String protocolTypeDescription) {
+		this.protocolTypeDescription = protocolTypeDescription;
+	}
+	public void setProtocolCode(String protocolCode) {
+		this.protocolCode = protocolCode;
+	}
+	public void setProtocolDescription(String protocolDescription) {
+		this.protocolDescription = protocolDescription;
+	}
+	public void setInputDataNumber(long inputDataNumber) {
+		this.inputDataNumber = inputDataNumber;
+	}
+	public void setStorageRate(String storageRate) {
+		this.storageRate = storageRate;
+	}
+	public void setDataFeildNumber(String dataFeildNumber) {
+		this.dataFeildNumber = dataFeildNumber;
 	}
 	public void setDataAccuracy(String dataAccuracy) {
 		this.dataAccuracy = dataAccuracy;
 	}
+	
+	
+	
+	
 	
 	
 	

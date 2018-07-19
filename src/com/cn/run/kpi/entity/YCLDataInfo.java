@@ -12,13 +12,13 @@ public class YCLDataInfo implements Serializable{
 	/*数据源描述*/
 	private String dataSourceDescription;
 	/*大协议编码*/
-	private String bigProtocolCode;
+	private String protocolTypeCode;
 	/*大协议描述*/
-	private String bigProtocolDescription;
+	private String protocolTypeDescription;
 	/*小协议编码*/
-	private String smallProtocolCode;
+	private String protocolCode;
 	/*小协议描述*/
-	private String smallProtocolDescription;
+	private String protocolDescription;
 	/*动作类型*/
 	private String actionType;
 	/*输入数据条数*/
@@ -42,25 +42,23 @@ public class YCLDataInfo implements Serializable{
 	/*输出数据依赖字段组填充率*/
 	private String outputFieldGroupFillRate;
 	
-	
-	
 	public String getDataSourceCode() {
 		return dataSourceCode;
 	}
 	public String getDataSourceDescription() {
 		return dataSourceDescription;
 	}
-	public String getBigProtocolCode() {
-		return bigProtocolCode;
+	public String getProtocolTypeCode() {
+		return protocolTypeCode;
 	}
-	public String getBigProtocolDescription() {
-		return bigProtocolDescription;
+	public String getProtocolTypeDescription() {
+		return protocolTypeDescription;
 	}
-	public String getSmallProtocolCode() {
-		return smallProtocolCode;
+	public String getProtocolCode() {
+		return protocolCode;
 	}
-	public String getSmallProtocolDescription() {
-		return smallProtocolDescription;
+	public String getProtocolDescription() {
+		return protocolDescription;
 	}
 	public String getActionType() {
 		return actionType;
@@ -101,17 +99,17 @@ public class YCLDataInfo implements Serializable{
 	public void setDataSourceDescription(String dataSourceDescription) {
 		this.dataSourceDescription = dataSourceDescription;
 	}
-	public void setBigProtocolCode(String bigProtocolCode) {
-		this.bigProtocolCode = bigProtocolCode;
+	public void setProtocolTypeCode(String protocolTypeCode) {
+		this.protocolTypeCode = protocolTypeCode;
 	}
-	public void setBigProtocolDescription(String bigProtocolDescription) {
-		this.bigProtocolDescription = bigProtocolDescription;
+	public void setProtocolTypeDescription(String protocolTypeDescription) {
+		this.protocolTypeDescription = protocolTypeDescription;
 	}
-	public void setSmallProtocolCode(String smallProtocolCode) {
-		this.smallProtocolCode = smallProtocolCode;
+	public void setProtocolCode(String protocolCode) {
+		this.protocolCode = protocolCode;
 	}
-	public void setSmallProtocolDescription(String smallProtocolDescription) {
-		this.smallProtocolDescription = smallProtocolDescription;
+	public void setProtocolDescription(String protocolDescription) {
+		this.protocolDescription = protocolDescription;
 	}
 	public void setActionType(String actionType) {
 		this.actionType = actionType;
@@ -146,7 +144,6 @@ public class YCLDataInfo implements Serializable{
 	public void setOutputFieldGroupFillRate(String outputFieldGroupFillRate) {
 		this.outputFieldGroupFillRate = outputFieldGroupFillRate;
 	}
-	
 	
 	
 	

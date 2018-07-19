@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +17,7 @@ import com.cn.run.kpi.entity.User;
 import com.cn.run.kpi.utils.ExcelUtil;
 
 
-@Controller
+@Component
 @RequestMapping("/excelDemo")
 public class DemoController {
 	

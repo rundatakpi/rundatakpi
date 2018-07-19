@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.run.kpi.dao.WarnDao">
+    <resultMap type="com.cn.run.kpi.entity.WarnMessage" id="warnMessageMap">
+    	<id column="id" property="id"></id>
+		<result column="warntime" property="warnTime"></result>
+		<result column="warngrade" property="warnGrade"></result>
+		<result column="warncontent" property="warnContent"></result>
+		<result column="status" property="status"></result>
+    </resultMap>
+    
+	<select id="list" resultMap="warnMessageMap">
+		select * from warnmessage
+	</select>
+</mapper>

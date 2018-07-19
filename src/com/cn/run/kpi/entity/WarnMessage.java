@@ -30,7 +30,7 @@ public class WarnMessage {
 	/**
 	 * 处理状态
 	 */
-	private int processState;
+	private int status;
 
 	public long getId() {
 		return id;
@@ -64,11 +64,11 @@ public class WarnMessage {
 		this.warnContent = warnContent;
 	}
 
-	public int getProcessState() {
-		return processState;
+	public int getStatus() {
+		return status;
 	}
 
-	public void setProcessState(int processState) {
-		this.processState = processState;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }
