@@ -2,12 +2,10 @@ package com.cn.run.kpi.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,7 +15,7 @@ import com.cn.run.kpi.entity.User;
 import com.cn.run.kpi.utils.ExcelUtil;
 
 
-@Component
+@Controller
 @RequestMapping("/excelDemo")
 public class DemoController {
 	
@@ -58,13 +56,13 @@ public class DemoController {
 	@ResponseBody
 	public void importBusinessRecord(MultipartFile file,HttpServletRequest request) throws Exception{
 		ExcelUtil<User> excelUtil = new ExcelUtil<User>();
-		String extensionName = excelUtil.getExtensionName(file.getOriginalFilename(), "\\.");
+//		String extensionName = excelUtil.getExtensionName(file.getOriginalFilename(), "\\.");
 		
 		excelUtil.addHeader(0, "id");
 		excelUtil.addHeader(1, "userName");
 		excelUtil.addHeader(2, "password");
 		
-		List<Map<String, Object>> dataList = excelUtil.exportListFromExcel(file.getInputStream(), extensionName, 0);
+//		List<Map<String, Object>> dataList = excelUtil.exportListFromExcel(file.getInputStream(), extensionName, 0);
 		//System.out.println(dataList);
 	}
 	
