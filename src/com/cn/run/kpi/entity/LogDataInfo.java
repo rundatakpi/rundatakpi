@@ -2,61 +2,75 @@ package com.cn.run.kpi.entity;
 
 import java.io.Serializable;
 
+/**
+ * 入库日志数据-实体类
+ * @author chenyan
+ *
+ */
 public class LogDataInfo implements Serializable{
 
 
 	private static final long serialVersionUID = 1L;
 	
+	/*id*/
+	private long id;
 	/*数据源编号*/
 	private String dataSourceCode;
 	/*数据源描述*/
 	private String dataSourceDescription;
 	/*大协议编码*/
-	private String protocolTypeCode;
+	private String bProtocolCode;
 	/*大协议描述*/
-	private String protocolTypeDescription;
+	private String bProtocolDescription;
 	/*小协议编码*/
-	private String protocolCode;
+	private String sProtocolCode;
 	/*小协议描述*/
-	private String protocolDescription;
+	private String sProtocolDescription;
 	/*入库条数*/
-	private long inputDataNumber;
+	private long inputDataNum;
 	/*入库率*/
 	private String storageRate;
 	/*字段数*/
-	private String dataFeildNumber;
+	private String FeildNum;
 	/*数据准确率*/
 	private String dataAccuracy;
 	
+	
+	public long getId() {
+		return id;
+	}
 	public String getDataSourceCode() {
 		return dataSourceCode;
 	}
 	public String getDataSourceDescription() {
 		return dataSourceDescription;
 	}
-	public String getProtocolTypeCode() {
-		return protocolTypeCode;
+	public String getbProtocolCode() {
+		return bProtocolCode;
 	}
-	public String getProtocolTypeDescription() {
-		return protocolTypeDescription;
+	public String getbProtocolDescription() {
+		return bProtocolDescription;
 	}
-	public String getProtocolCode() {
-		return protocolCode;
+	public String getsProtocolCode() {
+		return sProtocolCode;
 	}
-	public String getProtocolDescription() {
-		return protocolDescription;
+	public String getsProtocolDescription() {
+		return sProtocolDescription;
 	}
-	public long getInputDataNumber() {
-		return inputDataNumber;
+	public long getInputDataNum() {
+		return inputDataNum;
 	}
 	public String getStorageRate() {
 		return storageRate;
 	}
-	public String getDataFeildNumber() {
-		return dataFeildNumber;
+	public String getFeildNum() {
+		return FeildNum;
 	}
 	public String getDataAccuracy() {
 		return dataAccuracy;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	public void setDataSourceCode(String dataSourceCode) {
 		this.dataSourceCode = dataSourceCode;
@@ -64,30 +78,31 @@ public class LogDataInfo implements Serializable{
 	public void setDataSourceDescription(String dataSourceDescription) {
 		this.dataSourceDescription = dataSourceDescription;
 	}
-	public void setProtocolTypeCode(String protocolTypeCode) {
-		this.protocolTypeCode = protocolTypeCode;
+	public void setbProtocolCode(String bProtocolCode) {
+		this.bProtocolCode = bProtocolCode;
 	}
-	public void setProtocolTypeDescription(String protocolTypeDescription) {
-		this.protocolTypeDescription = protocolTypeDescription;
+	public void setbProtocolDescription(String bProtocolDescription) {
+		this.bProtocolDescription = bProtocolDescription;
 	}
-	public void setProtocolCode(String protocolCode) {
-		this.protocolCode = protocolCode;
+	public void setsProtocolCode(String sProtocolCode) {
+		this.sProtocolCode = sProtocolCode;
 	}
-	public void setProtocolDescription(String protocolDescription) {
-		this.protocolDescription = protocolDescription;
+	public void setsProtocolDescription(String sProtocolDescription) {
+		this.sProtocolDescription = sProtocolDescription;
 	}
-	public void setInputDataNumber(long inputDataNumber) {
-		this.inputDataNumber = inputDataNumber;
+	public void setInputDataNum(long inputDataNum) {
+		this.inputDataNum = inputDataNum;
 	}
 	public void setStorageRate(String storageRate) {
 		this.storageRate = storageRate;
 	}
-	public void setDataFeildNumber(String dataFeildNumber) {
-		this.dataFeildNumber = dataFeildNumber;
+	public void setFeildNum(String feildNum) {
+		FeildNum = feildNum;
 	}
 	public void setDataAccuracy(String dataAccuracy) {
 		this.dataAccuracy = dataAccuracy;
 	}
+	
 	
 	
 	

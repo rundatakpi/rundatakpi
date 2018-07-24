@@ -2,62 +2,73 @@ package com.cn.run.kpi.entity;
 
 import java.io.Serializable;
 
+/**
+ * 格转接入数据-实体类
+ * @author chenyan
+ *
+ */
 public class InputDataInfo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	/*id*/
+	private long id;
 	/*数据源编号*/
 	private String dataSourceCode;
 	/*数据源描述*/
 	private String dataSourceDescription;
 	/*大协议编码*/
-	private String protocolTypeCode;
+	private String bProtocolCode;
 	/*大协议描述*/
-	private String protocolTypeDescription;
+	private String bProtocolDescription;
 	/*小协议编码*/
-	private String protocolCode;
+	private String sProtocolCode;
 	/*小协议描述*/
-	private String protocolDescription;
+	private String sProtocolDescription;
 	/*动作类型*/
 	private String actionType;
 	/*输入数据条数*/
-	private int inputDataNumber;
+	private int inputDataNum;
 	/*输入数据速度*/
 	private int inputDataSpeed;
 	/*输入数据字段填充率*/
 	private String inputFieldFillRate;
 	/*输入数据依赖字段组填充率*/
-	private String inputFieldGroupFillRate;
+	private String inputDependGroupFillRate;
 	/*输入数据字段可用率*/
 	private String inputFieldAvailability;
 	/*输入数据依赖字段组可用率*/
-	private String inputFieldGroupAvailability;
+	private String inputDependGroupAvailability;
 	/*输入数据准确率*/
 	private String inputDataAccuracy;
 	
+	
+	public long getId() {
+		return id;
+	}
 	public String getDataSourceCode() {
 		return dataSourceCode;
 	}
 	public String getDataSourceDescription() {
 		return dataSourceDescription;
 	}
-	public String getProtocolTypeCode() {
-		return protocolTypeCode;
+	public String getbProtocolCode() {
+		return bProtocolCode;
 	}
-	public String getProtocolTypeDescription() {
-		return protocolTypeDescription;
+	public String getbProtocolDescription() {
+		return bProtocolDescription;
 	}
-	public String getProtocolCode() {
-		return protocolCode;
+	public String getsProtocolCode() {
+		return sProtocolCode;
 	}
-	public String getProtocolDescription() {
-		return protocolDescription;
+	public String getsProtocolDescription() {
+		return sProtocolDescription;
 	}
 	public String getActionType() {
 		return actionType;
 	}
-	public int getInputDataNumber() {
-		return inputDataNumber;
+	public int getInputDataNum() {
+		return inputDataNum;
 	}
 	public int getInputDataSpeed() {
 		return inputDataSpeed;
@@ -65,17 +76,20 @@ public class InputDataInfo implements Serializable{
 	public String getInputFieldFillRate() {
 		return inputFieldFillRate;
 	}
-	public String getInputFieldGroupFillRate() {
-		return inputFieldGroupFillRate;
+	public String getInputDependGroupFillRate() {
+		return inputDependGroupFillRate;
 	}
 	public String getInputFieldAvailability() {
 		return inputFieldAvailability;
 	}
-	public String getInputFieldGroupAvailability() {
-		return inputFieldGroupAvailability;
+	public String getInputDependGroupAvailability() {
+		return inputDependGroupAvailability;
 	}
 	public String getInputDataAccuracy() {
 		return inputDataAccuracy;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	public void setDataSourceCode(String dataSourceCode) {
 		this.dataSourceCode = dataSourceCode;
@@ -83,23 +97,23 @@ public class InputDataInfo implements Serializable{
 	public void setDataSourceDescription(String dataSourceDescription) {
 		this.dataSourceDescription = dataSourceDescription;
 	}
-	public void setProtocolTypeCode(String protocolTypeCode) {
-		this.protocolTypeCode = protocolTypeCode;
+	public void setbProtocolCode(String bProtocolCode) {
+		this.bProtocolCode = bProtocolCode;
 	}
-	public void setProtocolTypeDescription(String protocolTypeDescription) {
-		this.protocolTypeDescription = protocolTypeDescription;
+	public void setbProtocolDescription(String bProtocolDescription) {
+		this.bProtocolDescription = bProtocolDescription;
 	}
-	public void setProtocolCode(String protocolCode) {
-		this.protocolCode = protocolCode;
+	public void setsProtocolCode(String sProtocolCode) {
+		this.sProtocolCode = sProtocolCode;
 	}
-	public void setProtocolDescription(String protocolDescription) {
-		this.protocolDescription = protocolDescription;
+	public void setsProtocolDescription(String sProtocolDescription) {
+		this.sProtocolDescription = sProtocolDescription;
 	}
 	public void setActionType(String actionType) {
 		this.actionType = actionType;
 	}
-	public void setInputDataNumber(int inputDataNumber) {
-		this.inputDataNumber = inputDataNumber;
+	public void setInputDataNum(int inputDataNum) {
+		this.inputDataNum = inputDataNum;
 	}
 	public void setInputDataSpeed(int inputDataSpeed) {
 		this.inputDataSpeed = inputDataSpeed;
@@ -107,18 +121,20 @@ public class InputDataInfo implements Serializable{
 	public void setInputFieldFillRate(String inputFieldFillRate) {
 		this.inputFieldFillRate = inputFieldFillRate;
 	}
-	public void setInputFieldGroupFillRate(String inputFieldGroupFillRate) {
-		this.inputFieldGroupFillRate = inputFieldGroupFillRate;
+	public void setInputDependGroupFillRate(String inputDependGroupFillRate) {
+		this.inputDependGroupFillRate = inputDependGroupFillRate;
 	}
 	public void setInputFieldAvailability(String inputFieldAvailability) {
 		this.inputFieldAvailability = inputFieldAvailability;
 	}
-	public void setInputFieldGroupAvailability(String inputFieldGroupAvailability) {
-		this.inputFieldGroupAvailability = inputFieldGroupAvailability;
+	public void setInputDependGroupAvailability(String inputDependGroupAvailability) {
+		this.inputDependGroupAvailability = inputDependGroupAvailability;
 	}
 	public void setInputDataAccuracy(String inputDataAccuracy) {
 		this.inputDataAccuracy = inputDataAccuracy;
 	}
+	
+	
 	
 	
 }

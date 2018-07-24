@@ -1,12 +1,18 @@
 package com.cn.run.kpi.entity;
 
 import java.io.Serializable;
-
+/**
+ * 告警信息-实体类
+ * @author chenyan
+ *
+ */
 public class AlarmInfo implements Serializable{
 
 
 	private static final long serialVersionUID = 1L;
 	
+	/*id*/
+	private long id;
 	/*告警时间*/
 	private String alarmTime;
 	/*告警级别*/
@@ -14,43 +20,47 @@ public class AlarmInfo implements Serializable{
 	/*告警内容*/
 	private String alarmContent;
 	/*处理状态*/
-	private String alarmStatus;
+	private String processState;
+	/*是否删除*/
+	private String is_deleted;
 	
+	
+	public long getId() {
+		return id;
+	}
 	public String getAlarmTime() {
 		return alarmTime;
 	}
-
-	public void setAlarmTime(String alarmTime) {
-		this.alarmTime = alarmTime;
-	}
-
 	public String getAlarmLevel() {
 		return alarmLevel;
 	}
-
-	public void setAlarmLevel(String alarmLevel) {
-		this.alarmLevel = alarmLevel;
-	}
-
 	public String getAlarmContent() {
 		return alarmContent;
 	}
-
+	public String getProcessState() {
+		return processState;
+	}
+	public String getIs_deleted() {
+		return is_deleted;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public void setAlarmTime(String alarmTime) {
+		this.alarmTime = alarmTime;
+	}
+	public void setAlarmLevel(String alarmLevel) {
+		this.alarmLevel = alarmLevel;
+	}
 	public void setAlarmContent(String alarmContent) {
 		this.alarmContent = alarmContent;
 	}
-
-	public String getAlarmStatus() {
-		return alarmStatus;
+	public void setProcessState(String processState) {
+		this.processState = processState;
 	}
-
-	public void setAlarmStatus(String alarmStatus) {
-		this.alarmStatus = alarmStatus;
+	public void setIs_deleted(String is_deleted) {
+		this.is_deleted = is_deleted;
 	}
-	
-	
-	
-	
 	
 	
 }
