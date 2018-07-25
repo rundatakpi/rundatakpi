@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cn.run.kpi.entity.User;
 import com.cn.run.kpi.utils.ExcelUtil;
 
 
@@ -56,7 +55,6 @@ public class DemoController {
 	@ResponseBody
 	public void importBusinessRecord(MultipartFile file,HttpServletRequest request) throws Exception{
 		ExcelUtil<User> excelUtil = new ExcelUtil<User>();
-//		String extensionName = excelUtil.getExtensionName(file.getOriginalFilename(), "\\.");
 		
 		excelUtil.addHeader(0, "id");
 		excelUtil.addHeader(1, "userName");
@@ -66,4 +64,35 @@ public class DemoController {
 		//System.out.println(dataList);
 	}
 	
+	class User {
+		private long id;
+		
+		private String username;
+		
+		private String password;
+
+		public long getId() {
+			return id;
+		}
+
+		public void setId(long id) {
+			this.id = id;
+		}
+
+		public String getUsername() {
+			return username;
+		}
+
+		public void setUsername(String username) {
+			this.username = username;
+		}
+
+		public String getPassword() {
+			return password;
+		}
+
+		public void setPassword(String password) {
+			this.password = password;
+		}
+	}
 }
