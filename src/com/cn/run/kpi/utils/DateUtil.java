@@ -73,4 +73,7 @@ public class DateUtil {
 		return result;
 	}
 	
+	public static void main(String[] args) {
+		System.out.println(getDateBefore(new Date(), 1));
+	}
 }
