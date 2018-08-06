@@ -12,7 +12,7 @@ import com.cn.run.kpi.datamonitor.restore.entity.RestoreOutputEntity;
  * @author zg
  *
  */
-public interface ReStoreService {
+public interface RestoreService {
 
 	/**
 	 * 获取近七天协议还原数据实时输入数据量

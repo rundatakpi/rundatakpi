@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.cn.run.kpi.sample.dao.SampleMonitorDao">
+<mapper namespace="com.cn.run.kpi.sample.dao.TaskMonitorDao">
     <resultMap type="com.cn.run.kpi.sample.entity.SampleMonitor" id="sampleMonitorMap">
     	<id column="id" property="id"></id>
 		<result column="datasource" property="dataSource"></result>
