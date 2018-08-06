@@ -22,17 +22,17 @@
 <script type="text/javascript" src="../js/datePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="../js/date.js"></script>
 <script type="text/javascript" src="../js/layer/layer.js"></script>	
-<script type="text/javascript" src="../js/layer/layer.ext.js"></script>	
+	
   
 <body>
 	<div id="content">
 		<div id="page-wrapper" style="padding-top: 10px">
 			<div class="row">
-				 <div class="col-lg-12" margin-bottom="50px" style="width: 1200px;">
-					<ul id="" class="nav nav-tabs">
+				<div class="col-lg-12" margin-bottom="50px" style="width: 1200px;">
+					<ul id="menu" class="nav nav-tabs">
 						<li class="active"><a href="#warnresult" data-toggle="tab"><strong>告警结果</strong></a></li>
 						<li><a href="#resultreport" data-toggle="tab"><strong>结果上报</strong></a></li>
-						<li><a href="#kpi" data-toggle="tab"><strong>KPI</strong></a></li>
+						<li><a href="#kpi" data-toggle="tab"><strong>KPI</strong></a><script type="text/javascript" src="../js/layer/layer.ext.js"></script></li>
 						<li><a href="#reportlog" data-toggle="pill"><strong>上报日志</strong></a></li>
 					</ul>
 				</div> 
@@ -58,10 +58,17 @@
 <script type="text/javascript">
 	//页面载入。
 	$(function() {
+		
+		$("ul li a").bind('click', function(event) {
+			var id = $(this).attr('href')
+			var href = '/warn/warnweb/' +  id.substring(1) + '.html';
+			_intoPage(id, href);
+		});
 		_intoPage('#warnresult', "/warn/warnweb/warnresult.html");
+		/* _intoPage('#warnresult', "/warn/warnweb/warnresult.html");
 		_intoPage('#resultreport', "/warn/warnweb/resultreport.html");
 	  	_intoPage('#reportlog', "/warn/warnweb/reportlog.html");	 
-	  	_intoPage('#kpi', "/kpi/kpi.html");	 
+	  	_intoPage('#kpi', "/kpi/kpi.html");	 */ 
 	});
 </script> 
 </html>  
