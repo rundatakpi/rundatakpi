@@ -32,7 +32,10 @@ $(function() {
  
 })
 
-
+/**
+ * 绘制表格
+ * @returns
+ */
 function refreshData(){
 	//初始化表格对象
 	oTable =  $('#myTable').DataTable({

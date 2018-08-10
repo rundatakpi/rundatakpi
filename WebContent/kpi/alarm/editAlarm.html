@@ -52,7 +52,7 @@ var rootPath = pathName.substring(0, pathName.substr(1).indexOf('/')+1);
 						layer.close(index);
 					    
 					    layer.msg(data.msg,{
-	                          time: 3000 //2秒关闭（如果不配置，默认是3秒）
+	                          time: 1000 //1秒关闭（如果不配置，默认是3秒）
 	                    },function(){
 	                    	//关闭当前页并刷新父页面
 							var index2=parent.layer.getFrameIndex(window.name);//获取当前弹出层的层级

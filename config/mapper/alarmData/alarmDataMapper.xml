@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.run.kpi.alarm.dao.AlarmDataDao">
+    <resultMap type="com.cn.run.kpi.alarm.entity.AlarmData" id="alarmMap">
+    	<id column="id" property="id"></id>
+		<result column="alarm_time" property="alarmTime"></result>
+		<result column="alarm_level" property="alarmLevel"></result>
+		<result column="alarm_content" property="alarmContent"></result>
+		<result column="process_status" property="processState"></result>
+		<result column="relate_id" property="relateId"></result>
+    </resultMap>
+    
+    <sql id="alarmCondition">
+        <if test="null != alarmLevel and '' != alarmLevel">
+            and alarm_level = #{alarmLevel}
+        </if>
+        <if test="null != processState and '' != processState">
+            and process_status = #{processState}
+        </if>
+        <if test="null != startTime and '' != startTime">
+            and alarm_time &gt;= #{startTime}
+        </if>
+        <if test="null != endTime and '' != endTime">
+            and alarm_time &lt;= #{endTime}
+        </if>
+    
+    </sql>
+    
+	<select id="getList" parameterType="com.cn.run.kpi.alarm.entity.AlarmData" resultMap="alarmMap">
+		select 
+			id,
+			alarm_time,
+			alarm_level,
+			alarm_content,
+			process_status,
+			relate_id 
+		from t_alarm_info 
+		<where>
+			<include refid="alarmCondition"></include>
+			and is_deleted = 'N'
+		</where>
+		order by id desc
+		limit #{start},#{length}
+	</select>
+	
+	<select id="getTotal" parameterType="com.cn.run.kpi.alarm.entity.AlarmData" resultType="java.lang.Integer">
+		select count(*) from t_alarm_info 
+		<where>
+			<include refid="alarmCondition"></include>
+			and is_deleted = 'N'
+		</where>
+	</select>
+	
+	<update id="del" parameterType="java.lang.Integer">
+		update t_alarm_info
+		set is_deleted = 'Y'
+		where id = #{_parameter}
+	</update>
+	
+	<update id="edit" parameterType="com.cn.run.kpi.alarm.entity.AlarmData">
+		update t_alarm_info
+        <if test="null != processState and '' != processState">
+            set process_status = #{processState}
+        </if>
+        where id=#{id}
+	</update>
+	
+	<select id="getAllData" parameterType="com.cn.run.kpi.alarm.entity.AlarmData" resultMap="alarmMap">
+		select 
+			id,
+			alarm_time,
+			alarm_level,
+			alarm_content,
+			process_status,
+			relate_id 
+		from t_alarm_info 
+		<where>
+			<include refid="alarmCondition"></include>
+			and is_deleted = 'N'
+		</where>
+	</select>
+	
+	<insert id="insertInfo" parameterType="com.cn.run.kpi.alarm.entity.AlarmData">
+		insert into t_alarm_info 
+		(
+			"alarm_time",
+			"alarm_level",
+			"alarm_content",
+			"process_status"
+		) values (
+			<if test="null != alarmTime and '' != alarmTime">
+            	to_date(#{alarmLevel},"yyyy-MM-dd hh24:mi:ss"),
+        	</if>
+			<if test="null != alarmLevel and '' != alarmLevel">
+            	#{alarmLevel},
+        	</if>
+        	<if test="null != alarmContent and '' != alarmContent">
+            	#{alarmLevel},
+        	</if>
+        	<if test="null != processStatus and '' != processStatus">
+            	#{alarmLevel}
+        	</if>
+		) 
+	</insert>
+</mapper>
