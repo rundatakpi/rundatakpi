@@ -1,15 +1,12 @@
 package com.cn.run.kpi.alarm.controller;
 
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cn.run.kpi.alarm.entity.AlarmData;
 import com.cn.run.kpi.alarm.service.AlarmDataService;
 import com.cn.run.kpi.alarm.utils.ExportExcelUtil;
-import com.cn.run.kpi.sample.controller.SampleMonitorController;
-import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 
 
