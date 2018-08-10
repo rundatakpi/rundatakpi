@@ -18,19 +18,19 @@ public interface ServiceMonitorService {
 	 * 获取个应用调用中间件频次
 	 * @return
 	 */
-	List<AppMiddleWareEntity> getAppInvokeMiddlewareData();
+	List<AppMiddleWareEntity> getAppInvokeMiddlewareData() throws Exception;
 	
 	/**
 	 * 获取各应用调用协议频次
 	 * @return
 	 */
-	List<AppInvokeProtocolEntity> getAppInvokePrototolData();
+	List<AppInvokeProtocolEntity> getAppInvokePrototolData() throws Exception;
 	
 	/**
 	 * 获取服务调用异常信息列表
 	 * @param queryCondition
 	 * @return
 	 */
-	List<ServiceInvokeException> list(Map<String, Object> queryCondition);
+	List<ServiceInvokeException> list(Map<String, Object> queryCondition) throws Exception;
 	
 }

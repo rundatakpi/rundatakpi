@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>数据质量KPI监控 - 数据监控 - 服务监测</title>
+<link rel="stylesheet" type="text/css" href="style/global.css" />
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+<link rel="stylesheet" type="text/css" href="style/media.css" />
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/charts.js"></script>
+<script type="text/javascript" src="js/servemonitor.js"></script>
+</head>
+
+<body>
+<div class="container">
+	<%@ include file="nav.jsp"%>
+    
+    <%@ include file="datamonitornav.jsp"%>
+    
+    <div class="box">
+    	<div class="boxHd clearfix">
+        	<h3 class="left">xx数据统计</h3>
+            <!--<span class="right slideWrap"><span class="slideBtn">近7天</span> </span>-->
+            <div class="chooseDay right">
+            	<a href="#" class="left sevenDays slt">近7天</a>
+                <a href="#" class="right thirtyDays">近30天</a>
+            </div>
+        </div>
+        <div class="boxBd">
+        	<div id="dataStatistics" class="dataStatistics">
+            	
+            </div>
+        </div>
+    </div>
+    
+    <div class="box">
+    	<div class="boxHd clearfix">
+        	<h3 class="left">异常返回（<em class="boxHdEm">75</em>）</h3>
+            
+        </div>
+        <div class="boxBd">
+        	<div class="unusualBack">
+            	<table>
+                	<colgroup>
+                    	<col width="82" />
+                    	<col width="" />
+                    	<col width="" />
+                    	<col width="" />
+                    	<col width="" />
+                    </colgroup>
+                    <thead>
+                    	<tr>
+                        	<th>序号</th>
+                        	<th>调用时间</th>
+                        	<th>调用应用</th>
+                        	<th>调用语句</th>
+                        	<th>异常原因</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    	<tr>
+                        	<td>1</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    	<tr>
+                        	<td>2</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    	<tr>
+                        	<td>3</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    	<tr>
+                        	<td>4</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    	<tr>
+                        	<td>5</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    	<tr>
+                        	<td>6</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    	<tr>
+                        	<td>1</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    	<tr>
+                        	<td>1</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    	<tr>
+                        	<td>1</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    	<tr>
+                        	<td>1</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+</body>
+</html>

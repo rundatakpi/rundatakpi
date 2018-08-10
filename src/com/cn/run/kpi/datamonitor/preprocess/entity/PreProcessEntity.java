@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author zg
  *
  */
-public class DataSourceEntity implements Serializable {
+public class PreProcessEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

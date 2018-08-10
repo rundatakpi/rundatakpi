@@ -3,35 +3,5 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.cn.run.kpi.sample.dao.TaskMonitorDao">
-    <resultMap type="com.cn.run.kpi.sample.entity.SampleMonitor" id="sampleMonitorMap">
-    	<id column="id" property="id"></id>
-		<result column="datasource" property="dataSource"></result>
-		<result column="bprotocol" property="bProtocol"></result>
-		<result column="sprotocol" property="sProtocol"></result>
-		<result column="originalfieldstate" property="originalFieldState"></result>
-		<result column="preprocessingfieldstate" property="preprocessingFieldState"></result>
-		<result column="structextractfieldstate" property="structExtractFieldState"></result>
-		<result column="objectextractfieldstate" property="objectExtractFieldState"></result>
-    </resultMap>
-    
-    <sql id="sampleMonitorCondition">
-        <if test="null != dataSource and '' != dataSource">
-            and datasource = #{dataSource}
-        </if>
-        
-        <if test="null != bProtocol and '' != bProtocol">
-            and bProtocol = #{bProtocol}
-        </if>
-        
-        <if test="null != sProtocol and '' != sProtocol">
-            and sProtocol = #{sProtocol}
-        </if>
-    
-    </sql>
-    
-	<select id="list" parameterType="map" resultMap="sampleMonitorMap">
-		select * from samplemonitor where 1 = 1
-		<include refid="sampleMonitorCondition"></include>
-	</select>
+<mapper namespace="com.cn.run.kpi.datamonitor.task.dao.TaskMonitorDao">
 </mapper>

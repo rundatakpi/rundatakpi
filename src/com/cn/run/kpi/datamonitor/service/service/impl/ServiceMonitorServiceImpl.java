@@ -20,19 +20,20 @@ import com.cn.run.kpi.datamonitor.service.service.ServiceMonitorService;
 public class ServiceMonitorServiceImpl implements ServiceMonitorService {
 
 	private ServiceMonitorDao serviceMonitorDao;
-	
+
 	@Override
-	public List<AppMiddleWareEntity> getAppInvokeMiddlewareData() {
+	public List<AppMiddleWareEntity> getAppInvokeMiddlewareData() throws Exception {
 		return serviceMonitorDao.getAppInvokeMiddlewareData();
 	}
 
 	@Override
-	public List<AppInvokeProtocolEntity> getAppInvokePrototolData() {
+	public List<AppInvokeProtocolEntity> getAppInvokePrototolData() throws Exception {
 		return serviceMonitorDao.getAppInvokePrototolData();
 	}
 
 	@Override
-	public List<ServiceInvokeException> list(Map<String, Object> queryCondition) {
+	public List<ServiceInvokeException> list(Map<String, Object> queryCondition) throws Exception {
 		return serviceMonitorDao.list(queryCondition);
 	}
+	
 }

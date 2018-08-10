@@ -7,5 +7,11 @@ import com.cn.run.kpi.sample.entity.SampleMonitor;
 
 public interface SampleService {
 
+	/**
+	 * 获取样例数据列表
+	 * @param queryCondition
+	 * @return
+	 * @throws Exception
+	 */
 	public List<SampleMonitor> list(Map<String, Object> queryCondition) throws Exception;
 }

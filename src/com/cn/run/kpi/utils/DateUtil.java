@@ -12,6 +12,14 @@ public class DateUtil {
 	private static final Logger LOG = Logger.getLogger(DateUtil.class);
 	
 	/**
+	 * 获取当前日期
+	 * @return
+	 */
+	public static String getDate(){
+		return getDateBefore(new Date(), 0);
+	}
+	
+	/**
 	 * 获取前X天的日期
 	 * @param Date d
 	 * @param int day

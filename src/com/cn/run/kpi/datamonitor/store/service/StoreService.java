@@ -1,8 +1,11 @@
 package com.cn.run.kpi.datamonitor.store.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.cn.run.kpi.datamonitor.store.entity.NineResourceEntity;
 import com.cn.run.kpi.datamonitor.store.entity.ObjectEntity;
+import com.cn.run.kpi.datamonitor.store.entity.ObjectLibEntity;
 import com.cn.run.kpi.datamonitor.store.entity.StoreEntity;
 
 /**
@@ -23,4 +26,18 @@ public interface StoreService {
 	 * @return
 	 */
 	List<StoreEntity> getStoreData();
+	
+	/**
+	 * 查询九大资源数据量
+	 * @param queryCondition
+	 * @return
+	 */
+	List<NineResourceEntity> getNineResourceData(Map<String, Object> queryCondition);
+	
+	/**
+	 * 查询对象库数据量
+	 * @param queryCondition
+	 * @return
+	 */
+	List<ObjectLibEntity> getObjectData(Map<String, Object> queryCondition);
 }

@@ -2,10 +2,10 @@ package com.cn.run.kpi.datamonitor.preprocess.service;
 
 import java.util.List;
 
-import com.cn.run.kpi.datamonitor.preprocess.entity.DataSourceEntity;
 import com.cn.run.kpi.datamonitor.preprocess.entity.ErrorEntity;
 import com.cn.run.kpi.datamonitor.preprocess.entity.ExceptionEntity;
 import com.cn.run.kpi.datamonitor.preprocess.entity.InputRepetionEntity;
+import com.cn.run.kpi.datamonitor.preprocess.entity.PreProcessEntity;
 import com.cn.run.kpi.datamonitor.preprocess.entity.PreProcessRealTimeEntity;
 
 /**
@@ -19,7 +19,7 @@ public interface PreProcessService {
 	 * 查询各数据源预处理输入量、输出量、抛弃量
 	 * @return 
 	 */
-	List<DataSourceEntity> getPreProcessData();
+	List<PreProcessEntity> getPreProcessData();
 	
 	/**
 	 * 获取近XX预处理输入量、输出量

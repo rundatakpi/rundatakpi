@@ -23,4 +23,50 @@ public interface Constants {
 	 * 起始记录
 	 */
 	public static final String PAGE_START = "start";
+	
+	/**
+	 * 接入监测-抛弃数据量
+	 */
+	public static final String DISCARD_NUM = "discardNum";
+	
+	/**
+	 * 接入监测-抛弃原因
+	 */
+	public static final String DISCARD_REASON = "discardReason";
+	
+	/**
+	 * 接入监测-日期
+	 */
+	public static final String ACCESS_DATE = "accessDate";
+	
+	/**
+	 * 接入监测-输入数据量
+	 */
+	public static final String ACCESS_INPUT_NUM = "accessInputNum";
+	
+	/**
+	 * 接入监测-输入数据
+	 */
+	public static final String INPUT_DATA = "inputData";
+	
+	/**
+	 * 接入监测-抛弃数据
+	 */
+	public static final String DISCARD_DATA = "discardData";
+	
+	/**
+	 * 接入监测-当前接入输入数据总量
+	 */
+	public static final String TOTAL_INPUT_NUM = "totalInputNum";
+	
+	/**
+	 * 接入监测-当前接入输入数据平均流量
+	 */
+	public static final String AVERAGE_INPUT_NUM = "averageInputNum";
+	
+	/**
+	 * 接入监测-昨日接入输入数据量
+	 */
+	public static final String YESTERDAY_INPUT_NUM = "yesterdayInputNum";
+	
 }

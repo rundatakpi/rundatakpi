@@ -1,6 +1,7 @@
 package com.cn.run.kpi.datamonitor.access.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cn.run.kpi.datamonitor.access.entity.AccessDiscardEntiy;
 import com.cn.run.kpi.datamonitor.access.entity.AccessInputEntity;
@@ -16,30 +17,30 @@ public interface AccessService {
 	 * 获取近七天接入数据输入量
 	 * @return
 	 */
-	List<AccessInputEntity> getAccessInputData();
+	List<AccessInputEntity> getAccessInputData(Map<String, Object> queryCondition) throws Exception;
 	
 	/**
 	 * 查询抛弃量
 	 * @return
 	 */
-	List<AccessDiscardEntiy> getAccessDiscardData();
+	List<AccessDiscardEntiy> getAccessDiscardData(Map<String, Object> queryCondition) throws Exception;
 	
 	/**
 	 * 获取当前接入输入数据总量
 	 * @return
 	 */
-	Long getTotalAccessInputNum();
+	Long getTotalAccessInputNum(Map<String, Object> queryCondition) throws Exception;
 	
 	/**
 	 * 获取当前接入输入数据平均流量
 	 * @return
 	 */
-	Double getAverageAccessInputNum();
+	Double getAverageAccessInputNum(Map<String, Object> queryCondition) throws Exception;
 	
 	/**
 	 * 查询某天接入输入数据量
 	 * @param day
 	 * @return
 	 */
-	Long getAccessInputNumByDay(String day);
+	Long getAccessInputNumByDay(Map<String, Object> queryCondition) throws Exception;
 }

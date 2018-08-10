@@ -16,33 +16,69 @@ public interface RestoreDao {
 	
 	/**
 	 * 获取近七天协议还原数据实时输入数据量
-	 * @param queryCondition
 	 * @return
 	 */
-	public List<RestoreInputEntity> getRestoreInputData(Map<String, Object> queryCondition);
-
+	List<RestoreInputEntity> getRestoreInputData(Map<String, Object> queryCondition);
+	
 	/**
 	 * 获取当前协议还原输出数据总量
-	 * @param queryCondition
 	 * @return
 	 */
-	public List<RestoreOutputEntity> getRestoreOutputData(Map<String, Object> queryCondition);
-
-	public Long getTotalRestoreInputNum();
-
-	public Long getTotalRestoreOutputNum();
-
-	public Long getTotalRestoreDiscardNum();
-
-	public Long getRestoreInputNumByDay(String date);
-
-	public Long getRestoreOutputNumByDay(String date);
-
-	public Double getRestoreRepetionRate();
-
-	public Double getErrorRate();
-
-	public Double getAccuracy();
-
-	public DeviseLoadEntity getDeviseLoadData();
+	List<RestoreOutputEntity> getRestoreOutputData(Map<String, Object> queryCondition);
+	
+	/**
+	 * 获取当前协议还原输入数据总量
+	 * @return
+	 */
+	Long getTotalRestoreInputNum();
+	
+	/**
+	 * 获取当前协议还原输出数据总量
+	 * @return
+	 */
+	Long getTotalRestoreOutputNum();
+	
+	/**
+	 * 当前协议还原丢弃数据总量
+	 * @return
+	 */
+	Long getTotalRestoreDiscardNum();
+	
+	/**
+	 * 获取某天协议还原输入数据量
+	 * @param date
+	 * @return
+	 */
+	Long getRestoreInputNumByDay(String date);
+	
+	/**
+	 * 获取某天协议还原输出数据量
+	 * @param date
+	 * @return
+	 */
+	Long getRestoreOutputNumByDay(String date);
+	
+	/**
+	 * 获取数据重复率
+	 * @return
+	 */
+	Double getRestoreRepetionRate();
+	
+	/**
+	 * 获取数据错误率
+	 * @return
+	 */
+	Double getErrorRate();
+	
+	/**
+	 * 获取数据准确率
+	 * @return
+	 */
+	Double getAccuracy();
+	
+	/**
+	 * 获取还原设备负载
+	 * @return
+	 */
+	DeviseLoadEntity getDeviseLoadData();
 }

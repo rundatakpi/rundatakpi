@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.run.kpi.datamonitor.access.dao.AccessDao">
+    <resultMap type="com.cn.run.kpi.datamonitor.access.entity.AccessInputEntity" id="accessInputMap">
+    	<id column="id" property="id"></id>
+		<result column="createdate" property="date"></result>
+		<result column="input" property="inputNum"></result>
+    </resultMap>
+    
+    <sql id="queryCondition">
+        <if test="null != dataSource and '' != dataSource">
+            and datasource = #{dataSource}
+        </if>
+        
+        <if test="null != bProtocol and '' != bProtocol">
+            and bProtocol = #{bProtocol}
+        </if>
+        
+        <if test="null != sProtocol and '' != sProtocol">
+            and sProtocol = #{sProtocol}
+        </if>
+        
+        <if test="null != action and '' != action">
+            and action = #{action}
+        </if>
+        
+        <if test="null != createDate and '' != createDate">
+            and createdate = #{createDate}
+        </if>
+    </sql>
+    
+	<select id="getAccessInputData" parameterType="map" resultMap="accessInputMap">
+		SELECT DISTINCT
+		a.createdate,
+		IFNULL(b.input, 0) as input
+		FROM
+		accessmonitor as a
+		LEFT JOIN (
+			SELECT
+			createdate,
+			sum(input) as input
+			FROM
+			accessmonitor
+			WHERE 1 = 1
+			<include refid="queryCondition"></include>
+			GROUP BY
+			createdate
+		) AS b ON a.createdate = b.createdate order by a.createdate;
+	</select>
+	
+<!-- 	<select id="getAccessDiscardData" parameterType="map" resultMap="sampleMonitorMap"> -->
+<!-- 	</select> -->
+	
+	<select id="getTotalAccessInputNum" parameterType="map" resultType="java.lang.Long">
+	    select sum(input) from accessmonitor where 1 = 1 
+	    <include refid="queryCondition"></include>
+	</select>
+	
+<!-- 	<select id="getAverageAccessInputNum" parameterType="map" resultMap="java.lang.Double"> -->
+<!-- 	</select> -->
+	
+	<select id="getAccessInputNumByDay" parameterType="map" resultType="java.lang.Long">
+	    select sum(input) from accessmonitor where 1 = 1
+	    <include refid="queryCondition"></include>
+	</select>
+</mapper>

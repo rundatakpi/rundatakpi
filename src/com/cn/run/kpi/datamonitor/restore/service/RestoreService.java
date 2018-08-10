@@ -76,5 +76,9 @@ public interface RestoreService {
 	 */
 	Double getAccuracy();
 	
+	/**
+	 * 获取还原设备负载
+	 * @return
+	 */
 	DeviseLoadEntity getDeviseLoadData();
 }
