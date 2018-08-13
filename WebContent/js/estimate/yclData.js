@@ -41,7 +41,7 @@ function refreshData(){
          ],
          "ordering":false,
          "ajax": {
-             "url": rootPath+"/transform/getList",
+             "url": rootPath+"/yclData/getList",
              "type": "POST",
              "data": function(d){
             	 d.actionType = $("select#actionType>option:selected").val();
@@ -50,22 +50,26 @@ function refreshData(){
          },
          "searching" : false,
          "columns": [
-             { "data": "id" },
-             { "data": "dataSourceCode","defaultContent":"" },
-             { "data": "dataSourceDescription" ,"defaultContent":""},
-             { "data": "bProtocolCode" ,"defaultContent":""},
-             { "data": "bProtocolDescription","defaultContent":"" },
-             { "data": "sProtocolCode","defaultContent":""},
-             { "data": "sProtocolDescription" ,"defaultContent":""},
-             { "data": "actionType" ,"defaultContent":""},
-             { "data": "inputDataNum" ,"defaultContent":""},
-             { "data": "inputDataSpeed","defaultContent":"" },
-             { "data": "inputFieldFillRate" ,"defaultContent":""},
-             { "data": "inputDependGroupFillRate" ,"defaultContent":""},
-             { "data": "inputFieldAvailability","defaultContent":"" },
-             { "data": "inputDependGroupAvailability","defaultContent":"" },
-             { "data": "inputDataAccuracy","defaultContent":"" },
-             { "data": "createTime"}
+             { "data": "id" },    //0
+             { "data": "dataSourceCode","defaultContent":"" },   //1
+             { "data": "dataSourceDescription" ,"defaultContent":""},   //2
+             { "data": "bProtocolCode" ,"defaultContent":""},      //3
+             { "data": "bProtocolDescription","defaultContent":"" },   //4
+             { "data": "sProtocolCode","defaultContent":""},    //5
+             { "data": "sProtocolDescription" ,"defaultContent":""},    //6
+             { "data": "actionType" ,"defaultContent":""},       //7
+             { "data": "inputDataNum" ,"defaultContent":""},     //8
+             { "data": "inputFieldFillRate","defaultContent":"" },    //9
+             { "data": "inputDependGroupFillRate" ,"defaultContent":""},     //10
+             { "data": "inputFieldAvailability" ,"defaultContent":""},    //11
+             { "data": "inputDependGroupAvailability","defaultContent":"" },   //12
+             { "data": "inputDataAccuracy","defaultContent":"" },    //13
+             { "data": "outputNum","defaultContent":"" },    //14
+             { "data": "outputDataSpeed","defaultContent":"" },     //15
+             { "data": "outputFieldFillRate","defaultContent":"" },      //16
+             { "data": "outputDependGroupFillRate","defaultContent":"" },    //17
+             { "data": "createTime"},     //18
+             { "data": ""}       //19
          ],
          "oLanguage" : { // 国际化配置
              "sProcessing" : "正在获取数据，请稍后...",
@@ -99,7 +103,7 @@ function refreshData(){
          "columnDefs": [
         	 //给8-14列添加超链接
         	{
-	 			"targets": [8], // 输入数据条数
+	 			"targets": [8], 
 	 	        "render": function(data, type, full){
 	 	        
 	 	        	return "<a href='#' onclick='showDetail(this,8)'>"+data+"</a>";
@@ -154,9 +158,33 @@ function refreshData(){
 	 	           
 	 	        }
         	},
-        	//隐藏1和15列
         	{
-	 			"targets": [0,15], // 输入数据条数
+	 			"targets": [15], // 输入数据条数
+	 	        "render": function(data, type, full){
+	 	        	 var colName = 'inputDataAccuracy';
+	 	        	 return "<a href='#' onclick='showDetail(this,15)'>"+data+"</a>";
+	 	           
+	 	        }
+        	},
+        	{
+	 			"targets": [16], // 输入数据条数
+	 	        "render": function(data, type, full){
+	 	        	 var colName = 'inputDataAccuracy';
+	 	        	 return "<a href='#' onclick='showDetail(this,16)'>"+data+"</a>";
+	 	           
+	 	        }
+        	},
+        	{
+	 			"targets": [17], // 输入数据条数
+	 	        "render": function(data, type, full){
+	 	        	 var colName = 'inputDataAccuracy';
+	 	        	 return "<a href='#' onclick='showDetail(this,17)'>"+data+"</a>";
+	 	           
+	 	        }
+        	},
+        	//隐藏1和18列
+        	{
+	 			"targets": [0,18], // 输入数据条数
 	 			"visible": false,
         	}
         ]

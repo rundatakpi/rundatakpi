@@ -36,8 +36,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="null != actionType and '' != actionType">
             and actiontype = #{actionType}
         </if>
-        <if test="null != createTime and '' != createTime">
-            and actiontype = #{actionType}
+        <if test="null != startTime and '' != startTime">
+            and createTime <![CDATA[ >= ]]> #{startTime}
+        </if>
+        <if test="null != endTime and '' != endTime">
+            and createTime <![CDATA[ < ]]> #{endTime}
         </if>
     </sql>
     
@@ -62,8 +65,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from tran_data t where t.id = #{_parameter}
 	</select>
 	
-	<select id="selectDetail" parameterType="com.cn.run.kpi.estimate.entity.TransformData" resultMap="transMap">
-		select #{colName},createTime from tran_data 
+	<select id="selectDetail" parameterType="com.cn.run.kpi.estimate.entity.TransformData" resultType="com.cn.run.kpi.estimate.entity.TransformData">
+		select createtime as transKey,${colName} as transValue from tran_data
 		<where>
 			<include refid="transCondition"></include>
 		</where>
