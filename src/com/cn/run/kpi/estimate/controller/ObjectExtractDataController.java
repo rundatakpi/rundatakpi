@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cn.run.kpi.estimate.entity.ObjectExtractData;
+import com.cn.run.kpi.estimate.entity.TransformData;
 import com.cn.run.kpi.estimate.service.ObjectExtractDataService;
+
+import net.sf.json.JSONObject;
 
 
 /**
@@ -45,5 +48,20 @@ public class ObjectExtractDataController {
 		
 		return resultMap;
 		
+	}
+	
+	/**
+	 * 查询某种数据近一周趋势图
+	 * @param id
+	 * @param colName
+	 * @return
+	 */
+	@RequestMapping("/getDetail")
+	@ResponseBody
+	public JSONObject getDetail(Integer id,String colName) {
+		JSONObject json = new JSONObject();
+		TransformData transformData = objectExtractService.findById(id);
+		
+		return json;
 	}
 }

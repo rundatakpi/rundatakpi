@@ -193,8 +193,9 @@ function editAlarms(_this){
  * @returns
  */
 function detailAlarms(_this){
-	var id = oTable.row($(_this).closest("tr")).data().processState;
-	alert(id);
+	var id = oTable.row($(_this).closest("tr")).data().id;
+	var name = oTable.row($(_this).closest("tr")).ColumnName;
+	alert(name);
 }
 
 

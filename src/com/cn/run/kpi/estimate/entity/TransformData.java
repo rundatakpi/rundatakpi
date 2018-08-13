@@ -41,6 +41,12 @@ public class TransformData implements Serializable{
 	private String inputDependGroupAvailability;
 	/*输入数据准确率*/
 	private String inputDataAccuracy;
+	/*数据生成时间*/
+	private String createTime;
+	/*数据查询结束时间*/
+	private String endTime;
+	/*数据类型*/
+	private String colName;
 	/*起始位置*/
 	private int start;
 	/*长度*/
@@ -149,8 +155,23 @@ public class TransformData implements Serializable{
 	public void setLength(int length) {
 		this.length = length;
 	}
-	
-	
-	
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	public String getColName() {
+		return colName;
+	}
+	public void setColName(String colName) {
+		this.colName = colName;
+	}
 	
 }

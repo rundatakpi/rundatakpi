@@ -3,6 +3,7 @@ package com.cn.run.kpi.estimate.service;
 import java.util.List;
 
 import com.cn.run.kpi.estimate.entity.ObjectExtractData;
+import com.cn.run.kpi.estimate.entity.TransformData;
 
 
 /**
@@ -26,5 +27,12 @@ public interface ObjectExtractDataService {
 	 * @return Integer
 	 */
 	Integer getTotal(ObjectExtractData objectExtractData);
+
+	/**
+	 * 根据id查询对象化提取信息
+	 * @param id
+	 * @return
+	 */
+	TransformData findById(Integer id);
 
 }

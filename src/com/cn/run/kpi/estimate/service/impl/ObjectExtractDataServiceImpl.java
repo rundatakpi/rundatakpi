@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cn.run.kpi.estimate.entity.ObjectExtractData;
+import com.cn.run.kpi.estimate.entity.TransformData;
 import com.cn.run.kpi.estimate.service.ObjectExtractDataService;
 
 
@@ -26,6 +27,12 @@ public class ObjectExtractDataServiceImpl implements ObjectExtractDataService {
 
 	@Override
 	public Integer getTotal(ObjectExtractData objectExtractData) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TransformData findById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
