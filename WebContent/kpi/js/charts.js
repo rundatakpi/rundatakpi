@@ -35,9 +35,9 @@ $(function(){
 	//预处理错误数据量
 	anticipationChart_4("anticipationChart_4");
 	//接入数据实时输入数据量
-	insertChart_1("insertChart_1");
+	// insertChart_1("insertChart_1");
 	//抛弃数据量
-	insertChart_2("insertChart_2");
+	// insertChart_2("insertChart_2");
 	//应用调用协议频次
 	frequencyBar("frequencyBar");
 	

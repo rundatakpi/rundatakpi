@@ -30,26 +30,26 @@
     	<div class="left marginR25"><label class="left">小协议：</label><div class="left anticipationComb" id="insertComb_3"></div></div>
     	<div class="left marginR25"><label class="left">动作类型：</label><div class="left anticipationComb" id="insertComb_4"></div></div>
         <a href="#" class="right seeQuality">查看格转接入数据质量</a>
-        <a href="#" class="right schBtn_1">查询</a>
+        <a href="#" id="insert_query" onclick="insertQuery();" class="right schBtn_1">查询</a>
     </div>
     
     <div class="clearfix boxMain insertStatistics">
 		<div class="left insertStatisticsItem insertStatisticsItem_1">
         	<dl class="insertStaList">
-            	<dt class="clearfix"><span class="left">1231654565</span><em class="left">条</em></dt>
-                <dd class="clearfix">当前跨网传输输入数据总量</dd>
+            	<dt class="clearfix"><span id="insert_input" class="left"></span><em class="left">条</em></dt>
+                <dd class="clearfix">当前输入数据总量</dd>
             </dl>
         </div>
         <div class="left insertStatisticsItem insertStatisticsItem_2">
         	<dl class="insertStaList">
-            	<dt class="clearfix"><span class="left">123</span><em class="left">条/秒</em></dt>
-                <dd class="clearfix">当前跨网传输输入数据平均流量（1h）</dd>
+            	<dt class="clearfix"><span id="insert_average" class="left"></span><em class="left">条/秒</em></dt>
+                <dd class="clearfix">当前输入数据平均流量（1h）</dd>
             </dl>
         </div>
         <div class="left insertStatisticsItem insertStatisticsItem_3">
         	<dl class="insertStaList">
-            	<dt class="clearfix"><span class="left">1231654565</span><em class="left">条</em></dt>
-                <dd class="clearfix">昨日跨网传输输入数据量</dd>
+            	<dt class="clearfix"><span id="insert_yesterday" class="left"></span><em class="left">条</em></dt>
+                <dd class="clearfix">昨日输入数据量</dd>
             </dl>
         </div>
 	</div>
@@ -58,7 +58,7 @@
     	<div class="box left importData">
         	<div class="boxHd clearfix">
                 <h3 class="left">接入数据实时输入数据量</h3>
-                <div class="chooseDay right">
+                <div id="input_date" class="chooseDay right">
                     <a href="#" class="left sevenDays slt">近7天</a>
                     <a href="#" class="right thirtyDays">近30天</a>
                 </div>

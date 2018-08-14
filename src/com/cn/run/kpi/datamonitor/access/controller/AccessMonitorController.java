@@ -45,7 +45,7 @@ public class AccessMonitorController {
 		
 		JSONObject object = new JSONObject();
 		
-		// 获取近七天接入数据输入量
+		// 获取近X天接入数据输入量
 		JSONObject accessInputJson = getAccessInputData(queryCondition);
 		object.put(Constants.INPUT_DATA, accessInputJson);
 		
@@ -89,7 +89,25 @@ public class AccessMonitorController {
 	}
 
 	private Map<String, Object> getQueryCondition(HttpServletRequest request) {
-		return new HashMap<String, Object>();
+		Map<String, Object> queryCondition = new HashMap<String, Object>();
+		String dataSource = request.getParameter("dataSource");
+		String bProtocol = request.getParameter("bProtocol");
+		String sProtocol = request.getParameter("sProtocol");
+		String action = request.getParameter("action");
+		
+		if (StringUtil.isNotEmpty(dataSource)) {
+			queryCondition.put("dataSource", dataSource);
+		}
+		if (StringUtil.isNotEmpty(bProtocol)) {
+			queryCondition.put("bProtocol", bProtocol);
+		}
+		if (StringUtil.isNotEmpty(sProtocol)) {
+			queryCondition.put("sProtocol", sProtocol);
+		}
+		if (StringUtil.isNotEmpty(action)) {
+			queryCondition.put("action", action);
+		}
+		return queryCondition;
 	}
 
 	/**

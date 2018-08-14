@@ -17,29 +17,7 @@
 
 <body>
 <div class="container">
-	<div class="header clearfix">
-    	<a href="#" class="left logo"><img src="images/logo.png" alt="" /></a>
-        
-        <div class="right headerRight">
-        	<div class="messageBox left">
-            	<a href="#" class="messageLink">消息</a>
-                <em class="messageSign"></em>
-            </div>
-            
-            <div class="userBox left"><span class="userMain">Admin</span></div>
-            
-            <div class="logoutBox left"><a href="#" class="logoutMain">退出</a></div>
-        </div>
-        
-        <div class="nav clearfix">
-        	<a href="#" class="left navLink navLink_1"><span class="left"></span>首页</a>
-        	<a href="#" class="left navLink navLink_2 slt"><span class="left"></span>主动监测</a>
-        	<a href="#" class="left navLink navLink_3"><span class="left"></span>数据监控</a>
-        	<a href="#" class="left navLink navLink_4"><span class="left"></span>数据质量评估</a>
-        	<a href="#" class="left navLink navLink_5"><span class="left"></span>预警中心</a>
-        </div>
-        
-    </div>
+	<%@ include file="nav.jsp"%>
     
     <div class="active">
     
