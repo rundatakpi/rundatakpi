@@ -36,12 +36,12 @@ function refreshData(){
          "bPaginate": true, //翻页功能
          "bGoBtn":true,
          "lengthMenu": [ //自定义分页长度
-             [10,20,50],
-             ['10 条','20条','50条']
+             [5,10,20,50],
+             ['5条','10 条','20条','50条']
          ],
          "ordering":false,
          "ajax": {
-             "url": rootPath+"/yclData/getList",
+             "url": rootPath+"/ycl/getList",
              "type": "POST",
              "data": function(d){
             	 d.actionType = $("select#actionType>option:selected").val();
@@ -68,7 +68,7 @@ function refreshData(){
              { "data": "outputDataSpeed","defaultContent":"" },     //15
              { "data": "outputFieldFillRate","defaultContent":"" },      //16
              { "data": "outputDependGroupFillRate","defaultContent":"" },    //17
-             { "data": "createTime"},     //18
+             { "data": "createDate"},     //18
              { "data": ""}       //19
          ],
          "oLanguage" : { // 国际化配置
@@ -101,7 +101,7 @@ function refreshData(){
  			});
  		},
          "columnDefs": [
-        	 //给8-14列添加超链接
+        	 //给8-17列添加超链接
         	{
 	 			"targets": [8], 
 	 	        "render": function(data, type, full){
@@ -111,73 +111,64 @@ function refreshData(){
 	 	        }
         	},
         	{
-	 			"targets": [9], // 输入数据条数
+	 			"targets": [9], 
 	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputDataSpeed';
 	 	        	 return "<a href='#' onclick='showDetail(this,9)'>"+data+"</a>";
 	 	           
 	 	        }
         	},
         	{
-	 			"targets": [10], // 输入数据条数
+	 			"targets": [10],
 	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputFieldFillRate';
 	 	        	 return "<a href='#' onclick='showDetail(this,10)'>"+data+"</a>";
 	 	           
 	 	        }
         	},
         	{
-	 			"targets": [11], // 输入数据条数
+	 			"targets": [11], 
 	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputDependGroupFillRate';
 	 	        	 return "<a href='#' onclick='showDetail(this,11)'>"+data+"</a>";
 	 	           
 	 	        }
         	},
         	{
-	 			"targets": [12], // 输入数据条数
+	 			"targets": [12], 
 	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputFieldAvailability';
 	 	        	 return "<a href='#' onclick='showDetail(this,12)'>"+data+"</a>";
 	 	           
 	 	        }
         	},
         	{
-	 			"targets": [13], // 输入数据条数
+	 			"targets": [13], 
 	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputDependGroupAvailability';
 	 	        	 return "<a href='#' onclick='showDetail(this,13)'>"+data+"</a>";
 	 	           
 	 	        }
         	},
         	{
-	 			"targets": [14], // 输入数据条数
+	 			"targets": [14],
 	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputDataAccuracy';
 	 	        	 return "<a href='#' onclick='showDetail(this,14)'>"+data+"</a>";
 	 	           
 	 	        }
         	},
         	{
-	 			"targets": [15], // 输入数据条数
+	 			"targets": [15], 
 	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputDataAccuracy';
 	 	        	 return "<a href='#' onclick='showDetail(this,15)'>"+data+"</a>";
 	 	           
 	 	        }
         	},
         	{
-	 			"targets": [16], // 输入数据条数
+	 			"targets": [16], 
 	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputDataAccuracy';
 	 	        	 return "<a href='#' onclick='showDetail(this,16)'>"+data+"</a>";
 	 	           
 	 	        }
         	},
         	{
-	 			"targets": [17], // 输入数据条数
+	 			"targets": [17],
 	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputDataAccuracy';
 	 	        	 return "<a href='#' onclick='showDetail(this,17)'>"+data+"</a>";
 	 	           
 	 	        }
@@ -186,6 +177,15 @@ function refreshData(){
         	{
 	 			"targets": [0,18], // 输入数据条数
 	 			"visible": false,
+        	},
+        	//19列返回详情按钮
+        	{
+	 			"targets": [19], // 输入数据条数
+	 			"render": function(data, type, full){ 
+	 				 return  "<button class='btn btn-success btn-xs' onclick='showExample(this)'><i class='fa fa-remove'></i>查看样例</button>"
+		 	          
+	 	           
+	 	        }
         	}
         ]
     })
@@ -210,9 +210,32 @@ function showDetail(_this,num){
 		  closeBtn: 1, //关闭按钮是否显示 1显示0不显示
 		  shade: 0.8,
 		  area: ['800px', '600px'],
-		  content: rootPath+'/kpi/estimate/transformDetail.html?id='+id+'&num='+num//iframe的url
+		  content: rootPath+'/kpi/estimate/yclDetail.html?id='+id+'&num='+num//iframe的url
 	});
 			
+}
+
+/**
+ * 查看样例
+ * @param _this
+ * @returns
+ */
+function showExample(_this){
+	//获取该条数据id
+	var id = oTable.row($(_this).closest("tr")).data().id;
+	
+	var bProtocol = oTable.row($(_this).closest("tr")).data().bProtocolCode;
+	
+	//iframe层
+	layer.open({
+		  type: 2,
+		  title: bProtocol+'样例详情',
+		  shadeClose: true,
+		  closeBtn: 1, //关闭按钮是否显示 1显示0不显示
+		  shade: 0.8,
+		  area: ['80%', '80%'],
+		  content: rootPath+'/kpi/estimate/yclExample.html?id='+id    //iframe的url
+	});
 }
 
 
