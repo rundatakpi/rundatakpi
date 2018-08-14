@@ -44,7 +44,7 @@ public interface AlarmDataDao {
 	 * @param alarmData
 	 * @return
 	 */
-	Object insertInfo(AlarmData alarmData);
+	void insertInfo(AlarmData alarmData);
 
 	
 }
