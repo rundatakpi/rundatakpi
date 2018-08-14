@@ -5,11 +5,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>数据质量KPI监控 - 数据监控 - 服务监测</title>
 <link rel="stylesheet" type="text/css" href="style/global.css" />
+<link rel="stylesheet" type="text/css" href="style/ComboBox.css" />
 <link rel="stylesheet" type="text/css" href="style/style.css" />
 <link rel="stylesheet" type="text/css" href="style/media.css" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/run-min.js"></script>
+<script type="text/javascript" src="js/jquery.placeholder.js"></script>
 <script type="text/javascript" src="js/charts.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
 <script type="text/javascript" src="js/servemonitor.js"></script>
 </head>
 
@@ -30,6 +34,22 @@
         </div>
         <div class="boxBd">
         	<div id="dataStatistics" class="dataStatistics">
+            	
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="box">
+    	<div class="boxHd clearfix">
+        	<h3 class="left">应用调用协议频次</h3>
+            <div class="right failCauseBox">
+            	<label class="left">选择应用：</label>
+                <div id="chooseApp" class="chooseApp left"></div>
+            </div>
+        </div>
+        <div class="boxBd">
+        	<div id="frequencyBar" class="frequencyBar">
             	
             </div>
         </div>

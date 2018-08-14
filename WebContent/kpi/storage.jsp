@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>数据质量KPI监控 - 数据监控 - 存储量监测</title>
@@ -13,9 +14,10 @@
 
 <body>
 <div class="container">
-    <%@ include file="nav.jsp"%>
+	<%@ include file="nav.jsp"%>
     
-    <%@ include file="datamonitornav.jsp"%>    
+    <%@ include file="datamonitornav.jsp"%>
+    
     <div class="box">
     	<div class="boxHd clearfix">
         	<h3 class="left">九大资源库实时数据量和昨日数据量</h3>
