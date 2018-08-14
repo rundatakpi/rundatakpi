@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+.r-combobox-box{position:relative;}
+.r-combobox-input, .r-combobox-input[disabled]{width:214px; height:20px; line-height:20px; padding-right:38px;border:1px solid #4b5881;color:#333;background: #212942;}
+.r-combobox-handle{position:absolute; top:1px; right:1px; width:20px; height:20px; background:url(../images/combobox/arrow_down.png) no-repeat center center;}
+.r-combobox-handle-up{background:url(../images/combobox/arrow_up.png) no-repeat center center;}
+.r-combobox-slider-box{position:absolute; top:22px;background-color:#212942; border-right:1px solid #4b5881; border-bottom:1px solid #4b5881; border-left:1px solid #4b5881; z-index:996; overflow:auto;}
+.r-combobox-slider dt{height:24px; /*line-height:24px;*/ border-bottom:1px solid #d5e7ef;}
+.r-combobox-slider dt.r-combobox-load-box-noData{height:40px;}
+.r-combobox-slider dt.r-combobox-load-box-severError{height:40px;}
+.r-combobox-slider dt.r-combobox-load-box-sendError{height:40px;}
+.r-combobox-slider dd{height:24px; line-height:24px; padding:0px 10px; border-bottom:1px solid #4b5881; cursor:pointer;}
+.r-combobox-slider dd span{width:90%; color:#8394c6; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.r-combobox-now .r-combobox-input{/*background:#fff; */border-top:1px solid #6c99c6; border-right:1px solid #6c99c6; border-left:1px solid #6c99c6; border-bottom:1px solid #6c99c6;}
+.r-combobox-hover{background-color:#edf4f7;}
+.r-combobox-slt{background-color:#edf4f7;}
+.r-combobox-chk{margin:6px 5px 0px 0px;}
+.r-combobox-clear{display:none; position:absolute; top:1px; right:25px; width:10px; height:24px; background:url(../images/combobox/comboboxclear.png) no-repeat center center;}
+.r-combobox-clear-box .r-combobox-clear{display:block;}
+.r-combobox-loadding{height:60px; background:url(../images/combobox/loadding.gif) no-repeat center center;}
+.r-combobox-error{padding:10px 0; text-align:center; background:#e6e6e6; color:#666;}
+.r-combobox-serviceError{display:inline-block; width:100%; height:30px; background:url(../images/combobox/serviceError.png) no-repeat center center;}
+.r-combobox-sendError{display:inline-block; width:100%; height:30px; background:url(../images/combobox/sendError.png) no-repeat center center;}
+.r-combobox-noData{display:inline-block; width:100%; height:30px; background:url(../images/combobox/noData.png) no-repeat center center;}
+.r-combobox-hidden{display:none;}
+
+
+
+
+
+

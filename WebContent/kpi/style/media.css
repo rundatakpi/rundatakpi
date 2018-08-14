@@ -1,0 +1,24 @@
+﻿@charset "utf-8";
+@media screen and (min-width:1920px){
+	
+}
+
+@media screen and (max-width:1919px) and (min-width:1600px){
+	.stepBox{width:193px;}
+	
+}
+
+@media screen and (max-width:1599px) and (min-width:1440px){
+	.stepBox{width:160px;}
+	
+}
+
+@media screen and (max-width:1439px) and (min-width:1280px){
+	.stepBox{width:133px;}
+	
+}
+
+@media screen and (max-width:1279px){
+	.stepBox{width:133px;}
+	
+}
