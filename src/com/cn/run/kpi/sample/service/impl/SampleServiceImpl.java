@@ -21,4 +21,14 @@ public class SampleServiceImpl implements SampleService {
 		return sampleMonitorDao.list(queryCondition);
 	}
 
+	@Override
+	public void insertInfoList(List<SampleMonitor> sampleMonitors) {
+		sampleMonitorDao.insertInfoList(sampleMonitors);
+	}
+
+	@Override
+	public void insertInfo(SampleMonitor sampleMonitor) {
+		sampleMonitorDao.insertInfo(sampleMonitor);
+	}
+
 }

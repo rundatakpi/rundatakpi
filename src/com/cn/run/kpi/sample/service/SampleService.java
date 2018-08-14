@@ -14,4 +14,14 @@ public interface SampleService {
 	 * @throws Exception
 	 */
 	public List<SampleMonitor> list(Map<String, Object> queryCondition) throws Exception;
+	/**
+	 * 批量插入样例包数据
+	 * @param sampleMonitors
+	 */
+	public void insertInfoList(List<SampleMonitor> sampleMonitors);
+	/**
+	 * 插入一条样例包数据
+	 * @param sampleMonitor
+	 */
+	public void insertInfo(SampleMonitor sampleMonitor);
 }

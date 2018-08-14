@@ -68,8 +68,7 @@ public class AlarmDataServiceImpl implements AlarmDataService{
 	 */
 	@Override
 	public void insertInfo(AlarmData alarmData) {
-		alarmDataDao.insertInfo(alarmData);
-		
+		 alarmDataDao.insertInfo(alarmData);
 	}
 
 

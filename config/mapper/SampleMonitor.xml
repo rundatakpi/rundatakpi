@@ -34,4 +34,78 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from samplemonitor where 1 = 1
 		<include refid="sampleMonitorCondition"></include>
 	</select>
+	
+	<insert id="insertInfo" parameterType="com.cn.run.kpi.sample.entity.SampleMonitor" useGeneratedKeys="true" keyProperty="id">
+		insert into samplemonitor 
+		(	
+			<if test="null != dataSource and '' != dataSource">
+            	datasource,
+        	</if>
+        	<if test="null != bProtocol and '' != bProtocol">
+            	bprotocol,
+        	</if>
+        	<if test="null != sProtocol and '' != sProtocol">
+            	sprotocol,
+        	</if>
+        	<if test="null != originalFieldState and '' != originalFieldState">
+            	originalfieldstate,
+        	</if>
+        	<if test="null != preprocessingFieldState and '' != preprocessingFieldState">
+            	preprocessingfieldstate,
+        	</if>
+        	<if test="null != structExtractFieldState and '' != structExtractFieldState">
+            	structextractfieldstate,
+        	</if>
+        	<if test="null != objectExtractFieldState and '' != objectExtractFieldState">
+            	objectextractfieldstate
+        	</if>
+		) values (
+			<if test="null != dataSource and '' != dataSource">
+            	#{dataSource},
+        	</if>
+			<if test="null != bProtocol and '' != bProtocol">
+            	#{bProtocol},
+        	</if>
+        	<if test="null != sProtocol and '' != sProtocol">
+            	#{sProtocol},
+        	</if>
+        	<if test="null != originalFieldState and '' != originalFieldState">
+            	#{originalFieldState},
+        	</if>
+        	<if test="null != preprocessingFieldState and '' != preprocessingFieldState">
+            	#{preprocessingFieldState},
+        	</if>
+        	<if test="null != structExtractFieldState and '' != structExtractFieldState">
+            	#{structExtractFieldState},
+        	</if>
+        	<if test="null != objectExtractFieldState and '' != objectExtractFieldState">
+            	#{objectExtractFieldState}
+        	</if>
+		) 
+	</insert>
+	
+	<insert id="insertInfoList" parameterType="java.util.List">
+		insert into samplemonitor 
+		(
+			datasource,
+			bprotocol,
+			sprotocol,
+			originalfieldstate,
+			preprocessingfieldstate,
+			structextractfieldstate,
+			objectextractfieldstate )
+		values 
+		<foreach collection='list' item="item" index="index"  separator=",">
+			(
+			#{item.dataSource},
+			#{item.bProtocol},
+			#{item.sProtocol},
+			#{item.originalFieldState}, 
+			#{item.preprocessingFieldState}, 
+			#{item.structExtractFieldState}, 
+			#{item.objectExtractFieldState}
+			)
+		
+		</foreach>
+	</insert>
 </mapper>

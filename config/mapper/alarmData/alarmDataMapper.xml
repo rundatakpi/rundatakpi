@@ -83,25 +83,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
-	<insert id="insertInfo" parameterType="com.cn.run.kpi.alarm.entity.AlarmData">
+	<insert id="insertInfo" parameterType="com.cn.run.kpi.alarm.entity.AlarmData" useGeneratedKeys="true" keyProperty="id">
 		insert into t_alarm_info 
-		(
-			"alarm_time",
-			"alarm_level",
-			"alarm_content",
-			"process_status"
+		(	
+			<if test="null != alarmTime and '' != alarmTime">
+            	alarm_time,
+        	</if>
+			<if test="null != alarmLevel and '' != alarmLevel">
+            	alarm_level,
+        	</if>
+        	<if test="null != alarmContent and '' != alarmContent">
+            	alarm_content,
+        	</if>
+        	<if test="null != processState and '' != processState">
+            	process_status
+        	</if>
 		) values (
 			<if test="null != alarmTime and '' != alarmTime">
-            	to_date(#{alarmLevel},"yyyy-MM-dd hh24:mi:ss"),
+            	str_to_date(#{alarmTime},"%Y-%m-%d %H:%m:%s"),
         	</if>
 			<if test="null != alarmLevel and '' != alarmLevel">
             	#{alarmLevel},
         	</if>
         	<if test="null != alarmContent and '' != alarmContent">
-            	#{alarmLevel},
+            	#{alarmContent},
         	</if>
-        	<if test="null != processStatus and '' != processStatus">
-            	#{alarmLevel}
+        	<if test="null != processState and '' != processState">
+            	#{processState}
         	</if>
 		) 
 	</insert>

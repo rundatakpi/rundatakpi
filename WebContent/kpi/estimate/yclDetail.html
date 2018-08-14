@@ -35,11 +35,11 @@ var data = [];
 		var pid = args().id;
 		var num = args().num;
 		
-		var colnums = ['input_count','inputspeed','inputfieldfillrage','inputrelyfieldfillrage','inputfielduserage','inputrelyfielduserage','inputaccuracyrage'];
+		var colnums = ['input_count','inputfieldfillrage','inputrelyfieldfillrage','inputfielduserage','inputrelyfielduserage','inputaccuracyrage','output_count','outputspeed','outputfieldfillrage','outputrelyfieldfillrage'];
 		var colName = colnums[num-8];
 		
 		$.ajax({
-			url:rootPath+"/transform/getDetail",
+			url:rootPath+"/ycl/getDetail",
 			type:"post",
 			data:{
 				"id":pid,
@@ -47,8 +47,8 @@ var data = [];
 			},
 			success:function(d){
 				for (var i = 0; i < d.data.length; i++) {
-					time.unshift(d.data[i].transKey);
-					data.unshift(d.data[i].transValue);
+					time.unshift(d.data[i].colKey);
+					data.unshift(d.data[i].colValue);
 				}
 
 				showTransDetail();
@@ -65,7 +65,7 @@ var data = [];
 	//显示echarts图表
 	function showTransDetail(){
 		// 基于准备好的dom，初始化echarts图表
-	    var myChart = echarts.init(document.getElementById('transDetail'));
+	    var myChart = echarts.init(document.getElementById('yclDetail'));
 	    
 	    option = {
 		    title : {
@@ -136,7 +136,7 @@ var data = [];
 </head>
 <body>
 	<div class="container">
-		<div id="transDetail" style="width:700px;height: 500px;"></div>
+		<div id="yclDetail" style="width:700px;height: 500px;"></div>
 	</div>
 </body>
 </html>

@@ -3,8 +3,8 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.cn.run.kpi.estimate.dao.TransformDao">
-    <resultMap type="com.cn.run.kpi.estimate.entity.TransformData" id="transMap">
+<mapper namespace="com.cn.run.kpi.estimate.dao.YCLDataDao">
+    <resultMap type="com.cn.run.kpi.estimate.entity.YCLData" id="yclMap">
     	<id column="ID" property="id"></id>
 		<result column="sourcecode" property="dataSourceCode"></result>
 		<result column="sourcedesc" property="dataSourceDescription"></result>
@@ -14,16 +14,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="smallaggredesc" property="sProtocolDescription"></result>
 		<result column="actiontype" property="actionType"></result>
 		<result column="input_count" property="inputDataNum"></result>
-		<result column="inputspeed" property="inputDataSpeed"></result>
 		<result column="inputfieldfillrage" property="inputFieldFillRate"></result>
 		<result column="inputrelyfieldfillrage" property="inputDependGroupFillRate"></result>
 		<result column="inputfielduserage" property="inputFieldAvailability"></result>
 		<result column="inputrelyfielduserage" property="inputDependGroupAvailability"></result>
 		<result column="inputaccuracyrage" property="inputDataAccuracy"></result>
-		<result column="createtime" property="createTime"></result>
+		<result column="output_count" property="outputNum"></result>
+		<result column="outputspeed" property="outputDataSpeed"></result>
+		<result column="outputfieldfillrage" property="outputFieldFillRate"></result>
+		<result column="outputrelyfieldfillrage" property="outputDependGroupFillRate"></result>
+		<result column="createDate" property="createDate"></result>
     </resultMap>
     
-    <sql id="transCondition">
+    <sql id="yclCondition">
         <if test="null != dataSourceCode and '' != dataSourceCode">
             and sourcecode = #{dataSourceCode}
         </if>
@@ -37,39 +40,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             and actiontype = #{actionType}
         </if>
         <if test="null != startTime and '' != startTime">
-            and createTime <![CDATA[ >= ]]> #{startTime}
+            and createDate <![CDATA[ >= ]]> #{startTime}
         </if>
         <if test="null != endTime and '' != endTime">
-            and createTime <![CDATA[ < ]]> #{endTime}
+            and createDate <![CDATA[ < ]]> #{endTime}
         </if>
     </sql>
     
-	<select id="getList" parameterType="com.cn.run.kpi.estimate.entity.TransformData" resultMap="transMap">
+	<select id="getList" parameterType="com.cn.run.kpi.estimate.entity.YCLData" resultMap="yclMap">
 		select *
-		from tran_data 
+		from ycl_quality 
 		<where>
-			<include refid="transCondition"></include>
+			<include refid="yclCondition"></include>
 		</where>
 		order by id desc
 		limit #{start},#{length}
 	</select>
 	
-	<select id="getTotal" parameterType="com.cn.run.kpi.estimate.entity.TransformData" resultType="java.lang.Integer">
-		select count(*) from tran_data 
+	<select id="getTotal" parameterType="com.cn.run.kpi.estimate.entity.YCLData" resultType="java.lang.Integer">
+		select count(*) from ycl_quality 
 		<where>
-			<include refid="transCondition"></include>
+			<include refid="yclCondition"></include>
 		</where>
 	</select>
 	
-	<select id="selectById" parameterType="java.lang.Integer" resultMap="transMap">
-		select * from tran_data t where t.id = #{_parameter}
+	<select id="selectById" parameterType="java.lang.Integer" resultMap="yclMap">
+		select * from ycl_quality t where t.id = #{_parameter}
 	</select>
 	
-	<select id="selectDetail" parameterType="com.cn.run.kpi.estimate.entity.TransformData" resultType="com.cn.run.kpi.estimate.entity.TransformData">
-		select createtime as transKey,${colName} as transValue from tran_data
+	<select id="selectDetail" parameterType="com.cn.run.kpi.estimate.entity.YCLData" resultType="com.cn.run.kpi.estimate.entity.YCLData">
+		select createDate as colKey,${colName} as colValue from ycl_quality
 		<where>
-			<include refid="transCondition"></include>
+			<include refid="yclCondition"></include>
 		</where>
-		
+	</select>
+	
+	<select id="getYCLExample" parameterType="com.cn.run.kpi.estimate.entity.YCLExampleData" resultType="com.cn.run.kpi.estimate.entity.YCLExampleData">
+		select *
+		from ycl_quality_detail t
+		where 
+		t.qid = #{qid}
+		and
+		t.sourcedesc = #{sourcedesc}
+		limit ${size}
 	</select>
 </mapper>

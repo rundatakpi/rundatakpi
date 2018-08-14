@@ -43,14 +43,20 @@ public class TransformData implements Serializable{
 	private String inputDataAccuracy;
 	/*数据生成时间*/
 	private String createTime;
+	/*数据查询开始时间*/
+	private String startTime;
 	/*数据查询结束时间*/
 	private String endTime;
-	/*数据类型*/
-	private String colName;
 	/*起始位置*/
 	private int start;
 	/*长度*/
 	private int length;
+	/*列名*/
+	private String colName;
+	/**/
+	private String transKey;
+	
+	private String transValue;
 	
 	
 	public long getId() {
@@ -167,11 +173,30 @@ public class TransformData implements Serializable{
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
+	public String getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
 	public String getColName() {
 		return colName;
 	}
 	public void setColName(String colName) {
 		this.colName = colName;
 	}
+	public String getTransKey() {
+		return transKey;
+	}
+	public void setTransKey(String transKey) {
+		this.transKey = transKey;
+	}
+	public String getTransValue() {
+		return transValue;
+	}
+	public void setTransValue(String transValue) {
+		this.transValue = transValue;
+	}
+	
 	
 }
