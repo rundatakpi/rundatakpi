@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.run.kpi.datamonitor.compress.dao.CompressDao">
+    <resultMap type="com.cn.run.kpi.datamonitor.compress.entity.BacklogEntity" id="backlogMap">
+    	<id column="id" property="id"></id>
+		<result column="createdate" property="createDate"></result>
+		<result column="machinebacklognum" property="machineBacklogNum"></result>
+		<result column="machinebacklogsize" property="machineBacklogSize"></result>
+		<result column="kafkabacklognum" property="kafkaBacklogNum"></result>
+		<result column="kafkabacklogsize" property="kafkaBacklogSize"></result>
+    </resultMap>
+    
+    <sql id="queryCondition">
+        <if test="null != createDate and '' != createDate">
+            and createdate = #{createDate}
+        </if>
+    </sql>
+    
+	<select id="getKafkaBacklogData" parameterType="map" resultMap="backlogMap">
+		SELECT DISTINCT
+		a.createdate,
+		IFNULL(b.machinebacklognum, 0) as machineBacklogNum,
+		IFNULL(b.machinebacklogsize, 0) as machineBacklogSize,
+		IFNULL(b.kafkabacklognum, 0) as kafkaBacklogNum,
+		IFNULL(b.kafkabacklogsize, 0) as kafkaBacklogSize
+		FROM
+		backlog as a
+		LEFT JOIN (
+			SELECT
+			createdate,
+			sum(machinebacklognum) as machineBacklogNum,
+			sum(machinebacklogsize) as machineBacklogSize,
+			sum(kafkabacklognum) as kafkaBacklogNum,
+			sum(kafkabacklogsize) as kafkaBacklogSize
+			FROM
+			backlog
+			WHERE 1 = 1
+			<include refid="queryCondition"></include>
+			GROUP BY
+			createdate
+		) AS b ON a.createdate = b.createdate order by a.createdate;
+	</select>
+</mapper>

@@ -4,4 +4,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cn.run.kpi.datamonitor.service.dao.ServiceMonitorDao">
+	<resultMap type="com.cn.run.kpi.datamonitor.service.entity.AppMiddleWareEntity" id="appInvokeMiddleWareMap">
+    	<id column="id" property="id"></id>
+		<result column="createdate" property="createDate"></result>
+		<result column="app" property="app"></result>
+		<result column="invokenum" property="invokeNum"></result>
+    </resultMap>
+    
+    <resultMap type="com.cn.run.kpi.datamonitor.service.entity.AppInvokeProtocolEntity" id="appInvokeProtocolMap">
+    	<id column="id" property="id"></id>
+		<result column="createdate" property="createDate"></result>
+		<result column="app" property="app"></result>
+		<result column="invokenum" property="invokeNum"></result>
+    </resultMap>
+    
+    <sql id="queryCondition">
+        <if test="null != createDate and '' != createDate">
+            and createdate = #{createDate}
+        </if>
+    </sql>
+    
+    <select id="getAppInvokePrototolData" parameterType="map" resultMap="appInvokeProtocolMap">
+    </select>
+    
+    <select id="getAppInvokeMiddlewareData" parameterType="map" resultMap="appInvokeMiddleWareMap">
+        SELECT createdate, app, SUM(invokenum) invokenum FROM appinvokemiddleware GROUP BY createdate, app ORDER BY createdate, app
+    </select>
 </mapper>

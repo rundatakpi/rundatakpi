@@ -2,8 +2,10 @@ package com.cn.run.kpi.datamonitor.compress.dao;
 
 import java.util.List;
 
+import com.cn.run.kpi.datamonitor.compress.entity.BacklogEntity;
 import com.cn.run.kpi.datamonitor.compress.entity.KafkaCompressEntity;
 import com.cn.run.kpi.datamonitor.compress.entity.KafkaCompressNumEntity;
+import com.cn.run.kpi.datamonitor.compress.entity.KafkaCompressSizeEntity;
 import com.cn.run.kpi.datamonitor.compress.entity.MachineCompressNumEntity;
 import com.cn.run.kpi.datamonitor.compress.entity.MachineCompressSizeEntity;
 
@@ -32,4 +34,16 @@ public interface CompressDao {
 	 * @return
 	 */
 	List<KafkaCompressNumEntity> getKafkaCompressNum();
+	
+	/**
+	 * 获取Kafka实时积压数据大小
+	 * @return
+	 */
+	List<KafkaCompressSizeEntity> getKafkaCompressSize();
+	
+	/**
+	 * 获取积压数据
+	 * @return
+	 */
+	List<BacklogEntity> getKafkaBacklogData();
 }

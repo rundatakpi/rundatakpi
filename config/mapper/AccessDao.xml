@@ -10,6 +10,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="input" property="inputNum"></result>
     </resultMap>
     
+    <resultMap type="com.cn.run.kpi.datamonitor.access.entity.AccessDiscardEntiy" id="accessDiscardMap">
+    	<id column="id" property="id"></id>
+		<result column="discardreason" property="discardReason"></result>
+		<result column="discard" property="discardNum"></result>
+    </resultMap>
+    
     <sql id="queryCondition">
         <if test="null != dataSource and '' != dataSource">
             and datasource = #{dataSource}
@@ -51,8 +57,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) AS b ON a.createdate = b.createdate order by a.createdate;
 	</select>
 	
-<!-- 	<select id="getAccessDiscardData" parameterType="map" resultMap="sampleMonitorMap"> -->
-<!-- 	</select> -->
+	<select id="getAccessDiscardData" parameterType="map" resultMap="accessDiscardMap">
+	    SELECT sum(`discard`) discard, discardreason FROM `accessmonitor` GROUP BY discardreason;
+	</select>
 	
 	<select id="getTotalAccessInputNum" parameterType="map" resultType="java.lang.Long">
 	    select sum(input) from accessmonitor where 1 = 1 

@@ -18,6 +18,8 @@ import com.cn.run.kpi.commons.content.Constants;
 import com.cn.run.kpi.datamonitor.access.entity.AccessDiscardEntiy;
 import com.cn.run.kpi.datamonitor.access.entity.AccessInputEntity;
 import com.cn.run.kpi.datamonitor.access.service.AccessService;
+import com.cn.run.kpi.utils.DateUtil;
+import com.cn.run.kpi.utils.NumberUtils;
 import com.cn.run.kpi.utils.StringUtil;
 
 import net.sf.json.JSONObject;
@@ -48,8 +50,8 @@ public class AccessMonitorController {
 		object.put(Constants.INPUT_DATA, accessInputJson);
 		
 		// 查询抛弃数据量
-//		JSONObject discardJson = getAccessDiscardData(queryCondition);
-//		object.put(Constants.DISCARD_DATA, discardJson);
+		JSONObject discardJson = getAccessDiscardData(queryCondition);
+		object.put(Constants.DISCARD_DATA, discardJson);
 		
 		// 获取当前接入输入数据总量
 		Long totalInputNum = 0L;
@@ -63,7 +65,12 @@ public class AccessMonitorController {
 		// 当前接入输入数据平均流量（1h）
 		Double averageInputNum = 0D;
 		try {
-//			averageInputNum = accessService.getTotalAccessInputNum(queryCondition);
+			String date = DateUtil.getDate();
+			queryCondition.put("createDate", date);
+			Long total = accessService.getTotalAccessInputNum(queryCondition);
+			if (total != null) {
+				averageInputNum = NumberUtils.round(total / 24D, 2);
+			}
 		} catch (Exception e) {
 			LOG.error(">>>>>get averageInputNum failed", e);
 		}
@@ -85,6 +92,11 @@ public class AccessMonitorController {
 		return new HashMap<String, Object>();
 	}
 
+	/**
+	 * 获取近七天接入数据输入量
+	 * @param queryCondition
+	 * @return
+	 */
 	private JSONObject getAccessInputData(Map<String, Object> queryCondition) {
 		List<AccessInputEntity> accessInputData = new ArrayList<AccessInputEntity>();
 		JSONObject accessInputJson = new JSONObject();
@@ -107,6 +119,11 @@ public class AccessMonitorController {
 		return accessInputJson;
 	}
 	
+	/**
+	 * 查询抛弃数据量
+	 * @param queryCondition
+	 * @return
+	 */
 	private JSONObject getAccessDiscardData(Map<String, Object> queryCondition) {
 		List<AccessDiscardEntiy> discardData = new ArrayList<AccessDiscardEntiy>();
 		JSONObject discardJson = new JSONObject();

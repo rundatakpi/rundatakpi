@@ -2,12 +2,12 @@ package com.cn.run.kpi.datamonitor.compress.entity;
 
 import java.io.Serializable;
 
-public class KafkaCompressNumEntity implements Serializable {
+public class KafkaCompressSizeEntity implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7496410503775994713L;
+	private static final long serialVersionUID = 4030890374458007936L;
 
 	private String date;
 	
@@ -28,5 +28,4 @@ public class KafkaCompressNumEntity implements Serializable {
 	public void setNum(Long num) {
 		this.num = num;
 	}
-	
 }
