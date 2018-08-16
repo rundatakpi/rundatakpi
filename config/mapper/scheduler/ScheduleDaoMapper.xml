@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.run.kpi.scheduler.dao.ScheduleDao">
+    <resultMap type="com.cn.run.kpi.scheduler.entity.ScheduleBean" id="scheduleBean">
+    	<id column="id" property="id"></id>
+		<result column="datestr" property="datestr"></result>
+		<result column="datatype" property="datatype"></result>
+		<result column="describe" property="describe"></result>
+    </resultMap>
+    
+	
+	<select id="getScheduleByType" parameterType="java.lang.Integer" resultType="com.cn.run.kpi.scheduler.entity.ScheduleBean">
+		select * from schedule_date where datatype=#{type}
+	</select>
+	
+	<update id="updateSchedule" parameterType="com.cn.run.kpi.scheduler.entity.ScheduleBean">
+		update schedule_date
+		set datestr = #{datestr}
+		where id = #{id}
+	</update>
+	
+</mapper>

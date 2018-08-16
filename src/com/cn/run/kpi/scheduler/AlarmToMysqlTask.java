@@ -2,12 +2,14 @@ package com.cn.run.kpi.scheduler;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.cn.run.kpi.alarm.entity.AlarmData;
 import com.cn.run.kpi.alarm.service.AlarmDataService;
+import com.cn.run.kpi.scheduler.service.ScheduleService;
 
 /**
  * 预警中心调度任务
@@ -15,15 +17,18 @@ import com.cn.run.kpi.alarm.service.AlarmDataService;
  */
 @Component("alarmToMysqlTask")
 public class AlarmToMysqlTask {
-	
+	private static final Logger LOG = Logger.getLogger(AlarmToMysqlTask.class);
 	@Autowired
 	private AlarmDataService alarmDataService;
+	@Autowired
+	private ScheduleService scheduleService;
 	
 	/**
 	 * 预警定时任务 定时任务每分钟执行一次
 	 */
 	@Scheduled(cron = "0 0/1 * * * ? ")
 	public void alarmToMysqlTask() {
+		System.out.println("test");
 		//插入告警信息
 //		AlarmData alarmData=new AlarmData();
 //		alarmData.setAlarmContent("测试插入");
