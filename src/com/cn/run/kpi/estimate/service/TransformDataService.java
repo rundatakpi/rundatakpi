@@ -28,13 +28,6 @@ public interface TransformDataService {
 	public Integer getTotal(TransformData transformData);
 
 	/**
-	 * 根据id查询格转接入数据的值
-	 * @param id
-	 * @return
-	 */
-	public TransformData selectById(Integer id);
-
-	/**
 	 * 根据格转接入数据和列名查询该列近一周的指标值
 	 * @param tranformData
 	 * @param colName
