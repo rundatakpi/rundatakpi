@@ -10,6 +10,7 @@
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/echarts.min.js"></script>
 <script type="text/javascript" src="js/charts.js"></script>
+<script type="text/javascript" src="js/backlogmonitor.js"></script>
 </head>
 
 <body>

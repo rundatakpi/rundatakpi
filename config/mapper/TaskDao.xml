@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.run.kpi.datamonitor.task.dao.TaskMonitorDao">
+    <resultMap type="com.cn.run.kpi.datamonitor.task.entity.RunningTask" id="runningMap">
+    	<id column="id" property="id"></id>
+		<result column="createdate" property="time"></result>
+		<result column="running" property="taskNum"></result>
+    </resultMap>
+    
+    <resultMap type="com.cn.run.kpi.datamonitor.task.entity.CompletedTask" id="completedMap">
+    	<id column="id" property="id"></id>
+		<result column="createdate" property="time"></result>
+		<result column="complete" property="taskNum"></result>
+    </resultMap>
+    
+    <resultMap type="com.cn.run.kpi.datamonitor.task.entity.Task" id="runningtaskMap">
+    	<id column="id" property="id"></id>
+		<result column="server" property="server"></result>
+		<result column="starttime" property="startTime"></result>
+		<result column="runningtime" property="runningTime"></result>
+    </resultMap>
+    
+    <resultMap type="com.cn.run.kpi.datamonitor.task.entity.FailedTask" id="failedMap">
+    	<id column="id" property="id"></id>
+		<result column="server" property="server"></result>
+		<result column="starttime" property="startTime"></result>
+		<result column="failtime" property="failTime"></result>
+		<result column="reason" property="reason"></result>
+    </resultMap>
+    
+    <sql id="queryCondition">
+        <if test="null != createDate and '' != createDate">
+            and createdate = #{createDate}
+        </if>
+    </sql>
+    
+	<select id="getRunningTaskData" parameterType="map" resultMap="runningMap">
+		select sum(running) as running, createdate from taskmonitor group by createdate ORDER BY createdate;
+	</select>
+	
+	<select id="getCompletedTaskData" parameterType="map" resultMap="completedMap">
+		select sum(complete) as complete, createdate from taskmonitor group by createdate ORDER BY createdate;
+	</select>
+	
+	<select id="getRunningTask" parameterType="map" resultMap="runningtaskMap">
+		select id, server, starttime, runningtime from task_running
+	</select>
+	
+	<select id="getFailedTask" parameterType="map" resultMap="failedMap">
+		select id, server, starttime, failtime, reason from task_failed
+	</select>
+</mapper>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.run.kpi.datamonitor.restore.dao.RestoreDao">
+    <resultMap type="com.cn.run.kpi.datamonitor.restore.entity.RestoreInputEntity" id="restoreInputMap">
+    	<id column="id" property="id"></id>
+		<result column="createtime" property="time"></result>
+		<result column="input" property="inputNum"></result>
+    </resultMap>
+    
+    <resultMap type="com.cn.run.kpi.datamonitor.restore.entity.RestoreOutputEntity" id="restoreOutputMap">
+    	<id column="id" property="id"></id>
+		<result column="createtime" property="time"></result>
+		<result column="output" property="outputNum"></result>
+    </resultMap>
+    
+    <sql id="queryCondition">
+        <if test="null != dataSource and '' != dataSource">
+            and datasource = #{dataSource}
+        </if>
+        
+        <if test="null != bProtocol and '' != bProtocol">
+            and bProtocol = #{bProtocol}
+        </if>
+        
+        <if test="null != sProtocol and '' != sProtocol">
+            and sProtocol = #{sProtocol}
+        </if>
+        
+        <if test="null != action and '' != action">
+            and action = #{action}
+        </if>
+        
+        <if test="null != createDate and '' != createDate">
+            and createdate = #{createDate}
+        </if>
+    </sql>
+    
+	<select id="getRestoreInputData" parameterType="map" resultMap="restoreInputMap">
+		 select sum(restoreinput) as input, createtime FROM `restoremonitor` where date_sub(CURDATE(), INTERVAL 6 DAY) <![CDATA[<=]]>  date(createtime) GROUP BY createtime order by createtime;
+	</select>
+	
+	<select id="getRestoreOutputData" parameterType="map" resultMap="restoreOutputMap">
+	     select sum(restoreoutput) as output, createtime FROM `restoremonitor` where date_sub(CURDATE(), INTERVAL 6 DAY) <![CDATA[<=]]>  date(createtime) GROUP BY createtime order by createtime;
+	</select>
+	
+	<select id="getTotalRestoreInputNum" parameterType="map" resultType="java.lang.Long">
+	    select sum(restoreinput) from `restoremonitor` where 1 = 1 
+	    <include refid="queryCondition"></include>
+	</select>
+	
+	<select id="getTotalRestoreOutputNum" parameterType="map" resultType="java.lang.Long">
+	    select sum(restoreoutput) from `restoremonitor` where 1 = 1 
+	    <include refid="queryCondition"></include>
+	</select>
+	
+	<select id="getTotalRestoreDiscardNum" parameterType="map" resultType="java.lang.Long">
+	    select sum(restorediscard) from `restoremonitor` where 1 = 1 
+	    <include refid="queryCondition"></include>
+	</select>
+	
+	<select id="getRestoreInputNumByDay" parameterType="map" resultType="java.lang.Long">
+	    select sum(restoreinput) from `restoremonitor` where 1 = 1
+<!-- 	    <include refid="queryCondition"></include> -->
+	</select>
+	
+	<select id="getRestoreOutputNumByDay" parameterType="map" resultType="java.lang.Long">
+	    select sum(restoreoutput) from `restoremonitor` where 1 = 1
+<!-- 	    <include refid="queryCondition"></include> -->
+	</select>
+</mapper>

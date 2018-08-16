@@ -1,0 +1,15 @@
+﻿{
+	"total":153,
+	"data":[
+		{"id":"1","col1":"dianxinzhanghao1","col2":"一般","col3":"XXXX","col4":"告警中"},
+		{"id":"2","col1":"dianxinzhanghao1","col2":"轻微","col3":"XXXX","col4":"处理中"},
+		{"id":"3","col1":"dianxinzhanghao1","col2":"严重","col3":"XXXX","col4":"处理中"},
+		{"id":"4","col1":"dianxinzhanghao1","col2":"一般","col3":"XXXX","col4":"已处理"},
+		{"id":"5","col1":"dianxinzhanghao1","col2":"一般","col3":"XXXX","col4":"已处理"},
+		{"id":"6","col1":"dianxinzhanghao1","col2":"一般","col3":"XXXX","col4":"已处理"},
+		{"id":"7","col1":"dianxinzhanghao1","col2":"一般","col3":"XXXX","col4":"已处理"},
+		{"id":"8","col1":"dianxinzhanghao1","col2":"一般","col3":"XXXX","col4":"已处理"},
+		{"id":"9","col1":"dianxinzhanghao1","col2":"一般","col3":"XXXX","col4":"已处理"},
+		{"id":"10","col1":"dianxinzhanghao1","col2":"一般","col3":"XXXX","col4":"已处理"}
+	]
+}

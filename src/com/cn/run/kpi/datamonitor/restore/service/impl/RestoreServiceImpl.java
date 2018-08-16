@@ -34,28 +34,28 @@ public class RestoreServiceImpl implements RestoreService {
 	}
 
 	@Override
-	public Long getTotalRestoreInputNum() {
-		return restoreDao.getTotalRestoreInputNum();
+	public Long getTotalRestoreInputNum(Map<String, Object> queryCondition) {
+		return restoreDao.getTotalRestoreInputNum(queryCondition);
 	}
 
 	@Override
-	public Long getTotalRestoreOutputNum() {
-		return restoreDao.getTotalRestoreOutputNum();
+	public Long getTotalRestoreOutputNum(Map<String, Object> queryCondition) {
+		return restoreDao.getTotalRestoreOutputNum(queryCondition);
 	}
 
 	@Override
-	public Long getTotalRestoreDiscardNum() {
-		return restoreDao.getTotalRestoreDiscardNum();
+	public Long getTotalRestoreDiscardNum(Map<String, Object> queryCondition) {
+		return restoreDao.getTotalRestoreDiscardNum(queryCondition);
 	}
 
 	@Override
-	public Long getRestoreInputNumByDay(String date) {
-		return restoreDao.getRestoreInputNumByDay(date);
+	public Long getRestoreInputNumByDay(Map<String, Object> queryCondition) {
+		return restoreDao.getRestoreInputNumByDay(queryCondition);
 	}
 
 	@Override
-	public Long getRestoreOutputNumByDay(String date) {
-		return restoreDao.getRestoreOutputNumByDay(date);
+	public Long getRestoreOutputNumByDay(Map<String, Object> queryCondition) {
+		return restoreDao.getRestoreOutputNumByDay(queryCondition);
 	}
 
 	@Override

@@ -4,18 +4,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cn.run.kpi.datamonitor.service.dao.ServiceMonitorDao">
-	<resultMap type="com.cn.run.kpi.datamonitor.service.entity.AppMiddleWareEntity" id="appInvokeMiddleWareMap">
+	<resultMap type="com.cn.run.kpi.datamonitor.service.entity.AppMiddleWareEntity" id="appInvokeProtocolMap">
     	<id column="id" property="id"></id>
 		<result column="createdate" property="createDate"></result>
 		<result column="app" property="app"></result>
 		<result column="invokenum" property="invokeNum"></result>
     </resultMap>
     
-    <resultMap type="com.cn.run.kpi.datamonitor.service.entity.AppInvokeProtocolEntity" id="appInvokeProtocolMap">
+    <resultMap type="com.cn.run.kpi.datamonitor.service.entity.AppMiddleWareEntity" id="appInvokeMiddleWareMap">
     	<id column="id" property="id"></id>
 		<result column="createdate" property="createDate"></result>
 		<result column="app" property="app"></result>
 		<result column="invokenum" property="invokeNum"></result>
+    </resultMap>
+    
+    <resultMap type="com.cn.run.kpi.datamonitor.service.entity.ServiceInvokeException" id="serverExceptionMap">
+    	<id column="id" property="id"></id>
+		<result column="invoketime" property="invokeTime"></result>
+		<result column="app" property="invokeApplication"></result>
+		<result column="sql" property="invokeStatement"></result>
+		<result column="reason" property="exceptionReason"></result>
     </resultMap>
     
     <sql id="queryCondition">
@@ -29,5 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="getAppInvokeMiddlewareData" parameterType="map" resultMap="appInvokeMiddleWareMap">
         SELECT createdate, app, SUM(invokenum) invokenum FROM appinvokemiddleware GROUP BY createdate, app ORDER BY createdate, app
+    </select>
+    
+    <select id="list" parameterType="map" resultMap="serverExceptionMap">
+        SELECT * FROM `servicemonitorexception`; 
     </select>
 </mapper>

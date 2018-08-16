@@ -30,33 +30,33 @@ public interface RestoreDao {
 	 * 获取当前协议还原输入数据总量
 	 * @return
 	 */
-	Long getTotalRestoreInputNum();
+	Long getTotalRestoreInputNum(Map<String, Object> queryCondition);
 	
 	/**
 	 * 获取当前协议还原输出数据总量
 	 * @return
 	 */
-	Long getTotalRestoreOutputNum();
+	Long getTotalRestoreOutputNum(Map<String, Object> queryCondition);
 	
 	/**
 	 * 当前协议还原丢弃数据总量
 	 * @return
 	 */
-	Long getTotalRestoreDiscardNum();
+	Long getTotalRestoreDiscardNum(Map<String, Object> queryCondition);
 	
 	/**
 	 * 获取某天协议还原输入数据量
 	 * @param date
 	 * @return
 	 */
-	Long getRestoreInputNumByDay(String date);
+	Long getRestoreInputNumByDay(Map<String, Object> queryCondition);
 	
 	/**
 	 * 获取某天协议还原输出数据量
 	 * @param date
 	 * @return
 	 */
-	Long getRestoreOutputNumByDay(String date);
+	Long getRestoreOutputNumByDay(Map<String, Object> queryCondition);
 	
 	/**
 	 * 获取数据重复率

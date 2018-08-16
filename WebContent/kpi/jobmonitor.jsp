@@ -4,8 +4,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>数据质量KPI监控 - 数据监控 - 任务监测</title>
+
 <link rel="stylesheet" type="text/css" href="style/global.css" />
 <link rel="stylesheet" type="text/css" href="style/ComboBox.css" />
+<link rel="stylesheet" type="text/css" href="style/Grid.css" />
 <link rel="stylesheet" type="text/css" href="style/style.css" />
 <link rel="stylesheet" type="text/css" href="style/media.css" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
@@ -61,86 +63,7 @@
             
         </div>
         <div class="boxBd">
-        	<div class="unusualBack">
-            	<table>
-                	<colgroup>
-                    	<col width="82" />
-                    	<col width="" />
-                    	<col width="" />
-                    	<col width="" />
-                    	<col width="" />
-                    </colgroup>
-                    <thead>
-                    	<tr>
-                        	<th>序号</th>
-                        	<th>服务器地址</th>
-                        	<th>开始时间</th>
-                        	<th>运行时长（s）</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    	<tr>
-                        	<td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>2</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>3</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>4</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>5</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>6</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>7</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>8</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>9</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>10</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+        	<div class="unusualBack" id="runningJob">
             </div>
         </div>
     </div>
@@ -154,86 +77,7 @@
             </div>
         </div>
         <div class="boxBd">
-        	<div class="unusualBack">
-            	<table>
-                	<colgroup>
-                    	<col width="82" />
-                    	<col width="" />
-                    	<col width="" />
-                    	<col width="" />
-                    	<col width="" />
-                    </colgroup>
-                    <thead>
-                    	<tr>
-                        	<th>序号</th>
-                        	<th>服务器地址</th>
-                        	<th>开始时间</th>
-                        	<th>运行时长（s）</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    	<tr>
-                        	<td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>2</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>3</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>4</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>5</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>6</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>7</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>8</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>9</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    	<tr>
-                        	<td>10</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+        	<div class="unusualBack" id="failJob">
             </div>
         </div>
     </div>

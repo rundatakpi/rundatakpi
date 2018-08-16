@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cn.run.kpi.datamonitor.compress.entity.BacklogEntity;
-import com.cn.run.kpi.datamonitor.compress.entity.KafkaCompressNumEntity;
 import com.cn.run.kpi.datamonitor.compress.service.CompressService;
 import com.cn.run.kpi.utils.StringUtil;
 
@@ -35,25 +34,39 @@ public class CompressController {
 	@RequestMapping("/init")
 	@ResponseBody
 	public String init() {
-		JSONObject object = new JSONObject();
-		
 		Callable<JSONObject> kafkaNumCallable = new Callable<JSONObject>() {
 
 			@Override
 			public JSONObject call() throws Exception {
-		        JSONObject kafkaNumJson = new JSONObject();
+				JSONObject object = new JSONObject();
+		        JSONObject kafkaJson = new JSONObject();
+		        JSONObject machineJson = new JSONObject();
 				List<String> date = new ArrayList<>();
-				List<Long> num = new ArrayList<>();
-				List<KafkaCompressNumEntity> kafkaCompressNum = compressService.getKafkaCompressNum();
-				if (kafkaCompressNum != null && !kafkaCompressNum.isEmpty()) {
-					for (KafkaCompressNumEntity kafkaCompressNumEntity : kafkaCompressNum) {
-						date.add(kafkaCompressNumEntity.getDate());
-						num.add(kafkaCompressNumEntity.getNum());
+				List<Long> kafkaNum = new ArrayList<>();
+				List<Long> kafkaSize = new ArrayList<>();
+				List<Long> machineNum = new ArrayList<>();
+				List<Long> machineSize = new ArrayList<>();
+				List<BacklogEntity> backlog = compressService.getKafkaBacklogData();
+				if (backlog != null && !backlog.isEmpty()) {
+					for (BacklogEntity backlogEntity : backlog) {
+						date.add(backlogEntity.getCreateDate());
+						kafkaNum.add(backlogEntity.getKafkaBacklogSize());
+						kafkaSize.add(backlogEntity.getKafkaBacklogSize());
+						machineNum.add(backlogEntity.getMachineBacklogNum());
+						machineSize.add(backlogEntity.getMachineBacklogSize());
 					}
-					kafkaNumJson.put("date", date);
-					kafkaNumJson.put("kafkaNum", num);
+					kafkaJson.put("date", date);
+					kafkaJson.put("kafkaNum", kafkaNum);
+					kafkaJson.put("kafkaSize", kafkaSize);
+					
+					machineJson.put("date", date);
+					machineJson.put("machineNum", machineNum);
+					machineJson.put("machineSize", machineSize);
+					
+					object.put("kafkaJson", kafkaJson);
+					object.put("machineJson", machineJson);
 				}
-				return kafkaNumJson;
+				return object;
 			}
 			
 		};
@@ -63,19 +76,21 @@ public class CompressController {
 		
 		
 //		FutureTask<JSONObject> futureTask = new FutureTask<>(kafkaNumCallable);
+		JSONObject object = new JSONObject();
 		try {
-			object.put("kafkaNumJson", future.get());
+			object = future.get();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
 		
-		getBacklogData(object);
+		//getBacklogData(object);
 		
 		return object.toString();
 	}
 
+	@SuppressWarnings("unused")
 	private void getBacklogData(JSONObject object) {
 		List<BacklogEntity> backlog = compressService.getKafkaBacklogData();
 		if (backlog != null && !backlog.isEmpty()) {

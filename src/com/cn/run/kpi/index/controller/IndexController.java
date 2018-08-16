@@ -1,9 +1,7 @@
 package com.cn.run.kpi.index.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +16,6 @@ import com.cn.run.kpi.datamonitor.compress.service.CompressService;
 import com.cn.run.kpi.datamonitor.preprocess.entity.PreProcessEntity;
 import com.cn.run.kpi.datamonitor.preprocess.service.PreProcessService;
 import com.cn.run.kpi.datamonitor.store.entity.ObjectEntity;
-import com.cn.run.kpi.datamonitor.store.entity.StoreEntity;
 import com.cn.run.kpi.datamonitor.store.service.StoreService;
 import com.cn.run.kpi.utils.StringUtil;
 
@@ -74,7 +71,12 @@ public class IndexController {
 		object.put("preProcess", preProcess);
 		
 		// 获取对象化数据
-		List<ObjectEntity> objectData = storeService.getObjectData();
+		List<ObjectEntity> objectData = new ArrayList<>();
+		try {
+			objectData = storeService.getObjectData();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		List<Long> dataNumList = new ArrayList<Long>();
 		List<Long> accurateNumList = new ArrayList<Long>();
 		List<Long> associateNumList = new ArrayList<Long>();

@@ -10,6 +10,7 @@
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/echarts.min.js"></script>
 <script type="text/javascript" src="js/charts.js"></script>
+<script type="text/javascript" src="js/restoremonitor.js"></script>
 </head>
 
 <body>
@@ -56,17 +57,17 @@
         	<div class="left curTotalData">
             	<div class="curTotalDataChart" id="curTotalDataChart"></div>
                 <ul class="curTotalDataList">
-                	<li class="clearfix curTotalDataLi_1"><label class="left">当前协议还原输入数据总量：</label><span class="left agencyb">122332156</span><em class="left">条</em></li>
-                	<li class="clearfix curTotalDataLi_2"><label class="left">当前协议还原输出数据总量：</label><span class="left agencyb">122330235</span><em class="left">条</em></li>
-                	<li class="clearfix curTotalDataLi_3"><label class="left">当前协议还原丢弃数据总量：</label><span class="left agencyb">1921</span><em class="left">条</em></li>
+                	<li class="clearfix curTotalDataLi_1"><label class="left">当前协议还原输入数据总量：</label><span id="restore_total_input" class="left agencyb">122332156</span><em class="left">条</em></li>
+                	<li class="clearfix curTotalDataLi_2"><label class="left">当前协议还原输出数据总量：</label><span id="restore_total_output" class="left agencyb">122330235</span><em class="left">条</em></li>
+                	<li class="clearfix curTotalDataLi_3"><label class="left">当前协议还原丢弃数据总量：</label><span id="restore_total_discard" class="left agencyb">1921</span><em class="left">条</em></li>
                 </ul>
             </div>
             
             <div class="left yestodayTotalData">
             	<div class="yestodayTotalDataChart" id="yestodayTotalDataChart"></div>
                 <ul class="curTotalDataList">
-                	<li class="clearfix curTotalDataLi_4"><label class="left">昨日协议还原输入数据总量：</label><span class="left agencyb">122332156</span><em class="left">条</em></li>
-                	<li class="clearfix curTotalDataLi_5"><label class="left">昨日协议还原输出数据总量：</label><span class="left agencyb">122330235</span><em class="left">条</em></li>
+                	<li class="clearfix curTotalDataLi_4"><label class="left">昨日协议还原输入数据总量：</label><span id="restore_yesterday_input" class="left agencyb">122332156</span><em class="left">条</em></li>
+                	<li class="clearfix curTotalDataLi_5"><label class="left">昨日协议还原输出数据总量：</label><span id="restore_yesterday_output" class="left agencyb">122330235</span><em class="left">条</em></li>
                 </ul>
             </div>
             

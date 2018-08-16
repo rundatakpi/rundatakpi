@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cn.run.kpi.datamonitor.task.entity.CompletedTask;
+import com.cn.run.kpi.datamonitor.task.entity.FailedTask;
 import com.cn.run.kpi.datamonitor.task.entity.RunningTask;
 import com.cn.run.kpi.datamonitor.task.entity.Task;
 
@@ -26,12 +27,26 @@ public interface TaskMonitorDao {
 	 * @param date
 	 * @return
 	 */
-	public List<CompletedTask> getCompletedTaskData(String date);
+	public List<CompletedTask> getCompletedTaskData(String date) throws Exception;
 
 	/**
 	 * 获取任务列表
 	 * @param queryCondition
 	 * @return
 	 */
-	public List<Task> list(Map<String, Object> queryCondition);
+	public List<Task> list(Map<String, Object> queryCondition) throws Exception;
+	
+	/**
+	 * 获取失败任务列表
+	 * @return
+	 * @throws Exception
+	 */
+	public List<FailedTask> getFailedTask() throws Exception;
+	
+	/**
+	 * 获取运行任务列表
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Task> getRunningTask(Map<String, Object> queryCondition) throws Exception;
 }

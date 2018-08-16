@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cn.run.kpi.datamonitor.service.entity.AppInvokeProtocolEntity;
 import com.cn.run.kpi.datamonitor.service.entity.AppMiddleWareEntity;
+import com.cn.run.kpi.datamonitor.service.entity.ServiceInvokeException;
 import com.cn.run.kpi.datamonitor.service.service.ServiceMonitorService;
 import com.cn.run.kpi.utils.DateUtil;
 import com.cn.run.kpi.utils.StringUtil;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 /**
@@ -139,7 +144,29 @@ public class ServiceMonitorController {
 		return object.toString();
 	}
 	
-	public static void main(String[] args) {
-		System.out.println("2018-08-14r".substring(0, 10));
+	/**
+	 * 获取服务异常信息
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/serverException")
+	@ResponseBody
+	public String getServerException(HttpServletRequest request, HttpServletResponse response) {
+		JSONObject object = new JSONObject();
+		Map<String, Object> queryCondition = new HashMap<String, Object>();
+		try {
+			List<ServiceInvokeException> serviceInvokeException = serviceMonitorService.list(queryCondition);
+			int total = 0;
+			if (serviceInvokeException != null && !serviceInvokeException.isEmpty()) {
+				total = serviceInvokeException.size();
+				object.put("total", total);
+				object.put("data", JSONArray.fromObject(serviceInvokeException));
+			}
+		} catch (Exception e) {
+			LOG.error(">>>>>get server exception failed", e);
+		}
+		
+		return object.toString();
 	}
 }

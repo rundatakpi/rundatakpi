@@ -19,25 +19,25 @@ public interface StoreService {
 	 * 查询对象化数据
 	 * @return
 	 */
-	List<ObjectEntity> getObjectData();
+	List<ObjectEntity> getObjectData() throws Exception;
 	
 	/**
 	 * 获取近7天数据存储大小、对象化数据存储大小
 	 * @return
 	 */
-	List<StoreEntity> getStoreData();
+	List<StoreEntity> getStoreData() throws Exception;
 	
 	/**
 	 * 查询九大资源数据量
 	 * @param queryCondition
 	 * @return
 	 */
-	List<NineResourceEntity> getNineResourceData(Map<String, Object> queryCondition);
+	List<NineResourceEntity> getNineResourceData(Map<String, Object> queryCondition) throws Exception;
 	
 	/**
 	 * 查询对象库数据量
 	 * @param queryCondition
 	 * @return
 	 */
-	List<ObjectLibEntity> getObjectData(Map<String, Object> queryCondition);
+	List<ObjectLibEntity> getObjectData(Map<String, Object> queryCondition) throws Exception;
 }
