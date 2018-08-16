@@ -24,13 +24,13 @@ public class ServiceMonitorServiceImpl implements ServiceMonitorService {
 	private ServiceMonitorDao serviceMonitorDao;
 
 	@Override
-	public List<AppMiddleWareEntity> getAppInvokeMiddlewareData() throws Exception {
-		return serviceMonitorDao.getAppInvokeMiddlewareData();
+	public List<AppMiddleWareEntity> getAppInvokeMiddlewareData(Map<String, Object> queryCondition) throws Exception {
+		return serviceMonitorDao.getAppInvokeMiddlewareData(queryCondition);
 	}
 
 	@Override
-	public List<AppInvokeProtocolEntity> getAppInvokePrototolData() throws Exception {
-		return serviceMonitorDao.getAppInvokePrototolData();
+	public List<AppInvokeProtocolEntity> getAppInvokePrototolData(Map<String, Object> queryCondition) throws Exception {
+		return serviceMonitorDao.getAppInvokePrototolData(queryCondition);
 	}
 
 	@Override
@@ -38,4 +38,13 @@ public class ServiceMonitorServiceImpl implements ServiceMonitorService {
 		return serviceMonitorDao.list(queryCondition);
 	}
 	
+	@Override
+	public void insertAppQueryRecord(AppQueryRecord appQueryRecord) {
+		serviceMonitorDao.insertAppQueryRecord(appQueryRecord);
+	}
+
+	@Override
+	public List<String> getApp(Map<String, Object> queryCondition) throws Exception {
+		return serviceMonitorDao.getApp(queryCondition);
+	}
 }

@@ -18,13 +18,13 @@ public interface ServiceMonitorService {
 	 * 获取个应用调用中间件频次
 	 * @return
 	 */
-	List<AppMiddleWareEntity> getAppInvokeMiddlewareData() throws Exception;
+	List<AppMiddleWareEntity> getAppInvokeMiddlewareData(Map<String, Object> queryCondition) throws Exception;
 	
 	/**
 	 * 获取各应用调用协议频次
 	 * @return
 	 */
-	List<AppInvokeProtocolEntity> getAppInvokePrototolData() throws Exception;
+	List<AppInvokeProtocolEntity> getAppInvokePrototolData(Map<String, Object> queryCondition) throws Exception;
 	
 	/**
 	 * 获取服务调用异常信息列表
@@ -32,5 +32,12 @@ public interface ServiceMonitorService {
 	 * @return
 	 */
 	List<ServiceInvokeException> list(Map<String, Object> queryCondition) throws Exception;
+
+	/**
+	 * 插入服务监测数据
+	 * @param appQueryRecord
+	 */
+	public void insertAppQueryRecord(AppQueryRecord appQueryRecord);
+	List<String> getApp(Map<String, Object> queryCondition) throws Exception;
 	
 }

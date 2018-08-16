@@ -18,13 +18,13 @@ public interface ServiceMonitorDao {
 	 * 获取个应用调用中间件频次
 	 * @return
 	 */
-	public List<AppMiddleWareEntity> getAppInvokeMiddlewareData();
+	public List<AppMiddleWareEntity> getAppInvokeMiddlewareData(Map<String, Object> queryCondition);
 
 	/**
 	 * 获取各应用调用协议频次
 	 * @return
 	 */
-	public List<AppInvokeProtocolEntity> getAppInvokePrototolData();
+	public List<AppInvokeProtocolEntity> getAppInvokePrototolData(Map<String, Object> queryCondition);
 
 	/**
 	 * 获取服务调用异常信息列表
@@ -32,4 +32,12 @@ public interface ServiceMonitorDao {
 	 * @return
 	 */
 	public List<ServiceInvokeException> list(Map<String, Object> queryCondition);
+
+	/**
+	 * 插入服务监测数据
+	 * @param appQueryRecord
+	 */
+	public void insertAppQueryRecord(AppQueryRecord appQueryRecord);
+	
+	public List<String> getApp(Map<String, Object> queryCondition);
 }
