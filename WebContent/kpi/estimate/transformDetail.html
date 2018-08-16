@@ -32,19 +32,17 @@ var time = [];
 var data = [];
 	$(function(){
 
-		var pid = args().id;
-		var num = args().num;
-		
-		var colnums = ['input_count','inputspeed','inputfieldfillrage','inputrelyfieldfillrage','inputfielduserage','inputrelyfielduserage','inputaccuracyrage'];
-		var colName = colnums[num-8];
+		var transData = {};
+		transData.dataSourceCode =args().dataSourceCode;
+		transData.bProtocolCode =args().bProtocolCode;
+		transData.sProtocolCode =args().sProtocolCode;
+		transData.actionType =args().actionType;
+		transData.colName =args().colName;
 		
 		$.ajax({
 			url:rootPath+"/transform/getDetail",
 			type:"post",
-			data:{
-				"id":pid,
-				"colName":colName
-			},
+			data:transData,
 			success:function(d){
 				for (var i = 0; i < d.data.length; i++) {
 					time.unshift(d.data[i].transKey);

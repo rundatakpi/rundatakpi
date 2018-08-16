@@ -45,14 +45,6 @@ public class YCLDataServiceImpl implements YCLDataService {
 	}
 
 	/**
-	 * 根据id查询预处理数据信息
-	 */
-	@Override
-	public YCLData selectById(Integer id) {
-		return yclDataDao.selectById(id);
-	}
-
-	/**
 	 * 查询某属性近一周的值
 	 */
 	@Override

@@ -1,22 +1,26 @@
 package com.cn.run.kpi.estimate.controller;
 
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.cn.run.kpi.alarm.controller.AlarmDataController;
 import com.cn.run.kpi.estimate.entity.TransformData;
 import com.cn.run.kpi.estimate.service.TransformDataService;
 import com.cn.run.kpi.utils.DateUtil;
+
+import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
+import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 
 
@@ -65,23 +69,24 @@ public class TransformDataController {
 	 */
 	@RequestMapping("/getDetail")
 	@ResponseBody
-	public JSONObject getDetail(Integer id,String colName){
+	public JSONObject getDetail(TransformData tranformData){
 		JSONObject json = new JSONObject();
-
+		
 		try {
-			TransformData tranformData = transformService.selectById(id);
+			//JSONObject jsonobject = JSONObject.fromObject(transData);
+			//TransformData tranformData = (TransformData)JSONObject.toBean(jsonobject,TransformData.class);
 
-			tranformData.setColName(colName);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date beforeDate = sdf.parse(tranformData.getCreateTime());
-			String beforeDateStr = DateUtil.getDateBefore(beforeDate, 7);
-			tranformData.setStartTime(beforeDateStr);
-			tranformData.setEndTime(tranformData.getCreateTime());
+			String startDateStr = DateUtil.getDateBefore(new Date(), 7);
+			String endDateStr = sdf.format(new Date());
+			tranformData.setStartTime(startDateStr);
+			tranformData.setEndTime(endDateStr);
+			
 			List<TransformData> transformList = transformService.selectDetail(tranformData);
 			
 			json.put("data",transformList);
 
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			LOG.error(e.getMessage(), e);
 		}
 

@@ -11,6 +11,10 @@ public class YCLExampleData implements Serializable{
 	private static final long serialVersionUID = 1L;
 	/*主键*/
 	private long id;
+	/*数据源*/
+	private String dataSourceCode;
+	/*大协议*/
+	private String bProtocolCode;
 	/*来源描述*/
 	private String sourcedesc;
 	/*认证号码*/
@@ -23,8 +27,6 @@ public class YCLExampleData implements Serializable{
 	private String receivername;
 	/*基站*/
 	private String basestation;
-	/*预处理质量id*/
-	private long qid;
 	/*样例包取值个数*/
 	private Integer size;
 
@@ -84,14 +86,6 @@ public class YCLExampleData implements Serializable{
 		this.basestation = basestation;
 	}
 
-	public long getQid() {
-		return qid;
-	}
-
-	public void setQid(long qid) {
-		this.qid = qid;
-	}
-
 	public Integer getSize() {
 		return size;
 	}
@@ -100,6 +94,22 @@ public class YCLExampleData implements Serializable{
 		this.size = size;
 	}
 
+	public String getDataSourceCode() {
+		return dataSourceCode;
+	}
+
+	public void setDataSourceCode(String dataSourceCode) {
+		this.dataSourceCode = dataSourceCode;
+	}
+
+	public String getbProtocolCode() {
+		return bProtocolCode;
+	}
+
+	public void setbProtocolCode(String bProtocolCode) {
+		this.bProtocolCode = bProtocolCode;
+	}
+	
 
 	
 	

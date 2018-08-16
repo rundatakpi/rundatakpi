@@ -2,11 +2,13 @@ var oTable;
 //获取主机地址之后的目录，如： proj/meun.jsp
 var pathName = window.document.location.pathname;
 var rootPath = pathName.substring(0, pathName.substr(1).indexOf('/')+1);
-var pid;
+
 $(function() {
-	pid = args().id;
+	var yclData = {};
+	yclData.dataSourceCode = args().dataSourceCode;
+	yclData.bProtocolCode = args().bProtocolCode;
 	
-	refreshData();
+	refreshData(yclData);
     
 })
 
@@ -24,7 +26,7 @@ var args = function(params){
  * 绘制表格
  * @returns
  */
-function refreshData(){
+function refreshData(yclData){
 	//初始化表格对象
 	oTable =  $('#yclExampleTable').DataTable({
     	 "bAutoWidth": true,//自动宽度
@@ -42,9 +44,7 @@ function refreshData(){
          "ajax": {
              "url": rootPath+"/ycl/getExampleList",
              "type": "POST",
-             "data": function(d){
-            	 d.id = pid
-             }
+             "data": yclData
          },
          "searching" : false,
          "columns": [

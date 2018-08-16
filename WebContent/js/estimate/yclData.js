@@ -199,8 +199,14 @@ function refreshData(){
  */
 function showDetail(_this,num){
 	
-	//获取该条数据id
-	var id = oTable.row($(_this).closest("tr")).data().id;
+	//获取该条数据的数据源，大协议，小协议，数据类型
+	var dataSourceCode = oTable.row($(_this).closest("tr")).data().dataSourceCode;
+	var bProtocolCode = oTable.row($(_this).closest("tr")).data().bProtocolCode;
+	var sProtocolCode = oTable.row($(_this).closest("tr")).data().sProtocolCode;
+	var actionType = oTable.row($(_this).closest("tr")).data().actionType;
+	
+	var colnums = ['input_count','inputfieldfillrage','inputrelyfieldfillrage','inputfielduserage','inputrelyfielduserage','inputaccuracyrage','output_count','outputspeed','outputfieldfillrage','outputrelyfieldfillrage'];
+	var colName = colnums[num-8];
 	
 	//iframe层
 	layer.open({
@@ -210,7 +216,9 @@ function showDetail(_this,num){
 		  closeBtn: 1, //关闭按钮是否显示 1显示0不显示
 		  shade: 0.8,
 		  area: ['800px', '600px'],
-		  content: rootPath+'/kpi/estimate/yclDetail.html?id='+id+'&num='+num//iframe的url
+		  content: rootPath+'/kpi/estimate/yclDetail.html?dataSourceCode='+dataSourceCode+
+			'&bProtocolCode='+bProtocolCode+'&sProtocolCode='+sProtocolCode+'&actionType='+actionType+
+  			'&colName='+colName,     //iframe的url
 	});
 			
 }
@@ -221,20 +229,21 @@ function showDetail(_this,num){
  * @returns
  */
 function showExample(_this){
-	//获取该条数据id
-	var id = oTable.row($(_this).closest("tr")).data().id;
-	
-	var bProtocol = oTable.row($(_this).closest("tr")).data().bProtocolCode;
+
+	//获取该条数据的数据源，大协议
+	var dataSourceCode = oTable.row($(_this).closest("tr")).data().dataSourceCode;
+	var bProtocolCode = oTable.row($(_this).closest("tr")).data().bProtocolCode;
 	
 	//iframe层
 	layer.open({
 		  type: 2,
-		  title: bProtocol+'样例详情',
+		  title: dataSourceCode+'-'+bProtocolCode+'样例详情',
 		  shadeClose: true,
 		  closeBtn: 1, //关闭按钮是否显示 1显示0不显示
 		  shade: 0.8,
 		  area: ['80%', '80%'],
-		  content: rootPath+'/kpi/estimate/yclExample.html?id='+id    //iframe的url
+		  content: rootPath+'/kpi/estimate/yclExample.html?dataSourceCode='+dataSourceCode+
+			'&bProtocolCode='+bProtocolCode,    //iframe的url
 	});
 }
 

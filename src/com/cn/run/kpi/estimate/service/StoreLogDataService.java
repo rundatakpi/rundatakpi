@@ -3,6 +3,7 @@ package com.cn.run.kpi.estimate.service;
 import java.util.List;
 
 import com.cn.run.kpi.estimate.entity.StoreLogData;
+import com.cn.run.kpi.estimate.entity.TransformData;
 
 
 /**
@@ -25,6 +26,20 @@ public interface StoreLogDataService {
 	 * @return
 	 */
 	public Integer getTotal(StoreLogData storeLogData);
+
+	/**
+	 * 
+	 * @param tranformData
+	 * @return
+	 */
+	public List<StoreLogData> selectDetail(StoreLogData storeLogData);
+
+	/**
+	 * 
+	 * @param storeLogData
+	 * @return
+	 */
+	public List<StoreLogData> getTableInfo(StoreLogData storeLogData);
 
 	
 	
