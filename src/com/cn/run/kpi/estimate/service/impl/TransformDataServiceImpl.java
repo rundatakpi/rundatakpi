@@ -41,14 +41,6 @@ public class TransformDataServiceImpl implements TransformDataService {
 	}
 
 	/**
-	 * 根据id查询格转接入数据信息
-	 */
-	@Override
-	public TransformData selectById(Integer id) {
-		return transformDao.selectById(id);
-	}
-
-	/**
 	 * 根据个爪接入数据信息和列名查询近一周指标值
 	 */
 	@Override

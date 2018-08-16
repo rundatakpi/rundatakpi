@@ -53,9 +53,9 @@ public class TransformData implements Serializable{
 	private int length;
 	/*列名*/
 	private String colName;
-	/**/
+	/*趋势图的日期*/
 	private String transKey;
-	
+	/*趋势图的日期对应的数值*/
 	private String transValue;
 	
 	

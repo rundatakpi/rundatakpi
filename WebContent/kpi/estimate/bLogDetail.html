@@ -32,21 +32,19 @@ var time = [];
 var data = [];
 	$(function(){
 
-		var yclData = {};
-		yclData.dataSourceCode =args().dataSourceCode;
-		yclData.bProtocolCode =args().bProtocolCode;
-		yclData.sProtocolCode =args().sProtocolCode;
-		yclData.actionType =args().actionType;
-		yclData.colName =args().colName;
+		var bLogData = {};
+		bLogData.dataSourceCode =args().dataSourceCode;
+		bLogData.bProtocolCode =args().bProtocolCode;
+		bLogData.colName =args().colName;
 		
 		$.ajax({
-			url:rootPath+"/ycl/getDetail",
+			url:rootPath+"/storeLog/getDetail",
 			type:"post",
-			data:yclData,
+			data: bLogData,
 			success:function(d){
 				for (var i = 0; i < d.data.length; i++) {
-					time.unshift(d.data[i].colKey);
-					data.unshift(d.data[i].colValue);
+					time.unshift(d.data[i].logKey);
+					data.unshift(d.data[i].logValue);
 				}
 
 				showTransDetail();
@@ -63,7 +61,7 @@ var data = [];
 	//显示echarts图表
 	function showTransDetail(){
 		// 基于准备好的dom，初始化echarts图表
-	    var myChart = echarts.init(document.getElementById('yclDetail'));
+	    var myChart = echarts.init(document.getElementById('bLogDetail'));
 	    
 	    option = {
 		    title : {
@@ -134,7 +132,7 @@ var data = [];
 </head>
 <body>
 	<div class="container">
-		<div id="yclDetail" style="width:700px;height: 500px;"></div>
+		<div id="bLogDetail" style="width:700px;height: 500px;"></div>
 	</div>
 </body>
 </html>

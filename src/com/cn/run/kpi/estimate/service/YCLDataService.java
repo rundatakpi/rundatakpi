@@ -31,13 +31,6 @@ public interface YCLDataService {
 	Integer getTotal(YCLData yclData);
 
 	/**
-	 * 根据id查询预处理数据信息
-	 * @param id
-	 * @return
-	 */
-	YCLData selectById(Integer id);
-
-	/**
 	 * 查询某属性近一周的值
 	 * @param tranformData
 	 * @return

@@ -21,6 +21,7 @@ import com.cn.run.kpi.estimate.entity.YCLExampleData;
 import com.cn.run.kpi.estimate.service.YCLDataService;
 import com.cn.run.kpi.utils.DateUtil;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import cn.gbase.pool.log.Log;
 import net.sf.json.JSONObject;
@@ -77,23 +78,22 @@ public class YCLDataController {
 	 */
 	@RequestMapping("/getDetail")
 	@ResponseBody
-	public JSONObject getDetail(Integer id,String colName){
+	public JSONObject getDetail(YCLData yclData){
 		JSONObject json = new JSONObject();
 
 		try {
-			YCLData yclData = yclDataService.selectById(id);
-
-			yclData.setColName(colName);
+			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date beforeDate = sdf.parse(yclData.getCreateDate());
-			String beforeDateStr = DateUtil.getDateBefore(beforeDate, 7);
-			yclData.setStartTime(beforeDateStr);
-			yclData.setEndTime(yclData.getCreateDate());
+			
+			String startDateStr = DateUtil.getDateBefore(new Date(), 7);
+			yclData.setStartTime(startDateStr);
+			String endDateStr = sdf.format(new Date());
+			yclData.setEndTime(endDateStr);
 			List<YCLData> yclList = yclDataService.selectDetail(yclData);
 			
 			json.put("data",yclList);
 
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 		}
 
@@ -108,12 +108,10 @@ public class YCLDataController {
 	 */
 	@RequestMapping("/getExampleList")
 	@ResponseBody
-	public JSONObject getExampleList(Integer id) {
+	public JSONObject getExampleList(YCLExampleData yclExampleData) {
 		JSONObject json = new JSONObject();
 		try {
-			YCLExampleData yclExampleData = new YCLExampleData();
-			yclExampleData.setQid(id);
-			
+
 			List<YCLExampleData> yclExampleDatas = yclDataService.getExampleList(yclExampleData);
 			Integer total = YCLConstants.NORMAL_SIZE+YCLConstants.UNNORMAL_SIZE;
 			

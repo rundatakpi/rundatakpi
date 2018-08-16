@@ -27,13 +27,6 @@ public interface YCLDataDao {
 
 	/**
 	 * 
-	 * @param id
-	 * @return
-	 */
-	YCLData selectById(Integer id);
-
-	/**
-	 * 
 	 * @param tranformData
 	 * @param colName
 	 * @return

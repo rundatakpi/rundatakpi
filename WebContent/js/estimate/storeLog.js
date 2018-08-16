@@ -36,12 +36,12 @@ function refreshData(){
          "bPaginate": true, //翻页功能
          "bGoBtn":true,
          "lengthMenu": [ //自定义分页长度
-             [5,10,20,50],
-             ['5条','10 条','20条','50条']
+             [10,20,50],
+             ['10 条','20条','50条']
          ],
          "ordering":false,
          "ajax": {
-             "url": rootPath+"/transform/getList",
+             "url": rootPath+"/storeLog/getList",
              "type": "POST",
              "data": function(d){
             	 d.actionType = $("select#actionType>option:selected").val();
@@ -50,22 +50,16 @@ function refreshData(){
          },
          "searching" : false,
          "columns": [
-             { "data": "id" },
+        	 { "data": "id","defaultContent":"" },
              { "data": "dataSourceCode","defaultContent":"" },
-             { "data": "dataSourceDescription" ,"defaultContent":""},
-             { "data": "bProtocolCode" ,"defaultContent":""},
-             { "data": "bProtocolDescription","defaultContent":"" },
-             { "data": "sProtocolCode","defaultContent":""},
-             { "data": "sProtocolDescription" ,"defaultContent":""},
-             { "data": "actionType" ,"defaultContent":""},
-             { "data": "inputDataNum" ,"defaultContent":""},
-             { "data": "inputDataSpeed","defaultContent":"" },
-             { "data": "inputFieldFillRate" ,"defaultContent":""},
-             { "data": "inputDependGroupFillRate" ,"defaultContent":""},
-             { "data": "inputFieldAvailability","defaultContent":"" },
-             { "data": "inputDependGroupAvailability","defaultContent":"" },
-             { "data": "inputDataAccuracy","defaultContent":"" },
-             { "data": "createTime"}
+             { "data": "dataSourceDesc","defaultContent":""},
+             { "data": "bProtocolCode","defaultContent":""},
+             { "data": "bProtocolDesc","defaultContent":"" },
+             { "data": "inputNum","defaultContent":""},
+             { "data": "storageRate","defaultContent":"" },
+             { "data": "fieldNum","defaultContent":"" },
+             { "data": "bAccuracy","defaultContent":"" },
+             { "data": ""}
          ],
          "oLanguage" : { // 国际化配置
              "sProcessing" : "正在获取数据，请稍后...",
@@ -97,67 +91,52 @@ function refreshData(){
  			});
  		},
          "columnDefs": [
-        	 //给8-14列添加超链接
+        	 //给5-8列添加超链接
         	{
-	 			"targets": [8], // 输入数据条数
+	 			"targets": [5], // 入库条数
 	 	        "render": function(data, type, full){
 	 	        
-	 	        	return "<a href='#' onclick='showDetail(this,8)'>"+data+"</a>";
+	 	        	return "<a href='#' onclick='showFieldDetail(this,5)'>"+data+"</a>";
 	 	           
 	 	        }
         	},
         	{
-	 			"targets": [9], // 输入数据条数
+	 			"targets": [6], // 入库条数
 	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputDataSpeed';
-	 	        	 return "<a href='#' onclick='showDetail(this,9)'>"+data+"</a>";
+	 	        
+	 	        	return "<a href='#' onclick='showFieldDetail(this,6)'>"+data+"</a>";
 	 	           
 	 	        }
         	},
         	{
-	 			"targets": [10], // 输入数据条数
+	 			"targets": [7], // 入库条数
 	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputFieldFillRate';
-	 	        	 return "<a href='#' onclick='showDetail(this,10)'>"+data+"</a>";
+	 	        
+	 	        	return "<a href='#' onclick='showFieldDetail(this,7)'>"+data+"</a>";
 	 	           
 	 	        }
         	},
         	{
-	 			"targets": [11], // 输入数据条数
+	 			"targets": [8], // 入库条数
 	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputDependGroupFillRate';
-	 	        	 return "<a href='#' onclick='showDetail(this,11)'>"+data+"</a>";
+	 	        
+	 	        	return "<a href='#' onclick='showFieldDetail(this,8)'>"+data+"</a>";
 	 	           
 	 	        }
         	},
+        	//隐藏1列
         	{
-	 			"targets": [12], // 输入数据条数
-	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputFieldAvailability';
-	 	        	 return "<a href='#' onclick='showDetail(this,12)'>"+data+"</a>";
-	 	           
-	 	        }
-        	},
-        	{
-	 			"targets": [13], // 输入数据条数
-	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputDependGroupAvailability';
-	 	        	 return "<a href='#' onclick='showDetail(this,13)'>"+data+"</a>";
-	 	           
-	 	        }
-        	},
-        	{
-	 			"targets": [14], // 输入数据条数
-	 	        "render": function(data, type, full){
-	 	        	 var colName = 'inputDataAccuracy';
-	 	        	 return "<a href='#' onclick='showDetail(this,14)'>"+data+"</a>";
-	 	           
-	 	        }
-        	},
-        	//隐藏1和15列
-        	{
-	 			"targets": [0,15], // 输入数据条数
+	 			"targets": [0], // 输入数据条数
 	 			"visible": false,
+        	},
+        	//最后一列返回详情按钮
+        	{
+	 			"targets": [-1], // 输入数据条数
+	 			"render": function(data, type, full){ 
+	 				 return  "<button class='btn btn-success btn-xs' onclick='showProtocolDetail(this)'><i class='fa fa-remove'></i>查看详情</button>"
+		 	          
+	 	           
+	 	        }
         	}
         ]
     })
@@ -165,21 +144,18 @@ function refreshData(){
 
 
 /**
- * 展示格转信息详情
+ * 展示入库日志数据某字段详情
  * @param _this
  * @returns
  */
-function showDetail(_this,num){
+function showFieldDetail(_this,num){
 	
-	//获取该条数据的数据源，大协议，小协议，数据类型
-	
+	//获取该条数据数据源和大协议
 	var dataSourceCode = oTable.row($(_this).closest("tr")).data().dataSourceCode;
 	var bProtocolCode = oTable.row($(_this).closest("tr")).data().bProtocolCode;
-	var sProtocolCode = oTable.row($(_this).closest("tr")).data().sProtocolCode;
-	var actionType = oTable.row($(_this).closest("tr")).data().actionType;
 	
-	var colnums = ['input_count','inputspeed','inputfieldfillrage','inputrelyfieldfillrage','inputfielduserage','inputrelyfielduserage','inputaccuracyrage'];
-	var colName = colnums[num-8];
+	var colnums = ['inputNum','storageRate','fieldNum','accuracy'];
+	var colName = colnums[num-5];
 	
 	//iframe层
 	layer.open({
@@ -189,15 +165,22 @@ function showDetail(_this,num){
 		  closeBtn: 1, //关闭按钮是否显示 1显示0不显示
 		  shade: 0.8,
 		  area: ['800px', '600px'],
-		  content: rootPath+'/kpi/estimate/transformDetail.html?dataSourceCode='+dataSourceCode+
-		  			'&bProtocolCode='+bProtocolCode+'&sProtocolCode='+sProtocolCode+'&actionType='+actionType+
-		  			'&colName='+colName, //iframe的url
+		  content: rootPath+'/kpi/estimate/bLogDetail.html?dataSourceCode='+dataSourceCode+"&bProtocolCode="+bProtocolCode+'&colName='+colName//iframe的url
 	});
-	
-	
-
-	
 			
 }
 
+/**
+ * 展示入库日志数据小协议详情
+ * @param _this
+ * @returns
+ */
+function showProtocolDetail(_this){
+	
+	//获取该条数据数据源和大协议
+	var dataSourceCode = oTable.row($(_this).closest("tr")).data().dataSourceCode;
+	var bProtocolCode = oTable.row($(_this).closest("tr")).data().bProtocolCode;
+	
+	window.location.href = rootPath+'/kpi/estimate/sProtocolLog.html?dataSourceCode='+dataSourceCode+"&bProtocolCode="+bProtocolCode;
+}
 

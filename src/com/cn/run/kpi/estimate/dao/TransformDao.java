@@ -25,13 +25,6 @@ public interface TransformDao {
 
 	/**
 	 * 
-	 * @param id
-	 * @return
-	 */
-	TransformData selectById(Integer id);
-
-	/**
-	 * 
 	 * @param tranformData
 	 * @param colName
 	 * @return
