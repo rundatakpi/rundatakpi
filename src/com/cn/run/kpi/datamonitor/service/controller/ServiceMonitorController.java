@@ -20,7 +20,6 @@ import com.cn.run.kpi.datamonitor.service.entity.AppMiddleWareEntity;
 import com.cn.run.kpi.datamonitor.service.entity.ServiceInvokeException;
 import com.cn.run.kpi.datamonitor.service.service.ServiceMonitorService;
 import com.cn.run.kpi.utils.DateUtil;
-import com.cn.run.kpi.utils.StringUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -41,77 +40,28 @@ public class ServiceMonitorController {
 	
 	@RequestMapping("/get")
 	@ResponseBody
-	public String init() {
+	public String init(HttpServletRequest request, HttpServletResponse response) {
+		Map<String, Object> queryCondition = new HashMap<>();
 		JSONObject object = new JSONObject();
-		try {
-//			getAppInvokeMiddleWareData(object);
-			getAppInvokeProtocolData(object);
-		} catch (Exception e) {
-			LOG.error(">>>>>init error", e);
-		}
+		
+		getAppInvokeMiddleWareData(queryCondition, object);
+		
+		getAppInvokeProtocolData(queryCondition, object);
+		
 		return object.toString();
 	}
 
-	private void getAppInvokeProtocolData(JSONObject object) throws Exception {
-		List<AppMiddleWareEntity> appInvokeProtocol = serviceMonitorService.getAppInvokeMiddlewareData();
-		if (appInvokeProtocol != null && !appInvokeProtocol.isEmpty()) {
-			JSONObject appInvokeProtocolJson = new JSONObject();
-			List<String> app = new ArrayList<String>();
-			List<String> appInvokeProtocolDate = new ArrayList<String>();
-			Map<String, List<Long>> invokeMap = new HashMap<String, List<Long>>();
-			for (AppMiddleWareEntity appInvokeProtocolEntity : appInvokeProtocol) {
-				String key = appInvokeProtocolEntity.getCreateDate();
-				Long invoke = StringUtil.isEmpty(appInvokeProtocolEntity.getInvokeNum()) ? 0L: appInvokeProtocolEntity.getInvokeNum();
-				if (invokeMap.containsKey(key)) {
-					invokeMap.get(key).add(invoke);
-				} else {
-					List<Long> list = new ArrayList<Long>();
-					list.add(appInvokeProtocolEntity.getInvokeNum());
-					app.add(appInvokeProtocolEntity.getApp());
-					appInvokeProtocolDate.add(appInvokeProtocolEntity.getCreateDate());
-					invokeMap.put(key, list);
-				}
-			}
-			appInvokeProtocolJson.put("app", app);
-			appInvokeProtocolJson.put("invokeNum", invokeMap);
-			appInvokeProtocolJson.put("appInvokeProtocolDate", appInvokeProtocolDate);
-			object.put("appInvokeProtocolJson", appInvokeProtocolJson);
-		}
-	}
-
-	private void getAppInvokeMiddleWareData(JSONObject object) throws Exception {
-		List<AppMiddleWareEntity> appInvokeMiddleWare = serviceMonitorService.getAppInvokeMiddlewareData();
-		if (appInvokeMiddleWare != null && !appInvokeMiddleWare.isEmpty()) {
-			JSONObject appInvokeMiddleWareJson = new JSONObject();
-			List<String> app = new ArrayList<String>();
-			List<Long> invokeNum = new ArrayList<Long>();
-			List<String> appMiddleWareDate = new ArrayList<String>();
-			for (AppMiddleWareEntity appMiddleWareEntity : appInvokeMiddleWare) {
-				appMiddleWareDate.add(appMiddleWareEntity.getCreateDate());
-				app.add(appMiddleWareEntity.getApp());
-				invokeNum.add(StringUtil.isEmpty(appMiddleWareEntity.getInvokeNum()) ? 0L : appMiddleWareEntity.getInvokeNum());
-			}
-			appInvokeMiddleWareJson.put("app", app);
-			appInvokeMiddleWareJson.put("invokeNum", invokeNum);
-			appInvokeMiddleWareJson.put("appMiddleWareDate", appMiddleWareDate);
-			object.put("appInvokeMiddleWareJson", appInvokeMiddleWareJson);
-		}
-	}
-
-	@RequestMapping("/test")
-	@ResponseBody
-	public String test () throws Exception {
-		JSONObject object = new JSONObject();
+	private void getAppInvokeMiddleWareData(Map<String, Object> queryCondition, JSONObject object) {
 		List<String> createDate = new ArrayList<String>();
 		for (int i = 6; i >= 0; i--) {
 			String da = DateUtil.getDateBefore(new Date(), i);
 			createDate.add(da);
 		}
 		
-		List<String> app = new ArrayList<String>();
-		app.add("r");
-		app.add("s");
-		
+		List<String> app = getApp(queryCondition);
+		if (app == null || app.isEmpty()) {
+			return;
+		}
 		List<String> createDateApp = new ArrayList<String>();
 		for (String d: createDate) {
 			for (String ap : app) {
@@ -120,30 +70,73 @@ public class ServiceMonitorController {
 		}
 		
 		Map<String, List<Long>> map = new HashMap<String, List<Long>>();
-		for (String date : createDate) {
+		for (String appName : app) {
 			List<Long> invoke = new ArrayList<Long>();
-			map.put(date, invoke);
+			map.put(appName, invoke);
 		}
 		
-		List<AppMiddleWareEntity> appInvokeMiddleWare = serviceMonitorService.getAppInvokeMiddlewareData();
-		Map<String, Long> appMiddleMap = new HashMap<String, Long>();
-		for (AppMiddleWareEntity appMiddleWareEntity : appInvokeMiddleWare) {
-			appMiddleMap.put(appMiddleWareEntity.getCreateDate() + appMiddleWareEntity.getApp(), appMiddleWareEntity.getInvokeNum());
-		}
-		
-		for (String cda : createDateApp) {
-			List<Long> list = map.get(cda.substring(0, 10));
-			if (appMiddleMap.containsKey(cda)) {
-				list.add(appMiddleMap.get(cda));
-			} else {
-				list.add(0L);
+		List<AppMiddleWareEntity> appInvokeMiddleWare;
+		try {
+			appInvokeMiddleWare = serviceMonitorService.getAppInvokeMiddlewareData(queryCondition);
+			Map<String, Long> appMiddleMap = new HashMap<String, Long>();
+			for (AppMiddleWareEntity appMiddleWareEntity : appInvokeMiddleWare) {
+				appMiddleMap.put(appMiddleWareEntity.getCreateDate() + appMiddleWareEntity.getApp(), appMiddleWareEntity.getInvokeNum());
 			}
-			map.put(cda.substring(0, 10), list);
+			
+			for (String appName : app) {
+				List<Long> list = map.get(appName);
+				for (String cd: createDate) {
+					String key = cd + appName;
+					if (appMiddleMap.containsKey(key)) {
+						list.add(appMiddleMap.get(key));
+					} else {
+						list.add(0L);
+					}
+				}
+			}
+			
+			JSONObject invokeMiddlewareJson = new JSONObject();
+			invokeMiddlewareJson.put("createDate", createDate);
+			invokeMiddlewareJson.put("app", app);
+			invokeMiddlewareJson.put("data", map);
+			object.put("invokeMiddlewareJson", invokeMiddlewareJson);
+		} catch (Exception e) {
+			LOG.error(">>>>>get app invoke middleWare data failed...", e);
 		}
-		object.put("map", map);
-		return object.toString();
+		
+	}
+
+	private void getAppInvokeProtocolData(Map<String, Object> queryCondition, JSONObject object) {
+		List<AppInvokeProtocolEntity> appInvokeProtocol;
+		try {
+			appInvokeProtocol = serviceMonitorService.getAppInvokePrototolData(queryCondition);
+			if (appInvokeProtocol != null && !appInvokeProtocol.isEmpty()) {
+				JSONObject invokeProtocolJson = new JSONObject();
+				List<String> protocol = new ArrayList<>();
+				List<Long> invokeNum = new ArrayList<>();
+				for (AppInvokeProtocolEntity appInvokeProtocolEntity : appInvokeProtocol) {
+					protocol.add(appInvokeProtocolEntity.getProtocol());
+					invokeNum.add(appInvokeProtocolEntity.getInvokeNum());
+				}
+				invokeProtocolJson.put("protocol", protocol);
+				invokeProtocolJson.put("invokeNum", invokeNum);
+				object.put("invokeProtocolJson", invokeProtocolJson);
+			}
+		} catch (Exception e) {
+			LOG.error("get app invoke protocol data failed...", e);
+		}
 	}
 	
+	private List<String> getApp(Map<String, Object> queryCondition) {
+		List<String> app = new ArrayList<>();
+		try {
+			app = serviceMonitorService.getApp(queryCondition);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return app;
+	}
+
 	/**
 	 * 获取服务异常信息
 	 * @param request

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.cn.run.kpi.datamonitor.service.entity.AppInvokeProtocolEntity;
 import com.cn.run.kpi.datamonitor.service.entity.AppMiddleWareEntity;
+import com.cn.run.kpi.datamonitor.service.entity.AppQueryRecord;
 import com.cn.run.kpi.datamonitor.service.entity.ServiceInvokeException;
 
 /**
@@ -38,6 +39,7 @@ public interface ServiceMonitorService {
 	 * @param appQueryRecord
 	 */
 	public void insertAppQueryRecord(AppQueryRecord appQueryRecord);
+	
 	List<String> getApp(Map<String, Object> queryCondition) throws Exception;
 	
 }
