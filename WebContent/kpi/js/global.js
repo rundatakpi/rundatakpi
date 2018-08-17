@@ -99,6 +99,7 @@ function grid(id,url,colModel,configs){
 				reloadGrid:function(){
 					//alert(this.getTotal());
 					//alert(this.getData());
+					alert("暂无数据")
 				}
 			 }
 		};

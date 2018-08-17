@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cn.run.kpi.datamonitor.service.dao.ServiceMonitorDao;
 import com.cn.run.kpi.datamonitor.service.entity.AppInvokeProtocolEntity;
 import com.cn.run.kpi.datamonitor.service.entity.AppMiddleWareEntity;
+import com.cn.run.kpi.datamonitor.service.entity.AppQueryRecord;
 import com.cn.run.kpi.datamonitor.service.entity.ServiceInvokeException;
 import com.cn.run.kpi.datamonitor.service.service.ServiceMonitorService;
 
@@ -37,7 +38,7 @@ public class ServiceMonitorServiceImpl implements ServiceMonitorService {
 	public List<ServiceInvokeException> list(Map<String, Object> queryCondition) throws Exception {
 		return serviceMonitorDao.list(queryCondition);
 	}
-	
+
 	@Override
 	public void insertAppQueryRecord(AppQueryRecord appQueryRecord) {
 		serviceMonitorDao.insertAppQueryRecord(appQueryRecord);

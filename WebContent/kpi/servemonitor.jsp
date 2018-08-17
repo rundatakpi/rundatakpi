@@ -26,7 +26,7 @@
     
     <div class="box">
     	<div class="boxHd clearfix">
-        	<h3 class="left">xx数据统计</h3>
+        	<h3 class="left">应用调用中间件频次</h3>
             <!--<span class="right slideWrap"><span class="slideBtn">近7天</span> </span>-->
             <div class="chooseDay right">
             	<a href="#" class="left sevenDays slt">近7天</a>

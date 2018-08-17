@@ -7,17 +7,26 @@ $(function(){
 		}
 	];
 	combobox(configs);
+	var queryCondition = {};
 	
-	
-    
-    init();
+	$.ajax({
+		url:'/rundatakpi/service/get',
+		method: 'GET',
+		data: queryCondition,
+		dataType: 'json',
+		success: function(data) {
+			console.log(JSON.stringify(data));
+			init(data);
+		}
+	});
 })
 
-function init() {
+function init(data) {
 	//加载数据统计线图
-	dataStatistics("dataStatistics");
+	dataStatistics("dataStatistics", data['invokeMiddlewareJson']);
+	
 	//应用调用协议频次
-	frequencyBar("frequencyBar");
+	frequencyBar("frequencyBar", data['invokeProtocolJson']);
 	
 	getServerException();
 }
@@ -50,7 +59,37 @@ function getServerException() {
 /**
  * @description 数据统计线图
  */
-function dataStatistics(id) {
+function dataStatistics(id, data) {
+	var app = data['app'];
+	var date = data['createDate'];
+	
+	var seriesData = [];
+	var color = ['#8169b1', '#e9816d', '#0689d4', '#00c9b3', '#e95b5b'];
+	var length = color.length;
+	
+	$.each(app, function(index, value) {
+		console.log(color[index % length]);
+		var sd = {
+			name: value,
+			type:'line',
+			animation: false,
+			lineStyle: {
+				normal: {
+					width: 3,
+					color : color[index % length]
+				}
+			},
+			smooth : true,
+			symbolSize : 10,
+			//data:[900,200,123,400,151,812,100,200,123,400,151,812,100,200,400,123,400,151,812,100,200,123,400,151,812,100,200,123,400,151,812,100,200,123,400,151,812,100,200,123,400,151,812,100,200,123]
+		    data: data['data'][value]
+		}
+		seriesData.push(sd);
+	});
+	
+	
+	
+	
 	var ec = echarts;
 	/*线图*/
 	if (document.getElementById(id)) {
@@ -74,7 +113,8 @@ function dataStatistics(id) {
 				}
 			},
 			legend: {
-				data:['某某数据1','某某数据2','某某数据3','某某数据4','某某数据5'],
+				//data:['某某数据1','某某数据2','某某数据3','某某数据4','某某数据5'],
+				data: app,
 				x: 'right',
 				textStyle : {
 					color : "#a7b5e0"
@@ -106,11 +146,12 @@ function dataStatistics(id) {
 							color : "#404b6c"
 						}
 					},
-					data : [
+					/*data : [
 						'2009/6/12 2:00', '2009/6/12 3:00', '2009/6/12 4:00', '2009/6/12 5:00', '2009/6/12 6:00', '2009/6/12 7:00', '2009/6/12 8:00', '2009/6/12 9:00', '2009/6/12 10:00', '2009/6/12 11:00', '2009/6/12 12:00', '2009/6/12 13:00', '2009/6/12 14:00', '2009/6/12 15:00', '2009/6/12 16:00', '2009/6/12 17:00', '2009/6/12 18:00', '2009/6/12 19:00', '2009/6/12 20:00', '2009/6/12 21:00', '2009/6/12 22:00', '2009/6/12 23:00',
 						'2009/6/13 0:00', '2009/6/13 1:00', '2009/6/13 2:00', '2009/6/13 3:00', '2009/6/13 4:00', '2009/6/13 5:00', '2009/6/13 6:00', '2009/6/13 7:00', '2009/6/13 8:00', '2009/6/13 9:00', '2009/6/13 10:00', '2009/6/13 11:00', '2009/6/13 12:00', '2009/6/13 13:00', '2009/6/13 14:00', '2009/6/13 15:00', '2009/6/13 16:00', '2009/6/13 17:00', '2009/6/13 18:00', '2009/6/13 19:00', '2009/6/13 20:00', '2009/6/13 21:00', '2009/6/13 22:00', '2009/6/13 23:00'].map(function (str) {
 						return str.replace(' ', '\n')
-					})
+					})*/
+					data: date
 				}
 			],
 			yAxis: [
@@ -135,7 +176,7 @@ function dataStatistics(id) {
 
 				}
 			],
-			series: [
+			/*series: [
 				{
 					name:'某某数据1',
 					type:'line',
@@ -207,7 +248,8 @@ function dataStatistics(id) {
 					//hoverAnimation : true,
 					data:[512,400,812,123,100,200,123,400,451,200,100,200,400,823,400,151,212,100,400,200,600,100,200,123,400,151,812,100,200,123,400,151,812,151,123,400,123,151,812,100,200,123,400,151,812,100]
 				}
-			]
+			]*/
+			series: seriesData
 		};
 
 		chartObj[id].setOption(option, true);
@@ -218,7 +260,7 @@ function dataStatistics(id) {
 /**
  * @description 应用调用协议频次
  */
-function frequencyBar(id) {
+function frequencyBar(id, data) {
 	var ec = echarts;
 	/*线图*/
 	if (document.getElementById(id)) {
@@ -253,7 +295,8 @@ function frequencyBar(id) {
 			xAxis: [
 				{
 					type: 'category',
-					data: ['真实身份基础档案','对象活动信息','互联网服务单位信息','车辆档案信息','地理位置信息','统一身份关系信息','对象轨迹信息','对象间关系信息','上网终端基础档案'],
+					//data: ['真实身份基础档案','对象活动信息','互联网服务单位信息','车辆档案信息','地理位置信息','统一身份关系信息','对象轨迹信息','对象间关系信息','上网终端基础档案'],
+					data: data['protocol'],
 					axisPointer: {
 						type: 'shadow'
 					},
@@ -320,7 +363,8 @@ function frequencyBar(id) {
 							color : "#00cdbe"
 						}
 		            },
-					data:[69,78,96,72,78,85,78,96,72,78,85]
+					//data:[69,78,96,72,78,85,78,96,72]
+		            data: data['invokeNum']
 				}
 			]
 		};

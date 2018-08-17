@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 应用调用中间件封装类
- * @author Administrator
+ * @author zg
  *
  */
 public class AppInvokeProtocolEntity implements Serializable {
@@ -16,7 +16,7 @@ public class AppInvokeProtocolEntity implements Serializable {
 
 	private Long id;
 	
-	private String app;
+	private String protocol;
 	
 	private Long invokeNum;
 	
@@ -30,12 +30,12 @@ public class AppInvokeProtocolEntity implements Serializable {
 		this.id = id;
 	}
 
-	public String getApp() {
-		return app;
+	public String getProtocol() {
+		return protocol;
 	}
 
-	public void setApp(String app) {
-		this.app = app;
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
 	}
 
 	public Long getInvokeNum() {

@@ -89,8 +89,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         	</if>
 		</trim>
 	</insert>
+<<<<<<< HEAD
 	
     <select id="getApp" parameterType="map" resultType="string">
         select DISTINCT app from appinvokemiddleware ORDER BY createdate;
     </select>
+=======
+>>>>>>> branch 'master' of https://github.com/rundatakpi/rundatakpi
 </mapper>
