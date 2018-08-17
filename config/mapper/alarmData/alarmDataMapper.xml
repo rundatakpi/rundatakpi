@@ -85,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insertInfo" parameterType="com.cn.run.kpi.alarm.entity.AlarmData" useGeneratedKeys="true" keyProperty="id">
 		insert into t_alarm_info 
-		(	
+		<trim prefix="(" suffix=")" suffixOverrides=",">	
 			<if test="null != alarmTime and '' != alarmTime">
             	alarm_time,
         	</if>
@@ -96,9 +96,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             	alarm_content,
         	</if>
         	<if test="null != processState and '' != processState">
-            	process_status
+            	process_status,
         	</if>
-		) values (
+        </trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
 			<if test="null != alarmTime and '' != alarmTime">
             	str_to_date(#{alarmTime},"%Y-%m-%d %H:%m:%s"),
         	</if>
@@ -109,8 +110,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             	#{alarmContent},
         	</if>
         	<if test="null != processState and '' != processState">
-            	#{processState}
+            	#{processState},
         	</if>
-		) 
+		</trim>
 	</insert>
 </mapper>

@@ -42,4 +42,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="list" parameterType="map" resultMap="serverExceptionMap">
         SELECT * FROM `servicemonitorexception`; 
     </select>
+    
+    <insert id="insertAppQueryRecord" parameterType="com.cn.run.kpi.datamonitor.service.entity.AppQueryRecord" useGeneratedKeys="true" keyProperty="id">
+		insert into appqueryrecord 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != capturetime and '' != capturetime">
+            	capturetime,
+        	</if>
+			<if test="null != sqlstr and '' != sqlstr">
+            	sqlstr,
+        	</if>
+        	<if test="null != system_id and '' != system_id">
+            	system_id,
+        	</if>
+        	<if test="null != status and '' != status">
+            	status,
+        	</if>
+        	<if test="null != error_desc and '' != error_desc">
+            	error_desc,
+        	</if>
+        </trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="null != capturetime and '' != capturetime">
+            	str_to_date(#{capturetime},"%Y-%m-%d %H:%i:%s"),
+        	</if>
+			<if test="null != sqlstr and '' != sqlstr">
+            	#{sqlstr},
+        	</if>
+        	<if test="null != system_id and '' != system_id">
+            	#{system_id},
+        	</if>
+        	<if test="null != status and '' != status">
+            	#{status},
+        	</if>
+        	<if test="null != error_desc and '' != error_desc">
+            	#{error_desc},
+        	</if>
+		</trim>
+	</insert>
 </mapper>

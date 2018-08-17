@@ -62,4 +62,9 @@ public class CompressServiceImpl implements CompressService {
 		return compressDao.getKafkaBacklogData();
 	}
 
+	@Override
+	public void insertBackLogData(BacklogEntity backlogEntity) {
+		 compressDao.insertBackLogData(backlogEntity);
+	}
+
 }

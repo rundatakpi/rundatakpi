@@ -51,4 +51,8 @@ public interface CompressService {
 	 * @return
 	 */
 	List<BacklogEntity> getKafkaBacklogData();
+	/**
+	 * 插入kafka积压数据
+	 */
+	void insertBackLogData(BacklogEntity backlogEntity);
 }

@@ -42,8 +42,12 @@ public interface CompressDao {
 	List<KafkaCompressSizeEntity> getKafkaCompressSize();
 	
 	/**
-	 * 获取积压数据
+	 * 获取积压数据W
 	 * @return
 	 */
 	List<BacklogEntity> getKafkaBacklogData();
+	/**
+	 * 插入kafka积压数据
+	 */
+	void insertBackLogData(BacklogEntity backlogEntity);
 }

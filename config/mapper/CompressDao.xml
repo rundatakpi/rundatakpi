@@ -22,4 +22,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getKafkaBacklogData" parameterType="map" resultMap="backlogMap">
 		
 	</select>
+	
+	<insert id="insertBackLogData" parameterType="com.cn.run.kpi.datamonitor.compress.entity.BacklogEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into backlog 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != createDate and '' != createDate">
+            	createdate,
+        	</if>
+			<if test="null != machineBacklogNum and '' != machineBacklogNum">
+            	machinebacklognum,
+        	</if>
+        	<if test="null != machineBacklogSize and '' != machineBacklogSize">
+            	machinebacklogsize,
+        	</if>
+        	<if test="null != kafkaBacklogNum and '' != kafkaBacklogNum">
+            	kafkabacklognum,
+        	</if>
+        	<if test="null != kafkaBacklogSize and '' != kafkaBacklogSize">
+            	kafkabacklogsize,
+        	</if>
+        </trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="null != createDate and '' != createDate">
+            	str_to_date(#{createDate},"%Y-%m-%d"),
+        	</if>
+			<if test="null != machineBacklogNum and '' != machineBacklogNum">
+            	#{machineBacklogNum},
+        	</if>
+        	<if test="null != machineBacklogSize and '' != machineBacklogSize">
+            	#{machineBacklogSize},
+        	</if>
+        	<if test="null != kafkaBacklogNum and '' != kafkaBacklogNum">
+            	#{kafkaBacklogNum},
+        	</if>
+        	<if test="null != kafkaBacklogSize and '' != kafkaBacklogSize">
+            	#{kafkaBacklogSize},
+        	</if>
+		</trim>
+	</insert>
 </mapper>
