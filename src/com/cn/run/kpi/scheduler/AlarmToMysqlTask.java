@@ -52,14 +52,14 @@ public class AlarmToMysqlTask {
 //    	//插入到数据库中
 //    	compressService.insertBackLogData(BacklogEntity);
 		
-		AppQueryRecord appQueryRecord=new AppQueryRecord();
-    	appQueryRecord.setCapturetime("2018-05-08 12:00:00");
-    	appQueryRecord.setSqlstr("qwe");
-    	appQueryRecord.setSystem_id("111");
-    	appQueryRecord.setStatus("0");
-    	appQueryRecord.setError_desc("asd");
-    	//插入到数据库中
-    	serviceMonitorService.insertAppQueryRecord(appQueryRecord);
+//		AppQueryRecord appQueryRecord=new AppQueryRecord();
+//    	appQueryRecord.setCapturetime("2018-05-08 12:00:00");
+//    	appQueryRecord.setSqlstr("qwe");
+//    	appQueryRecord.setSystem_id("111");
+//    	appQueryRecord.setStatus("0");
+//    	appQueryRecord.setError_desc("asd");
+//    	//插入到数据库中
+//    	serviceMonitorService.insertAppQueryRecord(appQueryRecord);
 	}
 
 }
