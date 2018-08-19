@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.run.kpi.exampledata.dao.AlarmMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.run.kpi.exampledata.entity.Alarm" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="accountid" property="accountid" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="alarm" property="alarm" jdbcType="VARCHAR" />
+    <result column="zt" property="zt" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, accountid, level, alarm, zt, date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from zdjc_alarm
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  
+  	<select id="getAlarmList" parameterType="com.cn.run.kpi.exampledata.entity.Alarm" resultType="com.cn.run.kpi.exampledata.entity.Alarm">
+		select * from zdjc_alarm ORDER BY date desc 
+	</select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from zdjc_alarm
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.run.kpi.exampledata.entity.Alarm" >
+    insert into zdjc_alarm (ID, accountid, level, 
+      alarm, zt, date)
+    values (#{id,jdbcType=INTEGER}, #{accountid,jdbcType=INTEGER}, #{level,jdbcType=VARCHAR}, 
+      #{alarm,jdbcType=VARCHAR}, #{zt,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.run.kpi.exampledata.entity.Alarm" >
+    insert into zdjc_alarm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="accountid != null" >
+        accountid,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="alarm != null" >
+        alarm,
+      </if>
+      <if test="zt != null" >
+        zt,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountid != null" >
+        #{accountid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="alarm != null" >
+        #{alarm,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null" >
+        #{zt,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.run.kpi.exampledata.entity.Alarm" >
+    update zdjc_alarm
+    <set >
+      <if test="accountid != null" >
+        accountid = #{accountid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="alarm != null" >
+        alarm = #{alarm,jdbcType=VARCHAR},
+      </if>
+      <if test="zt != null" >
+        zt = #{zt,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.run.kpi.exampledata.entity.Alarm" >
+    update zdjc_alarm
+    set accountid = #{accountid,jdbcType=INTEGER},
+      level = #{level,jdbcType=VARCHAR},
+      alarm = #{alarm,jdbcType=VARCHAR},
+      zt = #{zt,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

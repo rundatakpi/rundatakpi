@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.run.kpi.exampledata.dao.AlarmDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.run.kpi.exampledata.entity.AlarmDetail" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="alarmid" property="alarmid" jdbcType="INTEGER" />
+    <result column="condate" property="condate" jdbcType="TIMESTAMP" />
+    <result column="lx" property="lx" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="os" property="os" jdbcType="VARCHAR" />
+    <result column="bz" property="bz" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, alarmid, condate, lx, mac, os, bz
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from zdjc_alarm_detail
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from zdjc_alarm_detail
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.run.kpi.exampledata.entity.AlarmDetail" >
+    insert into zdjc_alarm_detail (ID, alarmid, condate, 
+      lx, mac, os, bz
+      )
+    values (#{id,jdbcType=INTEGER}, #{alarmid,jdbcType=INTEGER}, #{condate,jdbcType=TIMESTAMP}, 
+      #{lx,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, #{os,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.run.kpi.exampledata.entity.AlarmDetail" >
+    insert into zdjc_alarm_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="alarmid != null" >
+        alarmid,
+      </if>
+      <if test="condate != null" >
+        condate,
+      </if>
+      <if test="lx != null" >
+        lx,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="os != null" >
+        os,
+      </if>
+      <if test="bz != null" >
+        bz,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="alarmid != null" >
+        #{alarmid,jdbcType=INTEGER},
+      </if>
+      <if test="condate != null" >
+        #{condate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lx != null" >
+        #{lx,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="os != null" >
+        #{os,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null" >
+        #{bz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.run.kpi.exampledata.entity.AlarmDetail" >
+    update zdjc_alarm_detail
+    <set >
+      <if test="alarmid != null" >
+        alarmid = #{alarmid,jdbcType=INTEGER},
+      </if>
+      <if test="condate != null" >
+        condate = #{condate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lx != null" >
+        lx = #{lx,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="os != null" >
+        os = #{os,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null" >
+        bz = #{bz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.run.kpi.exampledata.entity.AlarmDetail" >
+    update zdjc_alarm_detail
+    set alarmid = #{alarmid,jdbcType=INTEGER},
+      condate = #{condate,jdbcType=TIMESTAMP},
+      lx = #{lx,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      os = #{os,jdbcType=VARCHAR},
+      bz = #{bz,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
