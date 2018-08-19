@@ -5,7 +5,7 @@ var rootPath = pathName.substring(0, pathName.substr(1).indexOf('/')+1);
 
 $(function() {
 	refreshData();
-    
+	
     $("#exportExcel").click(function(){
     	$.ajax({
     		url:rootPath+"/alarmData/exportExcel",
@@ -21,14 +21,10 @@ $(function() {
     	})
     })
     
-
     $("#search").click(function(){
-    	
         oTable.settings()[0].ajax.data = {"alarmLevel":1,"processState":1};
     	oTable.ajax.reload();
-
     })
-
  
 })
 
@@ -102,6 +98,7 @@ function refreshData(){
 	 	        "render": function(data,type,row,full){
 	 	        	//alert(row.processState);
 	 	            return  "<button class='btn btn-success btn-xs' onclick='detailAlarms(this)'><i class='fa fa-remove'></i> 查看</button>"
+	 	            	+ "<button class='btn btn-primary btn-xs' onclick='addAlarms(this)'><i class='fa fa-remove'></i>新增</button>"
 	 	            + "<button class='btn btn-primary btn-xs' onclick='editAlarms(this)'><i class='fa fa-remove'></i>修改</button>"
 	 	           + "<button class='btn btn-danger btn-xs' onclick='delAlarms(this)'><i class='fa fa-remove'></i> 删除</button>"
 	 	           
@@ -183,6 +180,26 @@ function editAlarms(_this){
 	  shade: 0.8,
 	  area: ['300px', '200px'],
 	  content: rootPath+'/kpi/alarm/editAlarm.html?id='+id+'&processStatus='+processStatus//iframe的url
+	}); 
+}
+
+/**
+ * 编辑一条告警信息
+ * @param _this
+ * @returns
+ */
+function addAlarms(_this){
+	var id = oTable.row($(_this).closest("tr")).data().id;
+	var processStatus = oTable.row($(_this).closest("tr")).data().processState;
+	
+	//iframe层
+	layer.open({
+	  type: 2,
+	  title: '新增',
+	  shadeClose: true,
+	  shade: 0.8,
+	  area: ['500px', '500px'],
+	  content: rootPath+'/kpi/alarm/addAlarm.html?id='+id+'&processStatus='+processStatus//iframe的url
 	}); 
 }
 

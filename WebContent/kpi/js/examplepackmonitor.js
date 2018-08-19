@@ -36,21 +36,21 @@ $(function(){
                 name:'col3',
                 hidden:false
             },{
-                display:'原始字段状态',
+                display:'样例生成时间',
                 name:'col4',
                 hidden:false
             },{
-                display:'预处理字段状态',
+                display:'状态',
                 name:'col5',
                 hidden:false
             },{
-                display:'结构化提取后字段状态',
+                display:'操作',
                 name:'col6',
                 hidden:false
-            },{
+            /*},{
                 display:'对象化提取后字段状态',
                 name:'col7',
-                hidden:false
+                hidden:false*/
             }];
     grid("examplepackGrid","json/examplepackGrid.json",colModel);
 
