@@ -22,4 +22,251 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where id = #{id}
 	</update>
 	
+	<insert id="insertYCLData" parameterType="com.cn.run.kpi.scheduler.entity.YCLDataBean" useGeneratedKeys="true" keyProperty="id">
+		insert into preprocessmonitor 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != createtime and '' != createtime">
+            	createtime,
+        	</if>
+			<if test="null != dataSource and '' != dataSource">
+            	dataSource,
+        	</if>
+        	<if test="null != dataType and '' != dataType">
+            	dataType,
+        	</if>
+        	<if test="null != dataNum and '' != dataNum">
+            	dataNum,
+        	</if>
+        	<if test="null != protocol; and '' != protocol;">
+            	protocol,
+        	</if>
+        	<if test="null !=  protocolId and '' !=  protocolId">
+            	 protocolId,
+        	</if>
+        	<if test="null != action and '' != action">
+            	action,
+        	</if>
+        	<if test="null != collectplace and '' != collectplace">
+            	collectplace,
+        	</if>
+        	<if test="null != errorType and '' != errorType">
+            	errorType,
+        	</if>
+        </trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="null != createtime and '' != createtime">
+            	str_to_date(#{createtime},"%Y-%m-%d %H:%i:%s"),
+        	</if>
+			<if test="null != dataSource and '' != dataSource">
+            	#{dataSource},
+        	</if>
+        	<if test="null != dataType and '' != dataType">
+            	#{dataType},
+        	</if>
+        	<if test="null != dataNum and '' != dataNum">
+            	#{dataNum},
+        	</if>
+        	<if test="null != protocol; and '' != protocol;">
+            	#{protocol},
+        	</if>
+        	<if test="null !=  protocolId and '' !=  protocolId">
+            	 #{protocolId},
+        	</if>
+        	<if test="null != action and '' != action">
+            	#{action},
+        	</if>
+        	<if test="null != collectplace and '' != collectplace">
+            	#{collectplace},
+        	</if>
+        	<if test="null != errorType and '' != errorType">
+            	#{errorType},
+        	</if>
+		</trim>
+	</insert>
+	
+	<insert id="insertAppQueryRecord" parameterType="com.cn.run.kpi.scheduler.entity.AppQueryRecord" useGeneratedKeys="true" keyProperty="id">
+		insert into appqueryrecord 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != capturetime and '' != capturetime">
+            	capturetime,
+        	</if>
+			<if test="null != sqlstr and '' != sqlstr">
+            	sqlstr,
+        	</if>
+        	<if test="null != system_id and '' != system_id">
+            	system_id,
+        	</if>
+        	<if test="null != status and '' != status">
+            	status,
+        	</if>
+        	<if test="null != error_desc and '' != error_desc">
+            	error_desc,
+        	</if>
+        </trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="null != capturetime and '' != capturetime">
+            	str_to_date(#{capturetime},"%Y-%m-%d %H:%i:%s"),
+        	</if>
+			<if test="null != sqlstr and '' != sqlstr">
+            	#{sqlstr},
+        	</if>
+        	<if test="null != system_id and '' != system_id">
+            	#{system_id},
+        	</if>
+        	<if test="null != status and '' != status">
+            	#{status},
+        	</if>
+        	<if test="null != error_desc and '' != error_desc">
+            	#{error_desc},
+        	</if>
+		</trim>
+	</insert>
+	
+	<insert id="insertRestore" parameterType="com.cn.run.kpi.scheduler.entity.RestoreMonitorBean" useGeneratedKeys="true" keyProperty="id">
+		insert into restoremonitor 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != createtime and '' != createtime">
+            	createtime,
+        	</if>
+			<if test="null != restoreinput and '' != restoreinput">
+            	restoreinput,
+        	</if>
+        	<if test="null != restoreoutputbcp and '' != restoreoutputbcp">
+            	restoreoutputbcp,
+        	</if>
+        	<if test="null != restoreoutputzip and '' != restoreoutputzip">
+            	restoreoutputzip,
+        	</if>
+        	<if test="null != restorediscard and '' != restorediscard">
+            	restorediscard,
+        	</if>
+        	<if test="null != datasource and '' != datasource">
+            	datasource,
+        	</if>
+        	<if test="null != bprotocol and '' != bprotocol">
+            	bprotocol,
+        	</if>
+        	<if test="null != sprotocol and '' != sprotocol">
+            	sprotocol,
+        	</if>
+        	<if test="null != action and '' != action">
+            	action,
+        	</if>
+        	
+        </trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="null != createtime and '' != createtime">
+            	str_to_date(#{createtime},"%Y-%m-%d %H:%i:%s"),
+        	</if>
+			<if test="null != restoreinput and '' != restoreinput">
+            	#{restoreinput},
+        	</if>
+        	<if test="null != restoreoutputbcp and '' != restoreoutputbcp">
+            	#{restoreoutputbcp},
+        	</if>
+        	<if test="null != restoreoutputzip and '' != restoreoutputzip">
+            	#{restoreoutputzip},
+        	</if>
+        	<if test="null != restorediscard and '' != restorediscard">
+            	#{restorediscard},
+        	</if>
+        	<if test="null != datasource and '' != datasource">
+            	#{datasource},
+        	</if>
+        	<if test="null != bprotocol and '' != bprotocol">
+            	#{bprotocol},
+        	</if>
+        	<if test="null != sprotocol and '' != sprotocol">
+            	#{sprotocol},
+        	</if>
+        	<if test="null != action and '' != action">
+            	#{action},
+        	</if>
+		</trim>
+	</insert>
+	
+	<insert id="insertStoreData" parameterType="com.cn.run.kpi.scheduler.entity.StoreMonitorBean" useGeneratedKeys="true" keyProperty="id">
+		insert into datastoremonitor 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != createtime and '' != createtime">
+            	createtime,
+        	</if>
+			<if test="null != datatype and '' != datatype">
+            	datatype,
+        	</if>
+        	<if test="null != store and '' != store">
+            	store,
+        	</if>
+        	<if test="null != sourcename and '' != sourcename">
+            	sourcename,
+        	</if>
+        	
+        </trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="null != createtime and '' != createtime">
+            	str_to_date(#{createtime},"%Y-%m-%d %H:%i:%s"),
+        	</if>
+			<if test="null != datatype and '' != datatype">
+            	#{datatype},
+        	</if>
+        	<if test="null != store and '' != store">
+            	#{store},
+        	</if>
+        	<if test="null != sourcename and '' != sourcename">
+            	#{sourcename},
+        	</if>
+		</trim>
+	</insert>
+	
+	<insert id="insertJobData" parameterType="com.cn.run.kpi.scheduler.entity.JobMonitorBean" useGeneratedKeys="true" keyProperty="id">
+		insert into jobmonitor 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != timekey and '' != timekey">
+            	timekey,
+        	</if>
+			<if test="null != job_status and '' != job_status">
+            	job_status,
+        	</if>
+        	<if test="null != job_name and '' != job_name">
+            	job_name,
+        	</if>
+        	<if test="null != start_time and '' != start_time">
+            	start_time,
+        	</if>
+        	<if test="null != end_time and '' != end_time">
+            	end_time,
+        	</if>
+        	<if test="null != input_time and '' != input_time">
+            	input_time,
+        	</if>
+        	<if test="null != hostip and '' != hostip">
+            	hostip,
+        	</if>
+        	
+        </trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="null != timekey and '' != timekey">
+            	#{timekey},
+        	</if>
+			<if test="null != job_status and '' != job_status">
+            	#{job_status},
+        	</if>
+        	<if test="null != job_name and '' != job_name">
+            	#{job_name},
+        	</if>
+        	<if test="null != start_time and '' != start_time">
+            	#{start_time},
+        	</if>
+        	<if test="null != end_time and '' != end_time">
+            	#{end_time},
+        	</if>
+        	<if test="null != input_time and '' != input_time">
+            	#{input_time},
+        	</if>
+        	<if test="null != hostip and '' != hostip">
+            	#{hostip},
+        	</if>
+		</trim>
+	</insert>
+	
 </mapper>

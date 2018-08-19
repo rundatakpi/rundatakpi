@@ -19,7 +19,7 @@
         	<a href="activemonitor.jsp" class="left navLink navLink_2"><span class="left"></span>样例包监测</a>
         	<a href="anticipationmonitor.jsp" class="left navLink navLink_3 slt"><span class="left"></span>数据监控</a>
         	<a href="#" class="left navLink navLink_4"><span class="left"></span>数据质量评估</a>
-        	<a href="#" class="left navLink navLink_5"><span class="left"></span>预警中心</a>
+        	<a href="warmingcenter.jsp" class="left navLink navLink_5"><span class="left"></span>预警中心</a>
         </div>
         
     </div>

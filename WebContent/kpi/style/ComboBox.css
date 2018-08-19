@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 .r-combobox-box{position:relative;}
-.r-combobox-input, .r-combobox-input[disabled]{width:214px; height:20px; line-height:20px; padding-right:38px;border:1px solid #4b5881;color:#333;background: #212942;}
+.r-combobox-input, .r-combobox-input[disabled]{width:214px; height:20px; line-height:20px; padding-right:38px;border:1px solid #4b5881;color:#8394c6;background: #212942;}
 .r-combobox-handle{position:absolute; top:1px; right:1px; width:20px; height:20px; background:url(../images/combobox/arrow_down.png) no-repeat center center;}
 .r-combobox-handle-up{background:url(../images/combobox/arrow_up.png) no-repeat center center;}
 .r-combobox-slider-box{position:absolute; top:22px;background-color:#212942; border-right:1px solid #4b5881; border-bottom:1px solid #4b5881; border-left:1px solid #4b5881; z-index:996; overflow:auto;}

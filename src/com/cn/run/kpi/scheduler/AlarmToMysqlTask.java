@@ -11,7 +11,6 @@ import com.cn.run.kpi.alarm.entity.AlarmData;
 import com.cn.run.kpi.alarm.service.AlarmDataService;
 import com.cn.run.kpi.datamonitor.compress.entity.BacklogEntity;
 import com.cn.run.kpi.datamonitor.compress.service.CompressService;
-import com.cn.run.kpi.datamonitor.service.entity.AppQueryRecord;
 import com.cn.run.kpi.datamonitor.service.service.ServiceMonitorService;
 import com.cn.run.kpi.scheduler.service.ScheduleService;
 
@@ -26,15 +25,11 @@ public class AlarmToMysqlTask {
 	private AlarmDataService alarmDataService;
 	@Autowired
 	private ScheduleService scheduleService;
-	@Autowired
-	private CompressService compressService;
-	@Autowired
-	private ServiceMonitorService serviceMonitorService;
 	
 	/**
 	 * 预警定时任务 定时任务每分钟执行一次
 	 */
-	@Scheduled(cron = "0 0/1 * * * ? ")
+//	@Scheduled(cron = "0 0/1 * * * ? ")
 	public void alarmToMysqlTask() {
 		System.out.println("test");
 		//插入告警信息

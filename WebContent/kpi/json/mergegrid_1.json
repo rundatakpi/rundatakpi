@@ -1,0 +1,36 @@
+﻿{	"total":3500,
+    "data":[  
+		{
+			"id" : "1",
+			"lab":"证件号码",
+			"val":"1101019817678921",
+			"valKeyword":"110101",
+			"type":"car",
+			"collect":true,
+			"read":true,
+			"lastTime":"2017-05-03",
+			"lastTime":"2017-05-03",
+			"analysis":["family","relative","gis","activity"],
+			"minfos":[
+				{"lab":"姓名","val":""},
+				{"lab":"运营商","val":"中国移动","theme":"keyword","keyword":"国"},
+				{"lab":"归属地","val":"北京"},
+				{"lab":"IMSI","val":"4600012345678"}
+			],
+			"infos":[
+				{"tit":"同一身份",
+					"list":[
+						{"lab":"IMSI","val":"460008861620680","theme":"highword"},
+						{"lab":"IMEI","val":"355341081944331","theme":"highword"}
+					]
+				},
+				{"tit":"联系人",
+					"list":[
+						{"lab":"IMSI","val":"460008861620680","theme":"highword"},
+						{"lab":"IMEI","val":"355341081944331","theme":"highword"}
+					]
+				}
+			]
+		}
+	]
+}

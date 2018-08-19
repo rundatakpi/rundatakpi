@@ -16,6 +16,7 @@ import org.apache.xmlbeans.impl.util.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.cn.run.kpi.scheduler.entity.RestoreMonitorBean;
 import com.cn.run.kpi.scheduler.entity.ScheduleBean;
 import com.cn.run.kpi.scheduler.service.ScheduleService;
 import com.cn.run.kpi.scheduler.utils.HttpUtil;
@@ -88,9 +89,20 @@ public class ProtocolToMysqlTask {
 				e.printStackTrace();
 			}
 			//数据入库
-			String input=dataBean.getString("input");
-			String bcp_count=dataBean.getString("bcp_count");
-			String zip_count=dataBean.getString("zip_count");
+			//输入量
+			Long input=dataBean.getLong("input");
+			//输出bcp
+			Long bcp_count=dataBean.getLong("bcp_count");
+			//输出zip
+			Long zip_count=dataBean.getLong("zip_count");
+			RestoreMonitorBean restoreMonitorBean=new RestoreMonitorBean();
+			restoreMonitorBean.setCreatetime(dateStr);
+			restoreMonitorBean.setRestoreinput(input);
+			restoreMonitorBean.setRestoreoutputbcp(bcp_count);
+			restoreMonitorBean.setRestoreoutputzip(zip_count);
+			scheduleService.insertRestore(restoreMonitorBean);
+			//告警监测
+			
 		}
 		//设置结束时间
 		if(endTime>=startTime) {
