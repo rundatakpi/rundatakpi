@@ -31,13 +31,13 @@
         <input type="text" class="left starttime" />
         <span class="left timeSep">—</span>
         <input type="text" class="left endtime" /> -->
-        <a href="#" class="right emptyBtn_1">清空</a>
-        <a href="#" class="right schBtn_1">查询</a>
+        <a href="#" class="right schBtn_1" id="emptyBtn">清空</a>
+        <a href="#" class="right schBtn_1" id="schBtn">查询</a>
     </div>
     
     <div class="box">
         <div class="boxHd clearfix">
-            <h3 class="left">异常返回<!-- （<em class="boxHdEm">75</em>） --></h3>
+            <h3 class="left">异常返回 （<em class="boxHdEm"></em>） </h3>
             <a href="#" class="right opeBtn_1">批量导出</a>
         </div>
         <div class="boxBd">

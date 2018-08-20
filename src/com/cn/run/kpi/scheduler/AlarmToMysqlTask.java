@@ -1,5 +1,7 @@
 package com.cn.run.kpi.scheduler;
 
+import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -12,6 +14,12 @@ import com.cn.run.kpi.alarm.service.AlarmDataService;
 import com.cn.run.kpi.datamonitor.compress.entity.BacklogEntity;
 import com.cn.run.kpi.datamonitor.compress.service.CompressService;
 import com.cn.run.kpi.datamonitor.service.service.ServiceMonitorService;
+import com.cn.run.kpi.scheduler.entity.AppQueryRecord;
+import com.cn.run.kpi.scheduler.entity.JobMonitorBean;
+import com.cn.run.kpi.scheduler.entity.ObjDataSetBean;
+import com.cn.run.kpi.scheduler.entity.RestoreMonitorBean;
+import com.cn.run.kpi.scheduler.entity.StoreMonitorBean;
+import com.cn.run.kpi.scheduler.entity.YCLDataBean;
 import com.cn.run.kpi.scheduler.service.ScheduleService;
 
 /**
@@ -25,11 +33,13 @@ public class AlarmToMysqlTask {
 	private AlarmDataService alarmDataService;
 	@Autowired
 	private ScheduleService scheduleService;
+	@Autowired
+	private CompressService compressService;
 	
 	/**
 	 * 预警定时任务 定时任务每分钟执行一次
 	 */
-//	@Scheduled(cron = "0 0/1 * * * ? ")
+	//@Scheduled(cron = "0 0/1 * * * ? ")
 	public void alarmToMysqlTask() {
 		System.out.println("test");
 		//插入告警信息
@@ -55,6 +65,13 @@ public class AlarmToMysqlTask {
 //    	appQueryRecord.setError_desc("asd");
 //    	//插入到数据库中
 //    	serviceMonitorService.insertAppQueryRecord(appQueryRecord);
+		List<ObjDataSetBean> objList=scheduleService.getObjDataSetList();
+		
+		for(ObjDataSetBean objDataSetBean:objList) {
+			System.out.println("code:"+objDataSetBean.getCode()+"  name:"+objDataSetBean.getName());
+		}
+    	
+    	System.out.println("end...");
 	}
 
 }

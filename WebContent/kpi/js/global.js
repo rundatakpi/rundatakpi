@@ -94,7 +94,8 @@ function grid(id,url,colModel,configs){
 			},
 			listeners:{
 				render:function(){
-					//alert(this.getTotal());
+					var total=this.getTotal();
+					$(".boxHdEm").text(total);
 					//alert(this.getData());
 				},
 				reloadGrid:function(){

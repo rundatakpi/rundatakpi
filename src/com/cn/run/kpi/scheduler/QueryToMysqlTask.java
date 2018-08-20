@@ -18,6 +18,7 @@ import com.cn.run.kpi.alarm.service.AlarmDataService;
 import com.cn.run.kpi.datamonitor.compress.entity.BacklogEntity;
 import com.cn.run.kpi.datamonitor.service.service.ServiceMonitorService;
 import com.cn.run.kpi.scheduler.entity.AppQueryRecord;
+import com.cn.run.kpi.scheduler.entity.ObjDataSetBean;
 import com.cn.run.kpi.scheduler.entity.QueryRecord;
 import com.cn.run.kpi.scheduler.entity.ScheduleBean;
 import com.cn.run.kpi.scheduler.service.ScheduleService;
@@ -60,8 +61,10 @@ public class QueryToMysqlTask {
             pre.setString(1,startTimeStr);
             res = pre.executeQuery();
             long errorNum=0l;
+            List<ObjDataSetBean> objList=scheduleService.getObjDataSetList();
             while(res.next()){
             	long dateTime=res.getLong("TIMEKEY");
+            	String protocolName=getProtocolName(sql, objList);
             	String input_timeStr=sdf.format(new Date(dateTime));
             	String sqlStr=res.getString("SQL");
             	String system_id=res.getString("SYSTEM_ID");
@@ -73,6 +76,9 @@ public class QueryToMysqlTask {
             	appQueryRecord.setSystem_id(system_id);
             	appQueryRecord.setStatus(status);
             	appQueryRecord.setError_desc(error_desc);
+            	if(!protocolName.equals("")) {
+            		appQueryRecord.setProtocol(protocolName);
+            	}
             	//插入到数据库中
             	scheduleService.insertAppQueryRecord(appQueryRecord);
             	if(dateTime>maxTime) {
@@ -127,5 +133,25 @@ public class QueryToMysqlTask {
             e.printStackTrace();
             LOG.error(e.getMessage());
         }
+	}
+	/**
+	 * 获取协议名称
+	 * @param sql
+	 * @param objList
+	 * @return
+	 */
+	private String getProtocolName(String sql,List<ObjDataSetBean> objList) {
+		String objName="";
+		if(objList!=null&&objList.size()>0) {
+			for(ObjDataSetBean objDateSet:objList) {
+				String name=objDateSet.getName();
+				String code=objDateSet.getCode();
+				if(sql.contains(name)||sql.contains(code)) {
+					objName=name;
+					break;
+				}
+			}
+		}
+		return objName;
 	}
 }
