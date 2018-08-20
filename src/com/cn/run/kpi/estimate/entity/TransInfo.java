@@ -27,6 +27,8 @@ public class TransInfo implements Serializable{
 	private String sProtocolDesc;
 	/*动作类型*/
 	private String actionType;
+	/*动作类型*/
+	private String actionTypeDesc;
 	/*输入数据条数*/
 	private long inputNum;
 	/*输入数据速度*/
@@ -237,6 +239,12 @@ public class TransInfo implements Serializable{
 	}
 	public void setoValue(String oValue) {
 		this.oValue = oValue;
+	}
+	public String getActionTypeDesc() {
+		return actionTypeDesc;
+	}
+	public void setActionTypeDesc(String actionTypeDesc) {
+		this.actionTypeDesc = actionTypeDesc;
 	}
 	
 
