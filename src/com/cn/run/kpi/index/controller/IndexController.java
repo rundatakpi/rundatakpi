@@ -57,8 +57,8 @@ public class IndexController {
 		if (preProcessDate != null && !preProcessDate.isEmpty()) {
 			for (PreProcessEntity preProcessEntity : preProcessDate) {
 				dataSourceList.add(preProcessEntity.getDataSource());
-				inputList.add(StringUtil.isEmpty(preProcessEntity.getInputNum()) ? 0L : preProcessEntity.getInputNum());
-				outputList.add(StringUtil.isEmpty(preProcessEntity.getOutputNum()) ? 0L : preProcessEntity.getOutputNum());
+				inputList.add(StringUtil.isEmpty(preProcessEntity.getDataNum()) ? 0L : preProcessEntity.getDataNum());
+				outputList.add(StringUtil.isEmpty(preProcessEntity.getDataNum()) ? 0L : preProcessEntity.getDataNum());
 				discardList.add(StringUtil.isEmpty(preProcessEntity.getDiscardNum()) ? 0L : preProcessEntity.getDiscardNum());
 			}
 		}

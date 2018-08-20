@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cn.run.kpi.datamonitor.preprocess.dao.PreProcessDao;
-import com.cn.run.kpi.datamonitor.preprocess.entity.ErrorEntity;
 import com.cn.run.kpi.datamonitor.preprocess.entity.ExceptionEntity;
 import com.cn.run.kpi.datamonitor.preprocess.entity.InputRepetionEntity;
 import com.cn.run.kpi.datamonitor.preprocess.entity.PreProcessEntity;
@@ -40,7 +39,7 @@ public class PreProcessServiceImpl implements PreProcessService {
 	}
 
 	@Override
-	public List<ErrorEntity> getErrorData() {
+	public List<PreProcessEntity> getErrorData() {
 		return preProcessDao.getErrorData();
 	}
 

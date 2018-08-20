@@ -44,11 +44,11 @@ function init(data) {
 	//预处理数据实时监控
 	anticipationChart_1("anticipationChart_1", data);
 	//输入数据流重复率
-	anticipationChart_2("anticipationChart_2");
+	anticipationChart_2("anticipationChart_2", data['repeatJson']);
 	//预处理异常数据量
-	anticipationChart_3("anticipationChart_3");
+	//anticipationChart_3("anticipationChart_3");
 	//预处理错误数据量
-	anticipationChart_4("anticipationChart_4");
+	anticipationChart_4("anticipationChart_4", data['errorJson']);
 }
 
 
@@ -207,8 +207,10 @@ function anticipationChart_1(id, data) {
 /**
  * @description 输入数据流重复率
  */
-function anticipationChart_2(id) {
+function anticipationChart_2(id, data) {
 	var ec = echarts;
+	var date = data['date'];
+	var data = data['repeatNum'];
 	/*线图*/
 	if (document.getElementById(id)) {
 		chartObj[id] = ec.init(document.getElementById(id));
@@ -255,7 +257,7 @@ function anticipationChart_2(id) {
 			xAxis: [
 				{
 					type: 'category',
-					data: ['00：00：00','01：00：00','02：00：00','03：00：00','04：00：00','05：00：00','06：00：00','07：00：00','08：00：00','09：00：00','10：00：00','11：00：00','12：00：00','13：00：00','14：00：00','15：00：00','16：00：00','17：00：00','18：00：00','19：00：00','20：00：00','21：00：00','22：00：00','23：00：00','24：00：00'],
+					data: date,
 					axisPointer: {
 						type: 'shadow'
 					},
@@ -315,7 +317,7 @@ function anticipationChart_2(id) {
 						}
 					},
 					smooth : true,
-					data:[75321,12010,19841,35412,21014,54711,65421,12457,98654,9741,15973,13469,76431,64828,68741,24457,34451,17847,85241,84512,15489,33548,94102,64712]
+					data:data
 				}
 			]
 		};
@@ -464,7 +466,26 @@ function anticipationChart_3(id) {
 /**
  * @description 预处理错误数据量
  */
-function anticipationChart_4(id) {
+function anticipationChart_4(id, data) {
+	var color = ['#3069c8', '#409bd2', '#d37d24', '#972121', '#268f62'];
+	var legend = data['errorType'];
+	var seriesData = [];
+	$.each(data['errorNum'], function(index, value) {
+		var yData = {
+			value:value,
+			name:legend[index],
+			itemStyle: {
+				normal: {
+				   color : color[index % color.length]
+				},
+				emphasis : {
+					//shadowColor : 'rgba(0,0,0,0.5)'
+				}
+			}
+		}
+		seriesData.push(yData);
+	});
+	console.log(JSON.stringify(seriesData));
 	var ec = echarts;
 	/*线图*/
 	if (document.getElementById(id)) {
@@ -488,7 +509,7 @@ function anticipationChart_4(id) {
 					color : "#68789d"
 				},
 				itemGap : 30,
-				data:['AA异常数据量','BB异常数据量','CC异常数据量','DD异常数据量','EE异常数据量']
+				data:legend
 			},
 			/*toolbox: {
 				show : true,
@@ -520,7 +541,9 @@ function anticipationChart_4(id) {
 							fontFamily : "Microsoft YaHei"
 						}
 					},
-					data:[
+					data:seriesData
+						/*
+						[
 						{
 							value:100,
 							name:'AA异常数据量',
@@ -574,14 +597,15 @@ function anticipationChart_4(id) {
 							name:'EE异常数据量',
 							itemStyle: {
 								normal: {
-								   color : "#972121"
+								   color : "#972121#268f62"
 								},
 								emphasis : {
 									//shadowColor : 'rgba(0,0,0,0.5)'
 								}
 							}
 						}
-					]
+					
+					]*/
 				}
 			]
 		};

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cn.run.kpi.datamonitor.preprocess.entity.PreProcessEntity;
 import com.cn.run.kpi.datamonitor.preprocess.service.PreProcessService;
+import com.cn.run.kpi.utils.StringUtil;
 
 import net.sf.json.JSONObject;
 
@@ -40,18 +41,19 @@ public class PreProcessMonitorController {
 			if (inputData != null && !inputData.isEmpty()) {
 				for (PreProcessEntity preProcessEntity : inputData) {
 					date.add(preProcessEntity.getCreateTime());
-					inputNum.add(preProcessEntity.getInputNum());
+					inputNum.add(preProcessEntity.getDataNum());
 				}
 			}
 			System.out.println(inputData.isEmpty());
 		} catch (Exception e) {
 			LOG.error(">>>>>get preprocess inputdata failed", e);
 		}
+		
 		try {
 			List<PreProcessEntity> outputData = preProcessService.getPreProcessOutputData();
 			if (outputData != null && !outputData.isEmpty()) {
 				for (PreProcessEntity preProcessEntity : outputData) {
-					outputNum.add(preProcessEntity.getInputNum());
+					outputNum.add(preProcessEntity.getDataNum());
 				}
 			}
 		    System.out.println(outputData.size());
@@ -61,6 +63,51 @@ public class PreProcessMonitorController {
 		object.put("date", date);
 		object.put("inputNum", inputNum);
 		object.put("outputNum", outputNum);
+		
+		
+		getRepeatData(object);
+		getErrorData(object);
 		return object.toString();
+	}
+
+	private void getErrorData(JSONObject object) {
+		try {
+			List<PreProcessEntity> errorData = preProcessService.getErrorData();
+			JSONObject errorJson = new JSONObject();
+			List<Long> errorNum = new ArrayList<>(); 
+			List<String> errorType = new ArrayList<>(); 
+			if (errorData != null && !errorData.isEmpty()) {
+				for (PreProcessEntity preProcessEntity : errorData) {
+					errorNum.add(StringUtil.isEmpty(preProcessEntity.getDataNum()) ? 0L : preProcessEntity.getDataNum());
+					errorType.add(preProcessEntity.getErrorType());
+				}
+				errorJson.put("errorNum", errorNum);
+				errorJson.put("errorType", errorType);
+				object.put("errorJson", errorJson);
+			}
+		} catch (Exception e) {
+			LOG.error(">>>>>get preprocess error data failed", e);
+		}
+	}
+
+	private void getRepeatData(JSONObject object) {
+		// 获取重复率
+		try {
+			List<PreProcessEntity> repeatData = preProcessService.getPreProcessInputData();
+			if (repeatData != null && !repeatData.isEmpty()) {
+				JSONObject repeatJson = new JSONObject();
+				List<String> createDate = new ArrayList<>();
+				List<Long> repeatNum = new ArrayList<>();
+				for (PreProcessEntity preProcessEntity : repeatData) {
+					createDate.add(preProcessEntity.getCreateTime());
+					repeatNum.add(preProcessEntity.getDataNum());
+				}
+				repeatJson.put("date", createDate);
+				repeatJson.put("repeatNum", repeatNum);
+				object.put("repeatJson", repeatJson);
+			}
+		} catch (Exception e) {
+			LOG.error(">>>>>get preprocess repeat data failed", e);
+		}
 	}
 }

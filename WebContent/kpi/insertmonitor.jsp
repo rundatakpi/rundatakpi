@@ -24,7 +24,6 @@
     <%@ include file="datamonitornav.jsp"%>
     
     <div class="clearfix boxMain siftBox">
-    
     	<div class="left marginR25"><label class="left">数据源：</label><div class="left anticipationComb" id="insertComb_1"></div></div>
     	<div class="left marginR25"><label class="left">大协议：</label><div class="left anticipationComb" id="insertComb_2"></div></div>
     	<div class="left marginR25"><label class="left">小协议：</label><div class="left anticipationComb" id="insertComb_3"></div></div>

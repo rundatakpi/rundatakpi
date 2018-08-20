@@ -2,7 +2,6 @@ package com.cn.run.kpi.datamonitor.preprocess.service;
 
 import java.util.List;
 
-import com.cn.run.kpi.datamonitor.preprocess.entity.ErrorEntity;
 import com.cn.run.kpi.datamonitor.preprocess.entity.ExceptionEntity;
 import com.cn.run.kpi.datamonitor.preprocess.entity.InputRepetionEntity;
 import com.cn.run.kpi.datamonitor.preprocess.entity.PreProcessEntity;
@@ -43,7 +42,7 @@ public interface PreProcessService {
 	 * 预处理错误数据量
 	 * @return
 	 */
-	List<ErrorEntity> getErrorData();
+	List<PreProcessEntity> getErrorData() throws Exception;
 	
 	/**
 	 * 获取近XX预处理输入量

@@ -69,14 +69,14 @@
     
     <div class="clearfix boxMain">
     	<div class="box left importData">
-        	<div class="boxHd clearfix">
+        	<!-- <div class="boxHd clearfix">
                 <h3 class="left">预处理异常数据量</h3>
             </div>
             <div class="boxBd">
             	<div id="anticipationChart_3" class="anticipationChart_3">
                     
                 </div>
-            </div>
+            </div> -->
         </div>
         
     	<div class="box right exportData">

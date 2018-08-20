@@ -19,12 +19,14 @@ public class PreProcessEntity implements Serializable {
 	/**
 	 * 输入量
 	 */
-	private Long inputNum;
+	//private Long inputNum;
 	
 	/**
 	 * 输出量
 	 */
-	private Long outputNum;
+	//private Long outputNum;
+	
+	private Long dataNum;
 	
 	/**
 	 * 抛弃量
@@ -40,6 +42,8 @@ public class PreProcessEntity implements Serializable {
 	 * 采集时间
 	 */
 	private String createTime;
+	
+	private String errorType;
 
 	public String getDataSource() {
 		return dataSource;
@@ -49,7 +53,7 @@ public class PreProcessEntity implements Serializable {
 		this.dataSource = dataSource;
 	}
 
-	public Long getInputNum() {
+	/*public Long getInputNum() {
 		return inputNum;
 	}
 
@@ -63,10 +67,18 @@ public class PreProcessEntity implements Serializable {
 
 	public void setOutputNum(Long outputNum) {
 		this.outputNum = outputNum;
-	}
-
+	}*/
+	
 	public Long getDiscardNum() {
 		return discardNum;
+	}
+
+	public Long getDataNum() {
+		return dataNum;
+	}
+
+	public void setDataNum(Long dataNum) {
+		this.dataNum = dataNum;
 	}
 
 	public void setDiscardNum(Long discardNum) {
@@ -88,4 +100,13 @@ public class PreProcessEntity implements Serializable {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+
+	public String getErrorType() {
+		return errorType;
+	}
+
+	public void setErrorType(String errorType) {
+		this.errorType = errorType;
+	}
+	
 }

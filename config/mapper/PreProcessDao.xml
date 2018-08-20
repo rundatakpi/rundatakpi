@@ -6,20 +6,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.cn.run.kpi.datamonitor.preprocess.dao.PreProcessDao">
     <resultMap type="com.cn.run.kpi.datamonitor.preprocess.entity.PreProcessEntity" id="preProcessInputMap">
     	<id column="id" property="id"></id>
-		<result column="datanum" property="inputNum"></result>
+		<result column="datanum" property="dataNum"></result>
 		<result column="createtime" property="createTime"></result>
     </resultMap>
     
     <resultMap type="com.cn.run.kpi.datamonitor.preprocess.entity.PreProcessEntity" id="preProcessOutputMap">
     	<id column="id" property="id"></id>
-		<result column="datanum" property="outputNum"></result>
+		<result column="datanum" property="dataNum"></result>
 		<result column="createtime" property="createTime"></result>
     </resultMap>
     
     <resultMap type="com.cn.run.kpi.datamonitor.preprocess.entity.PreProcessEntity" id="preProcessDiscardMap">
     	<id column="id" property="id"></id>
-		<result column="datanum" property="discardNum"></result>
-		<result column="errortype" property="reason"></result>
+		<result column="datanum" property="dataNum"></result>
+		<result column="datatype" property="errorType"></result>
     </resultMap>
     
     <sql id="queryCondition">
@@ -61,9 +61,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    order by createtime
 	</select>
 	
+	<select id="getRepeatData" parameterType="map" resultMap="preProcessInputMap">
+	    select sum(datanum) as datanum, createtime from `preprocessmonitor` where datatype = '2004' and errortype = 1 
+	    <include refid="queryCondition"></include>
+	    group by createtime 
+	    ORDER BY createtime
+	</select>
+	
 	<select id="getPreProcessDiscardData" parameterType="map" resultMap="preProcessInputMap">
 	    select sum(datanum) discardNum, errortype  from preprocessmonitor where datatype = '2006'
 	    <include refid="queryCondition"></include>
-	    group by errortype;
+	    group by errortype
+	</select>
+	
+	<select id="getErrorData" parameterType="map" resultMap="preProcessDiscardMap">
+	    select sum(datanum) as datanum, errortype from `preprocessmonitor` where datatype = '2004' group by errortype ORDER BY datatype;
 	</select>
 </mapper>
