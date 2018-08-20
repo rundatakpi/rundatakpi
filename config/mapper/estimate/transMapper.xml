@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.run.kpi.estimate.dao.TransDao">
+  
+    
+    <sql id="transCondition">
+        <if test="null != dsCode and '' != dsCode">
+            and dsCode = #{dsCode}
+        </if>
+        <if test="null != bProtocolCode and '' != bProtocolCode">
+            and bProtocolCode = #{bProtocolCode}
+        </if>
+        <if test="null != sProtocolCode and '' != sProtocolCode">
+            and sProtocolCode = #{sProtocolCode}
+        </if>
+        <if test="null != actionType and '' != actionType">
+            and actionType = #{actionType}
+        </if>
+        <if test="null != startTime and '' != startTime">
+            and createDate <![CDATA[ >= ]]> #{startTime}
+        </if>
+        <if test="null != endTime and '' != endTime">
+            and createDate <![CDATA[ < ]]> #{endTime}
+        </if>
+         <if test="null != createDate and '' != createDate">
+            and createDate = #{createDate}
+        </if>
+    </sql>
+    
+	<select id="getList" parameterType="com.cn.run.kpi.estimate.entity.TransInfo" resultType="com.cn.run.kpi.estimate.entity.TransInfo">
+		select 
+		  	t.id,
+			t.dsCode,
+			t.dsDesc,
+			t.bProtocolCode,
+			t.bProtocolDesc,
+			t.sProtocolCode,
+			t.sProtocolDesc,
+			t.actionType,
+			t.inputNum,
+			t.inputSpeed,
+			t.inputFieldRate,
+			t.inputGroupRate,
+			t.inputFieldAvailRate,
+			t.inputGroupAvailRate,
+			t.inputAccuracy,
+			t.createDate
+		from t_trans_total t
+		<where>
+			<include refid="transCondition"></include>
+		</where>
+		group by 
+			t.dsCode,
+			t.bProtocolCode,
+			t.sProtocolCode,
+			t.actionType
+		limit #{start},#{length}
+	</select>
+	
+	<select id="getTotal" parameterType="com.cn.run.kpi.estimate.entity.TransInfo" resultType="java.lang.Integer">
+		SELECT count(
+				DISTINCT t.dsCode,
+				t.bProtocolCode,
+				t.sProtocolCode,
+				t.actionType
+			)
+		FROM t_trans_total t
+		<where>
+			<include refid="transCondition"></include>
+		</where>
+	</select>
+	
+	<select id="selectDetail" parameterType="com.cn.run.kpi.estimate.entity.TransInfo" resultType="com.cn.run.kpi.estimate.entity.TransInfo">
+		select createDate as oKey,${colName} as oValue from t_trans
+		<where>
+			<include refid="transCondition"></include>
+		</where>
+		
+	</select>
+</mapper>

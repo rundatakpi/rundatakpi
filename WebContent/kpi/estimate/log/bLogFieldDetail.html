@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>指标趋势</title>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href= "../../../css/bootstrap.min.css" >
+<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+<link rel="stylesheet" href="../../../css/bootstrap-theme.min.css" >
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="../../../css/jquery.dataTables.css">
+<!-- layer.css -->
+<link rel="stylesheet" type="text/css" href="../../../js/layer/skin/layer.css">
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="../../../js/jquery.min.js" type="text/javascript"></script>
+<script src="../../../js/bootstrop/bootstrap.min.js" type="text/javascript"></script>
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="../../../js/datatable/jquery.dataTables.js"></script>
+<!-- layer.js -->
+<script src="../../../js/layer/layer.js" type="text/javascript"></script>
+<!-- echarts.js -->
+<script src="../../../js/echarts.js" type="text/javascript"></script>
+
+
+<script>
+//获取主机地址之后的目录，如： proj/meun.jsp
+var pathName = window.document.location.pathname;
+var rootPath = pathName.substring(0, pathName.substr(1).indexOf('/')+1);
+var time = [];
+var data = [];
+	$(function(){
+
+		var bLogData = {};
+		bLogData.dataSourceCode =args().dataSourceCode;
+		bLogData.bProtocolCode =args().bProtocolCode;
+		bLogData.sProtocolCode =args().sProtocolCode;
+		bLogData.actionType =args().actionType;
+		bLogData.fieldCode =args().fieldCode;
+		bLogData.colName =args().colName;
+		
+		$.ajax({
+			url:rootPath+"/storeLog/getFeildInfo",
+			type:"post",
+			data: bLogData,
+			success:function(d){
+				for (var i = 0; i < d.data.length; i++) {
+					time.push(d.data[i].logKey);
+					data.push(d.data[i].logValue);
+				}
+
+				showTransDetail();
+			},
+			error:function(){
+				layer.msg("系统错误！");
+			}
+		});
+		
+	})
+	
+	//显示echarts图表
+	function showTransDetail(){
+		// 基于准备好的dom，初始化echarts图表
+	    var myChart = echarts.init(document.getElementById('bLogDetail'));
+	    
+	    option = {
+		    title : {
+		        text: '近一周指标趋势'
+//		        subtext: '纯属虚构'
+		    },
+		    tooltip : {
+		        trigger: 'axis'
+		    },
+		    /*legend: {
+		        data:['数据量']
+		    },*/
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            mark : {show: true},
+		            dataView : {show: true, readOnly: false},
+		            magicType : {show: true, type: ['line', 'bar']},
+		            restore : {show: true},
+		            saveAsImage : {show: true}
+		        }
+		    },
+		    calculable : true,
+		    xAxis : [
+		        {
+		            type : 'category',
+		            boundaryGap : false,
+		            data : time
+		        }
+		    ],
+		    yAxis : [
+		        {
+		            type : 'value',
+		            axisLabel : {
+		                formatter: '{value} 条'
+		            }
+		        }
+		    ],
+		    series : [
+		        {
+//		            name:'数据量',
+		            type:'line',
+		            data : data,
+		            markLine : {
+		                data : [
+		                    {type : 'average', name: '平均值'}
+		                ]
+	            	}
+		            
+		        }
+	    	]
+		};	
+	    
+	    myChart.setOption(option);
+		
+	}
+	
+    //获取index传参rid args为传递过来的所有参数，类型为OBJDECT，调用为args();
+    var args = function(params){
+        var a = {};
+        params = params || location.search;
+        if(!params) return {};
+        params = decodeURI(params);
+        params.replace(/(?:^\?|&)([^=&]+)(?:\=)([^=&]+)(?=&|$)/g,function(m,k,v){  a[k] = v; });
+        return a;
+    };
+</script>
+</head>
+<body>
+	<div class="container">
+		<div id="bLogDetail" style="width:700px;height: 500px;"></div>
+	</div>
+</body>
+</html>

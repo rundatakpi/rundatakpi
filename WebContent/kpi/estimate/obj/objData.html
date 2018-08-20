@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>对象化数据质量评估</title>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href= "../../../css/bootstrap.min.css" >
+<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+<link rel="stylesheet" href="../../../css/bootstrap-theme.min.css" >
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="../../../css/jquery.dataTables.css">
+<!-- layer.css -->
+<link rel="stylesheet" type="text/css" href="../../../js/layer/skin/layer.css">
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="../../../js/jquery.min.js" type="text/javascript"></script>
+<script src="../../../js/bootstrop/bootstrap.min.js" type="text/javascript"></script>
+<!-- DataTables -->
+<script src="../../../js/datatable/jquery.dataTables.js" type="text/javascript" ></script>
+<!-- layer.js -->
+<script src="../../../js/layer/layer.js" type="text/javascript"></script>
+<script src="../../js/estimate/obj/objData.js" type="text/javascript"></script>
+
+
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<form>
+				<span> 
+					<strong>对象类型</strong> 
+					<select id="objType">
+						<option value="">全部</option>
+					</select>
+				</span> 
+				<span id="featureId"> 
+					<strong>特征串</strong> 
+					<select id="featureString">
+						<option value="">全部</option>
+					</select>
+				</span>
+				<span> 
+					<strong>数据源编码</strong> 
+					<select id="dataSourceCode">
+						<option value="">全部</option>
+					</select>
+				</span>
+
+				<button id="searchBtn">查询</button>
+				<button type="reset">重置</button>
+			</form>
+		</div>
+		<div class="row">
+			<h3 id="objectName">对象化数据</h3>
+			<p></p>
+			<table id="objTable" class="table table-bordered table-hover">
+  				<thead>
+					<tr>
+						<th>编号</th>
+						<th>特征串编码</th>
+						<th>特征串中文</th>
+						<th>数据源编号</th>
+						<th>数据源描述</th>
+						<th>特征串总量</th>
+						<th>准确率</th>
+						<th>提取量</th>
+						<th>净提取关系个数</th>
+						<th>净提取关系比率</th>
+						<th>手机号关联数量</th>
+						<th>手机号关联比率</th>
+						<th>身份证关联数量</th>
+						<th>身份证关联比率</th>
+						<th>ADSL关联数量</th>
+						<th>ADSL关联比率</th>
+						<th>IMEI关联数量</th>
+						<th>IMEI关联比率</th>
+						<th>IMSI关联数量</th>
+						<th>IMSI关联比率</th>
+						<th>MAC关联数量</th>
+						<th>MAC关联比率</th>
+						<th>数据生成日期</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

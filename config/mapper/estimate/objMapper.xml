@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.run.kpi.estimate.dao.ObjDao">
+
+	<select id="getObjType" resultType="com.cn.run.kpi.estimate.entity.ObjInfo">
+		select distinct objType,objTypeDesc from t_obj_quality
+	</select>
+	
+	<select id="getFeartureString" resultType="com.cn.run.kpi.estimate.entity.ObjInfo">
+		select 
+			distinct aspectCode,aspectStr
+		from t_obj_quality
+		where objType = "virtualIdentity"
+	</select>
+	
+	<select id="getDataSource" resultType="com.cn.run.kpi.estimate.entity.ObjInfo">
+		select 
+			distinct dsCode,dsDesc
+		from t_obj_quality
+	</select>
+
+	<sql id="objCondition">
+		<if test=" objType !=null and objType != '' ">
+			and objType = #{objType}
+		</if>
+		<if test=" aspectCode != null and aspectCode != '' ">
+			and aspectCode = #{aspectCode}
+		</if>
+		<if test=" dsCode != null and dsCode != '' ">
+			and dsCode = #{dsCode}
+		</if>
+		<if test=" startTime != null and startTime != '' ">
+            and createDate <![CDATA[ >= ]]> #{startTime}
+        </if>
+        <if test=" endTime != null and endTime != '' ">
+            and createDate <![CDATA[ < ]]> #{endTime}
+        </if>
+         <if test="null != createDate and '' != createDate">
+            and createDate = #{createDate}
+        </if>
+	</sql>
+
+	<select id="getList" parameterType="com.cn.run.kpi.estimate.entity.ObjInfo" resultType="com.cn.run.kpi.estimate.entity.ObjInfo">
+		select 
+			id,
+			objType,
+			objTypeDesc,
+			dsCode,
+			dsDesc,
+			aspectCode,
+			aspectStr,
+			aspectTotal aspectNum,
+			accuracy,
+			extractTotal extractNum,
+			netExtractTotal netExtractNum,
+			netExtractRate,
+			phoneReTotal phoneReNum,
+			phoneReRate,
+			idCardReTotal idCardReNum,
+			idCardReRate,
+			adslReTotal adslReNum,
+			adslReRate,
+			imeiReTotal imeiReNum,
+			imeiReRate,
+			imsiReTotal imsiReNum,
+			imsiReRate,
+			macReTotal macReNum,
+			macReRate,
+			createDate
+		from t_obj_quality_total
+		<where>
+			<include refid="objCondition"></include>
+		</where>
+		limit #{start},#{length}
+	</select>
+
+	<select id="getTotal" parameterType="com.cn.run.kpi.estimate.entity.ObjInfo" resultType="java.lang.Integer">
+		SELECT 
+			count(1)
+		FROM t_obj_quality_total
+		<where>
+			<include refid="objCondition"></include>
+		</where>
+	</select>
+
+	<select id="getDetail" parameterType="com.cn.run.kpi.estimate.entity.ObjInfo" resultType="com.cn.run.kpi.estimate.entity.ObjInfo">
+		select 
+			createDate okey,
+			${colName} oValue 
+		from t_obj_quality
+		<where>
+			<include refid="objCondition"></include>
+		</where>
+	</select>
+</mapper>
