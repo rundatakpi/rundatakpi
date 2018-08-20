@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.run.kpi.exampledata.dao.ExampleZipMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.run.kpi.exampledata.entity.ExampleZip" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="datasource" property="datasource" jdbcType="VARCHAR" />
+    <result column="datatype" property="datatype" jdbcType="VARCHAR" />
+    <result column="datatypechname" property="datatypechname" jdbcType="VARCHAR" />
+    <result column="protocol" property="protocol" jdbcType="VARCHAR" />
+    <result column="protocolchname" property="protocolchname" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, datasource, datatype, datatypechname, protocol, protocolchname, createdate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from zdjc_example
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  
+  	<select id="getList" parameterType="com.cn.run.kpi.exampledata.entity.ExampleZip" resultType="com.cn.run.kpi.exampledata.entity.ExampleZip">
+		select * from zdjc_example ORDER BY createdate desc 
+	</select>
+	
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from zdjc_example
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.run.kpi.exampledata.entity.ExampleZip" >
+    insert into zdjc_example (ID, datasource, datatype, 
+      datatypechname, protocol, protocolchname, 
+      createdate)
+    values (#{id,jdbcType=INTEGER}, #{datasource,jdbcType=VARCHAR}, #{datatype,jdbcType=VARCHAR}, 
+      #{datatypechname,jdbcType=VARCHAR}, #{protocol,jdbcType=VARCHAR}, #{protocolchname,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.run.kpi.exampledata.entity.ExampleZip" >
+    insert into zdjc_example
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="datasource != null" >
+        datasource,
+      </if>
+      <if test="datatype != null" >
+        datatype,
+      </if>
+      <if test="datatypechname != null" >
+        datatypechname,
+      </if>
+      <if test="protocol != null" >
+        protocol,
+      </if>
+      <if test="protocolchname != null" >
+        protocolchname,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="datasource != null" >
+        #{datasource,jdbcType=VARCHAR},
+      </if>
+      <if test="datatype != null" >
+        #{datatype,jdbcType=VARCHAR},
+      </if>
+      <if test="datatypechname != null" >
+        #{datatypechname,jdbcType=VARCHAR},
+      </if>
+      <if test="protocol != null" >
+        #{protocol,jdbcType=VARCHAR},
+      </if>
+      <if test="protocolchname != null" >
+        #{protocolchname,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.run.kpi.exampledata.entity.ExampleZip" >
+    update zdjc_example
+    <set >
+      <if test="datasource != null" >
+        datasource = #{datasource,jdbcType=VARCHAR},
+      </if>
+      <if test="datatype != null" >
+        datatype = #{datatype,jdbcType=VARCHAR},
+      </if>
+      <if test="datatypechname != null" >
+        datatypechname = #{datatypechname,jdbcType=VARCHAR},
+      </if>
+      <if test="protocol != null" >
+        protocol = #{protocol,jdbcType=VARCHAR},
+      </if>
+      <if test="protocolchname != null" >
+        protocolchname = #{protocolchname,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.run.kpi.exampledata.entity.ExampleZip" >
+    update zdjc_example
+    set datasource = #{datasource,jdbcType=VARCHAR},
+      datatype = #{datatype,jdbcType=VARCHAR},
+      datatypechname = #{datatypechname,jdbcType=VARCHAR},
+      protocol = #{protocol,jdbcType=VARCHAR},
+      protocolchname = #{protocolchname,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=DATE}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

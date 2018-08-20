@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,11 +15,15 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.cn.run.kpi.alarm.entity.AlarmData;
+import com.cn.run.kpi.alarm.service.AlarmDataService;
 import com.cn.run.kpi.datamonitor.compress.entity.BacklogEntity;
+import com.cn.run.kpi.scheduler.entity.JobMonitorBean;
 import com.cn.run.kpi.scheduler.entity.LogCount;
 import com.cn.run.kpi.scheduler.entity.ObjectCount;
 import com.cn.run.kpi.scheduler.entity.OfflineJob;
 import com.cn.run.kpi.scheduler.entity.ScheduleBean;
+import com.cn.run.kpi.scheduler.entity.StoreMonitorBean;
 import com.cn.run.kpi.scheduler.service.ScheduleService;
 import com.cn.run.kpi.scheduler.utils.JDBCUtil;
 
@@ -31,6 +36,8 @@ public class StorageToMysqlTask {
 	private static final Logger LOG = Logger.getLogger(StorageToMysqlTask.class);
 	@Autowired
 	private ScheduleService scheduleService;
+	@Autowired
+	private AlarmDataService alarmDataService;
 	
 	/**
 	 * 资源库表调度任务 定时任务每分钟执行一次
@@ -63,42 +70,38 @@ public class StorageToMysqlTask {
         try {
             pre = conn.prepareStatement(sql);
             res = pre.executeQuery();
+            Long maxNum=0l;
             while(res.next()){
             	Date timekey=res.getDate("TIMEKEY");
             	String timekeyStr=sdf.format(timekey);
             	String dataSource=res.getString("DATASOURCE");
             	long datacnt=res.getLong("TOTALCNT");
-            	
             	//插入到数据库
-            	
+            	StoreMonitorBean storeMonitorBean=new StoreMonitorBean();
+            	storeMonitorBean.setCreatetime(timekeyStr);
+            	storeMonitorBean.setDatatype(1);
+            	storeMonitorBean.setSourcename(dataSource);
+            	storeMonitorBean.setStore(datacnt);
+            	scheduleService.insertStoreData(storeMonitorBean);
             	//获取最大时间
             	long dateTime=timekey.getTime();
             	if(dateTime>maxTime) {
             		maxTime=dateTime;
             	}
+            	maxNum+=datacnt;
+            	scheduleService.insertStoreData(storeMonitorBean);
             }
-//            //调用将结果集转换成实体对象方法
-//            List list=new ArrayList();
-//			try {
-//				list = JDBCUtil.Populate(res, LogCount.class);
-//			} catch (InstantiationException e) {
-//				LOG.error(e.getMessage());
-//				e.printStackTrace();
-//			} catch (IllegalAccessException e) {
-//				LOG.error(e.getMessage());
-//				e.printStackTrace();
-//			}
-//            //循环遍历结果
-//            for(int i=0;i<list.size();i++){
-//            	LogCount data = (LogCount) list.get(i);
-//            	//获取最大时间
-//            	long dateTime=data.getTimekey().getTime();
-//            	if(dateTime>maxTime) {
-//            		maxTime=dateTime;
-//            	}
-//            	//解析数据入库，
-//            	
-//            }
+            //告警
+            if(maxNum==0) {
+            	AlarmData alarmData=new AlarmData();
+        		String dateStr=sdf.format(new Date(maxTime));
+        		String content=dateStr+" 资源库中数据量为0";
+        		alarmData.setAlarmContent(content);
+        		alarmData.setAlarmLevel("2");
+        		alarmData.setAlarmTime(dateStr);
+        		alarmData.setProcessState("1");
+        		alarmDataService.insertInfo(alarmData);
+            }
           //关闭数据库连接
             try{
                 if(conn != null){
@@ -157,41 +160,37 @@ public class StorageToMysqlTask {
         try {
             pre = conn.prepareStatement(sql);
             res = pre.executeQuery();
+            Long maxNum=0l;
             while(res.next()){
             	Date timekey=res.getDate("TIMEKEY");
             	String timekeyStr=sdf.format(timekey);
             	String dataSource=res.getString("OBJECTTYPE");
             	long datacnt=res.getLong("TOTALCNT");
             	//插入到数据库
-            	
+            	StoreMonitorBean storeMonitorBean=new StoreMonitorBean();
+            	storeMonitorBean.setCreatetime(timekeyStr);
+            	storeMonitorBean.setDatatype(2);
+            	storeMonitorBean.setSourcename(dataSource);
+            	storeMonitorBean.setStore(datacnt);
+            	scheduleService.insertStoreData(storeMonitorBean);
             	//获取最大时间
             	long dateTime=timekey.getTime();
             	if(dateTime>maxTime) {
             		maxTime=dateTime;
             	}
+            	maxNum+=datacnt;
             }
-//            //调用将结果集转换成实体对象方法
-//            List list=new ArrayList();
-//			try {
-//				list = JDBCUtil.Populate(res, ObjectCount.class);
-//			} catch (InstantiationException e) {
-//				LOG.error(e.getMessage());
-//				e.printStackTrace();
-//			} catch (IllegalAccessException e) {
-//				LOG.error(e.getMessage());
-//				e.printStackTrace();
-//			}
-//            //循环遍历结果
-//            for(int i=0;i<list.size();i++){
-//            	ObjectCount data = (ObjectCount) list.get(i);
-//            	//获取最大时间
-//            	long dateTime=data.getTimekey().getTime();
-//            	if(dateTime>maxTime) {
-//            		maxTime=dateTime;
-//            	}
-//            	//解析数据入库，
-//            	
-//            }
+            //告警
+            if(maxNum==0) {
+            	AlarmData alarmData=new AlarmData();
+        		String dateStr=sdf.format(new Date(maxTime));
+        		String content=dateStr+" 对象库中数据量为0";
+        		alarmData.setAlarmContent(content);
+        		alarmData.setAlarmLevel("2");
+        		alarmData.setAlarmTime(dateStr);
+        		alarmData.setProcessState("1");
+        		alarmDataService.insertInfo(alarmData);
+            }
           //关闭数据库连接
             try{
                 if(conn != null){
@@ -250,27 +249,34 @@ public class StorageToMysqlTask {
         try {
             pre = conn.prepareStatement(sql);
             res = pre.executeQuery();
-            //调用将结果集转换成实体对象方法
-            List list=new ArrayList();
-			try {
-				list = JDBCUtil.Populate(res, OfflineJob.class);
-			} catch (InstantiationException e) {
-				LOG.error(e.getMessage());
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				LOG.error(e.getMessage());
-				e.printStackTrace();
-			}
-            //循环遍历结果
-            for(int i=0;i<list.size();i++){
-            	OfflineJob data = (OfflineJob) list.get(i);
+            while(res.next()){
+            	JobMonitorBean jobMonitorBean=new JobMonitorBean();
+            	String timekey=res.getString("TIMEKEY");
+            	jobMonitorBean.setTimekey(timekey);
+            	int status=res.getInt("JOB_STATUS");
+            	jobMonitorBean.setJob_status(status);
+            	String jobName=res.getString("JOB_NAME");
+            	jobMonitorBean.setJob_name(jobName);
+            	jobMonitorBean.setStart_time(res.getString("START_TIME"));
+            	jobMonitorBean.setEnd_time(res.getString("END_TIME"));
+            	jobMonitorBean.setInput_time(res.getString("INPUT_TIME"));
+            	scheduleService.insertJobData(jobMonitorBean);
             	//获取最大时间
-            	long dateTime=data.getTimekey().getTime();
+            	long dateTime=sdf.parse(timekey).getTime();
             	if(dateTime>maxTime) {
             		maxTime=dateTime;
             	}
-            	//解析数据入库，
-            	
+                //告警(失败的任务)
+                if(status==0) {
+                	AlarmData alarmData=new AlarmData();
+            		String dateStr=sdf.format(new Date(dateTime));
+            		String content=dateStr+" "+jobName+" 执行失败!";
+            		alarmData.setAlarmContent(content);
+            		alarmData.setAlarmLevel("1");
+            		alarmData.setAlarmTime(dateStr);
+            		alarmData.setProcessState("1");
+            		alarmDataService.insertInfo(alarmData);
+                }
             }
           //关闭数据库连接
             try{
@@ -294,7 +300,7 @@ public class StorageToMysqlTask {
         	  scheduleService.updateSchedule(scheduleBean);
           }
           LOG.info("end outlineDataToMysqlTask...");
-        } catch (SQLException e) {
+        } catch (SQLException | ParseException e) {
             e.printStackTrace();
             LOG.error(e.getMessage());
         }

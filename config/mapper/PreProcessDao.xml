@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.run.kpi.datamonitor.preprocess.dao.PreProcessDao">
+    <resultMap type="com.cn.run.kpi.datamonitor.preprocess.entity.PreProcessEntity" id="preProcessInputMap">
+    	<id column="id" property="id"></id>
+		<result column="datanum" property="inputNum"></result>
+		<result column="createtime" property="createTime"></result>
+    </resultMap>
+    
+    <resultMap type="com.cn.run.kpi.datamonitor.preprocess.entity.PreProcessEntity" id="preProcessOutputMap">
+    	<id column="id" property="id"></id>
+		<result column="datanum" property="outputNum"></result>
+		<result column="createtime" property="createTime"></result>
+    </resultMap>
+    
+    <resultMap type="com.cn.run.kpi.datamonitor.preprocess.entity.PreProcessEntity" id="preProcessDiscardMap">
+    	<id column="id" property="id"></id>
+		<result column="datanum" property="discardNum"></result>
+		<result column="errortype" property="reason"></result>
+    </resultMap>
+    
+    <sql id="queryCondition">
+        <if test="null != dataSource and '' != dataSource">
+            and datasource = #{dataSource}
+        </if>
+        
+        <if test="null != bProtocol and '' != bProtocol">
+            and bProtocol = #{bProtocol}
+        </if>
+        
+        <if test="null != sProtocol and '' != sProtocol">
+            and sProtocol = #{sProtocol}
+        </if>
+        
+        <if test="null != action and '' != action">
+            and action = #{action}
+        </if>
+        
+        <if test="null != createDate and '' != createDate">
+            and createdate = #{createDate}
+        </if>
+    </sql>
+    
+	<select id="getPreProcessInputData" parameterType="map" resultMap="preProcessInputMap">
+	    select sum(datanum) as datanum, createtime from preprocessmonitor
+	    where datatype = '2001'
+	    <include refid="queryCondition"></include> 
+	    group BY createtime
+	    order by createtime
+	</select>
+	
+	<select id="getPreProcessOutputData" parameterType="map" resultMap="preProcessInputMap">
+	    select sum(datanum) as datanum, createtime from preprocessmonitor
+	    where datatype = '2002' or datatype = '2003' or datatype = '2005' or datatype = '2009'
+	    or datatype = '2012' or datatype = '2044'
+	    <include refid="queryCondition"></include> 
+	    group BY createtime
+	    order by createtime
+	</select>
+	
+	<select id="getPreProcessDiscardData" parameterType="map" resultMap="preProcessInputMap">
+	    select sum(datanum) discardNum, errortype  from preprocessmonitor where datatype = '2006'
+	    <include refid="queryCondition"></include>
+	    group by errortype;
+	</select>
+</mapper>

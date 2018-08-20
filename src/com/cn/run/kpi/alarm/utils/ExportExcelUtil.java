@@ -4,13 +4,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.HttpResponse;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -30,7 +33,7 @@ public class ExportExcelUtil<T> {
      *  out         与输出设备关联的流对象，可以将EXCEL文档导出到本地文件或者网络中
      */
     public void exportExcel(String title, List<String> headersName,List<String> headersId,
-                            List<T> dtoList) {
+                            List<T> dtoList,HttpServletResponse response,HttpServletRequest request) {
         /*（一）表头--标题栏*/
         Map<Integer, String> headersNameMap = new HashMap<>();
         int key=0;
@@ -117,20 +120,46 @@ public class ExportExcelUtil<T> {
                 }
             }
         }
-        
-        
         try {
-            FileOutputStream exportXls = new FileOutputStream("D://告警信息表"+System.currentTimeMillis()+".xls");
-            wb.write(exportXls);
-            exportXls.close();
-            System.out.println("导出成功!");
-        } catch (FileNotFoundException e) {
-            System.out.println("导出失败!");
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("导出失败!");
-            e.printStackTrace();
-        }
+			outWrite(request, response, wb, "告警信息表.xls");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+        
+//        try {
+//            FileOutputStream exportXls = new FileOutputStream("D://告警信息表"+System.currentTimeMillis()+".xls");
+//            wb.write(exportXls);
+//            exportXls.close();
+//            System.out.println("导出成功!");
+//        } catch (FileNotFoundException e) {
+//            System.out.println("导出失败!");
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            System.out.println("导出失败!");
+//            e.printStackTrace();
+//        }
     }
+    
+    private static void outWrite(HttpServletRequest request, HttpServletResponse response, HSSFWorkbook wb,
+            String fileName) throws IOException {
+         OutputStream output = null;
+         try {
+             String userAgent = request.getHeader("User-Agent");
+             output = response.getOutputStream();
+             response.reset();  
+             fileName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+             response.setHeader("Content-disposition", "attachment; filename="+ fileName);  
+             response.setContentType("application/vnd.ms-excel;charset=utf-8");
+             response.setCharacterEncoding("utf-8");  
+             wb.write(output);  
+             output.flush(); 
+         } catch (IOException e) {
+             e.printStackTrace();
+         }finally {
+             if(output != null){
+                 output.close();            
+                 }
+         }
+     }
     
 }

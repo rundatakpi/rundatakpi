@@ -44,4 +44,16 @@ public interface PreProcessService {
 	 * @return
 	 */
 	List<ErrorEntity> getErrorData();
+	
+	/**
+	 * 获取近XX预处理输入量
+	 * @return
+	 */
+	List<PreProcessEntity> getPreProcessInputData() throws Exception;
+	
+	/**
+	 * 获取近XX预处理丢弃量
+	 * @return
+	 */
+	List<PreProcessEntity> getPreProcessOutputData() throws Exception;
 }

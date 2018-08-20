@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.run.kpi.exampledata.dao.ExampleZipItemMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.run.kpi.exampledata.entity.ExampleZipItem" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="key" property="key" jdbcType="VARCHAR" />
+    <result column="chname" property="chname" jdbcType="VARCHAR" />
+    <result column="ysz" property="ysz" jdbcType="VARCHAR" />
+    <result column="yclz" property="yclz" jdbcType="VARCHAR" />
+    <result column="jghz" property="jghz" jdbcType="VARCHAR" />
+    <result column="dxhz" property="dxhz" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, pid, key, chname, ysz, yclz, jghz, dxhz
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from zdjc_example_items
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  
+   	<select id="getSubList" parameterType="com.cn.run.kpi.exampledata.entity.ExampleZipItem" resultType="com.cn.run.kpi.exampledata.entity.ExampleZipItem">
+		select * from zdjc_example_items where pid=#{id}
+	</select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from zdjc_example_items
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.run.kpi.exampledata.entity.ExampleZipItem" >
+    insert into zdjc_example_items (ID, pid, key, 
+      chname, ysz, yclz, 
+      jghz, dxhz)
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{key,jdbcType=VARCHAR}, 
+      #{chname,jdbcType=VARCHAR}, #{ysz,jdbcType=VARCHAR}, #{yclz,jdbcType=VARCHAR}, 
+      #{jghz,jdbcType=VARCHAR}, #{dxhz,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.run.kpi.exampledata.entity.ExampleZipItem" >
+    insert into zdjc_example_items
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="key != null" >
+        key,
+      </if>
+      <if test="chname != null" >
+        chname,
+      </if>
+      <if test="ysz != null" >
+        ysz,
+      </if>
+      <if test="yclz != null" >
+        yclz,
+      </if>
+      <if test="jghz != null" >
+        jghz,
+      </if>
+      <if test="dxhz != null" >
+        dxhz,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="key != null" >
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="chname != null" >
+        #{chname,jdbcType=VARCHAR},
+      </if>
+      <if test="ysz != null" >
+        #{ysz,jdbcType=VARCHAR},
+      </if>
+      <if test="yclz != null" >
+        #{yclz,jdbcType=VARCHAR},
+      </if>
+      <if test="jghz != null" >
+        #{jghz,jdbcType=VARCHAR},
+      </if>
+      <if test="dxhz != null" >
+        #{dxhz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.run.kpi.exampledata.entity.ExampleZipItem" >
+    update zdjc_example_items
+    <set >
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="key != null" >
+        key = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="chname != null" >
+        chname = #{chname,jdbcType=VARCHAR},
+      </if>
+      <if test="ysz != null" >
+        ysz = #{ysz,jdbcType=VARCHAR},
+      </if>
+      <if test="yclz != null" >
+        yclz = #{yclz,jdbcType=VARCHAR},
+      </if>
+      <if test="jghz != null" >
+        jghz = #{jghz,jdbcType=VARCHAR},
+      </if>
+      <if test="dxhz != null" >
+        dxhz = #{dxhz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.run.kpi.exampledata.entity.ExampleZipItem" >
+    update zdjc_example_items
+    set pid = #{pid,jdbcType=INTEGER},
+      key = #{key,jdbcType=VARCHAR},
+      chname = #{chname,jdbcType=VARCHAR},
+      ysz = #{ysz,jdbcType=VARCHAR},
+      yclz = #{yclz,jdbcType=VARCHAR},
+      jghz = #{jghz,jdbcType=VARCHAR},
+      dxhz = #{dxhz,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

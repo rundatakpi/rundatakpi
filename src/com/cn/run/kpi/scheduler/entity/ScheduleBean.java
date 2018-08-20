@@ -20,6 +20,12 @@ public class ScheduleBean implements Serializable{
 	private Integer dadatype;
 	/*描述*/
 	private String describe;
+	/*轻微告警情况*/
+	private String slightalarm;
+	/*一般告警情况*/
+	private String commonlyalarm;
+	/*严重告警情况*/
+	private String seriousalarm;
 	public long getId() {
 		return id;
 	}
@@ -44,11 +50,24 @@ public class ScheduleBean implements Serializable{
 	public void setDescribe(String describe) {
 		this.describe = describe;
 	}
-	
-	
-	
-	
-	
+	public String getSlightalarm() {
+		return slightalarm;
+	}
+	public void setSlightalarm(String slightalarm) {
+		this.slightalarm = slightalarm;
+	}
+	public String getCommonlyalarm() {
+		return commonlyalarm;
+	}
+	public void setCommonlyalarm(String commonlyalarm) {
+		this.commonlyalarm = commonlyalarm;
+	}
+	public String getSeriousalarm() {
+		return seriousalarm;
+	}
+	public void setSeriousalarm(String seriousalarm) {
+		this.seriousalarm = seriousalarm;
+	}
 	
 
 }

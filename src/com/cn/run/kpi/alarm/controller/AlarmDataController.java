@@ -11,9 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.cn.run.kpi.alarm.entity.AlarmData;
 import com.cn.run.kpi.alarm.service.AlarmDataService;
 import com.cn.run.kpi.alarm.utils.ExportExcelUtil;
+
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 
@@ -40,24 +44,26 @@ public class AlarmDataController {
 	 */
 	@RequestMapping("/getList")
 	@ResponseBody
-	public Map<String,Object> getList(HttpServletRequest request,AlarmData alarmData){
-		
-		Map<String,Object> resultMap = new HashMap<String,Object>();
-		Integer start = Integer.valueOf(request.getParameter("start"));
-		Integer length = Integer.valueOf(request.getParameter("length"));
+	public void getList(HttpServletRequest request,HttpServletResponse response,AlarmData alarmData){
+		// 每页显示条数。
+		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
+		// 当前页码。
+		int currentPage = Integer.valueOf(request.getParameter("currentPage"));
+		System.out.println("begin...");
+		Integer start = (currentPage - 1) * pageSize;
 		alarmData.setStart(start);
-		alarmData.setLength(length);
-		try {
-			List<AlarmData> alarmDatas = alarmDataService.getList(alarmData);
-			Integer total = alarmDataService.getTotal(alarmData);
-			resultMap.put("recordsTotal", total);
-			resultMap.put("recordsFiltered", total);
-			resultMap.put("data", alarmDatas);
-		}catch(Exception e) {
-			LOG.error(e.getMessage(), e);
-		}
+		alarmData.setLength(pageSize);
+		List<AlarmData> alarmDatas = alarmDataService.getList(alarmData);
+		Integer total = alarmDataService.getTotal(alarmData);
+		// 新建JSON对象。
+		JSONObject resultJsonObject = new JSONObject();
 		
-		return resultMap;
+		// 将值赋给json对象。（total和data）
+		resultJsonObject.element("total", total);
+		resultJsonObject.element("data", JSONArray.fromObject(alarmDatas));
+		
+		// 将生成的json字符串传给response，再给前台。
+		writeJson(resultJsonObject.toString(), response);
 	}
 	
 	/**
@@ -67,18 +73,21 @@ public class AlarmDataController {
 	 */
 	@RequestMapping("/del")
 	@ResponseBody
-	public JSONObject delAlarms(Integer id) {
+	public void delAlarms(Integer id,HttpServletResponse response) {
 		JSONObject json = new JSONObject();
+		boolean flag=false;
 		try {
 			alarmDataService.del(id);
+			flag=true;
 		}catch(Exception e) {
-			json.put("msg", "操作失败");
 			LOG.error(e.getMessage(), e);
 		}
-		
-		json.put("msg", "操作成功！");
-		
-		return json;
+		if(flag){
+			json.element("flag", "1");
+		}else{
+			json.element("flag", "2");
+		}
+		writeJson(json.toString(), response);
 	}
 	
 	/**
@@ -88,17 +97,21 @@ public class AlarmDataController {
 	 */
 	@RequestMapping("/edit")
 	@ResponseBody
-	public JSONObject editAlarm(AlarmData alarmData) {
+	public void editAlarm(AlarmData alarmData,HttpServletResponse response) {
 		JSONObject json = new JSONObject();
+		boolean flag=false;
 		try {
 			alarmDataService.edit(alarmData);
+			flag=true;
 		}catch(Exception e) {
-			json.put("msg", "操作失败");
 			LOG.error(e.getMessage(), e);
 		}
-		
-		json.put("msg", "操作成功");
-		return json;
+		if(flag){
+			json.element("flag", "1");
+		}else{
+			json.element("flag", "2");
+		}
+		writeJson(json.toString(), response);
 	} 
 	
 	/**
@@ -121,12 +134,11 @@ public class AlarmDataController {
 	 */
 	@RequestMapping("/exportExcel")
 	@ResponseBody
-	public JSONObject exportExcel(AlarmData alarmData,HttpServletResponse response){
-		JSONObject json = new JSONObject();
+	public void exportExcel(AlarmData alarmData,HttpServletResponse response,HttpServletRequest request){
 		try {
-				
+			System.out.println("begin...");
 			List<String> listName = new ArrayList<>();
-	        listName.add("编号");
+	        listName.add("主键ID");
 	        listName.add("告警时间");
 	        listName.add("告警级别");
 	        listName.add("告警内容");
@@ -142,15 +154,12 @@ public class AlarmDataController {
 	        List<AlarmData> list = alarmDataService.getAllData(alarmData);
 	        
 	        ExportExcelUtil<AlarmData> exportBeanExcelUtil = new ExportExcelUtil();
-	        exportBeanExcelUtil.exportExcel("告警信息表",listName,listId,list);
+	        exportBeanExcelUtil.exportExcel("告警信息表",listName,listId,list,response,request);
 	        
-	        
+	        System.out.println("sucess...");
 		}catch(Exception e) {
-			json.put("msg", "下载失败！");
 			LOG.error(e.getMessage(), e);
 		}
-		json.put("msg", "下载成功！文件存放在D盘根目录下。");
-		return json;
 	
 	}
 	
@@ -171,5 +180,26 @@ public class AlarmDataController {
 		}
 		resultJson.put("msg", "添加成功");
 		return resultJson;
+	}
+	
+	/**
+	 * 把json写入页面
+	 * @param json
+	 * @param response
+	 */
+	protected void writeJson(String json,HttpServletResponse response){
+		response.setContentType("text/html;charset=UTF-8");
+		response.setCharacterEncoding("utf8");
+		try {
+			response.getWriter().write(json);
+			response.getWriter().close();
+		} catch (Exception e) {
+			try {
+				response.getWriter().close();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
 	}
 }

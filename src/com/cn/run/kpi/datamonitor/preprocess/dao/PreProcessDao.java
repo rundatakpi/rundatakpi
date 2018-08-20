@@ -39,4 +39,16 @@ public interface PreProcessDao {
 	 * @return
 	 */
 	List<ErrorEntity> getErrorData();
+	
+	/**
+	 * 获取近X天预处理输入量
+	 * @return
+	 */
+	List<PreProcessEntity> getPreProcessInputData();
+	
+	/**
+	 * 获取近X天预处理丢弃量
+	 * @return
+	 */
+	List<PreProcessEntity> getPreProcessOutputData();
 }

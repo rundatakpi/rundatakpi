@@ -44,4 +44,14 @@ public class PreProcessServiceImpl implements PreProcessService {
 		return preProcessDao.getErrorData();
 	}
 
+	@Override
+	public List<PreProcessEntity> getPreProcessInputData() {
+		return preProcessDao.getPreProcessInputData();
+	}
+
+	@Override
+	public List<PreProcessEntity> getPreProcessOutputData() {
+		return preProcessDao.getPreProcessOutputData();
+	}
+
 }

@@ -30,6 +30,16 @@ public class PreProcessEntity implements Serializable {
 	 * 抛弃量
 	 */
 	private Long discardNum;
+	
+	/**
+	 * 抛弃原因
+	 */
+	private String reason;
+	
+	/**
+	 * 采集时间
+	 */
+	private String createTime;
 
 	public String getDataSource() {
 		return dataSource;
@@ -61,5 +71,21 @@ public class PreProcessEntity implements Serializable {
 
 	public void setDiscardNum(Long discardNum) {
 		this.discardNum = discardNum;
+	}
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 }

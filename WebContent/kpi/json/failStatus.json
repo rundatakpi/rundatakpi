@@ -1,0 +1,15 @@
+﻿{"result":[
+	{
+		"chkVal":"0",
+		"chkDisplay":"全部"
+	},{
+		"chkVal":"1",
+		"chkDisplay":"告警中"
+	},{
+		"chkVal":"2",
+		"chkDisplay":"处理中"
+	},{
+		"chkVal":"3",
+		"chkDisplay":"已处理"
+	}
+]}

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.cn.run.kpi.alarm.entity.AlarmData;
+import com.cn.run.kpi.alarm.service.AlarmDataService;
 import com.cn.run.kpi.datamonitor.compress.entity.BacklogEntity;
 import com.cn.run.kpi.datamonitor.compress.service.CompressService;
 import com.cn.run.kpi.scheduler.entity.KafkaData;
@@ -32,6 +35,8 @@ public class KfakaToMysqlTask {
 	private ScheduleService scheduleService;
 	@Autowired
 	private CompressService compressService;
+	@Autowired
+	private AlarmDataService alarmDataService;
 	
 	/**
 	 * kafka数据调度任务 定时任务每分钟执行一次
@@ -44,6 +49,10 @@ public class KfakaToMysqlTask {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		//获取开始时间
 		String startTimeStr=scheduleBean.getDatestr();
+		//告警阈值
+		double seriousNum=Double.parseDouble(scheduleBean.getSeriousalarm());
+		//积压最大值(测试值)
+		double seriourMax=1111;
 		Date startDate=null;
 		try {
 			startDate=sdf.parse(startTimeStr);
@@ -64,6 +73,7 @@ public class KfakaToMysqlTask {
         try {
             pre = conn.prepareStatement(sql);
             res = pre.executeQuery();
+            Long allNum=0l;
             while(res.next()){
             	Date input_time=res.getDate("INPUT_TIME");
             	String input_timeStr=sdf.format(input_time);
@@ -78,29 +88,22 @@ public class KfakaToMysqlTask {
             	if(dateTime>maxTime) {
             		maxTime=dateTime;
             	}
+            	//总积压量
+            	allNum+=count;
             }
-//            //调用将结果集转换成实体对象方法
-//            List list=new ArrayList();
-//			try {
-//				list = JDBCUtil.Populate(res, KafkaData.class);
-//			} catch (InstantiationException e) {
-//				LOG.error(e.getMessage());
-//				e.printStackTrace();
-//			} catch (IllegalAccessException e) {
-//				LOG.error(e.getMessage());
-//				e.printStackTrace();
-//			}
-//            //循环遍历结果
-//            for(int i=0;i<list.size();i++){
-//            	KafkaData data = (KafkaData) list.get(i);
-//            	//获取最大时间
-//            	long dateTime=data.getInput_time().getTime();
-//            	if(dateTime>maxTime) {
-//            		maxTime=dateTime;
-//            	}
-//            	//解析数据入库，
-//            	
-//            }
+            //告警提示
+            if(allNum.doubleValue()/seriourMax>seriousNum) {
+        		AlarmData alarmData=new AlarmData();
+        		String dateStr=sdf.format(new Date(maxTime));
+        		DecimalFormat df = new DecimalFormat("0.00%");
+        		String r = df.format(allNum.doubleValue()/seriourMax);
+        		String content=dateStr+" Kafka实时积压数据大小达到设备空间的"+df;
+        		alarmData.setAlarmContent(content);
+        		alarmData.setAlarmLevel("1");
+        		alarmData.setAlarmTime(dateStr);
+        		alarmData.setProcessState("1");
+        		alarmDataService.insertInfo(alarmData);
+            }
           //关闭数据库连接
             try{
                 if(conn != null){
