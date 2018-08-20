@@ -99,8 +99,23 @@ function clickSift(){
 }
 //清空
 function clickEmpty(){
-	$("#warmingCombobox_2").find(".r-combobox-input").val("请选择");
-	$("#warmingCombobox_1").find(".r-combobox-input").val("请选择");
+	//$('div[name="warmingCombobox_1"]').val("0");
+	//$('div[name="warmingCombobox_2"]').val("0");
+	//$("#warmingCombobox_2").find(".r-combobox-input").val("请选择");
+	//$("#warmingCombobox_1").find(".r-combobox-input").val("请选择");
+	$("#warmingCombobox_1").children().remove();
+	$("#warmingCombobox_2").children().remove();
+	var configs = [{
+		id : "warmingCombobox_1",
+		url : "json/failCause.json",
+		onSelect : function(combo,record){}
+	},{
+		id : "warmingCombobox_2",
+		url : "json/failStatus.json",
+		onSelect : function(combo,record){}
+	}];
+	//加载下拉框
+	combobox(configs);
 	showTable("/rundatakpi/alarmData/getList")
 }
 
