@@ -13,7 +13,7 @@ var args = function(params){
 };
 
 var outArr = [];
-var numArr = [3];
+var numArr = [4];
 var dataSourceCode;
 var bProtocolCode;
 $(function(){
@@ -39,6 +39,7 @@ $(function(){
 				innerArr.push(this.sProtocolCode);
 				innerArr.push(this.sProtocolDesc);
 				innerArr.push(this.actionType);
+				innerArr.push(this.actionTypeDesc);
 				innerArr.push(this.dataNum);
 					
 				$.each(this.storeFieldList,function(i,n){
@@ -50,16 +51,16 @@ $(function(){
 					innerArr.push(this.sAccuracy);
 					innerArr.push(this.codeMatch);
 					
-					numArr.push(4+i*3);
 					numArr.push(5+i*3);
 					numArr.push(6+i*3);
+					numArr.push(7+i*3);
 					
 				})
 				
 				outArr.push(innerArr);
 			});
 			
-			alert(numArr);
+			//alert(numArr);
 			
 			refreshData(outArr);
 			
@@ -71,14 +72,10 @@ $(function(){
 				
 				$.each(this.storeFieldList,function(i,n){
 					
-					//添加列名属性					
-					$("td").eq(4+3*i).attr('title','fillRate');
-					$("td").eq(5+3*i).attr('title','sAccuracy');
-					$("td").eq(6+3*i).attr('title','codeMatch');
-					//添加字段类型属性
-					$("td").eq(4+3*i).attr('field',this.fieldCode);
-					$("td").eq(5+3*i).attr('field',this.fieldCode);
-					$("td").eq(6+3*i).attr('field',this.fieldCode);
+					//添加列名属性和添加字段类型属性		
+					$("td").eq(4+3*i).attr({'title':'fillRate','field':this.fieldCode});
+					$("td").eq(5+3*i).attr({'title':'sAccuracy','field':this.fieldCode});
+					$("td").eq(6+3*i).attr({'title':'codeMatch','field':this.fieldCode});
 					
 				})
 				
@@ -146,7 +143,12 @@ function refreshData(colNameArr){
  			});
  		},
          "columnDefs": [
-        	 //从第4列开始添加超链接
+        	//隐藏动作类型列
+         	{
+ 	 			"targets": [2], 
+ 	 			"visible": false,
+         	},
+        	 //从第5列开始添加超链接
         	{
 	 			"targets": numArr, // 入库条数
 	 	        "render": function(data, type, full){
@@ -157,7 +159,7 @@ function refreshData(colNameArr){
 
         ],
  		fixedColumns : {//关键是这里了，需要第一列不滚动就设置1
-            leftColumns : 3
+            leftColumns : 4
         }
     })
     
@@ -178,7 +180,7 @@ function refreshData(colNameArr){
 function showFeildDetail(_this){
 	var sProtocolCode = oTable.row($(_this).closest("tr")).data()[0];
 	var actionType = oTable.row($(_this).closest("tr")).data()[2]; 
-	alert(sProtocolCode+"actionType============"+actionType);
+	//alert(sProtocolCode+"actionType============"+actionType);
 	
 	var colName = $(_this).closest("td").attr("title");
 	var fieldCode = $(_this).closest("td").attr("field");
@@ -199,21 +201,5 @@ function showFeildDetail(_this){
 		  		"&fieldCode="+fieldCode+
 		  		'&colName='+colName//iframe的url
 	});
-	
-	/*$.ajax({
-		url:rootPath+"/storeLog/getFeildInfo",
-		data:{
-			"dataSourceCode":dataSourceCode,
-			"bProtocolCode":bProtocolCode,
-			"sProtocolCode":sProtocolCode,
-			"actionType":actionType,
-			"colName":colName,
-			"fieldCode":fieldCode
-			
-		},
-		"success":function(data){
-			
-		}
-	})*/
 }
 

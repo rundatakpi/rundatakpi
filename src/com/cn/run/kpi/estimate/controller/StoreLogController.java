@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cn.run.kpi.estimate.common.ActionConfig;
 import com.cn.run.kpi.estimate.common.LogConstants;
 import com.cn.run.kpi.estimate.entity.StoreLogData;
 import com.cn.run.kpi.estimate.service.StoreLogService;
@@ -99,6 +101,10 @@ public class StoreLogController {
 	public JSON getTableInfo(StoreLogData storeLogData) {
 		JSONObject jsonObject = new JSONObject();
 		List<StoreLogData> storeLogs = storeLogDataService.getTableInfo(storeLogData);
+		for (StoreLogData storeLogData2 : storeLogs) {
+			String actionTypeDesc = ActionConfig.getValue(storeLogData2.getActionType());
+			storeLogData2.setActionTypeDesc(actionTypeDesc);
+		}
 		jsonObject.put("logs", storeLogs);
 		return jsonObject;
 		
