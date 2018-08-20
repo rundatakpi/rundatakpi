@@ -1,7 +1,6 @@
 package com.cn.run.kpi.datamonitor.service.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 中间件查询数据量表
