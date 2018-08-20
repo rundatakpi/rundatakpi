@@ -1,4 +1,7 @@
 $(function(){
+	//切换样式
+	$('.nav').find('a').removeClass("slt");
+	$('.navLink_5').addClass('slt');
 	var configs = [{
 		id : "warmingCombobox_1",
 		url : "json/failCause.json",
@@ -8,10 +11,10 @@ $(function(){
 		url : "json/failStatus.json",
 		onSelect : function(combo,record){}
 	}];
+	//加载下拉框
 	combobox(configs);
+	//加载表格
 	showTable("/rundatakpi/alarmData/getList")
-	//加载帐号监测表格
-
     
 	//加一个监听（筛选功能）
 	$('.schBtn_1').click(function(){
