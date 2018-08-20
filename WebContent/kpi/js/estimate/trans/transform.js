@@ -58,6 +58,7 @@ function refreshData(){
              { "data": "sProtocolCode","defaultContent":""},
              { "data": "sProtocolDesc" ,"defaultContent":""},
              { "data": "actionType" ,"defaultContent":""},
+             { "data": "actionTypeDesc" ,"defaultContent":""},
              { "data": "inputNum" ,"defaultContent":""},
              { "data": "inputSpeed","defaultContent":"" },
              { "data": "inputFieldRate" ,"defaultContent":""},
@@ -99,7 +100,7 @@ function refreshData(){
          "columnDefs": [
         	 //给8-14列添加超链接
         	{
-	 			"targets": [8,9,10,11,12,13,14], // 输入数据条数
+	 			"targets": [9,10,11,12,13,14,15], // 输入数据条数
 	 	        "render": function(data, type, row, meta){
 	 	        	var colIndex = meta.col;
 	 	        	return "<a href='#' onclick='showDetail(this,"+colIndex+")'>"+data+"</a>";
@@ -108,7 +109,7 @@ function refreshData(){
         	},
         	//隐藏1和15列
         	{
-	 			"targets": [0,-1], // 输入数据条数
+	 			"targets": [0,7,-1], // 输入数据条数
 	 			"visible": false,
         	}
         ]
@@ -130,8 +131,9 @@ function showDetail(_this,index){
 	var sProtocolCode = oTable.row($(_this).closest("tr")).data().sProtocolCode;
 	var actionType = oTable.row($(_this).closest("tr")).data().actionType;
 	
-	var colnums = ["id","dsCode","dsDesc","bProtocolCode","bProtocolDesc","sProtocolCode","sProtocolDesc","actionType","inputNum",
-		"inputSpeed","inputFieldRate","inputGroupRate","inputFieldAvailRate","inputGroupAvailRate","inputAccuracy","createDate"];
+	var colnums = ["id","dsCode","dsDesc","bProtocolCode","bProtocolDesc","sProtocolCode","sProtocolDesc","actionType",
+		"actionTypeDesc","inputNum","inputSpeed","inputFieldRate","inputGroupRate","inputFieldAvailRate",
+		"inputGroupAvailRate","inputAccuracy","createDate"];
 	var colName = colnums[index];
 	
 	//iframe层
