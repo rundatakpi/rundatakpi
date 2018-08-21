@@ -20,7 +20,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
     
 	<select id="getKafkaBacklogData" parameterType="map" resultMap="backlogMap">
-		
+		SELECT DISTINCT
+		a.createdate,
+		IFNULL(b.machinebacklognum, 0) as machineBacklogNum,
+		IFNULL(b.machinebacklogsize, 0) as machineBacklogSize,
+		IFNULL(b.kafkabacklognum, 0) as kafkaBacklogNum,
+		IFNULL(b.kafkabacklogsize, 0) as kafkaBacklogSize
+		FROM
+		backlog as a
+		LEFT JOIN (
+			SELECT
+			createdate,
+			sum(machinebacklognum) as machineBacklogNum,
+			sum(machinebacklogsize) as machineBacklogSize,
+			sum(kafkabacklognum) as kafkaBacklogNum,
+			sum(kafkabacklogsize) as kafkaBacklogSize
+			FROM
+			backlog
+			WHERE 1 = 1
+			<include refid="queryCondition"></include>
+			GROUP BY
+			createdate
+		) AS b ON a.createdate = b.createdate order by a.createdate;
 	</select>
 	
 	<insert id="insertBackLogData" parameterType="com.cn.run.kpi.datamonitor.compress.entity.BacklogEntity" useGeneratedKeys="true" keyProperty="id">

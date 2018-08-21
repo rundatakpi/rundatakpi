@@ -22,7 +22,7 @@ $(function(){
 			onSelect : function(combo,record){}
 		},{
 			id : "anticipationComb_6",
-			url : "json/failCause.json",
+			url : "json/collectPlace.json",
 			onSelect : function(combo,record){}
 		}
 	];

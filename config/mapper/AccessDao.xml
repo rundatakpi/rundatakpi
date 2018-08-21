@@ -78,18 +78,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getDataSource" resultType="string">
-	    SELECT  DISTINCT(datasource) FROM `restoremonitor`;
+	    SELECT  DISTINCT(datasource) FROM `restoremonitor` where date_sub(CURDATE(), INTERVAL 30 DAY) <![CDATA[<=]]>  date(createtime)
 	</select>
 	
 	<select id="getSprotocol" resultType="string">
-	    SELECT  DISTINCT(sprotocol) FROM `restoremonitor`;
+	    SELECT  DISTINCT(sprotocol) FROM `restoremonitor` where date_sub(CURDATE(), INTERVAL 30 DAY) <![CDATA[<=]]>  date(createtime)
 	</select>
 	
 	<select id="getBprotocol" resultType="string">
-	    SELECT  DISTINCT(bprotocol) FROM `restoremonitor`;
+	    SELECT  DISTINCT(bprotocol) FROM `restoremonitor` where date_sub(CURDATE(), INTERVAL 30 DAY) <![CDATA[<=]]>  date(createtime)
 	</select>
 	
 	<select id="getAction" resultType="string">
-	    SELECT  DISTINCT(action) FROM `restoremonitor`;
+	    SELECT  DISTINCT(actionType) FROM `preprocessmonitor` where date_sub(CURDATE(), INTERVAL 30 DAY) <![CDATA[<=]]>  date(createtime)
+	</select>
+	
+	<select id="getCollectPlace" resultType="string">
+	    SELECT  DISTINCT(collectplace) FROM `preprocessmonitor` where date_sub(CURDATE(), INTERVAL 30 DAY) <![CDATA[<=]]>  date(createtime)
 	</select>
 </mapper>

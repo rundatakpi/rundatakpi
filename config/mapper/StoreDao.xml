@@ -19,19 +19,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <sql id="queryCondition">
         <if test="null != yesterday and '' != yesterday">
-            and createdate = #{yesterday}
+            and createtime = #{yesterday}
         </if>
     </sql>
     
 	<select id="getNineResourceData" parameterType="map" resultMap="storeResourceMap">
-		select sum(datanum) datanum, resource from store_resource
-		where 1=1 <include refid="queryCondition"></include>
+		select sum(store) datanum, sourcename as resource from datastoremonitor
+		where 1=1 and datatype = 1 <include refid="queryCondition"></include>
 		 GROUP BY resource ORDER BY resource;
 	</select>
 	
 	<select id="getObjectData" parameterType="map" resultMap="storeObjectMap">
-		select sum(datanum) datanum, object from store_object
-		where 1=1 <include refid="queryCondition"></include>
+		select sum(store) datanum, sourcename as object from datastoremonitor
+		where 1=1 and datatype = 1 <include refid="queryCondition"></include>
 		 GROUP BY object ORDER BY object;
 	</select>
 </mapper>

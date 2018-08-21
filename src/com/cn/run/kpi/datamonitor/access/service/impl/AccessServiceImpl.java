@@ -152,7 +152,7 @@ public class AccessServiceImpl implements AccessService {
 		}
 		
 		try {
-//			getCollectPlace();
+			getCollectPlace();
 		} catch (Exception e) {
 			LOG.error(">>>>get collect place failed", e);
 		}

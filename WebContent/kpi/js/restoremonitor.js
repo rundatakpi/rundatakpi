@@ -26,7 +26,12 @@ $(function(){
 			onSelect : function(combo,record){}
 		}
 	];
+	
 	combobox(configs);*/
+	$('.chooseDay').off("click").on('click',"a",function(){
+		$(this).addClass("slt").siblings().removeClass("slt");
+		return false;
+	});	
 	var queryCondition = {};
 	$.ajax({
 		url: '/rundatakpi/restore/init',
