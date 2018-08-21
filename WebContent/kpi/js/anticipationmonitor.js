@@ -6,19 +6,19 @@ $(function(){
 			onSelect : function(combo,record){}
 		},{
 			id : "anticipationComb_2",
-			url : "json/failCause.json",
+			url : "json/datasource.json",
 			onSelect : function(combo,record){}
 		},{
 			id : "anticipationComb_3",
-			url : "json/failCause.json",
+			url : "json/bProtocol.json",
 			onSelect : function(combo,record){}
 		},{
 			id : "anticipationComb_4",
-			url : "json/failCause.json",
+			url : "json/sProtocol.json",
 			onSelect : function(combo,record){}
 		},{
 			id : "anticipationComb_5",
-			url : "json/failCause.json",
+			url : "json/action.json",
 			onSelect : function(combo,record){}
 		},{
 			id : "anticipationComb_6",

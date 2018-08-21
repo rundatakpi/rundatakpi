@@ -163,4 +163,20 @@ public class AccessMonitorController {
 		
 		return discardJson;
 	}
+	
+	@RequestMapping("/input")
+	@ResponseBody
+	public String getInputData(HttpServletRequest request, HttpServletResponse response) {
+		Map<String, Object> queryCondition = new HashMap<>();
+		getAccessInputData(queryCondition);
+		return "";
+	}
+	
+	@RequestMapping("/discard")
+	@ResponseBody
+	public String getDiscardData(HttpServletRequest request, HttpServletResponse response) {
+		Map<String, Object> queryCondition = new HashMap<>();
+		getAccessDiscardData(queryCondition);
+		return "";
+	}
 }

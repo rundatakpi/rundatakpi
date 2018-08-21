@@ -3,25 +3,25 @@ $(function(){
 	var configs = [
 		{
 			id : "insertComb_1",
-			url : "json/failCause.json",
+			url : "json/datasource.json",
 			onSelect : function(combo,record){
 				$("#insertComb_1").val(record.text);
 			}
 		},{
 			id : "insertComb_2",
-			url : "json/failCause.json",
+			url : "json/bProtocol.json",
 			onSelect : function(combo,record){
 				$("#insertComb_2").val(record.text);
 			}
 		},{
 			id : "insertComb_3",
-			url : "json/failCause.json",
+			url : "json/sProtocol.json",
 			onSelect : function(combo,record){
 				$("#insertComb_3").val(record.text);
 			}
 		},{
 			id : "insertComb_4",
-			url : "json/failCause.json",
+			url : "json/action.json",
 			onSelect : function(combo,record){
 				$("#insertComb_4").val(record.text);
 			}
@@ -29,15 +29,52 @@ $(function(){
 	];
 	combobox(configs);
 	
+	$('.chooseDay').off("click").on('click',"a",function(){
+		$(this).addClass("slt").siblings().removeClass("slt");
+		var parent = $(this).parent();
+		var day = $(this).attr('value');
+		var url = parent.attr('url');
+		var id = parent.attr('data-id');
+		console.log("day = " + day);
+		console.log("url = " + url);
+		
+		
+		var queryCondition = getQueryCondition();
+		
+		queryCondition.push("day", day);
+		
+		refresh(url, queryCondition, id);
+		return false;
+	});	 
+	
 	init();
 	
 	
 	
 })
 
-function insertQuery() {
-	var inputDate = $("#input_date a[class$='slt']").text();
-	console.log("inputDate = " + inputDate);
+function refresh(url, queryCondition) {
+	$.ajax({
+		url: '/rundatakpi/access' + url,
+		method: 'GET',
+		data: queryCondition,
+		dataType: 'json',
+		success: function(data) {
+			if (url == 'input') {
+				//接入数据实时输入数据量
+				insertChart_1("insertChart_1", data);
+			} else if (url == 'discard') {
+				//抛弃数据量
+				insertChart_2("insertChart_2", data);
+			}
+		},
+		error: function(data) {
+			console.log("error");
+		}
+	});
+}
+
+function getQueryCondtion() {
 	var dataSource = $("#insertComb_1").val()[0];
 	var bProtocol = $("#insertComb_2").val()[0];
 	var sProtocol = $("#insertComb_3").val()[0];
@@ -47,11 +84,24 @@ function insertQuery() {
 		"bProtocol": bProtocol,
 		"sProtocol": sProtocol,
 		"action": action,
-	}
+	};
+	
+	return queryCondition;
+}
+
+function insertQuery() {
+	var inputDate = $("#input_date a[class$='slt']").attr("value");
+	var discardDate = $("#discard_date a[class$='slt']").attr("value");
+	console.log("inputDate = " + inputDate);
+	console.log("discardDate = " + discardDate);
+	var queryCondition = getQueryCondtion();
 	init(queryCondition);
 }
 
 function init(queryCondition) {
+	var data = "";
+	console.log(data['test']);
+	
 	$.ajax({
 		url: '/rundatakpi/access/data',
 		data: queryCondition,

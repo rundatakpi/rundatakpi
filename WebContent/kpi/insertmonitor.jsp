@@ -15,6 +15,7 @@
 <script type="text/javascript" src="js/run-min.js"></script>
 <script type="text/javascript" src="js/global.js"></script>
 <script type="text/javascript" src="js/insertmonitor.js"></script>
+<script type="text/javascript" src="js/datamonitornav.js"></script>
 </head>
 
 <body>
@@ -22,7 +23,7 @@
 	<%@ include file="nav.jsp"%>
     
     <%@ include file="datamonitornav.jsp"%>
-    
+    <div>
     <div class="clearfix boxMain siftBox">
     	<div class="left marginR25"><label class="left">数据源：</label><div class="left anticipationComb" id="insertComb_1"></div></div>
     	<div class="left marginR25"><label class="left">大协议：</label><div class="left anticipationComb" id="insertComb_2"></div></div>
@@ -57,9 +58,9 @@
     	<div class="box left importData">
         	<div class="boxHd clearfix">
                 <h3 class="left">接入数据实时输入数据量</h3>
-                <div id="input_date" class="chooseDay right">
-                    <a href="#" class="left sevenDays slt">近7天</a>
-                    <a href="#" class="right thirtyDays">近30天</a>
+                <div id="input_date" data-id="insertChart_1" url="input" class="chooseDay right">
+                    <a href="#" class="left sevenDays slt" value="7">近7天</a>
+                    <a href="#" class="right thirtyDays" value="30">近30天</a>
                 </div>
             </div>
             <div class="boxBd">
@@ -72,9 +73,9 @@
     	<div class="box right exportData">
         	<div class="boxHd clearfix">
                 <h3 class="left">抛弃数据量</h3>
-                <div class="chooseDay right">
-                    <a href="#" class="left sevenDays slt">近7天</a>
-                    <a href="#" class="right thirtyDays">近30天</a>
+                <div id="discard_date" path="discard" class="chooseDay right">
+                    <a href="#" class="left sevenDays slt" value="7">近7天</a>
+                    <a href="#" class="right thirtyDays" value="30">近30天</a>
                 </div>
             </div>
             <div class="boxBd">
@@ -84,7 +85,7 @@
             </div>
         </div>
     </div>
-    
+    </div>
     
     
     

@@ -43,4 +43,50 @@ public interface AccessService {
 	 * @return
 	 */
 	Long getAccessInputNumByDay(Map<String, Object> queryCondition) throws Exception;
+	
+	/**
+	 * 获取近一个月的分类列表
+	 * @return
+	 * @throws Exception
+	 */
+	void getClassfication() throws Exception;
+	
+	/**
+	 * 获取近一个月的数据源列表
+	 * @return
+	 * @throws Exception
+	 */
+	void getDataSource() throws Exception;
+	
+	
+	/**
+	 * 获取近一个月的大协议列表
+	 * @return
+	 * @throws Exception
+	 */
+	void getBprotocol() throws Exception;
+	
+	/**
+	 * 获取近一个月的小协议列表
+	 * @return
+	 * @throws Exception
+	 */
+	void getSprotocol() throws Exception;
+	
+	/**
+	 * 获取近一个月的动作类型列表
+	 * @return
+	 * @throws Exception
+	 */
+	void getAction() throws Exception;
+	
+	/**
+	 * 获取近一个月的采集地列表
+	 * @return
+	 * @throws Exception
+	 */
+	void getCollectPlace() throws Exception;
+	
+	void initJson();
+	
 }

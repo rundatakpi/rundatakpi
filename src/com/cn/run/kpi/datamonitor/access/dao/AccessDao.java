@@ -48,4 +48,46 @@ public interface AccessDao {
 	 */
 	Long getAccessInputNumByDay(Map<String, Object> queryCondition) throws Exception;
 
+	/**
+	 * 获取近一个月的分类列表
+	 * @return
+	 * @throws Exception
+	 */
+	List<String> getClassfication() throws Exception;
+	
+	/**
+	 * 获取近一个月的数据源列表
+	 * @return
+	 * @throws Exception
+	 */
+	List<String> getDataSource() throws Exception;
+	
+	
+	/**
+	 * 获取近一个月的大协议列表
+	 * @return
+	 * @throws Exception
+	 */
+	List<String> getBprotocol() throws Exception;
+	
+	/**
+	 * 获取近一个月的小协议列表
+	 * @return
+	 * @throws Exception
+	 */
+	List<String> getSprotocol() throws Exception;
+	
+	/**
+	 * 获取近一个月的动作类型列表
+	 * @return
+	 * @throws Exception
+	 */
+	List<String> getAction() throws Exception;
+	
+	/**
+	 * 获取近一个月的采集地列表
+	 * @return
+	 * @throws Exception
+	 */
+	List<String> getCollectPlace() throws Exception;
 }

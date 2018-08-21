@@ -73,4 +73,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    select sum(input) from accessmonitor where 1 = 1
 	    <include refid="queryCondition"></include>
 	</select>
+	
+	<select id="getClassfication" resultType="string">
+	</select>
+	
+	<select id="getDataSource" resultType="string">
+	    SELECT  DISTINCT(datasource) FROM `restoremonitor`;
+	</select>
+	
+	<select id="getSprotocol" resultType="string">
+	    SELECT  DISTINCT(sprotocol) FROM `restoremonitor`;
+	</select>
+	
+	<select id="getBprotocol" resultType="string">
+	    SELECT  DISTINCT(bprotocol) FROM `restoremonitor`;
+	</select>
+	
+	<select id="getAction" resultType="string">
+	    SELECT  DISTINCT(action) FROM `restoremonitor`;
+	</select>
 </mapper>
