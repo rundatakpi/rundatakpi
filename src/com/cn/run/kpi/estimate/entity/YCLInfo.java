@@ -28,6 +28,8 @@ public class YCLInfo implements Serializable{
 	private String sProtocolDesc;
 	/*动作类型*/
 	private String actionType;
+	/*动作类型描述*/
+	private String actionTypeDesc;
 	/*输入数据条数*/
 	private long inputNum;
 	/*输入数据字段填充条数*/
@@ -278,6 +280,12 @@ public class YCLInfo implements Serializable{
 	}
 	public void setColName(String colName) {
 		this.colName = colName;
+	}
+	public String getActionTypeDesc() {
+		return actionTypeDesc;
+	}
+	public void setActionTypeDesc(String actionTypeDesc) {
+		this.actionTypeDesc = actionTypeDesc;
 	}
 	
 }

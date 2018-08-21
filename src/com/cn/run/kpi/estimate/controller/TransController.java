@@ -5,22 +5,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.cn.run.kpi.alarm.controller.AlarmDataController;
+import com.cn.run.kpi.estimate.common.ActionConfig;
 import com.cn.run.kpi.estimate.entity.TransInfo;
 import com.cn.run.kpi.estimate.service.TransService;
 import com.cn.run.kpi.utils.DateUtil;
-
-import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
-import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 
 
@@ -61,6 +56,12 @@ public class TransController {
 			transformData.setCreateDate(currDate);
 			
 			List<TransInfo> tanformDatas = transformService.getList(transformData);
+			for (TransInfo transInfo : tanformDatas) {
+				String actionType = transInfo.getActionType();
+				String actionTypeDesc = ActionConfig.getValue(actionType);
+				transInfo.setActionTypeDesc(actionTypeDesc);
+			}
+			
 			Integer total = transformService.getTotal(transformData);
 			resultMap.put("recordsTotal", total);
 			resultMap.put("recordsFiltered",total);

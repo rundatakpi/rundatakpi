@@ -1,11 +1,14 @@
 package com.cn.run.kpi.scheduler.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cn.run.kpi.scheduler.dao.ScheduleDao;
 import com.cn.run.kpi.scheduler.entity.AppQueryRecord;
 import com.cn.run.kpi.scheduler.entity.JobMonitorBean;
+import com.cn.run.kpi.scheduler.entity.ObjDataSetBean;
 import com.cn.run.kpi.scheduler.entity.RestoreMonitorBean;
 import com.cn.run.kpi.scheduler.entity.ScheduleBean;
 import com.cn.run.kpi.scheduler.entity.StoreMonitorBean;
@@ -50,6 +53,11 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Override
 	public void insertJobData(JobMonitorBean jobMonitorBean) {
 		scheduleDao.insertJobData(jobMonitorBean);
+	}
+
+	@Override
+	public List<ObjDataSetBean> getObjDataSetList() {
+		return scheduleDao.getObjDataSetList();
 	}
 
 }

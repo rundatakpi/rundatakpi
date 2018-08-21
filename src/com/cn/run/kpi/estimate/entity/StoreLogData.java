@@ -35,8 +35,10 @@ public class StoreLogData implements Serializable{
 	private String sProtocolCode;
 	/*小协议描述*/
 	private String sProtocolDesc;
-	/*动作描述*/
+	/*动作类型*/
 	private String actionType;
+	/*动作描述*/
+	private String actionTypeDesc;
 	/*小协议数据条数*/
 	private String dataNum;
 	/*字段编码*/
@@ -198,6 +200,12 @@ public class StoreLogData implements Serializable{
 	}
 	public void setStoreFieldList(List<StoreFieldData> storeFieldList) {
 		this.storeFieldList = storeFieldList;
+	}
+	public String getActionTypeDesc() {
+		return actionTypeDesc;
+	}
+	public void setActionTypeDesc(String actionTypeDesc) {
+		this.actionTypeDesc = actionTypeDesc;
 	}
 	
 	

@@ -1,7 +1,10 @@
 package com.cn.run.kpi.scheduler.service;
 
+import java.util.List;
+
 import com.cn.run.kpi.scheduler.entity.AppQueryRecord;
 import com.cn.run.kpi.scheduler.entity.JobMonitorBean;
+import com.cn.run.kpi.scheduler.entity.ObjDataSetBean;
 import com.cn.run.kpi.scheduler.entity.RestoreMonitorBean;
 import com.cn.run.kpi.scheduler.entity.ScheduleBean;
 import com.cn.run.kpi.scheduler.entity.StoreMonitorBean;
@@ -42,4 +45,9 @@ public interface ScheduleService {
 	 * 插入离线任务数据
 	 */
 	public void insertJobData(JobMonitorBean jobMonitorBean);
+	/**
+	 * 获取对象化数据集
+	 * @return
+	 */
+	public List<ObjDataSetBean> getObjDataSetList();
 }

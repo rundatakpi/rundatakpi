@@ -17,12 +17,12 @@ $(function(){
 	showTable("/rundatakpi/alarmData/getList")
     
 	//加一个监听（筛选功能）
-	$('.schBtn_1').click(function(){
+	$('#schBtn').click(function(){
 		clickSift();
 	});
 	
 	//清空筛选
-	$(".emptyBtn_1").click(function(){
+	$("#emptyBtn").click(function(){
 		clickEmpty();
 	});
 	

@@ -5,13 +5,6 @@ import java.util.Map;
 
 public class LogConstants {
 	
-	
-	/*预处理正常样例包取值个数*/
-	public static final Integer NORMAL_SIZE = 3;
-	
-	/*预处理不正常样例包取值个数*/
-	public static final Integer UNNORMAL_SIZE = 3;
-	
 	/*入库日志数据条数*/
 	public static final String STORE_NUM="inputNum";
 	/*入库日志数据条数sql*/

@@ -50,26 +50,27 @@ function refreshData(){
          },
          "searching" : false,
          "columns": [
-             { "data": "id" },    //0
-             { "data": "dsCode","defaultContent":"" },   //1
-             { "data": "dsDesc" ,"defaultContent":""},   //2
-             { "data": "bProtocolCode" ,"defaultContent":""},      //3
-             { "data": "bProtocolDesc","defaultContent":"" },   //4
-             { "data": "sProtocolCode","defaultContent":""},    //5
-             { "data": "sProtocolDesc" ,"defaultContent":""},    //6
-             { "data": "actionType" ,"defaultContent":""},       //7
-             { "data": "inputNum" ,"defaultContent":""},     //8
-             { "data": "inputFieldRate","defaultContent":"" },    //9
-             { "data": "inputGroupRate" ,"defaultContent":""},     //10
-             { "data": "inputFieldAvailRate" ,"defaultContent":""},    //11
-             { "data": "inputGroupAvailRate","defaultContent":"" },   //12
-             { "data": "inputAccuracy","defaultContent":"" },    //13
-             { "data": "outputNum","defaultContent":"" },    //14
-             { "data": "outputSpeed","defaultContent":"" },     //15
-             { "data": "outputFieldRate","defaultContent":"" },      //16
-             { "data": "outputGroupRate","defaultContent":"" },    //17
-             { "data": "createDate"},     //18
-             { "data": ""}       //19
+             { "data": "id" }, 
+             { "data": "dsCode","defaultContent":"" },  
+             { "data": "dsDesc" ,"defaultContent":""}, 
+             { "data": "bProtocolCode" ,"defaultContent":""},  
+             { "data": "bProtocolDesc","defaultContent":"" }, 
+             { "data": "sProtocolCode","defaultContent":""},  
+             { "data": "sProtocolDesc" ,"defaultContent":""}, 
+             { "data": "actionType" ,"defaultContent":""}, 
+             { "data": "actionTypeDesc" ,"defaultContent":""}, 
+             { "data": "inputNum" ,"defaultContent":""},  
+             { "data": "inputFieldRate","defaultContent":"" }, 
+             { "data": "inputGroupRate" ,"defaultContent":""}, 
+             { "data": "inputFieldAvailRate" ,"defaultContent":""}, 
+             { "data": "inputGroupAvailRate","defaultContent":"" }, 
+             { "data": "inputAccuracy","defaultContent":"" }, 
+             { "data": "outputNum","defaultContent":"" }, 
+             { "data": "outputSpeed","defaultContent":"" }, 
+             { "data": "outputFieldRate","defaultContent":"" }, 
+             { "data": "outputGroupRate","defaultContent":"" }, 
+             { "data": "createDate"},  
+             { "data": ""}  
          ],
          "oLanguage" : { // 国际化配置
              "sProcessing" : "正在获取数据，请稍后...",
@@ -101,23 +102,23 @@ function refreshData(){
  			});
  		},
          "columnDefs": [
-        	 //给8-17列添加超链接
+        	 //给9-18列添加超链接
         	{
-	 			"targets": [8,9,10,11,12,13,14,15,16,17], 
+	 			"targets": [9,10,11,12,13,14,15,16,17,18], 
 	 	        "render": function(data, type, row, meta){
 	 	        	var colIndex = meta.col;
 	 	        	return "<a href='#' onclick='showDetail(this,"+colIndex+")'>"+data+"</a>";
 	 	           
 	 	        }
         	},
-        	//隐藏1和18列
+        	//隐藏1和19列
         	{
-	 			"targets": [0,-2], // 输入数据条数
+	 			"targets": [0,7,-2], // 输入数据条数
 	 			"visible": false,
         	},
         	//19列返回详情按钮
         	{
-	 			"targets": [19], // 输入数据条数
+	 			"targets": [-1], // 输入数据条数
 	 			"render": function(data, type, full){ 
 	 				 return  "<button class='btn btn-success btn-xs' onclick='showExample(this)'><i class='fa fa-remove'></i>查看样例</button>"
 		 	          
@@ -143,8 +144,8 @@ function showDetail(_this,index){
 	var actionType = oTable.row($(_this).closest("tr")).data().actionType;
 	
 	var colnums = ["id","dsCode","dsDesc","bProtocolCode","bProtocolDesc","sProtocolCode","sProtocolDesc","actionType",
-		"inputNum","inputFieldRate","inputGroupRate","inputFieldAvailRate","inputGroupAvailRate","inputAccuracy",
-		"outputNum","outputSpeed","outputFieldRate","outputGroupRate","createDate"];
+		"actionTypeDesc","inputNum","inputFieldRate","inputGroupRate","inputFieldAvailRate","inputGroupAvailRate",
+		"inputAccuracy","outputNum","outputSpeed","outputFieldRate","outputGroupRate","createDate"];
 	var colName = colnums[index];
 	
 	//iframe层
@@ -176,7 +177,7 @@ function showExample(_this){
 	//iframe层
 	layer.open({
 		  type: 2,
-		  title: dataSourceCode+'-'+bProtocolCode+'样例详情',
+		  title: dsCode+'-'+bProtocolCode+'样例详情',
 		  shadeClose: true,
 		  closeBtn: 1, //关闭按钮是否显示 1显示0不显示
 		  shade: 0.8,

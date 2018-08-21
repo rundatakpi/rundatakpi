@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cn.run.kpi.estimate.common.ActionConfig;
 import com.cn.run.kpi.estimate.common.LogConstants;
+import com.cn.run.kpi.estimate.common.YCLConstants;
 import com.cn.run.kpi.estimate.entity.YCLInfo;
 import com.cn.run.kpi.estimate.entity.YCLExample;
 import com.cn.run.kpi.estimate.service.YCLDataService;
@@ -56,6 +59,11 @@ public class YCLController {
 			yclData.setCreateDate(currDate);
 			
 			List<YCLInfo> yclDatas = yclDataService.getList(yclData);
+			for (YCLInfo yclInfo : yclDatas) {
+				String actionTypeDesc = ActionConfig.getValue(yclInfo.getActionType());
+				yclInfo.setActionTypeDesc(actionTypeDesc);
+			}
+			
 			Integer total = yclDataService.getTotal(yclData);
 			
 			resultMap.put("recordsTotal", total);
@@ -109,7 +117,7 @@ public class YCLController {
 		try {
 
 			List<YCLExample> yclExampleDatas = yclDataService.getExampleList(yclExampleData);
-			Integer total = LogConstants.NORMAL_SIZE+LogConstants.UNNORMAL_SIZE;
+			Integer total = YCLConstants.NORMAL_SIZE+YCLConstants.UNNORMAL_SIZE;
 			
 			json.put("recordsTotal", total);
 			json.put("recordsFiltered", total);

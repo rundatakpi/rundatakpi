@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSetFile Description="动作类型代码" Name="WACODE_0011">
+	<CodeSet AliasCHName="" AliasCSID="" AliasENName="" CHName="动作类型代码表" CSID="WACODE_0011" Description="" ENName="WACODE_0011">
+		<Item Code="01" Name="聊天/私聊/私信（发送信息）" Description="" Type=""/>
+		<Item Code="02" Name="上线/登录" Description="" Type=""/>
+		<Item Code="03" Name="下线/离线/退出" Description="" Type=""/>
+		<Item Code="04" Name="在线" Description="" Type=""/>
+		<Item Code="05" Name="隐身上线" Description="" Type=""/>
+		<Item Code="06" Name="隐身" Description="" Type=""/>
+		<Item Code="07" Name="发贴/发微博/发微信/发弹幕" Description="" Type=""/>
+		<Item Code="08" Name="回帖" Description="" Type=""/>
+		<Item Code="09" Name="修改帖子/微博/微信" Description="" Type=""/>
+		<Item Code="10" Name="删除帖子/微博/微信" Description="" Type=""/>
+		<Item Code="11" Name="转载/分享/转发" Description="" Type=""/>
+		<Item Code="12" Name="更新好友列表" Description="" Type=""/>
+		<Item Code="13" Name="群聊/群操作/发微群消息" Description="" Type=""/>
+		<Item Code="14" Name="更新群成员列表" Description="" Type=""/>
+		<Item Code="15" Name="查看资料" Description="" Type=""/>
+		<Item Code="16" Name="更新帐号信息" Description="" Type=""/>
+		<Item Code="17" Name="新增好友" Description="" Type=""/>
+		<Item Code="18" Name="删除好友" Description="" Type=""/>
+		<Item Code="19" Name="接受好友邀请" Description="" Type=""/>
+		<Item Code="20" Name="语音视频通信" Description="" Type=""/>
+		<Item Code="21" Name="开始语音视频/直播" Description="" Type=""/>
+		<Item Code="22" Name="停止语音视频/直播" Description="" Type=""/>
+		<Item Code="23" Name="文件传输" Description="" Type=""/>
+		<Item Code="24" Name="播放音频/视频/直播" Description="" Type=""/>
+		<Item Code="25" Name="评论" Description="" Type=""/>
+		<Item Code="26" Name="关注/跟随" Description="" Type=""/>
+		<Item Code="27" Name="撤销关注/跟随" Description="" Type=""/>
+		<Item Code="28" Name="上传" Description="" Type=""/>
+		<Item Code="29" Name="下载" Description="" Type=""/>
+		<Item Code="30" Name="更新/切换（认证数据）" Description="" Type=""/>
+		<Item Code="31" Name="收邮件/收彩信" Description="" Type=""/>
+		<Item Code="32" Name="发邮件/发彩信" Description="" Type=""/>
+		<Item Code="33" Name="投注" Description="" Type=""/>
+		<Item Code="34" Name="发信息" Description="" Type=""/>
+		<Item Code="35" Name="收文件" Description="" Type=""/>
+		<Item Code="36" Name="发文件" Description="" Type=""/>
+		<Item Code="37" Name="注册" Description="" Type=""/>
+		<Item Code="38" Name="注销" Description="" Type=""/>
+		<Item Code="39" Name="定位" Description="" Type=""/>
+		<Item Code="40" Name="签到" Description="" Type=""/>
+		<Item Code="41" Name="备份" Description="" Type=""/>
+		<Item Code="42" Name="恢复" Description="" Type=""/>
+		<Item Code="43" Name="增加联系人" Description="" Type=""/>
+		<Item Code="44" Name="删除联系人" Description="" Type=""/>
+		<Item Code="45" Name="提及相关人（@）" Description="" Type=""/>
+		<Item Code="46" Name="加微群" Description="" Type=""/>
+		<Item Code="47" Name="投票" Description="" Type=""/>
+		<Item Code="48" Name="关键词搜索" Description="" Type=""/>
+		<Item Code="49" Name="WebMail存草稿箱" Description="" Type=""/>
+		<Item Code="50" Name="失败登录" Description="" Type=""/>
+		<Item Code="51" Name="网上值机（航班）" Description="" Type=""/>
+		<Item Code="52" Name="下订单（如：订票、购物等）" Description="" Type=""/>
+		<Item Code="53" Name="订单查询（如：快递单号查询、订票和购物订单查询等）" Description="" Type=""/>
+		<Item Code="54" Name="访问操作（如：QQ空间访问、突防工具访问、第三方支付访问等）" Description="" Type=""/>
+		<Item Code="55" Name="备注操作（如：好友备注、地图标注等）" Description="" Type=""/>
+		<Item Code="56" Name="接单（如：打车软件，司机端的接单动作）" Description="" Type=""/>
+		<Item Code="57" Name="命令操作（如：FTP、TELNET的命令操作）" Description="" Type=""/>
+		<Item Code="58" Name="报名" Description="" Type=""/>
+		<Item Code="59" Name="支付" Description="" Type=""/>
+		<Item Code="60" Name="改签" Description="" Type=""/>
+		<Item Code="61" Name="退款" Description="" Type=""/>
+		<Item Code="91" Name="发送（泛指所有发送动作）" Description="" Type=""/>
+		<Item Code="92" Name="接收（泛指所有接收动作）" Description="" Type=""/>
+		<Item Code="93" Name="新增（泛指所有新增动作）" Description="" Type=""/>
+		<Item Code="94" Name="删除（泛指所有删除动作）" Description="" Type=""/>
+		<Item Code="95" Name="修改/更新（泛指所有修改、更新动作）" Description="" Type=""/>
+		<Item Code="96" Name="取消（（泛指所有取消动作）" Description="" Type=""/>
+		<Item Code="99" Name="其他" Default="true" Description="" Type=""/>
+		<Item Code="A0" Name="默认值" Description="" Type=""/>
+		<Item Code="A1" Name="群接受聊天" Description="" Type=""/>
+		<Item Code="A2" Name="群列表" Description="" Type=""/>
+		<Item Code="A3" Name="为好友接受聊天信息" Description="" Type=""/>
+		<Item Code="A4" Name="好友分组名称" Description="" Type=""/>
+		<Item Code="A5" Name="好友分组成员" Description="" Type=""/>
+		<Item Code="A6" Name="好友备注信息" Description="" Type=""/>
+		<Item Code="A7" Name="群聊天信息" Description="" Type=""/>
+		<Item Code="A8" Name="创建临时组" Description="" Type=""/>
+		<Item Code="A9" Name="创建群" Description="" Type=""/>
+		<Item Code="AA" Name="好友头像" Description="" Type=""/>
+		<Item Code="AB" Name="接受好友离线消息" Description="" Type=""/>
+		<Item Code="AC" Name="接受群离线消息" Description="" Type=""/>
+		<Item Code="AD" Name="修改" Description="" Type=""/>
+		<Item Code="AE" Name="账号绑定/绑定" Description="" Type=""/>
+		<Item Code="AF" Name="修改简历" Description="" Type=""/>
+		<Item Code="B1" Name="增加简历" Description="" Type=""/>
+		<Item Code="B2" Name="通行证签注" Description="" Type=""/>
+		<Item Code="B3" Name="空间问答" Description="" Type=""/>
+		<Item Code="B4" Name="空间相册问答" Description="" Type=""/>
+		<Item Code="B5" Name="访问空间问答" Description="" Type=""/>
+		<Item Code="B6" Name="访问相册问答" Description="" Type=""/>
+		<Item Code="B7" Name="修改好友备注" Description="" Type=""/>
+		<Item Code="B8" Name="盗号" Description="" Type=""/>
+		<Item Code="B9" Name="发布信息或者下单" Description="" Type=""/>
+		<Item Code="BA" Name="发附件" Description="" Type=""/>
+		<Item Code="BB" Name="收附件" Description="" Type=""/>
+		<Item Code="BC" Name="查看粉丝" Description="" Type=""/>
+		<Item Code="BD" Name="查看粉丝/观众列表" Description="" Type=""/>
+		<Item Code="BE" Name="QQ空间同步" Description="" Type=""/>
+		<Item Code="BF" Name="主叫" Description="" Type=""/>
+		<Item Code="C0" Name="被叫" Description="" Type=""/>
+		<Item Code="C1" Name="文件分享（将自己文件分享给他人）" Description="" Type=""/>
+		<Item Code="C2" Name="转存文件（将他人的文件转存到自己的网盘）" Description="" Type=""/>
+		<Item Code="C3" Name="提款" Description="" Type=""/>
+		<Item Code="C4" Name="充值" Description="" Type=""/>
+		<Item Code="C5" Name="汇款" Description="" Type=""/>
+		<Item Code="C6" Name="叫车" Description="" Type=""/>
+		<Item Code="C7" Name="抢单" Description="" Type=""/>
+		<Item Code="C8" Name="完成" Description="" Type=""/>
+		<Item Code="C9" Name="取消" Description="" Type=""/>
+		<Item Code="CA" Name="TAG标签" Description="" Type=""/>
+		<Item Code="CB" Name="转账" Description="" Type=""/>
+		<Item Code="CC" Name="交易" Description="" Type=""/>
+		<Item Code="CD" Name="归档" Description="" Type=""/>
+		<Item Code="CE" Name="创建角色" Description="" Type=""/>
+		<Item Code="CF" Name="删除" Description="" Type=""/>
+		<Item Code="D0" Name="服务结束" Description="" Type=""/>
+		<Item Code="D1" Name="乘客取消（抢单前）" Description="" Type=""/>
+		<Item Code="D2" Name="乘客取消（抢单后）" Description="" Type=""/>
+		<Item Code="D3" Name="未匹配" Description="" Type=""/>
+		<Item Code="D4" Name="浏览" Description="" Type=""/>
+		<Item Code="D5" Name="获取回复数" Description="" Type=""/>
+		<Item Code="D6" Name="出发" Description="" Type=""/>
+		<Item Code="D7" Name="支付" Description="废弃" Type=""/>
+		<Item Code="D8" Name="入住" Description="" Type=""/>
+		<Item Code="D9" Name="删除评论" Description="" Type=""/>
+		<Item Code="DA" Name="退货" Description="" Type=""/>
+		<Item Code="DB" Name="分配" Description="" Type=""/>
+		<Item Code="DC" Name="回收" Description="" Type=""/>
+		<Item Code="DD" Name="浏览统计信息" Description="" Type=""/>
+		<Item Code="DE" Name="浏览热榜" Description="" Type=""/>
+		<Item Code="DF" Name="浏览网站首页" Description="" Type=""/>
+		<Item Code="E0" Name="浏览新闻首页" Description="" Type=""/>
+		<Item Code="E1" Name="持仓（查看购买列表）" Description="" Type=""/>
+		<Item Code="E2" Name="卖出/出售" Description="" Type=""/>
+		<Item Code="E3" Name="代驾" Description="" Type=""/>
+		<Item Code="E4" Name="接驾" Description="" Type=""/>
+		<Item Code="E5" Name="租车" Description="" Type=""/>
+		<Item Code="E6" Name="收藏/喜欢/赞" Description="" Type=""/>
+		<Item Code="E7" Name="获取收藏/喜欢/赞列表" Description="" Type=""/>
+		<Item Code="E8" Name="获取历史/记录列表" Description="" Type=""/>
+		<Item Code="E9" Name="打赏操作" Description="" Type=""/>
+		<Item Code="EA" Name="地址管理" Description="" Type=""/>
+		<Item Code="EB" Name="查看草稿箱" Description="" Type=""/>
+		<Item Code="EC" Name="保存（泛指所有保存动作）" Description="" Type=""/>
+		<Item Code="ED" Name="直播中"/>
+		<Item Code="EF" Name="摇一摇" Description="4G添加" Type=""/>
+		<Item Code="F0" Name="搜索好友" Description="4G添加"/>
+		<Item Code="F1" Name="邀请好友" Description="4G添加"/>
+		<Item Code="F2" Name="开机（附着）" Description="4G添加"/>
+		<Item Code="F3" Name="关机（去附着）" Description="4G添加"/>
+		<Item Code="F4" Name="承载激活" Description="4G添加"/>
+		<Item Code="F5" Name="承载修改" Description="4G添加"/>
+		<Item Code="F6" Name="承载去活" Description="4G添加"/>
+		<Item Code="F7" Name="UE请求承载资源修改" Description="4G添加"/>
+		<Item Code="F8" Name="GUTI更新" Description="4G添加"/>
+		<Item Code="F9" Name="运行" Description="4G添加"/>
+		<Item Code="FA" Name="文件列表" Description="4G添加"/>
+		<Item Code="FB" Name="查看联系人" Description="4G添加"/>
+		<Item Code="FC" Name="发状态" Description="4G添加"/>
+		<Item Code="FD" Name="编辑状态" Description="4G添加"/>
+		<Item Code="FE" Name="删除状态" Description="4G添加"/>
+		<Item Code="FF" Name="话题" Description="4G添加"/>
+		<Item Code="G0" Name="订阅" Description="4G添加"/>
+		<Item Code="G1" Name="业务请求" Description="4G添加"/>
+		<Item Code="G2" Name="查看地址" Description="4G添加"/>
+		<Item Code="G3" Name="历史记录" Description="4G添加"/>
+		<Item Code="G4" Name="更新软件列表" Description="4G添加"/>
+		<Item Code="G5" Name="绑定银行卡" Description="4G添加"/>
+		<Item Code="G6" Name="取消收藏" Description="4G添加"/>
+		<Item Code="G7" Name="取消订阅" Description="4G添加"/>
+		<Item Code="G8" Name="添加地址" Description="4G添加"/>
+		<Item Code="G9" Name="修改地址" Description="4G添加"/>
+		<Item Code="GA" Name="预览简历" Description="4G添加"/>
+		<Item Code="GB" Name="上报软件列表" Description="4G添加"/>
+		<Item Code="GC" Name="获取远端信息" Description="4G添加"/>
+		<Item Code="GD" Name="周期跟踪区更新" Description="4G添加"/>
+		<Item Code="GE" Name="强制跟踪区更新" Description="4G添加"/>
+		<Item Code="GF" Name="CallerCSFB（CS域回落）" Description="4G添加"/>
+		<Item Code="H0" Name="CalledCSFB（CS域回落）" Description="4G添加"/>
+		<Item Code="H1" Name="切换（X2/S2/S11接口非上线CSREQ）" Description="4G添加"/>
+		<Item Code="H2" Name="好友列表" Description="4G添加"/>
+		<Item Code="H3" Name="接受好友" Description="4G添加"/>
+		<Item Code="H4" Name="备份通讯录" Description="4G添加"/>
+		<Item Code="H5" Name="搜索群组" Description="4G添加"/>
+		<Item Code="H6" Name="退出群组" Description="4G添加"/>
+		<Item Code="H7" Name="查看群组信息" Description="4G添加"/>
+		<Item Code="H8" Name="查看群组成员列表" Description="4G添加"/>
+		<Item Code="H9" Name="加入群组" Description="4G添加"/>
+		<Item Code="HA" Name="查看通讯录" Description="4G添加"/>
+		<Item Code="HB" Name="编辑" Description="4G添加"/>
+		<Item Code="HC" Name="留言" Description="4G添加"/>
+		<Item Code="HD" Name="修改联系人信息" Description="4G添加"/>
+		<Item Code="HE" Name="查询路线" Description="4G添加"/>
+		<Item Code="HF" Name="浏览笔记" Description="4G添加"/>
+		<Item Code="I0" Name="添加乘客" Description="4G添加"/>
+		<Item Code="I1" Name="短信状态报告" Description="4G添加"/>
+		<Item Code="I2" Name="二次激活" Description="4G添加"/>
+		<Item Code="I3" Name="基于S1的切出" Description="4G添加"/>
+		<Item Code="I4" Name="SSL安全认证时服务器向客户端发送证书" Description="4G添加"/>
+		<Item Code="I5" Name="创建聊天" Description="4G添加"/>
+		<Item Code="I6" Name="进入直播间" Description="4G添加"/>
+		<Item Code="I7" Name="PDP更新" Description="4G添加"/>
+		<Item Code="I8" Name="位置报告" Description="4G添加"/>
+		<Item Code="I9" Name="基于X2的切换" Description="4G添加"/>
+		<Item Code="IA" Name="SSL安全认证时客户端向服务器发送证书" Description="4G添加"/>
+		<Item Code="IB" Name="PDP激活" Description="4G添加"/>
+		<Item Code="IC" Name="基于S1的切入" Description="4G添加"/>
+		<Item Code="ID" Name="拼车" Description="4G添加"/>
+		<Item Code="IE" Name="紧急附着" Description="4G添加"/>
+		<Item Code="IF" Name="身份请求" Description="4G添加"/>
+		<Item Code="J0" Name="查询" Description="4G添加"/>
+		<Item Code="J1" Name="紧急呼叫" Description="4G添加"/>
+		<Item Code="J2" Name="申请职位" Description="4G添加"/>
+		<Item Code="J3" Name="退出聊天" Description="4G添加"/>
+		<Item Code="J4" Name="PDU通知" Description="4G添加"/>
+		<Item Code="J5" Name="Client Hello消息" Description="4G添加"/>
+		<Item Code="J6" Name="退出直播间" Description="4G添加"/>
+		<Item Code="J7" Name="寻呼" Description="4G添加"/>
+		<Item Code="J8" Name="预约" Description="4G添加"/>
+		<Item Code="J9" Name="S1释放" Description="4G添加"/>
+		<Item Code="JA" Name="实名认证" Description="4G添加"/>
+		<Item Code="JB" Name="PDP去活" Description="4G添加"/>
+		<Item Code="JC" Name="短信命令" Description="4G添加"/>
+		<Item Code="JD" Name="编辑简历" Description="4G添加"/>
+		<Item Code="JE" Name="局间上下文请求" Description="4G添加"/>
+		<Item Code="JF" Name="TAU切出" Description="4G添加"/>
+		<Item Code="K0" Name="S5S8上线" Description="4G添加"/>
+		<Item Code="K1" Name="S5S8下线" Description="4G添加"/>
+		<Item Code="K2" Name="S5S8承载激活" Description="4G添加"/>
+		<Item Code="K3" Name="S5S8承载去活" Description="4G添加"/>
+		<Item Code="K4" Name="查看关注列表" Description="前台微博添加"/>
+		<Item Code="K5" Name="扫一扫" Description=""/>
+		<Item Code="K6" Name="查看朋友圈" Description=""/>
+		<Item Code="K7" Name="发朋友圈" Description=""/>
+		<Item Code="K8" Name="切换网络" Description="前台即时通讯添加"/>
+		<Item Code="K9" Name="过滤" Description="XX5"/>
+		<Item Code="KA" Name="屏蔽" Description="XX5"/>
+		<Item Code="KB" Name="开始直播" Description="XX5"/>
+		<Item Code="KC" Name="结束直播" Description="XX5"/>
+		<Item Code="KD" Name="接麦" Description="XX5"/>
+		<Item Code="KF" Name="录制" Description="XX5"/>
+		<Item Code="KG" Name="消息" Description="XX5"/>
+		<Item Code="KH" Name="礼物" Description="XX5"/>
+		<Item Code="KI" Name="红包" Description="XX5"/>
+		<Item Code="KJ" Name="举报" Description="XX5"/>
+		<Item Code="KL" Name="娱乐" Description="XX5"/>
+		<Item Code="KM" Name="休闲" Description="XX5"/>
+		<Item Code="KN" Name="酒店" Description="XX5"/>
+		<Item Code="KO" Name="餐饮" Description="XX5"/>
+		<Item Code="KP" Name="线路" Description="XX5"/>
+		<Item Code="KQ" Name="导航开始" Description="XX5"/>
+		<Item Code="KR" Name="导航结束" Description="XX5"/>
+		<Item Code="KS" Name="推荐" Description="XX5"/>
+		<Item Code="KT" Name="加入热帖" Description="XX5"/>
+		<Item Code="KU" Name="移出热帖" Description="XX5"/>
+		<Item Code="KV" Name="值机" Description="废弃"/>
+		<Item Code="KW" Name="运营商base设备端口分配" Description="塔城联通数据"/>
+		<Item Code="KX" Name="贷款" Description="" Type=""/>
+		<Item Code="KY" Name="还款" Description="" Type=""/>
+		<Item Code="KZ" Name="消费" Description="" Type=""/>
+		<Item Code="L0" Name="提现" Description="" Type=""/>
+		<Item Code="L1" Name="账单" Description="" Type=""/>
+		<Item Code="L2" Name="修改密码" Description="" Type=""/>
+		<Item Code="L3" Name="歇息" Description="" Type=""/>
+		<Item Code="L4" Name="更新程序版本" Description="前台" Type=""/>
+		<Item Code="L5" Name="解散群" Description="前台" Type=""/>
+		<Item Code="L6" Name="修改群资料" Description="前台" Type=""/>
+		<Item Code="L7" Name="修改群名片" Description="前台" Type=""/>
+		<Item Code="L8" Name="查看邮件" Description="前台" Type=""/>
+	</CodeSet>
+</CodeSetFile>

@@ -16,6 +16,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from schedule_date where datatype=#{type}
 	</select>
 	
+	<select id="getObjDataSetList" resultType="com.cn.run.kpi.scheduler.entity.ObjDataSetBean">
+		select * from objdataset 
+	</select>
+	
 	<update id="updateSchedule" parameterType="com.cn.run.kpi.scheduler.entity.ScheduleBean">
 		update schedule_date
 		set datestr = #{datestr}
@@ -37,17 +41,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         	<if test="null != dataNum and '' != dataNum">
             	dataNum,
         	</if>
-        	<if test="null != protocol; and '' != protocol;">
+        	<if test="null != protocol and '' != protocol">
             	protocol,
         	</if>
         	<if test="null !=  protocolId and '' !=  protocolId">
             	 protocolId,
         	</if>
-        	<if test="null != action and '' != action">
-            	action,
+        	<if test="null != actionType and '' != actionType">
+            	actionType,
         	</if>
-        	<if test="null != collectplace and '' != collectplace">
-            	collectplace,
+        	<if test="null != collectPlace and '' != collectPlace">
+            	collectPlace,
         	</if>
         	<if test="null != errorType and '' != errorType">
             	errorType,
@@ -66,17 +70,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         	<if test="null != dataNum and '' != dataNum">
             	#{dataNum},
         	</if>
-        	<if test="null != protocol; and '' != protocol;">
+        	<if test="null != protocol and '' != protocol">
             	#{protocol},
         	</if>
         	<if test="null !=  protocolId and '' !=  protocolId">
             	 #{protocolId},
         	</if>
-        	<if test="null != action and '' != action">
-            	#{action},
+        	<if test="null != actionType and '' != actionType">
+            	#{actionType},
         	</if>
-        	<if test="null != collectplace and '' != collectplace">
-            	#{collectplace},
+        	<if test="null != collectPlace and '' != collectPlace">
+            	#{collectPlace},
         	</if>
         	<if test="null != errorType and '' != errorType">
             	#{errorType},

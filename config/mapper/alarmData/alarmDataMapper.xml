@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<include refid="alarmCondition"></include>
 			and is_deleted = 'N'
 		</where>
-		order by id desc
+		order by process_status,alarm_time desc
 		limit #{start},#{length}
 	</select>
 	
