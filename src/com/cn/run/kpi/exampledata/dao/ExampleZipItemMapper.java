@@ -18,4 +18,6 @@ public interface ExampleZipItemMapper {
     int updateByPrimaryKey(ExampleZipItem record);
 
 	List<ExampleZipItem> getSubList(ExampleZipItem exampleitem);
+
+	void insertBatch(List<ExampleZipItem> list);
 }

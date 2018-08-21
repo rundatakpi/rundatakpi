@@ -8,7 +8,7 @@ public class AlarmDetail extends PageBean{
 
     private Integer alarmid;
 
-    private Date condate;
+    private String condate;
 
     private String lx;
 
@@ -34,15 +34,21 @@ public class AlarmDetail extends PageBean{
         this.alarmid = alarmid;
     }
 
-    public Date getCondate() {
-        return condate;
-    }
+    /**
+	 * @return the condate
+	 */
+	public String getCondate() {
+		return condate;
+	}
 
-    public void setCondate(Date condate) {
-        this.condate = condate;
-    }
+	/**
+	 * @param condate the condate to set
+	 */
+	public void setCondate(String condate) {
+		this.condate = condate;
+	}
 
-    public String getLx() {
+	public String getLx() {
         return lx;
     }
 

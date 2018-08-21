@@ -1,5 +1,7 @@
 package com.cn.run.kpi.exampledata.dao;
 
+import java.util.List;
+
 import com.cn.run.kpi.exampledata.entity.AlarmDetail;
 
 public interface AlarmDetailMapper {
@@ -14,4 +16,6 @@ public interface AlarmDetailMapper {
     int updateByPrimaryKeySelective(AlarmDetail record);
 
     int updateByPrimaryKey(AlarmDetail record);
+
+	List<AlarmDetail> getAlarmList(AlarmDetail alarmDetail);
 }

@@ -19,4 +19,6 @@ public interface AlarmMapper {
     int updateByPrimaryKey(Alarm record);
     
 	List<Alarm> getAlarmList(Alarm example);
+
+	void deleteSubByPrimaryKey(Integer id);
 }

@@ -19,6 +19,14 @@
     from zdjc_alarm_detail
     where ID = #{id,jdbcType=INTEGER}
   </select>
+  
+   	<select id="getAlarmList" parameterType="com.cn.run.kpi.exampledata.entity.AlarmDetail" resultType="com.cn.run.kpi.exampledata.entity.AlarmDetail">
+		select * from zdjc_alarm_detail where alarmid=#{alarmid} 
+		<if test="lx != null and lx != ''" >
+	       and  lx=#{lx}
+        </if>
+	</select>
+	
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from zdjc_alarm_detail
     where ID = #{id,jdbcType=INTEGER}

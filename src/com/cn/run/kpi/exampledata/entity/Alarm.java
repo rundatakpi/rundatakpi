@@ -1,6 +1,5 @@
 package com.cn.run.kpi.exampledata.entity;
 
-import java.util.Date;
 
 public class Alarm extends PageBean{
 	private static final long serialVersionUID = 1L;
@@ -15,7 +14,7 @@ public class Alarm extends PageBean{
 
     private String zt;
 
-    private Date date;
+    private String date;
     
 	public String getAccount() {
 		return account;
@@ -65,11 +64,18 @@ public class Alarm extends PageBean{
         this.zt = zt == null ? null : zt.trim();
     }
 
-    public Date getDate() {
-        return date;
-    }
+	/**
+	 * @return the date
+	 */
+	public String getDate() {
+		return date;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	/**
+	 * @param date the date to set
+	 */
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 }

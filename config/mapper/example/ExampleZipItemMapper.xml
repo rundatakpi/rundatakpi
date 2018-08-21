@@ -37,6 +37,15 @@
       #{chname,jdbcType=VARCHAR}, #{ysz,jdbcType=VARCHAR}, #{yclz,jdbcType=VARCHAR}, 
       #{jghz,jdbcType=VARCHAR}, #{dxhz,jdbcType=VARCHAR})
   </insert>
+  
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into zdjc_example_items ( pid, key,  chname, ysz)
+    values 
+     <foreach collection="list" item="item" separator=",">
+        (#{item.pid}, #{item.key},#{item.chname}, #{item.ysz})
+    </foreach>
+  </insert>
+  
   <insert id="insertSelective" parameterType="com.cn.run.kpi.exampledata.entity.ExampleZipItem" >
     insert into zdjc_example_items
     <trim prefix="(" suffix=")" suffixOverrides="," >

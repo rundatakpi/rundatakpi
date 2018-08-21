@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cn.run.kpi.alarm.entity.AlarmData;
 import com.cn.run.kpi.exampledata.entity.Account;
 import com.cn.run.kpi.exampledata.entity.Alarm;
+import com.cn.run.kpi.exampledata.entity.AlarmDetail;
 import com.cn.run.kpi.exampledata.entity.ExampleZip;
 import com.cn.run.kpi.exampledata.entity.ExampleZipItem;
 import com.cn.run.kpi.exampledata.entity.PageBean;
@@ -62,11 +64,60 @@ public class ExampleZipController extends BaseController{
 		return json.toString();
 	}
 	
+
+	@RequestMapping("/getAlarmDetails")
+	@ResponseBody
+	public String getAlarmDetails(HttpServletRequest request,HttpServletResponse response,AlarmDetail alarmDetail)  {
+		Page page = setPages(alarmDetail);
+		List<AlarmDetail> exampleZips= exampleZipService.getAlarmDetails(alarmDetail);
+		JSONObject json = getJsonObject(exampleZips,(int)page.getTotal());
+		return json.toString();
+	}
+	
+	
 	@RequestMapping("/save")
 	public void save(HttpServletRequest request,HttpServletResponse response,Account example)  {
 		int r = exampleZipService.save(example);
 		writeTxt(r+"", response);
 	}
+	
+	@RequestMapping("/edit")
+	@ResponseBody
+	public void editAlarm(Alarm alarmData,HttpServletResponse response) {
+		JSONObject json = new JSONObject();
+		boolean flag=false;
+		try {
+			exampleZipService.editAlarm(alarmData);
+			flag=true;
+		}catch(Exception e) {
+			//LOG.error(e.getMessage(), e);
+		}
+		if(flag){
+			json.element("flag", "1");
+		}else{
+			json.element("flag", "2");
+		}
+		writeJson(json.toString(), response);
+	} 
+	
+	@RequestMapping("/del")
+	@ResponseBody
+	public void delAlarm(Alarm alarmData,HttpServletResponse response) {
+		JSONObject json = new JSONObject();
+		boolean flag=false;
+		try {
+			exampleZipService.delAlarm(alarmData);
+			flag=true;
+		}catch(Exception e) {
+			//LOG.error(e.getMessage(), e);
+		}
+		if(flag){
+			json.element("flag", "1");
+		}else{
+			json.element("flag", "2");
+		}
+		writeJson(json.toString(), response);
+	} 
 	
 	private Page setPages(PageBean pg) {
 		Integer pageNum = pg.getCurrentPage()!=null?pg.getCurrentPage():1;

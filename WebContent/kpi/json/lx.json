@@ -1,0 +1,18 @@
+﻿{"result":[
+	{
+		"chkVal":"0",
+		"chkDisplay":"全部"
+	},{
+		"chkVal":"1",
+		"chkDisplay":"手机"
+	},{
+		"chkVal":"2",
+		"chkDisplay":"电脑"
+	},{
+		"chkVal":"3",
+		"chkDisplay":"pad"
+	},{
+		"chkVal":"4",
+		"chkDisplay":"其他"
+	}
+]}

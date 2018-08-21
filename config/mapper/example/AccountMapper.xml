@@ -28,7 +28,7 @@
     values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{imei,jdbcType=VARCHAR}, #{imsi,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.cn.run.kpi.exampledata.entity.Account" >
+  <insert id="insertSelective" parameterType="com.cn.run.kpi.exampledata.entity.Account" useGeneratedKeys="true" keyProperty="id">
     insert into zdjc_account
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

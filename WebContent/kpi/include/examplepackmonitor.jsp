@@ -18,7 +18,7 @@
     
     <div class="box">
     	<div class="boxHd clearfix">
-        	<h3 class="left">样例包（<em class="boxHdEm">75</em>）</h3>
+        	<h3 class="left">样例包（<em class="boxHdEm">12</em>）</h3>
         </div>
         <div class="boxBd">
         	<div class="examplepackGrid" id="examplepackGrid">
@@ -32,23 +32,23 @@
 	$(function(){
 		var configs = [{
 			id : "exampleCombobox_1",
-			url : "json/failCause.json",
+			url : "json/test.json",
 			onSelect : function(combo,record){}
 		},{
 			id : "exampleCombobox_2",
-			url : "json/failCause.json",
+			url : "json/test.json",
 			onSelect : function(combo,record){}
 		},{
 			id : "exampleCombobox_3",
-			url : "json/failCause.json",
+			url : "json/test.json",
 			onSelect : function(combo,record){}
 		},{
 			id : "exampleCombobox_4",
-			url : "json/failCause.json",
+			url : "json/test.json",
 			onSelect : function(combo,record){}
 		},{
 			id : "exampleCombobox_5",
-			url : "json/failCause.json",
+			url : "json/test.json",
 			onSelect : function(combo,record){}
 		}];
 		combobox(configs);

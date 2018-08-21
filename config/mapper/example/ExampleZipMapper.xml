@@ -36,7 +36,7 @@
       #{datatypechname,jdbcType=VARCHAR}, #{protocol,jdbcType=VARCHAR}, #{protocolchname,jdbcType=VARCHAR}, 
       #{createdate,jdbcType=DATE})
   </insert>
-  <insert id="insertSelective" parameterType="com.cn.run.kpi.exampledata.entity.ExampleZip" >
+  <insert id="insertSelective" parameterType="com.cn.run.kpi.exampledata.entity.ExampleZip" useGeneratedKeys="true" keyProperty="id">
     insert into zdjc_example
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

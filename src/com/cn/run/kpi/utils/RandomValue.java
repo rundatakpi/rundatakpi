@@ -445,7 +445,9 @@ public class RandomValue {
 	public static String work_path="C:\\works\\test\\";
 	public static String datasetCode="";
 	public static String timeValue="";
-    public static void genData(int dataLength,String dataSets) {
+	
+    public static Map<String, String> genData(int dataLength,String dataSets) {
+    	Map<String, String> map = null;
    	 try {
 	   		String[] split = dataSets.split(",");
 	   		String datasetFileDirstr=work_path+"tmp";
@@ -459,7 +461,7 @@ public class RandomValue {
 				 datasetCode=datasetCodepr;
 		    	 List<String> list = new ArrayList<>();
 		          for (int i = 0; i < dataLength; i++) {
-				    	Map<String, String> map=new LinkedHashMap<String, String>();  
+		        	  	map=new LinkedHashMap<String, String>();  
 				    	value = random.nextInt(100);
 				    	getMapData(map,value);
 				    	Iterator<String> iterator = map.values().iterator();
@@ -490,11 +492,12 @@ public class RandomValue {
 			}
 			ZipUtils.compress(datasetFileDirstr,datasetFileDatestr+File.separator+"124-746736751-990000-330000-"+valuetime+"-20002.zip");
 			FileUtilsn.deleteDir(datasetFileDir);
+			return map;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// return list;
+	   	return map;
     }
     
     private static void getMapData(Map<String, String> map,int value){
@@ -517,20 +520,20 @@ public class RandomValue {
 	        map.put("card", getIdNo(name_sexb)); 
 	        map.put("tel", getTel());  
     	}else if ("WA_SOURCE_0005".equals(datasetCode)) {
-	    	map.put("data_type", "103");
-	    	map.put("capture_time", String.valueOf(System.currentTimeMillis()));
-	    	map.put("data_source", "124");
+	    	map.put("h010002", "103");
+	    	map.put("h010014", String.valueOf(System.currentTimeMillis()));
+	    	map.put("b050016", "124");
 	    	map.put("g020014", "公安部第三研究所检测中心");
-	    	map.put("card_type", "111");
-	        map.put("card", getIdNo(name_sexb));
-	        map.put("name", getChineseName());
+	    	map.put("b030004", "111");
+	        map.put("b030005", getIdNo(name_sexb));
+	        map.put("f010001", getChineseName());
 	        map.put("f010008", "990000");
-	        map.put("im_type", "1030001");
-	        map.put("qq", getQQ());
-	        map.put("qqqun", getQQqun());
-	        map.put("action_type", "01");
-	        map.put("phone", getTel());
-	        map.put("imsi", getImsi());
+	        map.put("h010001", "1030001");
+	        map.put("b040002", getQQ());
+	        map.put("b040017", getQQqun());
+	        map.put("h010003", "01");
+	        map.put("b020005", getTel());
+	        map.put("b020007", getImsi());
     	}
     }
     

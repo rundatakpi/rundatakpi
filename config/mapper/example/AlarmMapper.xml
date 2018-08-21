@@ -20,13 +20,32 @@
   </select>
   
   	<select id="getAlarmList" parameterType="com.cn.run.kpi.exampledata.entity.Alarm" resultType="com.cn.run.kpi.exampledata.entity.Alarm">
-		select * from zdjc_alarm ORDER BY date desc 
+		select m.*,t.account from zdjc_alarm m
+		left join zdjc_account t on m.accountid=t.id
+		where 1=1 
+	      <if test="level != null and level != ''" >
+	        and level = #{level,jdbcType=VARCHAR}
+	      </if>
+	      <if test="alarm != null and alarm != ''" >
+	        and alarm = #{alarm,jdbcType=VARCHAR}
+	      </if>
+	      <if test="zt != null and zt != ''" >
+	        and zt = #{zt,jdbcType=VARCHAR}
+	      </if>
+	      <if test="date != null" >
+	        and date = #{date,jdbcType=TIMESTAMP}
+	      </if>
+		ORDER BY m.date desc 
 	</select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from zdjc_alarm
-    where ID = #{id,jdbcType=INTEGER}
+    delete from zdjc_alarm  where ID = #{id,jdbcType=INTEGER}
   </delete>
+  
+  <delete id="deleteSubByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from zdjc_alarm_detail  where alarmid = #{id,jdbcType=INTEGER}
+  </delete>
+  
   <insert id="insert" parameterType="com.cn.run.kpi.exampledata.entity.Alarm" >
     insert into zdjc_alarm (ID, accountid, level, 
       alarm, zt, date)
