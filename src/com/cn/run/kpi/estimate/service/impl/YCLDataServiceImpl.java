@@ -1,16 +1,13 @@
 package com.cn.run.kpi.estimate.service.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.cn.run.kpi.estimate.common.LogConstants;
+import com.cn.run.kpi.estimate.common.YCLConstants;
 import com.cn.run.kpi.estimate.dao.YCLDao;
-import com.cn.run.kpi.estimate.entity.TransInfo;
 import com.cn.run.kpi.estimate.entity.YCLInfo;
 import com.cn.run.kpi.estimate.entity.YCLExample;
 import com.cn.run.kpi.estimate.service.YCLDataService;
@@ -61,14 +58,14 @@ public class YCLDataServiceImpl implements YCLDataService {
 		
 		//正常数据和异常数据各取指定条数
 		yclExampleData.setSourceDesc("1");
-		yclExampleData.setSize(LogConstants.NORMAL_SIZE);
+		yclExampleData.setSize(YCLConstants.NORMAL_SIZE);
 		List<YCLExample> normal = yclDataDao.getYCLExample(yclExampleData);
 		for (YCLExample ycl : normal) {
 			total.add(ycl);
 		}
 		
 		yclExampleData.setSourceDesc("0");
-		yclExampleData.setSize(LogConstants.UNNORMAL_SIZE);
+		yclExampleData.setSize(YCLConstants.UNNORMAL_SIZE);
 		List<YCLExample> unNormal = yclDataDao.getYCLExample(yclExampleData);
 		for (YCLExample ycl : unNormal) {
 			total.add(ycl);

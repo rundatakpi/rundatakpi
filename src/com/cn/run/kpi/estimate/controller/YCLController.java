@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cn.run.kpi.estimate.common.ActionConfig;
 import com.cn.run.kpi.estimate.common.LogConstants;
+import com.cn.run.kpi.estimate.common.YCLConstants;
 import com.cn.run.kpi.estimate.entity.YCLInfo;
 import com.cn.run.kpi.estimate.entity.YCLExample;
 import com.cn.run.kpi.estimate.service.YCLDataService;
@@ -116,7 +117,7 @@ public class YCLController {
 		try {
 
 			List<YCLExample> yclExampleDatas = yclDataService.getExampleList(yclExampleData);
-			Integer total = LogConstants.NORMAL_SIZE+LogConstants.UNNORMAL_SIZE;
+			Integer total = YCLConstants.NORMAL_SIZE+YCLConstants.UNNORMAL_SIZE;
 			
 			json.put("recordsTotal", total);
 			json.put("recordsFiltered", total);
