@@ -4,7 +4,7 @@ var pathName = window.document.location.pathname;
 var rootPath = pathName.substring(0, pathName.substr(1).indexOf('/')+1);
 
 $(function() {
-	
+		
 	refreshData();
     
     $("#searchBtn").on('click',function() {
@@ -20,6 +20,8 @@ $(function() {
 
  
 })
+
+
 
 /**
  * 绘制表格

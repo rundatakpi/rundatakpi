@@ -48,4 +48,36 @@ public class TransformServiceImpl implements TransService {
 		return transformDao.selectDetail(tranformData);
 	}
 
+	/**
+	 * 获取数据源
+	 */
+	@Override
+	public List<TransInfo> getDataSource() {
+		return transformDao.getDataSource();
+	}
+
+	/**
+	 * 获取大协议
+	 */
+	@Override
+	public List<TransInfo> getBProtocol(TransInfo transInfo) {
+		return transformDao.getBProtocol(transInfo);
+	}
+
+	/**
+	 * 获取小协议
+	 */
+	@Override
+	public List<TransInfo> getSProtocol(TransInfo transInfo) {
+		return transformDao.getSProtocol(transInfo);
+	}
+
+	/**
+	 * 获取动作类型
+	 */
+	@Override
+	public List<TransInfo> getActionType(TransInfo transInfo) {
+		return transformDao.getActionType(transInfo);
+	}
+
 }

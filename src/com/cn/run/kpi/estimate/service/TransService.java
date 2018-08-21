@@ -33,5 +33,31 @@ public interface TransService {
 	 * @param colName
 	 * @return
 	 */
-	public List<TransInfo> selectDetail(TransInfo tranformData);;
+	public List<TransInfo> selectDetail(TransInfo tranformData);
+	
+	/**
+	 * 查询数据源
+	 * @return
+	 */
+	public List<TransInfo> getDataSource();
+	/**
+	 * 查询大协议
+	 * @param transInfo
+	 * @return
+	 */
+	public List<TransInfo> getBProtocol(TransInfo transInfo);
+	
+	/**
+	 * 查询小协议
+	 * @param transInfo
+	 * @return
+	 */
+	public List<TransInfo> getSProtocol(TransInfo transInfo);
+	
+	/**
+	 * 查询动作类型
+	 * @param transInfo
+	 * @return
+	 */
+	public List<TransInfo> getActionType(TransInfo transInfo);;
 }

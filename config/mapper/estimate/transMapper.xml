@@ -30,6 +30,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </if>
     </sql>
     
+    <select id="getDataSource" resultType="com.cn.run.kpi.estimate.entity.TransInfo">
+    	select distinct dsCode,dsDesc from t_trans_total
+    </select>
+    
+     <select id="getBProtocol" parameterType="com.cn.run.kpi.estimate.entity.TransInfo" resultType="com.cn.run.kpi.estimate.entity.TransInfo">
+    	select distinct bProtocolCode,bProtocolDesc from t_trans_total
+    	<where>       
+			<include refid="transCondition"></include>
+		</where>
+    </select>
+    
+     <select id="getSProtocol" parameterType="com.cn.run.kpi.estimate.entity.TransInfo" resultType="com.cn.run.kpi.estimate.entity.TransInfo">
+    	select distinct sProtocolCode,sProtocolDesc from t_trans_total
+    	<where>
+			<include refid="transCondition"></include>
+		</where>
+    </select>
+    
+     <select id="getActionType" parameterType="com.cn.run.kpi.estimate.entity.TransInfo" resultType="com.cn.run.kpi.estimate.entity.TransInfo">
+    	select distinct actionType from t_trans_total
+    	<where>
+			<include refid="transCondition"></include>
+		</where>
+    </select>
+    
 	<select id="getList" parameterType="com.cn.run.kpi.estimate.entity.TransInfo" resultType="com.cn.run.kpi.estimate.entity.TransInfo">
 		select 
 		  	t.id,

@@ -11,24 +11,20 @@ import com.cn.run.kpi.estimate.entity.TransInfo;
  */
 public interface TransDao {
 
-	/**
-	 * @param transformData
-	 * @return
-	 */
 	List<TransInfo> getList(TransInfo transformData);
 
-	/**
-	 * @param transformData
-	 * @return
-	 */
 	Integer getTotal(TransInfo transformData);
 
-	/**
-	 * 
-	 * @param tranformData
-	 * @param colName
-	 * @return
-	 */
 	List<TransInfo> selectDetail(TransInfo tranformData);
+
+	List<TransInfo> getCondition(String conSql);
+
+	List<TransInfo> getDataSource();
+
+	List<TransInfo> getBProtocol(TransInfo transInfo);
+
+	List<TransInfo> getSProtocol(TransInfo transInfo);
+
+	List<TransInfo> getActionType(TransInfo transInfo);
 
 }
