@@ -6,11 +6,27 @@ $(function(){
 	}];
 	combobox(configs);
 	
-	var queryCondition = {};
+	$('.chooseDay').off("click").on('click',"a",function(){
+		$(this).addClass("slt").siblings().removeClass("slt");
+		var parent = $(this).parent();
+		var day = $(this).attr('value');
+		var url = parent.attr('url');
+		var id = parent.attr('data-id');
+		console.log("day = " + day);
+		console.log("url = " + url);
+		
+		var queryCondition = {};
+		
+		queryCondition['day'] = day;
+		
+		refresh(url, queryCondition, id);
+		return false;
+	});
 	
+	var queryCondition = {};
 	$.ajax({
 		url: '/rundatakpi/task/init',
-		data: queryCondition,
+		data: '',
 		method: 'GET',
 		dataType: 'json',
 		success: function(data) {
@@ -23,6 +39,27 @@ $(function(){
 	});
 	//init(data);
 })
+
+function refresh(url, queryCondition, id) {
+	$.ajax({
+		url: '/rundatakpi/task/' + url,
+		method: 'GET',
+		data: queryCondition,
+		dataType: 'json',
+		success: function(data) {
+			if (url == 'running') {
+				//接入数据实时输入数据量
+				jobChart_1("jobChart_1", data['runningJson']);
+			} else if (url == 'complete') {
+				//抛弃数据量
+				jobChart_2("jobChart_2", data['completedJson']);
+			}
+		},
+		error: function(data) {
+			console.log("error");
+		}
+	});
+}
 
 function init(data) {
 	//实时运行任务量
