@@ -20,14 +20,14 @@ public interface TaskMonitorDao {
 	 * @param date
 	 * @return
 	 */
-	public List<RunningTask> getRunningTaskData(String date);
+	public List<RunningTask> getRunningTaskData(Map<String, Object> queryCondition);
 
 	/**
 	 * 获取近七天实时已完成任务量数据
 	 * @param date
 	 * @return
 	 */
-	public List<CompletedTask> getCompletedTaskData(String date) throws Exception;
+	public List<CompletedTask> getCompletedTaskData(Map<String, Object> queryCondition) throws Exception;
 
 	/**
 	 * 获取任务列表
@@ -41,7 +41,7 @@ public interface TaskMonitorDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<FailedTask> getFailedTask() throws Exception;
+	public List<FailedTask> getFailedTask(Map<String, Object> queryCondition) throws Exception;
 	
 	/**
 	 * 获取运行任务列表
@@ -49,4 +49,12 @@ public interface TaskMonitorDao {
 	 * @throws Exception
 	 */
 	public List<Task> getRunningTask(Map<String, Object> queryCondition) throws Exception;
+	
+	/**
+	 * 获取运行任务总数
+	 * @param queryCondition
+	 * @return
+	 * @throws Exception
+	 */
+	public Long getTotalTaskNum(Map<String, Object> queryCondition) throws Exception;
 }

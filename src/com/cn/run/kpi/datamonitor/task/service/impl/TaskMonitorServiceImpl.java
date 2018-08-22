@@ -20,13 +20,13 @@ public class TaskMonitorServiceImpl implements TaskMonitorService {
 	private TaskMonitorDao taskMonitorDao;
 
 	@Override
-	public List<RunningTask> getRunningTaskData(String date) throws Exception {
-		return taskMonitorDao.getRunningTaskData(date);
+	public List<RunningTask> getRunningTaskData(Map<String, Object> queryCondition) throws Exception {
+		return taskMonitorDao.getRunningTaskData(queryCondition);
 	}
 
 	@Override
-	public List<CompletedTask> getCompletedTaskData(String date) throws Exception {
-		return taskMonitorDao.getCompletedTaskData(date);
+	public List<CompletedTask> getCompletedTaskData(Map<String, Object> queryCondition) throws Exception {
+		return taskMonitorDao.getCompletedTaskData(queryCondition);
 	}
 
 	@Override
@@ -36,12 +36,17 @@ public class TaskMonitorServiceImpl implements TaskMonitorService {
 
 	@Override
 	public List<FailedTask> getFailedTask(Map<String, Object> queryCondition) throws Exception {
-		return taskMonitorDao.getFailedTask();
+		return taskMonitorDao.getFailedTask(queryCondition);
 	}
 
 	@Override
 	public List<Task> getRunningTask(Map<String, Object> queryCondition) throws Exception {
 		return taskMonitorDao.getRunningTask(queryCondition);
+	}
+
+	@Override
+	public Long getTotalTaskNum(Map<String, Object> queryCondition) throws Exception {
+		return taskMonitorDao.getTotalTaskNum(queryCondition);
 	}
 
 }

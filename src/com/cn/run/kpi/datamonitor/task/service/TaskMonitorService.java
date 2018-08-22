@@ -20,14 +20,14 @@ public interface TaskMonitorService {
 	 * @param date
 	 * @return
 	 */
-	List<RunningTask> getRunningTaskData(String date) throws Exception;
+	List<RunningTask> getRunningTaskData(Map<String, Object> queryCondition) throws Exception;
 	
 	/**
 	 * 获取近七天实时已完成任务量数据
 	 * @param date
 	 * @return
 	 */
-	List<CompletedTask> getCompletedTaskData(String date) throws Exception;
+	List<CompletedTask> getCompletedTaskData(Map<String, Object> queryCondition) throws Exception;
 	
 	/**
 	 * 获取任务列表
@@ -49,4 +49,12 @@ public interface TaskMonitorService {
 	 * @throws Exception
 	 */
 	public List<Task> getRunningTask(Map<String, Object> queryCondition) throws Exception;
+	
+	/**
+	 * 获取运行任务总数
+	 * @param queryCondition
+	 * @return
+	 * @throws Exception
+	 */
+	public Long getTotalTaskNum(Map<String, Object> queryCondition) throws Exception;
 }
