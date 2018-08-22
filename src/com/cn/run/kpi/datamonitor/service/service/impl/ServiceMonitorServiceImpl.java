@@ -48,4 +48,9 @@ public class ServiceMonitorServiceImpl implements ServiceMonitorService {
 	public List<String> getApp(Map<String, Object> queryCondition) throws Exception {
 		return serviceMonitorDao.getApp(queryCondition);
 	}
+
+	@Override
+	public Long getTotal(Map<String, Object> queryCondition) throws Exception {
+		return serviceMonitorDao.getTotal(queryCondition);
+	}
 }

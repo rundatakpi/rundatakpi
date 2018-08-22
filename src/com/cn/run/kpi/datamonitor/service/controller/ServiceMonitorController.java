@@ -20,6 +20,7 @@ import com.cn.run.kpi.datamonitor.service.entity.AppMiddleWareEntity;
 import com.cn.run.kpi.datamonitor.service.entity.ServiceInvokeException;
 import com.cn.run.kpi.datamonitor.service.service.ServiceMonitorService;
 import com.cn.run.kpi.utils.DateUtil;
+import com.cn.run.kpi.utils.StringUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -147,12 +148,12 @@ public class ServiceMonitorController {
 	@ResponseBody
 	public String getServerException(HttpServletRequest request, HttpServletResponse response) {
 		JSONObject object = new JSONObject();
-		Map<String, Object> queryCondition = new HashMap<String, Object>();
+		Map<String, Object> queryCondition = getQueryCondition(request);
 		try {
 			List<ServiceInvokeException> serviceInvokeException = serviceMonitorService.list(queryCondition);
-			int total = 0;
+			Long totalException = serviceMonitorService.getTotal(queryCondition);
+			Long total = StringUtil.isEmpty(totalException) ? 0L : totalException;
 			if (serviceInvokeException != null && !serviceInvokeException.isEmpty()) {
-				total = serviceInvokeException.size();
 				object.put("total", total);
 				object.put("data", JSONArray.fromObject(serviceInvokeException));
 			}
@@ -161,5 +162,22 @@ public class ServiceMonitorController {
 		}
 		
 		return object.toString();
+	}
+
+	private Map<String, Object> getQueryCondition(HttpServletRequest request) {
+		Map<String, Object> queryCondition = new HashMap<String, Object>();
+		String pageSizeStr = request.getParameter("pageSize");
+		
+		
+		Integer pageSize = StringUtil.isNull(pageSizeStr) ? 0 : Integer.parseInt(pageSizeStr);
+		
+		String currentPageStr = request.getParameter("currentPage");
+		Integer currentPage = StringUtil.isNull(currentPageStr) ? 0 : Integer.parseInt(currentPageStr);
+		
+		Integer start = (currentPage - 1) * pageSize;
+//		Integer end = currentPage * pageSize;
+		queryCondition.put("start", start);
+		queryCondition.put("end", pageSize);
+		return queryCondition;
 	}
 }

@@ -38,12 +38,7 @@ $(function(){
 		console.log("day = " + day);
 		console.log("url = " + url);
 		
-		
-		var queryCondition = getQueryCondition();
-		
-		queryCondition.push("day", day);
-		
-		refresh(url, queryCondition, id);
+		refresh(url, day);
 		return false;
 	});	 
 	
@@ -53,7 +48,9 @@ $(function(){
 	
 })
 
-function refresh(url, queryCondition) {
+function refresh(url, day) {
+	var queryCondition = getQueryCondition();
+	queryCondition.push("day", day);
 	$.ajax({
 		url: '/rundatakpi/access' + url,
 		method: 'GET',

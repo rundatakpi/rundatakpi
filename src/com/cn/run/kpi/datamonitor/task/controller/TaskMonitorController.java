@@ -87,9 +87,9 @@ public class TaskMonitorController {
 		Integer currentPage = StringUtil.isNull(currentPageStr) ? 0 : Integer.parseInt(currentPageStr);
 		
 		Integer start = (currentPage - 1) * pageSize;
-		Integer end = currentPage * pageSize;
+//		Integer end = currentPage * pageSize;
 		queryCondition.put("start", start);
-		queryCondition.put("end", end);
+		queryCondition.put("end", pageSize);
 		String reason = request.getParameter("reason");
 		if (StringUtil.isNotEmpty(reason)) {
 			queryCondition.put("reason", reason);

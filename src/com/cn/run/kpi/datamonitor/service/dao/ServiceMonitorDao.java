@@ -41,5 +41,12 @@ public interface ServiceMonitorDao {
 	public void insertAppQueryRecord(AppQueryRecord appQueryRecord);
 	
 	public List<String> getApp(Map<String, Object> queryCondition);
+	
+	/**
+	 * 获取服务调用异常信息总数
+	 * @param queryCondition
+	 * @return
+	 */
+	Long getTotal(Map<String, Object> queryCondition);
 
 }

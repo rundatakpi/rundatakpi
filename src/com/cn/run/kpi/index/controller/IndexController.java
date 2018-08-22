@@ -1,7 +1,9 @@
 package com.cn.run.kpi.index.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,8 +47,10 @@ public class IndexController {
 		
 		JSONObject object = new JSONObject();
 		
+		Map<String, Object> queryCondition = new HashMap<String, Object>();
+		
 		// 获取预处理检测数据
-		List<PreProcessEntity> preProcessDate = preProcessService.getPreProcessData();
+		List<PreProcessEntity> preProcessDate = preProcessService.getPreProcessData(queryCondition);
 		
 		JSONObject preProcess = new JSONObject();
 		List<Long> inputList = new ArrayList<Long>();

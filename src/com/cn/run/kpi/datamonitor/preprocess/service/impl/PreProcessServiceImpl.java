@@ -1,6 +1,7 @@
 package com.cn.run.kpi.datamonitor.preprocess.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,38 +20,43 @@ public class PreProcessServiceImpl implements PreProcessService {
 	PreProcessDao preProcessDao;
 
 	@Override
-	public List<PreProcessEntity> getPreProcessData() {
-		return preProcessDao.getPreProcessData();
+	public List<PreProcessEntity> getPreProcessData(Map<String, Object> queryCondition) {
+		return preProcessDao.getPreProcessData(queryCondition);
 	}
 
 	@Override
-	public List<PreProcessRealTimeEntity> getPreProcessRealTimeData() {
-		return preProcessDao.getPreProcessRealTimeData();
+	public List<PreProcessRealTimeEntity> getPreProcessRealTimeData(Map<String, Object> queryCondition) {
+		return preProcessDao.getPreProcessRealTimeData(queryCondition);
 	}
 
 	@Override
-	public List<InputRepetionEntity> getInputRepetionRate() {
-		return preProcessDao.getInputRepetionRate();
+	public List<InputRepetionEntity> getInputRepetionRate(Map<String, Object> queryCondition) {
+		return preProcessDao.getInputRepetionRate(queryCondition);
 	}
 
 	@Override
-	public List<ExceptionEntity> getExceptionData() {
-		return preProcessDao.getExceptionData();
+	public List<ExceptionEntity> getExceptionData(Map<String, Object> queryCondition) {
+		return preProcessDao.getExceptionData(queryCondition);
 	}
 
 	@Override
-	public List<PreProcessEntity> getErrorData() {
-		return preProcessDao.getErrorData();
+	public List<PreProcessEntity> getErrorData(Map<String, Object> queryCondition) {
+		return preProcessDao.getErrorData(queryCondition);
 	}
 
 	@Override
-	public List<PreProcessEntity> getPreProcessInputData() {
-		return preProcessDao.getPreProcessInputData();
+	public List<PreProcessEntity> getPreProcessInputData(Map<String, Object> queryCondition) {
+		return preProcessDao.getPreProcessInputData(queryCondition);
 	}
 
 	@Override
-	public List<PreProcessEntity> getPreProcessOutputData() {
-		return preProcessDao.getPreProcessOutputData();
+	public List<PreProcessEntity> getPreProcessOutputData(Map<String, Object> queryCondition) {
+		return preProcessDao.getPreProcessOutputData(queryCondition);
+	}
+
+	@Override
+	public List<PreProcessEntity> getRepeatData(Map<String, Object> queryCondition) {
+		return preProcessDao.getRepeatData(queryCondition);
 	}
 
 }
