@@ -29,9 +29,9 @@
     	<div class="box left importData">
         	<div class="boxHd clearfix">
                 <h3 class="left">实时运行任务量</h3>
-                <div class="chooseDay right">
-                    <a href="#" class="left sevenDays slt">近7天</a>
-                    <a href="#" class="right thirtyDays">近30天</a>
+                <div id="job_run" data-id="jobChart_1" url="running" class="chooseDay right">
+                    <a href="#" value="7" class="left sevenDays slt">近7天</a>
+                    <a href="#" value="30" class="right thirtyDays">近30天</a>
                 </div>
             </div>
             <div class="boxBd">
@@ -44,9 +44,9 @@
     	<div class="box right exportData">
         	<div class="boxHd clearfix">
                 <h3 class="left">实时已完成任务量</h3>
-                <div class="chooseDay right">
-                    <a href="#" class="left sevenDays slt">近7天</a>
-                    <a href="#" class="right thirtyDays">近30天</a>
+                <div id="job_complete" url="complete" class="chooseDay right">
+                    <a href="#" value="7" class="left sevenDays slt">近7天</a>
+                    <a href="#" value="30" class="right thirtyDays">近30天</a>
                 </div>
             </div>
             <div class="boxBd">

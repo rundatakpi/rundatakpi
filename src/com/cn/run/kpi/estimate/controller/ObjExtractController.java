@@ -44,7 +44,6 @@ public class ObjExtractController {
 		JSONObject jsonObject = new JSONObject();
 		try {
 			List<ObjInfo> objs =  objectExtractService.getObjType();
-			jsonObject.put("json", objs);
 		}catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 			jsonObject.put("json", "error");

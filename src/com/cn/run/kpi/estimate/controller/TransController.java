@@ -38,6 +38,76 @@ public class TransController {
 	private TransService transformService;
 	
 	/**
+	 * 获取数据源
+	 * @return
+	 */
+	@RequestMapping("/getDataSource")
+	@ResponseBody
+	public JSONObject getDataSource() {
+		JSONObject jsonObject = new JSONObject();
+		List<TransInfo> list = transformService.getDataSource();
+		if(null!=list&&!list.isEmpty()) {
+			jsonObject.put("trans", list);
+		}
+		return jsonObject;
+	}
+	
+	/**
+	 * 获取大协议
+	 * @param transInfo
+	 * @return
+	 */
+	@RequestMapping("/getBProtocol")
+	@ResponseBody
+	public JSONObject getBProtocol(TransInfo transInfo) {
+		JSONObject jsonObject = new JSONObject();
+		List<TransInfo> list = transformService.getBProtocol(transInfo);
+		if(null!=list&&!list.isEmpty()) {
+			jsonObject.put("trans", list);
+		}
+		return jsonObject;
+	}
+	
+	/**
+	 * 获取小协议
+	 * @param transInfo
+	 * @return
+	 */
+	@RequestMapping("/getSProtocol")
+	@ResponseBody
+	public JSONObject getSProtocol(TransInfo transInfo) {
+		JSONObject jsonObject = new JSONObject();
+		List<TransInfo> list = transformService.getSProtocol(transInfo);
+		if(null!=list&&!list.isEmpty()) {
+			jsonObject.put("trans", list);
+		}
+		return jsonObject;
+	}
+	
+	/**
+	 * 获取动作类型
+	 * @param transInfo
+	 * @return
+	 */
+	@RequestMapping("/getActionType")
+	@ResponseBody
+	public JSONObject getActionType(TransInfo transInfo) {
+		JSONObject jsonObject = new JSONObject();
+		List<TransInfo> list = transformService.getActionType(transInfo);
+		if(null!=list&&!list.isEmpty()) {
+			for (TransInfo info : list) {
+				String actionTypeDesc = ActionConfig.getValue(info.getActionType());
+				info.setActionTypeDesc(actionTypeDesc);
+			}
+			
+			jsonObject.put("trans", list);
+		}
+		return jsonObject;
+	}
+	
+	
+	
+	/**
 	 * 展示格转接入数据列表
 	 * @return List<TransformData>
 	 */

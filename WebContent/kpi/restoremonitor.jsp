@@ -23,9 +23,9 @@
     	<div class="box left importData">
         	<div class="boxHd clearfix">
                 <h3 class="left">协议还原数据实时输入数据量</h3>
-                <div class="chooseDay right">
-                    <a href="#" class="left sevenDays slt">近7天</a>
-                    <a href="#" class="right thirtyDays">近30天</a>
+                <div id="" class="chooseDay right" id="restore_input" url="input">
+                    <a href="#" value="7" class="left sevenDays slt">近7天</a>
+                    <a href="#" value="30" class="right thirtyDays">近30天</a>
                 </div>
             </div>
             <div class="boxBd">
@@ -38,9 +38,9 @@
     	<div class="box right exportData">
         	<div class="boxHd clearfix">
                 <h3 class="left">协议还原数据实时输出数据量</h3>
-                <div class="chooseDay right">
-                    <a href="#" class="left sevenDays slt">近7天</a>
-                    <a href="#" class="right thirtyDays">近30天</a>
+                <div class="chooseDay right" id="restore_output" url="output">
+                    <a href="#" value="7" class="left sevenDays slt">近7天</a>
+                    <a href="#" value="30" class="right thirtyDays">近30天</a>
                 </div>
             </div>
             <div class="boxBd">

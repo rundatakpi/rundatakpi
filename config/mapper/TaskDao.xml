@@ -35,21 +35,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="null != createDate and '' != createDate">
             and createdate = #{createDate}
         </if>
+        <if test="null != reason and '' != reason">
+            and reason = #{reason}
+        </if>
+        
     </sql>
     
 	<select id="getRunningTaskData" parameterType="map" resultMap="runningMap">
-		select sum(running) as running, createdate from taskmonitor group by createdate ORDER BY createdate;
+		select count(*) as running, INPUT_TIME createdate from jobmonitor runningtime where JOB_STATUS = 3
+		and date_sub(CURDATE(), INTERVAL #{day} DAY) <![CDATA[<=]]>  date(INPUT_TIME)
+		group by createdate ORDER BY createdate
 	</select>
 	
 	<select id="getCompletedTaskData" parameterType="map" resultMap="completedMap">
-		select sum(complete) as complete, createdate from taskmonitor group by createdate ORDER BY createdate;
+		select count(*) as complete, INPUT_TIME createdate from jobmonitor where JOB_STATUS = 4
+		and date_sub(CURDATE(), INTERVAL #{day} DAY) <![CDATA[<=]]>  date(INPUT_TIME)
+		group by createdate ORDER BY createdate;
 	</select>
 	
 	<select id="getRunningTask" parameterType="map" resultMap="runningtaskMap">
-		select id, server, starttime, runningtime from task_running
+		select ID id, HOSTIP server, START_TIME starttime, END_TIME runningtime from jobmonitor
+		where JOB_STATUS = 3
+		<include refid="queryCondition"></include>
+		limit #{start}, #{end}
 	</select>
 	
 	<select id="getFailedTask" parameterType="map" resultMap="failedMap">
-		select id, server, starttime, failtime, reason from task_failed
+		select ID id, HOSTIP server, START_TIME starttime, END_TIME failtime, 'xxx' reason from jobmonitor
+		where JOB_STATUS = 2
+		<include refid="queryCondition"></include>
+		limit #{start}, #{end}
+	</select>
+	
+	<select id="getTotalTaskNum" parameterType="map" resultType="long">
+	    select count(*) from jobmonitor where JOB_STATUS = #{status}
+	    <include refid="queryCondition"></include>
 	</select>
 </mapper>

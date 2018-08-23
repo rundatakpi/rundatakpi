@@ -2,8 +2,10 @@ package com.cn.run.kpi.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -17,6 +19,14 @@ public class DateUtil {
 	 */
 	public static String getDate(){
 		return getDateBefore(new Date(), 0);
+	}
+	
+	public static List<String> getDate(int day) {
+		List<String> date = new ArrayList<>();
+		for (int i = day - 1; i >= 0; i--) {
+			date.add(getDateBefore(new Date(), i));
+		}
+		return date;
 	}
 	
 	/**

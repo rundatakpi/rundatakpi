@@ -63,37 +63,45 @@ public class AccessServiceImpl implements AccessService {
 	@Override
 	public void getClassfication() throws Exception {
 		List<String> classfiction = accessDao.getClassfication();
-		createJsonFile(classfiction, "classfiction");
+		createJson(classfiction, "classfiction");
 	}
 
 	@Override
 	public void getDataSource() throws Exception {
 		List<String> dataSource = accessDao.getDataSource();
-		createJsonFile(dataSource, "datasource"); 
+		createJson(dataSource, "datasource");
+		
+	}
+	
+	private void createJson(List<String> query, String fileName) {
+		List<String> q = new ArrayList<>();
+		q.add("全部");
+		q.addAll(query);
+		createJsonFile(q, fileName);
 	}
 
 	@Override
 	public void getBprotocol() throws Exception {
 		List<String> bProtocol = accessDao.getBprotocol();
-		createJsonFile(bProtocol, "bProtocol");
+		createJson(bProtocol, "bProtocol");
 	}
 
 	@Override
 	public void getSprotocol() throws Exception {
 		List<String> sProtocol = accessDao.getSprotocol();
-		createJsonFile(sProtocol, "sProtocol");
+		createJson(sProtocol, "sProtocol");
 	}
 
 	@Override
 	public void getAction() throws Exception {
 		List<String> action = accessDao.getAction();
-		createJsonFile(action, "action");
+		createJson(action, "action");
 	}
 
 	@Override
 	public void getCollectPlace() throws Exception {
 		List<String> collectPlace = accessDao.getCollectPlace();
-		createJsonFile(collectPlace, "collectPlace");
+		createJson(collectPlace, "collectPlace");
 	}
 	
 	private void createJsonFile(List<String> query, String fileName) {
@@ -152,7 +160,7 @@ public class AccessServiceImpl implements AccessService {
 		}
 		
 		try {
-//			getCollectPlace();
+			getCollectPlace();
 		} catch (Exception e) {
 			LOG.error(">>>>get collect place failed", e);
 		}

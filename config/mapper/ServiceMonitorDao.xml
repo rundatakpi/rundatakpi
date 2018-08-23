@@ -49,7 +49,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="list" parameterType="map" resultMap="serverExceptionMap">
-        SELECT * FROM `servicemonitorexception`; 
+        SELECT capturetime as invoketime, system_id as app, sqlstr as 'sql', error_desc as reason FROM `appqueryrecord`
+        limit #{start}, #{end}
+    </select>
+    
+    <select id="getTotal" parameterType="map" resultType="long">
+        SELECT count(*) from `appqueryrecord`
     </select>
     
     <insert id="insertAppQueryRecord" parameterType="com.cn.run.kpi.datamonitor.service.entity.AppQueryRecord" useGeneratedKeys="true" keyProperty="id">
@@ -91,6 +96,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
     <select id="getApp" parameterType="map" resultType="string">
-        select DISTINCT app from appinvokemiddleware ORDER BY createdate;
+        select DISTINCT system_id as app from appqueryrecord ORDER BY createdate;
     </select>
 </mapper>

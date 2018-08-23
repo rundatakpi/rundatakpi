@@ -5,6 +5,8 @@ var rootPath = pathName.substring(0, pathName.substr(1).indexOf('/')+1);
 
 $(function() {
 	
+	showCondition();
+	
 	refreshData();
     
     $("#searchBtn").on('click',function() {
@@ -21,6 +23,91 @@ $(function() {
  
 })
 
+/**
+ * 展示查询条件
+ * @returns
+ */
+function showCondition(){
+	//展示数据源下拉选项
+	$.ajax({
+		url:rootPath+"/transform/getDataSource",
+		type:"post",
+		success:function(data){
+			if(""!=data&&null!=data){
+				$.each(data.trans,function(i,n){
+					$("#dataSource").append("<option value='"+this.dsCode+"'>"+this.dsDesc+"</option>")
+				})
+			}
+		}
+	})
+	
+	//监听数据源改变事件，获取对应ed大协议
+	$("#dataSource").change(function(){
+		$.ajax({
+			url:rootPath+"/transform/getBProtocol",
+			type:"post",
+			data:{
+				"dsCode":$("#dsCode>option:selected").val(),
+				"bProtocolCode":$("#bProtocol>option:selected").val(),
+				"sProtocolCode":$("#sProtocol>option:selected").val(),
+				"actionType":$("#actionType>option:selected").val()
+			},
+			success:function(data){
+				$("#bProtocol").html("").html("<option value=''>全部</option>");
+				if(""!=data.trans&&null!=data.trans){
+					$.each(data.trans,function(i,n){
+						$("#bProtocol").append("<option value='"+this.bProtocolCode+"'>"+this.bProtocolDesc+"</option>")
+					})
+					
+				}
+			}
+		})
+		
+		//监听大协议改变事件，获取对应的小协议
+		$("#bProtocol").change(function(){
+			$.ajax({
+				url:rootPath+"/transform/getSProtocol",
+				type:"post",
+				data:{
+					"dsCode":$("#dataSource>option:selected").val(),
+					"bProtocolCode":$("#bProtocol>option:selected").val()
+				},
+				success:function(data){
+					$("#sProtocol").html("").html("<option value=''>全部</option>");
+					if(""!=data.trans&&null!=data.trans){
+						$.each(data.trans,function(i,n){
+							$("#sProtocol").append("<option value='"+this.sProtocolCode+"'>"+this.sProtocolDesc+"</option>");
+						})
+					}
+				}
+			})
+			
+			
+			//监听小协议改变事件，获取相应的动作类型
+			$("#sProtocol").change(function(){
+				$.ajax({
+					url:rootPath+"/transform/getActionType",
+					type:"post",
+					data:{
+						"dsCode":$("#dataSource>option:selected").val(),
+						"bProtocolCode":$("#bProtocol>option:selected").val(),
+						"sProtocolCode":$("#sProtocol>option:selected").val()
+					},
+					success:function(data){
+						$("#actionType").html("").html("<option value=''>全部</option>");
+						if(""!=data.trans&&null!=data.trans){
+							$.each(data.trans,function(i,n){
+								$("#actionType").append("<option value='"+this.actionType+"'>"+this.actionTypeDesc+"</option>");
+							})
+						}
+					}
+				})
+			})
+		})
+		
+	})
+	
+	
 }
 
 /**

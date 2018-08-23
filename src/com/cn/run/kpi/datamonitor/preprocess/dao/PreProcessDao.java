@@ -1,6 +1,7 @@
 package com.cn.run.kpi.datamonitor.preprocess.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cn.run.kpi.datamonitor.preprocess.entity.ExceptionEntity;
 import com.cn.run.kpi.datamonitor.preprocess.entity.InputRepetionEntity;
@@ -13,41 +14,48 @@ public interface PreProcessDao {
 	 * 查询各数据源预处理输入量、输出量、抛弃量
 	 * @return 
 	 */
-	List<PreProcessEntity> getPreProcessData();
+	List<PreProcessEntity> getPreProcessData(Map<String, Object> queryCondition);
 	
 	/**
 	 * 获取近XX预处理输入量、输出量
 	 * @return
 	 */
-	List<PreProcessRealTimeEntity> getPreProcessRealTimeData();
+	List<PreProcessRealTimeEntity> getPreProcessRealTimeData(Map<String, Object> queryCondition);
 	
 	/**
 	 * 获取近XX输入数据流重复率
 	 * @return
 	 */
-	List<InputRepetionEntity> getInputRepetionRate();
+	List<InputRepetionEntity> getInputRepetionRate(Map<String, Object> queryCondition);
 	
 	/**
 	 * 获取预处理异常数据量
 	 * @return
 	 */
-	List<ExceptionEntity> getExceptionData();
+	List<ExceptionEntity> getExceptionData(Map<String, Object> queryCondition);
 	
 	/**
 	 * 预处理错误数据量
 	 * @return
 	 */
-	List<PreProcessEntity> getErrorData();
+	List<PreProcessEntity> getErrorData(Map<String, Object> queryCondition);
 	
 	/**
 	 * 获取近X天预处理输入量
 	 * @return
 	 */
-	List<PreProcessEntity> getPreProcessInputData();
+	List<PreProcessEntity> getPreProcessInputData(Map<String, Object> queryCondition);
 	
 	/**
 	 * 获取近X天预处理丢弃量
 	 * @return
 	 */
-	List<PreProcessEntity> getPreProcessOutputData();
+	List<PreProcessEntity> getPreProcessOutputData(Map<String, Object> queryCondition);
+	
+	/**
+	 * 获取重复率数据
+	 * @param queryCondition
+	 * @return
+	 */
+	List<PreProcessEntity> getRepeatData(Map<String, Object> queryCondition);
 }

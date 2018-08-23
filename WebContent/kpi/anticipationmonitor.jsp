@@ -32,16 +32,16 @@
     	<div class="left marginR25"><label class="left">动作类型：</label><div class="left anticipationComb" id="anticipationComb_5"></div></div>
     	<div class="left marginR25"><label class="left">采集地：</label><div class="left anticipationComb" id="anticipationComb_6"></div></div>
         <a href="#" class="right seeQuality">查看格转接入数据质量</a>
-        <a href="#" class="right schBtn_1">查询</a>
+        <a href="#" onclick="query();" class="right schBtn_1">查询</a>
     </div>
     
     <div class="clearfix boxMain">
     	<div class="box left importData">
         	<div class="boxHd clearfix">
                 <h3 class="left">预处理数据实时监控</h3>
-                <div class="chooseDay right">
-                    <a href="#" class="left sevenDays slt">近7天</a>
-                    <a href="#" class="right thirtyDays">近30天</a>
+                <div id="real_day" data-id="anticipationChart_1" url="realtime" class="chooseDay right">
+                    <a href="#" value="7" class="left sevenDays slt">近7天</a>
+                    <a href="#" value="30"  class="right thirtyDays">近30天</a>
                 </div>
             </div>
             <div class="boxBd">
@@ -54,9 +54,9 @@
     	<div class="box right exportData">
         	<div class="boxHd clearfix">
                 <h3 class="left">输入数据流重复率</h3>
-                <div class="chooseDay right">
-                    <a href="#" class="left sevenDays slt">近7天</a>
-                    <a href="#" class="right thirtyDays">近30天</a>
+                <div id="repeat_day" data-id="anticipationChart_2" url="repeat" class="chooseDay right">
+                    <a href="#" value="7" class="left sevenDays slt">近7天</a>
+                    <a href="#" value="30" class="right thirtyDays">近30天</a>
                 </div>
             </div>
             <div class="boxBd">

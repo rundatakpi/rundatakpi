@@ -107,6 +107,20 @@ public class AccessMonitorController {
 		if (StringUtil.isNotEmpty(action)) {
 			queryCondition.put("action", action);
 		}
+		
+		String inputDay = request.getParameter("inputDay");
+		String discardDay = request.getParameter("discardDay");
+		
+		if (StringUtil.isNotEmpty(inputDay)) {
+			queryCondition.put("inputDay", inputDay);
+		} else {
+			queryCondition.put("inputDay", 7);
+		}
+		if (StringUtil.isNotEmpty(discardDay)) {
+			queryCondition.put("discardDay", discardDay);
+		} else {
+			queryCondition.put("discardDay", 7);
+		}
 		return queryCondition;
 	}
 
@@ -167,16 +181,16 @@ public class AccessMonitorController {
 	@RequestMapping("/input")
 	@ResponseBody
 	public String getInputData(HttpServletRequest request, HttpServletResponse response) {
-		Map<String, Object> queryCondition = new HashMap<>();
-		getAccessInputData(queryCondition);
-		return "";
+		Map<String, Object> queryCondition = getQueryCondition(request);
+		JSONObject object = getAccessInputData(queryCondition);
+		return object.toString();
 	}
 	
 	@RequestMapping("/discard")
 	@ResponseBody
 	public String getDiscardData(HttpServletRequest request, HttpServletResponse response) {
-		Map<String, Object> queryCondition = new HashMap<>();
-		getAccessDiscardData(queryCondition);
-		return "";
+		Map<String, Object> queryCondition = getQueryCondition(request);
+		JSONObject object = getAccessDiscardData(queryCondition);
+		return object.toString();
 	}
 }

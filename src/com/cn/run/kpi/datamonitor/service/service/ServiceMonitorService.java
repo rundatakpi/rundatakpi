@@ -35,6 +35,13 @@ public interface ServiceMonitorService {
 	List<ServiceInvokeException> list(Map<String, Object> queryCondition) throws Exception;
 
 	/**
+	 * 获取服务调用异常信息总数
+	 * @param queryCondition
+	 * @return
+	 */
+	Long getTotal(Map<String, Object> queryCondition) throws Exception;
+	
+	/**
 	 * 插入服务监测数据
 	 * @param appQueryRecord
 	 */

@@ -69,4 +69,8 @@ public interface Constants {
 	 */
 	public static final String YESTERDAY_INPUT_NUM = "yesterdayInputNum";
 	
+	/**
+	 * 接入监测-昨日接入输入数据量
+	 */
+	public static final String QUERY_ALL = "全部";
 }

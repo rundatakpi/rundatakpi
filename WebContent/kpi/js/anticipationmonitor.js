@@ -3,31 +3,123 @@ $(function(){
 		{
 			id : "anticipationComb_1",
 			url : "json/failCause.json",
-			onSelect : function(combo,record){}
+			onSelect : function(combo,record){
+				$("#anticipationComb_1").val(record.text);
+			}
 		},{
 			id : "anticipationComb_2",
 			url : "json/datasource.json",
-			onSelect : function(combo,record){}
+			onSelect : function(combo,record){
+				$("#anticipationComb_2").val(record.text);
+			}
 		},{
 			id : "anticipationComb_3",
 			url : "json/bProtocol.json",
-			onSelect : function(combo,record){}
+			onSelect : function(combo,record){
+				$("#anticipationComb_3").val(record.text);
+			}
 		},{
 			id : "anticipationComb_4",
 			url : "json/sProtocol.json",
-			onSelect : function(combo,record){}
+			onSelect : function(combo,record){
+				$("#anticipationComb_4").val(record.text);
+			}
 		},{
 			id : "anticipationComb_5",
 			url : "json/action.json",
-			onSelect : function(combo,record){}
+			onSelect : function(combo,record){
+				$("#anticipationComb_5").val(record.text);
+			}
 		},{
 			id : "anticipationComb_6",
-			url : "json/failCause.json",
-			onSelect : function(combo,record){}
+			url : "json/collectPlace.json",
+			onSelect : function(combo,record){
+				$("#anticipationComb_6").val(record.text);
+			}
 		}
 	];
 	combobox(configs);
-	var queryCondition = {};
+	
+	$('.chooseDay').off("click").on('click',"a",function(){
+		$(this).addClass("slt").siblings().removeClass("slt");
+		var parent = $(this).parent();
+		var day = $(this).attr('value');
+		var url = parent.attr('url');
+		console.log("day = " + day);
+		console.log("url = " + url);
+		
+		refresh(url, day);
+		return false;
+	});
+	
+	init();
+})
+
+
+function query() {
+	var queryCondition = getQueryCondtion();
+	console.log(JSON.stringify(queryCondition));
+	init(queryCondition);
+}
+
+function getQueryCondtion() {
+	var classfication = $("#anticipationComb_1").val()[0];
+	var dataSource = $("#anticipationComb_2").val()[0];
+	var bProtocol = $("#anticipationComb_3").val()[0];
+	var sProtocol = $("#anticipationComb_4").val()[0];
+	var action = $("#anticipationComb_5").val()[0];
+	var collectPlace = $("#anticipationComb_6").val()[0];
+	
+	var realDay = $("#real_day a[class$='slt']").attr("value");
+	var repeatDay = $("#repeat_day a[class$='slt']").attr("value");
+	
+	console.log("realDay = " + realDay);
+	console.log("repeatDay = " + repeatDay);
+		
+	var queryCondition = {
+		"classfication": classfication,
+		"dataSource": dataSource,
+		"bProtocol": bProtocol,
+		"sProtocol": sProtocol,
+		"action": action,
+		"collectPlace": collectPlace,
+		"realDay": realDay,
+		"repeatDay": repeatDay
+	};
+	
+	return queryCondition;
+}
+
+function refresh(url, day) {
+	var queryCondition = getQueryCondtion();
+	console.log(JSON.stringify(queryCondition));
+	
+	if (url == 'realtime') {
+		queryCondition['realDay'] = day;
+	} else if (url == 'repeat') {
+		queryCondition['repeatDay'] = day;
+	}
+	$.ajax({
+		url: '/rundatakpi/preprocess/' + url,
+		method: 'GET',
+		data: queryCondition,
+		dataType: 'json',
+		success: function(data) {
+			if (url == 'realtime') {
+				//接入数据实时输入数据量
+				anticipationChart_1("anticipationChart_1", data);
+			} else if (url == 'repeat') {
+				//数据重复率
+				anticipationChart_2("anticipationChart_2", data['repeatJson']);
+			}
+		},
+		error: function(data) {
+			console.log("error");
+		}
+	});
+}
+
+function init(queryCondition) {
 	$.ajax({
 		url:'/rundatakpi/preprocess/init',
 		method: 'GET',
@@ -35,20 +127,18 @@ $(function(){
 		dataType: 'json',
 		success: function(data) {
 			console.log(JSON.stringify(data));
-			init(data);
+			
+			//预处理数据实时监控
+			anticipationChart_1("anticipationChart_1", data);
+			//输入数据流重复率
+			anticipationChart_2("anticipationChart_2", data['repeatJson']);
+			//预处理异常数据量
+			//anticipationChart_3("anticipationChart_3");
+			//预处理错误数据量
+			anticipationChart_4("anticipationChart_4", data['errorJson']);
 		}
 	});
-})
-
-function init(data) {
-	//预处理数据实时监控
-	anticipationChart_1("anticipationChart_1", data);
-	//输入数据流重复率
-	anticipationChart_2("anticipationChart_2", data['repeatJson']);
-	//预处理异常数据量
-	//anticipationChart_3("anticipationChart_3");
-	//预处理错误数据量
-	anticipationChart_4("anticipationChart_4", data['errorJson']);
+	
 }
 
 
@@ -208,9 +298,15 @@ function anticipationChart_1(id, data) {
  * @description 输入数据流重复率
  */
 function anticipationChart_2(id, data) {
+	var date, data;
+	if (data == undefined) {
+		date = ['无数据'];
+		data = [0];
+	} else {
+		date = data['date'];
+		data = data['repeatNum'];
+	}
 	var ec = echarts;
-	var date = data['date'];
-	var data = data['repeatNum'];
 	/*线图*/
 	if (document.getElementById(id)) {
 		chartObj[id] = ec.init(document.getElementById(id));

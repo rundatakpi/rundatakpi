@@ -23,10 +23,10 @@ $(function(){
 
 function init(data) {
 	//加载数据统计线图
-	dataStatistics("dataStatistics", data['invokeMiddlewareJson']);
+	// dataStatistics("dataStatistics", data['invokeMiddlewareJson']);
 	
 	//应用调用协议频次
-	frequencyBar("frequencyBar", data['invokeProtocolJson']);
+	// frequencyBar("frequencyBar", data['invokeProtocolJson']);
 	
 	getServerException();
 }

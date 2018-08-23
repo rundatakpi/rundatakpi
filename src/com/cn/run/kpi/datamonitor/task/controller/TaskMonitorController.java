@@ -20,6 +20,7 @@ import com.cn.run.kpi.datamonitor.task.entity.FailedTask;
 import com.cn.run.kpi.datamonitor.task.entity.RunningTask;
 import com.cn.run.kpi.datamonitor.task.entity.Task;
 import com.cn.run.kpi.datamonitor.task.service.TaskMonitorService;
+import com.cn.run.kpi.utils.StringUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -43,10 +44,10 @@ public class TaskMonitorController {
 		JSONObject object = new JSONObject();
 		
 		// 获取运行任务数据
-		getRunningTaskDate(object);
+		getRunningTaskDate(request, object);
 		
 		// 获取已完成任务数据
-		getCompletedTaskData(object);
+		getCompletedTaskData(request, object);
 		
 		return object.toString();
 	}
@@ -56,13 +57,14 @@ public class TaskMonitorController {
 	public String getRunningJob(HttpServletRequest request, HttpServletResponse response) {
 		JSONObject object = new JSONObject();
 		JSONArray array = new JSONArray();
-		Map<String, Object> queryCondition = new HashMap<>();
+		Map<String, Object> queryCondition = getQueryCondition(request);
+		
+		queryCondition.put("status", 3);
 		
 		try {
 			List<Task> runningTask = taskMonitorService.getRunningTask(queryCondition);
-			int total = 0;
+			Long total = taskMonitorService.getTotalTaskNum(queryCondition);
 			if (runningTask != null && !runningTask.isEmpty()) {
-				total = runningTask.size();
 				array = JSONArray.fromObject(runningTask);
 			}
 			object.put("total", total);
@@ -73,18 +75,39 @@ public class TaskMonitorController {
 		System.out.println(object.toString());
 		return object.toString();
 	}
+
+	private Map<String, Object> getQueryCondition(HttpServletRequest request) {
+		Map<String, Object> queryCondition = new HashMap<String, Object>();
+		String pageSizeStr = request.getParameter("pageSize");
+		
+		
+		Integer pageSize = StringUtil.isNull(pageSizeStr) ? 0 : Integer.parseInt(pageSizeStr);
+		
+		String currentPageStr = request.getParameter("currentPage");
+		Integer currentPage = StringUtil.isNull(currentPageStr) ? 0 : Integer.parseInt(currentPageStr);
+		
+		Integer start = (currentPage - 1) * pageSize;
+//		Integer end = currentPage * pageSize;
+		queryCondition.put("start", start);
+		queryCondition.put("end", pageSize);
+		String reason = request.getParameter("reason");
+		if (StringUtil.isNotEmpty(reason)) {
+			queryCondition.put("reason", reason);
+		}
+		return queryCondition;
+	}
 	
 	@RequestMapping("/failJob")
 	@ResponseBody
 	public String getFailedJob(HttpServletRequest request, HttpServletResponse response) {
 		JSONObject object = new JSONObject();
 		JSONArray array = new JSONArray();
-		Map<String, Object> queryCondition = new HashMap<>();
-		
+		Map<String, Object> queryCondition = getQueryCondition(request);
+		queryCondition.put("status", 2);
 		try {
 			List<FailedTask>  failedTask = taskMonitorService.getFailedTask(queryCondition);
 			if (failedTask != null && !failedTask.isEmpty()) {
-				int total = failedTask.size();
+				long total = taskMonitorService.getTotalTaskNum(queryCondition);
 				array = JSONArray.fromObject(failedTask);
 				object.put("total", total);
 				object.put("data", array);
@@ -95,14 +118,35 @@ public class TaskMonitorController {
 		System.out.println(object.toString());
 		return object.toString();
 	}
+	
+	@RequestMapping("/running")
+	@ResponseBody
+	public String getRunningData(HttpServletRequest request) {
+		JSONObject object = new JSONObject();
+		getRunningTaskDate(request, object);
+		return object.toString();
+	}
+	
+	@RequestMapping("/complete")
+	@ResponseBody
+	public String getFailData(HttpServletRequest request) {
+		JSONObject object = new JSONObject();
+		getCompletedTaskData(request, object);
+		return object.toString();
+	}
+
 
 	/**
 	 * 获取已完成任务数据
 	 * @param object
 	 */
-	private void getCompletedTaskData(JSONObject object) {
+	private void getCompletedTaskData(HttpServletRequest request, JSONObject object) {
 		try {
-			List<CompletedTask> completedTask = taskMonitorService.getCompletedTaskData("");
+			Map<String, Object> queryCondition = new HashMap<String, Object>();
+			String dayStr = request.getParameter("day");
+			int day = 7;
+			queryCondition.put("day", StringUtil.isNull(dayStr) ? day : Integer.parseInt(dayStr));
+			List<CompletedTask> completedTask = taskMonitorService.getCompletedTaskData(queryCondition);
 			JSONObject completedJson = new JSONObject();
 			if (completedTask != null && !completedTask.isEmpty()) {
 				List<String> completedDate = new ArrayList<>();
@@ -124,9 +168,14 @@ public class TaskMonitorController {
 	 * 获取运行任务数据
 	 * @param object
 	 */
-	private void getRunningTaskDate(JSONObject object) {
+	private void getRunningTaskDate(HttpServletRequest request, JSONObject object) {
+		Map<String, Object> queryCondition = getQueryCondition(request);
+		String dayStr = request.getParameter("day");
+		int day = 7;
+		queryCondition.put("day", StringUtil.isNull(dayStr) ? day : Integer.parseInt(dayStr));
+		
 		try {
-		    List<RunningTask> runningTask = taskMonitorService.getRunningTaskData("");
+		    List<RunningTask> runningTask = taskMonitorService.getRunningTaskData(queryCondition);
 			JSONObject runningJson = new JSONObject();
 			if (runningTask != null && !runningTask.isEmpty()) {
 		    List<String> runningDate = new ArrayList<>();

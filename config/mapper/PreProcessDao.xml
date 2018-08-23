@@ -46,9 +46,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
 	<select id="getPreProcessInputData" parameterType="map" resultMap="preProcessInputMap">
 	    select sum(datanum) as datanum, createtime from preprocessmonitor
-	    where datatype = '2001'
+	    where datatype = '2001' and date_sub(CURDATE(), INTERVAL #{realDay} DAY) <![CDATA[<=]]>  date(createtime)
 	    <include refid="queryCondition"></include> 
-	    group BY createtime
+	    group by createtime
 	    order by createtime
 	</select>
 	
@@ -56,13 +56,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    select sum(datanum) as datanum, createtime from preprocessmonitor
 	    where datatype = '2002' or datatype = '2003' or datatype = '2005' or datatype = '2009'
 	    or datatype = '2012' or datatype = '2044'
+	    and date_sub(CURDATE(), INTERVAL #{realDay} DAY) <![CDATA[<=]]>  date(createtime)
 	    <include refid="queryCondition"></include> 
-	    group BY createtime
+	    group by createtime
 	    order by createtime
 	</select>
 	
 	<select id="getRepeatData" parameterType="map" resultMap="preProcessInputMap">
-	    select sum(datanum) as datanum, createtime from `preprocessmonitor` where datatype = '2004' and errortype = 1 
+	    select sum(datanum) as datanum, createtime from `preprocessmonitor` where datatype = '2004' and errortype = 1
+	    and date_sub(CURDATE(), INTERVAL #{repeatDay} DAY) <![CDATA[<=]]>  date(createtime) 
 	    <include refid="queryCondition"></include>
 	    group by createtime 
 	    ORDER BY createtime
@@ -77,4 +79,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getErrorData" parameterType="map" resultMap="preProcessDiscardMap">
 	    select sum(datanum) as datanum, errortype from `preprocessmonitor` where datatype = '2004' group by errortype ORDER BY datatype;
 	</select>
+	
 </mapper>

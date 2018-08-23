@@ -1,33 +1,65 @@
 $(function(){
-	/*var configs = [
-		{
-			id : "anticipationComb_1",
-			url : "json/failCause.json",
-			onSelect : function(combo,record){}
-		},{
-			id : "anticipationComb_2",
-			url : "json/failCause.json",
-			onSelect : function(combo,record){}
-		},{
-			id : "anticipationComb_3",
-			url : "json/failCause.json",
-			onSelect : function(combo,record){}
-		},{
-			id : "anticipationComb_4",
-			url : "json/failCause.json",
-			onSelect : function(combo,record){}
-		},{
-			id : "anticipationComb_5",
-			url : "json/failCause.json",
-			onSelect : function(combo,record){}
-		},{
-			id : "anticipationComb_6",
-			url : "json/failCause.json",
-			onSelect : function(combo,record){}
+	$('.chooseDay').off("click").on('click',"a",function(){
+		$(this).addClass("slt").siblings().removeClass("slt");
+		
+		var parent = $(this).parent();
+		var day = $(this).attr('value');
+		var url = parent.attr('url');
+		console.log("day = " + day);
+		console.log("url = " + url);
+		
+		refresh(url, day);
+		return false;
+	});	
+	
+	init();
+})
+
+function getQueryCondtion() {
+	var inputDay = $("#restore_input a[class$='slt']").attr("value");
+	var outputDay = $("#restore_output a[class$='slt']").attr("value");
+	
+	console.log("inputDay = " + inputDay);
+	console.log("outputDay = " + outputDay);
+		
+	var queryCondition = {
+		"inputDay": inputDay,
+		"outputDay": outputDay
+	};
+	
+	return queryCondition;
+}
+
+function refresh(url, day) {
+	var queryCondition = getQueryCondtion();
+	console.log(JSON.stringify(queryCondition));
+	
+	if (url == 'input') {
+		queryCondition['inputDay'] = day;
+	} else if (url == 'output') {
+		queryCondition['outputDay'] = day;
+	}
+	$.ajax({
+		url: '/rundatakpi/restore/' + url,
+		method: 'GET',
+		data: queryCondition,
+		dataType: 'json',
+		success: function(data) {
+			if (url == 'input') {
+				//接入数据实时输入数据量
+				importDataChart("importDataChart", data['inputJson']);
+			} else if (url == 'output') {
+				//数据重复率
+				exportDataChart("exportDataChart", data['outputJson']);
+			}
+		},
+		error: function(data) {
+			console.log("error");
 		}
-	];
-	combobox(configs);*/
-	var queryCondition = {};
+	});
+}
+
+function init(queryCondition) {
 	$.ajax({
 		url: '/rundatakpi/restore/init',
 		data: queryCondition,
@@ -35,39 +67,35 @@ $(function(){
 		dataType: 'json',
 		success: function(data) {
 			console.log(JSON.stringify(data));
-			init(data);
+			//协议还原数据实时输入数据量
+			importDataChart("importDataChart", data['inputJson']);
+			
+			//协议还原数据实时输出数据量
+			exportDataChart("exportDataChart", data['outputJson']);
+			
+			//当前数据总量饼图
+			curTotalDataChart("curTotalDataChart", data['currentDataJson']);
+			
+			//昨日数据总量饼图
+			yestodayTotalDataChart("yestodayTotalDataChart", data['yesterdayDataJson']);
+			
+			//重复率、错误率、准确率
+			ratioDatas_1("ratioDatas_1");
+			
+			//还原设备负载
+			restoreEquipmentChart("restoreEquipmentChart");
+			
+			$("#restore_total_input").text(data['currentDataJson']['totalInputNum']);
+			$("#restore_total_output").text(data['currentDataJson']['totalOutputNum']);
+			$("#restore_total_discard").text(data['currentDataJson']['totalDiscardNum']);
+			$("#restore_yesterday_input").text(data['yesterdayDataJson']['yesterdayInputNum']);
+			$("#restore_yesterday_output").text(data['yesterdayDataJson']['yesterdayOutputNum']);
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log("error");
 		}
 	});
 	
-})
-
-function init(data) {
-	//协议还原数据实时输入数据量
-	importDataChart("importDataChart", data['inputJson']);
-	
-	//协议还原数据实时输出数据量
-	exportDataChart("exportDataChart", data['outputJson']);
-	
-	//当前数据总量饼图
-	curTotalDataChart("curTotalDataChart", data['currentDataJson']);
-	
-	//昨日数据总量饼图
-	yestodayTotalDataChart("yestodayTotalDataChart", data['yesterdayDataJson']);
-	
-	//重复率、错误率、准确率
-	ratioDatas_1("ratioDatas_1");
-	
-	//还原设备负载
-	restoreEquipmentChart("restoreEquipmentChart");
-	
-	$("#restore_total_input").text(data['currentDataJson']['totalInputNum']);
-	$("#restore_total_output").text(data['currentDataJson']['totalOutputNum']);
-	$("#restore_total_discard").text(data['currentDataJson']['totalDiscardNum']);
-	$("#restore_yesterday_input").text(data['yesterdayDataJson']['yesterdayInputNum']);
-	$("#restore_yesterday_output").text(data['yesterdayDataJson']['yesterdayOutputNum']);
 }
 
 /**
