@@ -38,7 +38,7 @@ $(function(){
 		console.log("day = " + day);
 		console.log("url = " + url);
 		
-		refresh(url, day);
+		refresh(url);
 		return false;
 	});	 
 	
@@ -50,9 +50,8 @@ $(function(){
 
 function refresh(url, day) {
 	var queryCondition = getQueryCondition();
-	queryCondition.push("day", day);
 	$.ajax({
-		url: '/rundatakpi/access' + url,
+		url: '/rundatakpi/access/' + url,
 		method: 'GET',
 		data: queryCondition,
 		dataType: 'json',
@@ -71,34 +70,32 @@ function refresh(url, day) {
 	});
 }
 
-function getQueryCondtion() {
+function getQueryCondition() {
 	var dataSource = $("#insertComb_1").val()[0];
 	var bProtocol = $("#insertComb_2").val()[0];
 	var sProtocol = $("#insertComb_3").val()[0];
 	var action = $("#insertComb_4").val()[0];
+	
+	var inputDate = $("#input_date a[class$='slt']").attr("value");
+	var discardDate = $("#discard_date a[class$='slt']").attr("value");
 	var queryCondition = {
 		"dataSource": dataSource,
 		"bProtocol": bProtocol,
 		"sProtocol": sProtocol,
 		"action": action,
+		"inputDay": inputDate,
+		"discardDay": discardDate
 	};
 	
 	return queryCondition;
 }
 
 function insertQuery() {
-	var inputDate = $("#input_date a[class$='slt']").attr("value");
-	var discardDate = $("#discard_date a[class$='slt']").attr("value");
-	console.log("inputDate = " + inputDate);
-	console.log("discardDate = " + discardDate);
-	var queryCondition = getQueryCondtion();
+	var queryCondition = getQueryCondition();
 	init(queryCondition);
 }
 
 function init(queryCondition) {
-	var data = "";
-	console.log(data['test']);
-	
 	$.ajax({
 		url: '/rundatakpi/access/data',
 		data: queryCondition,

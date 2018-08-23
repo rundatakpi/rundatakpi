@@ -39,11 +39,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
     
 	<select id="getRestoreInputData" parameterType="map" resultMap="restoreInputMap">
-		 select sum(restoreinput) as input, createtime FROM `restoremonitor` where date_sub(CURDATE(), INTERVAL 6 DAY) <![CDATA[<=]]>  date(createtime) GROUP BY createtime order by createtime
+		 select sum(restoreinput) as input, createtime FROM `restoremonitor` 
+		 where date_sub(CURDATE(), INTERVAL #{inputDay} DAY) <![CDATA[<=]]>  date(createtime) 
+		 GROUP BY createtime order by createtime
 	</select>
 	
 	<select id="getRestoreOutputData" parameterType="map" resultMap="restoreOutputMap">
-	     select sum(restoreoutputbcp) output, createtime FROM `restoremonitor` where date_sub(CURDATE(), INTERVAL 6 DAY) <![CDATA[<=]]>  date(createtime) GROUP BY createtime order by createtime;
+	     select sum(restoreoutputbcp) output, createtime FROM `restoremonitor` 
+	     where date_sub(CURDATE(), INTERVAL #{outputDay} DAY) <![CDATA[<=]]>  date(createtime)
+	     GROUP BY createtime order by createtime;
 	</select>
 	
 	<select id="getTotalRestoreInputNum" parameterType="map" resultType="java.lang.Long">

@@ -73,7 +73,7 @@
     	<div class="box right exportData">
         	<div class="boxHd clearfix">
                 <h3 class="left">抛弃数据量</h3>
-                <div id="discard_date" path="discard" class="chooseDay right">
+                <div id="discard_date" url="discard" class="chooseDay right">
                     <a href="#" class="left sevenDays slt" value="7">近7天</a>
                     <a href="#" class="right thirtyDays" value="30">近30天</a>
                 </div>

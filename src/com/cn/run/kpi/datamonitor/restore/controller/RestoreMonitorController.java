@@ -40,7 +40,7 @@ public class RestoreMonitorController {
 	@RequestMapping("/init")
 	@ResponseBody
 	public String init(HttpServletRequest request, HttpServletResponse response) {
-		Map<String, Object> queryCondition = new HashMap<String, Object>();
+		Map<String, Object> queryCondition = getQueryCondition(request);
 		
 		JSONObject object =new JSONObject();
 		
@@ -76,6 +76,25 @@ public class RestoreMonitorController {
 		object.put("yesterdayDataJson", yesterdayDataJson);
 		
 		return object.toString();
+	}
+
+	private Map<String, Object> getQueryCondition(HttpServletRequest request) {
+		
+		Map<String, Object> queryCondition = new HashMap<String, Object>();
+		String inputDay = request.getParameter("inputDay");
+		String outputDay = request.getParameter("outputDay");
+		
+		if (StringUtil.isNotEmpty(inputDay)) {
+			queryCondition.put("inputDay", inputDay);
+		} else {
+			queryCondition.put("inputDay", 7);
+		}
+		if (StringUtil.isNotEmpty(outputDay)) {
+			queryCondition.put("outputDay", outputDay);
+		} else {
+			queryCondition.put("outputDay", 7);
+		}
+		return queryCondition;
 	}
 
 	private void getRestoreOutputData(Map<String, Object> queryCondition, JSONObject object) {
@@ -171,5 +190,23 @@ public class RestoreMonitorController {
 			LOG.error(">>>>>get total input num failed...", e);
 		}
 		return StringUtil.isEmpty(totalInputNum) ? 0L : totalInputNum;
+	}
+	
+	@RequestMapping("/input")
+	@ResponseBody
+	public String getInputData(HttpServletRequest request) {
+		JSONObject object = new JSONObject();
+		
+		getRestoreInputData(getQueryCondition(request), object);
+		return object.toString();
+	}
+	
+	@RequestMapping("/output")
+	@ResponseBody
+	public String getOutputData(HttpServletRequest request) {
+		JSONObject object = new JSONObject();
+		
+		getRestoreOutputData(getQueryCondition(request), object);
+		return object.toString();
 	}
 }
