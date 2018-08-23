@@ -22,13 +22,13 @@ public interface PreProcessService {
 	List<PreProcessEntity> getPreProcessData(Map<String, Object> queryCondition);
 	
 	/**
-	 * 获取近XX预处理输入量、输出量
+	 * 获取近X天预处理输入量、输出量
 	 * @return
 	 */
 	List<PreProcessRealTimeEntity> getPreProcessRealTimeData(Map<String, Object> queryCondition);
 	
 	/**
-	 * 获取近XX输入数据流重复率
+	 * 获取近X天输入数据流重复率
 	 * @return
 	 */
 	List<InputRepetionEntity> getInputRepetionRate(Map<String, Object> queryCondition);
@@ -46,13 +46,13 @@ public interface PreProcessService {
 	List<PreProcessEntity> getErrorData(Map<String, Object> queryCondition) throws Exception;
 	
 	/**
-	 * 获取近XX预处理输入量
+	 * 获取近X天预处理输入量
 	 * @return
 	 */
 	List<PreProcessEntity> getPreProcessInputData(Map<String, Object> queryCondition) throws Exception;
 	
 	/**
-	 * 获取近XX预处理丢弃量
+	 * 获取近X天预处理丢弃量
 	 * @return
 	 */
 	List<PreProcessEntity> getPreProcessOutputData(Map<String, Object> queryCondition) throws Exception;

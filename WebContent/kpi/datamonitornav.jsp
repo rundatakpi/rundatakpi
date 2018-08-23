@@ -2,14 +2,12 @@
 <script>
 $(function() {
     
-    console.log(window.document.location.href);
     var url = window.document.location.href;
     var index = url.lastIndexOf('/');
-    var id = url.substring(index + 1, url.length - 4);
-    
-    $("a").removeClass("slt");
-    $("#" + id).addClass("slt");
-    console.log("id = " + id);
+    var id = url.substring(index + 1);
+    $("#datamonitor").addClass("slt");
+//     $("a").removeClass("slt");
+    $("a[href='" + id + "']").addClass("slt").attr('href','javascript:void(0);');
 })
 </script>
 <div id="nav_datamonitor" class="steps clearfix">
