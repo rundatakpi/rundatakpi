@@ -112,6 +112,9 @@ function opeFormatter(val,row){
 	//return "<a href='#' class='opeButton' onclick='formatterOpe(this,"+row+")' title='"+val+"'>"+val+"</a>";
 }
 
+function ser(){
+	alert($(".j_toTimeSS").val());
+}
 //点击查看按钮方法
 function opeSeeFnc(){
 	windowFnc({
