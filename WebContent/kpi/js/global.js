@@ -6,13 +6,13 @@ var globalObj = {
 		"mergeGrid":{}
 	};
 
-$(function(){
+/*$(function(){
 	$('.chooseDay').off("click").on('click',"a",function(){
 		$(this).addClass("slt").siblings().removeClass("slt");
 		return false;
 	});	
 	
-})
+})*/
 
 
 //创建下拉框组件
