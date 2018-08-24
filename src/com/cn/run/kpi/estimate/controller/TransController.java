@@ -124,7 +124,6 @@ public class TransController {
 			Integer length = Integer.valueOf(request.getParameter("pageSize"));
 			transformData.setStart(start-1);
 			transformData.setLength(length);
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			transformData.setCreateDate(DateUtil.getDate());
 			
 			List<TransInfo> tanformDatas = transformService.getList(transformData);
