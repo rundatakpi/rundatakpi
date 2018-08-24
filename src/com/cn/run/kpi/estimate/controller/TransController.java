@@ -116,9 +116,6 @@ public class TransController {
 	public Map<String,Object> getList(HttpServletRequest request,TransInfo transformData){
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		try {
-			if(null == transformData) {
-				return resultMap;
-			}
 			
 			Integer start = Integer.valueOf(request.getParameter("currentPage"));
 			Integer length = Integer.valueOf(request.getParameter("pageSize"));

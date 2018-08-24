@@ -7,25 +7,25 @@ $(function(){
 		id : "importDataCombobox_1",
 		url : rootPath+"/transform/getDataSource",
 		onSelect : function(combo,record){
-			param.dsCode = record.value;
+			param.dsCode = record.value[0];
 		}
 	},{
 		id : "importDataCombobox_2",
 		url : rootPath+"/transform/getBProtocol",
 		onSelect : function(combo,record){
-			param.bProtocolCode = record.value;
+			param.bProtocolCode = record.value[0];
 		}
 	},{
 		id : "importDataCombobox_3",
 		url : rootPath+"/transform/getSProtocol",
 		onSelect : function(combo,record){
-			param.sProtocolCode = record.value;
+			param.sProtocolCode = record.value[0];
 		}
 	},{
 		id : "importDataCombobox_4",
 		url : rootPath+"/transform/getActionType",
 		onSelect : function(combo,record){
-			param.actionType = record.value;
+			param.actionType = record.value[0];
 		}
 	}];
 	combobox(configs);
@@ -40,7 +40,6 @@ $(function(){
 	
 	globalObj.mergeGrid["importDataBody"] = Run.create('importDataGrid',{
 		id : 'importDataBody',
-		query : param,
 		url : rootPath+"/transform/getList",
 		//checkOneCls:'cardOb_chk',
 		cache:true,
@@ -76,12 +75,16 @@ $(function(){
 	
 	//点击查询按钮
 	$(".schBtn_1").on("click",function(){
-		globalObj.mergeGrid["importDataBody"].reload;
+		console.log(param);
+		globalObj.mergeGrid["importDataBody"].reloadCards(rootPath+"/transform/getList",param);
 	})
 	
 	//点击清空按钮
 	$(".emptyBtn_1").on("click",function(){
-		
+		clearCombobox("importDataCombobox_1");
+		clearCombobox("importDataCombobox_2");
+		clearCombobox("importDataCombobox_3");
+		clearCombobox("importDataCombobox_4");
 	})
 
 });

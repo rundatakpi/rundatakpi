@@ -184,6 +184,9 @@ function windowFnc(configs){
 	//console.log(JSON.stringify(globalObj));
 }
 
+function clearCombobox(id){
+	$("#"+id).find("input").val("").end().find(".r-combobox-slt").removeClass("r-combobox-slt");
+}
 
 
 
