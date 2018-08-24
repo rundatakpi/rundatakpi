@@ -15,7 +15,7 @@ import com.cn.run.kpi.datamonitor.restore.entity.RestoreOutputEntity;
 public interface RestoreService {
 
 	/**
-	 * 获取近七天协议还原数据实时输入数据量
+	 * 获取近x天协议还原数据实时输入数据量
 	 * @return
 	 */
 	List<RestoreInputEntity> getRestoreInputData(Map<String, Object> queryCondition) throws Exception;

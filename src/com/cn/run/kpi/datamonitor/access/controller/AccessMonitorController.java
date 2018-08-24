@@ -95,16 +95,16 @@ public class AccessMonitorController {
 		String sProtocol = request.getParameter("sProtocol");
 		String action = request.getParameter("action");
 		
-		if (StringUtil.isNotEmpty(dataSource)) {
+		if (StringUtil.isNotEmpty(dataSource) && !Constants.QUERY_ALL.equals(dataSource)) {
 			queryCondition.put("dataSource", dataSource);
 		}
-		if (StringUtil.isNotEmpty(bProtocol)) {
+		if (StringUtil.isNotEmpty(bProtocol) && !Constants.QUERY_ALL.equals(bProtocol)) {
 			queryCondition.put("bProtocol", bProtocol);
 		}
-		if (StringUtil.isNotEmpty(sProtocol)) {
+		if (StringUtil.isNotEmpty(sProtocol) && !Constants.QUERY_ALL.equals(sProtocol)) {
 			queryCondition.put("sProtocol", sProtocol);
 		}
-		if (StringUtil.isNotEmpty(action)) {
+		if (StringUtil.isNotEmpty(action) && !Constants.QUERY_ALL.equals(action)) {
 			queryCondition.put("action", action);
 		}
 		

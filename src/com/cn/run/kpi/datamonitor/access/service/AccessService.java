@@ -87,6 +87,9 @@ public interface AccessService {
 	 */
 	void getCollectPlace() throws Exception;
 	
+	/**
+	 * 初始化查询条件
+	 */
 	void initJson();
 	
 }
