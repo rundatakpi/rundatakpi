@@ -45,19 +45,26 @@ public interface TransService {
 	 * @param transInfo
 	 * @return
 	 */
-	public List<TransInfo> getBProtocol(TransInfo transInfo);
+	public List<TransInfo> getBProtocol();
 	
 	/**
 	 * 查询小协议
 	 * @param transInfo
 	 * @return
 	 */
-	public List<TransInfo> getSProtocol(TransInfo transInfo);
+	public List<TransInfo> getSProtocol();
 	
 	/**
 	 * 查询动作类型
 	 * @param transInfo
 	 * @return
 	 */
-	public List<TransInfo> getActionType(TransInfo transInfo);;
+	public List<TransInfo> getActionType();
+
+	/**
+	 * 根据id查询格转接入数据信息
+	 * @param id
+	 * @return
+	 */
+	public TransInfo selectById(long id);;
 }

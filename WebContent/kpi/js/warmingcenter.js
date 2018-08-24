@@ -1,132 +1,54 @@
 $(function(){
-	//切换样式
-	$('.nav').find('a').removeClass("slt");
-	$('.navLink_5').addClass('slt');
 	var configs = [{
 		id : "warmingCombobox_1",
 		url : "json/failCause.json",
 		onSelect : function(combo,record){}
 	},{
 		id : "warmingCombobox_2",
-		url : "json/failStatus.json",
+		url : "json/failCause.json",
 		onSelect : function(combo,record){}
 	}];
-	//加载下拉框
 	combobox(configs);
-	//加载表格
-	showTable("/rundatakpi/alarmData/getList")
-    
-	//加一个监听（筛选功能）
-	$('#schBtn').click(function(){
-		clickSift();
-	});
 	
-	//清空筛选
-	$("#emptyBtn").click(function(){
-		clickEmpty();
-	});
-	
-	//批量导出
-	$(".opeBtn_1").click(function(){
-		downloadFun();
-	});
-    
+	//加载帐号监测表格
+    var colModel = [{                                               //配置表格各列
+                display:'告警时间',
+                name:'col1',
+                hidden:false
+            },{
+                display:'告警级别',
+                name:'col2',
+                hidden:false,
+				formatter : levelFormatter
+            },{
+                display:'告警内容',
+                name:'col3',
+                hidden:false
+            },{
+                display:'处理状态',
+                name:'col4',
+                hidden:false,
+				formatter : statusFormatter
+            },{
+                display:'操作',
+                name:'col5',
+                hidden:false,
+				formatter : opeFormatter
+            }];
+    grid("warmingGrid","json/warmingGrid.json",colModel);
 });
-
-function downloadFun(){
-	//告警级别
-	var warmingLevel = $("#warmingCombobox_1").find(".r-combobox-slt").find("span").attr("value");
-	if(warmingLevel==undefined||warmingLevel==0){
-		warmingLevel="";
-	}
-	//告警状态
-	var warmingStatus= $("#warmingCombobox_2").find(".r-combobox-slt").find("span").attr("value");
-	if(warmingStatus==undefined||warmingStatus==0){
-		warmingStatus="";
-	}
-	var url="/rundatakpi/alarmData/exportExcel?alarmLevel="+warmingLevel+"&processState="+warmingStatus;
-	window.location=url;
-}
-
-function showTable(url){
-	  var colModel = [{                                               //配置表格各列
-          display:'id',
-          name:'id',
-          hidden:true
-      },{                                               //配置表格各列
-          display:'告警时间',
-          name:'alarmTime',
-          hidden:false
-      },{
-          display:'告警级别',
-          name:'alarmLevel',
-          hidden:false,
-			formatter : levelFormatter
-      },{
-          display:'告警内容',
-          name:'alarmContent',
-          hidden:false
-      },{
-          display:'处理状态',
-          name:'processState',
-          hidden:false,
-			formatter : statusFormatter
-      },{
-          display:'操作',
-          name:'col5',
-          hidden:false,
-		  formatter : opeFormatter
-      }];
-	  var otherConfig = {
-				"isMultiple":false
-	};
-grid("warmingGrid",url,colModel,otherConfig);
-}
-//筛选
-function clickSift(){
-	//告警级别
-	var warmingLevel = $("#warmingCombobox_1").find(".r-combobox-slt").find("span").attr("value");
-	if(warmingLevel==undefined||warmingLevel==0){
-		warmingLevel="";
-	}
-	//告警状态
-	var warmingStatus= $("#warmingCombobox_2").find(".r-combobox-slt").find("span").attr("value");
-	if(warmingStatus==undefined||warmingStatus==0){
-		warmingStatus="";
-	}
-	var url="/rundatakpi/alarmData/getList?alarmLevel="+warmingLevel+"&processState="+warmingStatus;
-	showTable(url);
-}
-//清空
-function clickEmpty(){
-	//$('div[name="warmingCombobox_1"]').val("0");
-	//$('div[name="warmingCombobox_2"]').val("0");
-	//$("#warmingCombobox_2").find(".r-combobox-input").val("请选择");
-	//$("#warmingCombobox_1").find(".r-combobox-input").val("请选择");
-	$("#warmingCombobox_1").children().remove();
-	$("#warmingCombobox_2").children().remove();
-	var configs = [{
-		id : "warmingCombobox_1",
-		url : "json/failCause.json",
-		onSelect : function(combo,record){}
-	},{
-		id : "warmingCombobox_2",
-		url : "json/failStatus.json",
-		onSelect : function(combo,record){}
-	}];
-	//加载下拉框
-	combobox(configs);
-	showTable("/rundatakpi/alarmData/getList")
-}
 
 //告警级别列回调函数
 function levelFormatter(val,row){
-	if(val === "1"){
-		return "<span class='levelSpan_1'>严重</span>";
-	}else if(val === "2"){
-		return "<span class='levelSpan_2'>一般</span>";
-	}else if(val === "3"){
-		return "<span class='levelSpan_3'>轻微</span>";
+	//alert(JSON.stringify(row));
+	//alert(JSON.stringify(val));
+	//alert(JSON.stringify($(row).html()));
+	if(val === "一般"){
+		return "<span class='levelSpan_1'>"+val+"</span>";
+	}else if(val === "轻微"){
+		return "<span class='levelSpan_2'>"+val+"</span>";
+	}else if(val === "严重"){
+		return "<span class='levelSpan_3'>"+val+"</span>";
 	}
 	//var row = JSON.stringify(row);
 	//return "<a href='#' class='opeButton' onclick='formatterOpe(this,"+row+")' title='"+val+"'>"+val+"</a>";
@@ -134,12 +56,15 @@ function levelFormatter(val,row){
 
 //状态列回调函数
 function statusFormatter(val,row){
-	if(val === "1"){
-		return "<span class='statusSpan_1'>告警中</span>";
-	}else if(val === "2"){
-		return "<span class='statusSpan_2'>处理中</span>";
-	}else if(val === "3"){
-		return "<span class='statusSpan_3'>已处理</span>";
+	//alert(JSON.stringify(row));
+	//alert(JSON.stringify(val));
+	//alert(JSON.stringify($(row).html()));
+	if(val === "告警中"){
+		return "<span class='statusSpan_1'>"+val+"</span>";
+	}else if(val === "处理中"){
+		return "<span class='statusSpan_2'>"+val+"</span>";
+	}else if(val === "已处理"){
+		return "<span class='statusSpan_3'>"+val+"</span>";
 	}
 	//var row = JSON.stringify(row);
 	//return "<a href='#' class='opeButton' onclick='formatterOpe(this,"+row+")' title='"+val+"'>"+val+"</a>";
@@ -159,7 +84,7 @@ function opeFormatter(val,row){
 }
 
 //点击修改按钮方法
-function opeEditFnc(_this){
+function opeEditFnc(){
 	windowFnc({
 		id:"pop",
 		width:300,
@@ -170,34 +95,6 @@ function opeEditFnc(_this){
 			'className':'diaSureBtn',
 			'text':'确定',
 			'handle': function (api) {//确定
-				var status=$("#dealStatusCombobox").find(".r-combobox-slt").find("span").attr("value");
-				var statusContent=$("#dealStatusCombobox").find(".r-combobox-slt").find("span").text();
-				if(status!=undefined&&status!=0){
-					var id=$(_this).closest("tr").find("td[name='id']").find(".r-grid-omit").text();
-					$.ajax({
-				        type: 'post',
-				        url: "/rundatakpi/alarmData/edit",
-				        dataType : 'json',
-				        async : false,
-				        data:{"id":id,"processState":status},
-				        success: function(result){
-				        	var flag=result.flag;
-				        	if(flag==1){
-				        		var processState =$(_this).closest("tr").find("td[name='processState']").find(".r-grid-omit").find("span");
-				        		$(processState).text(statusContent);
-				        		$(processState).removeClass("statusSpan_1").removeClass("statusSpan_2").removeClass("statusSpan_3");
-				        		if(status==1){
-				        			$(processState).addClass("statusSpan_1")
-				        		}else if(status==2){
-				        			$(processState).addClass("statusSpan_2")
-				        		}else{
-				        			$(processState).addClass("statusSpan_3")
-				        		}
-				        	}
-				        	
-				       }
-				     });
-				}
 				api.close();
 			}
 		},{
@@ -221,7 +118,7 @@ function opeEditFnc(_this){
 }
 
 //点击删除按钮方法
-function opeDeleteFnc(_this){
+function opeDeleteFnc(){
 	windowFnc({
 		id:"pop",
 		width:310,
@@ -232,17 +129,6 @@ function opeDeleteFnc(_this){
 			'className':'diaSureBtn',
 			'text':'确定',
 			'handle': function (api) {//确定
-				var id=$(_this).closest("tr").find("td[name='id']").find(".r-grid-omit").text();
-				$.ajax({
-			        type: 'post',
-			        url: "/rundatakpi/alarmData/del",
-			        dataType : 'json',
-			        async : false,
-			        data:{"id":id},
-			        success: function(result){
-			        	location.reload();
-			       }
-			     });
 				api.close();
 			}
 		},{

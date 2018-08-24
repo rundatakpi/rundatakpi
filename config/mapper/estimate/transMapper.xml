@@ -19,40 +19,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="null != actionType and '' != actionType">
             and actionType = #{actionType}
         </if>
-        <if test="null != startTime and '' != startTime">
-            and createDate <![CDATA[ >= ]]> #{startTime}
-        </if>
-        <if test="null != endTime and '' != endTime">
-            and createDate <![CDATA[ < ]]> #{endTime}
-        </if>
          <if test="null != createDate and '' != createDate">
             and createDate = #{createDate}
         </if>
     </sql>
     
     <select id="getDataSource" resultType="com.cn.run.kpi.estimate.entity.TransInfo">
-    	select distinct dsCode,dsDesc from t_trans_total
+    	select distinct dsCode chkVal,dsDesc chkDisplay from t_trans_total
     </select>
     
      <select id="getBProtocol" parameterType="com.cn.run.kpi.estimate.entity.TransInfo" resultType="com.cn.run.kpi.estimate.entity.TransInfo">
-    	select distinct bProtocolCode,bProtocolDesc from t_trans_total
-    	<where>       
-			<include refid="transCondition"></include>
-		</where>
+    	select distinct bProtocolCode chkVal,bProtocolDesc chkDisplay from t_trans_total
     </select>
     
      <select id="getSProtocol" parameterType="com.cn.run.kpi.estimate.entity.TransInfo" resultType="com.cn.run.kpi.estimate.entity.TransInfo">
-    	select distinct sProtocolCode,sProtocolDesc from t_trans_total
-    	<where>
-			<include refid="transCondition"></include>
-		</where>
+    	select distinct sProtocolCode chkVal,sProtocolDesc chkDisplay from t_trans_total
     </select>
     
      <select id="getActionType" parameterType="com.cn.run.kpi.estimate.entity.TransInfo" resultType="com.cn.run.kpi.estimate.entity.TransInfo">
-    	select distinct actionType from t_trans_total
-    	<where>
-			<include refid="transCondition"></include>
-		</where>
+    	select distinct actionType chkVal from t_trans_total
     </select>
     
 	<select id="getList" parameterType="com.cn.run.kpi.estimate.entity.TransInfo" resultType="com.cn.run.kpi.estimate.entity.TransInfo">
@@ -77,32 +62,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<where>
 			<include refid="transCondition"></include>
 		</where>
-		group by 
-			t.dsCode,
-			t.bProtocolCode,
-			t.sProtocolCode,
-			t.actionType
 		limit #{start},#{length}
 	</select>
 	
 	<select id="getTotal" parameterType="com.cn.run.kpi.estimate.entity.TransInfo" resultType="java.lang.Integer">
-		SELECT count(
-				DISTINCT t.dsCode,
-				t.bProtocolCode,
-				t.sProtocolCode,
-				t.actionType
-			)
-		FROM t_trans_total t
+		SELECT count(1) FROM t_trans_total t
 		<where>
 			<include refid="transCondition"></include>
 		</where>
 	</select>
 	
+	<select id="selectById" parameterType="java.lang.Long" resultType="com.cn.run.kpi.estimate.entity.TransInfo">
+		select 
+		  	t.id,
+			t.dsCode,
+			t.dsDesc,
+			t.bProtocolCode,
+			t.bProtocolDesc,
+			t.sProtocolCode,
+			t.sProtocolDesc,
+			t.actionType,
+			t.inputNum,
+			t.inputSpeed,
+			t.inputFieldRate,
+			t.inputGroupRate,
+			t.inputFieldAvailRate,
+			t.inputGroupAvailRate,
+			t.inputAccuracy,
+			t.createDate
+		from t_trans_total t
+		where t.id = #{_parameter}
+	</select>
+	
 	<select id="selectDetail" parameterType="com.cn.run.kpi.estimate.entity.TransInfo" resultType="com.cn.run.kpi.estimate.entity.TransInfo">
-		select createDate as oKey,${colName} as oValue from t_trans
+		select createDate as chkVal,${colName} as chkDisplay from t_trans
 		<where>
-			<include refid="transCondition"></include>
+			<if test="null != dsCode and '' != dsCode">
+	            and dsCode = #{dsCode}
+	        </if>
+	        <if test="null != bProtocolCode and '' != bProtocolCode">
+	            and bProtocolCode = #{bProtocolCode}
+	        </if>
+	        <if test="null != sProtocolCode and '' != sProtocolCode">
+	            and sProtocolCode = #{sProtocolCode}
+	        </if>
+	        <if test="null != actionType and '' != actionType">
+	            and actionType = #{actionType}
+	        </if>
+	         <if test="null != createDate and '' != createDate">
+	            and createDate >= date_sub(#{createDate}, INTERVAL 7 DAY) 
+	        </if>
+			
 		</where>
-		
 	</select>
 </mapper>

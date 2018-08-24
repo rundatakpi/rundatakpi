@@ -58,7 +58,8 @@ function clearGlobalObj(){
 	globalObj = {
 		"gridObj":{},
 		"comboboxObj":{},
-		"windowObj":{}
+		"windowObj":{},
+		"mergeGrid":{}
 	};
 }
 
@@ -94,8 +95,7 @@ function grid(id,url,colModel,configs){
 			},
 			listeners:{
 				render:function(){
-					var total=this.getTotal();
-					$(".boxHdEm").text(total);
+					//alert(this.getTotal());
 					//alert(this.getData());
 				},
 				reloadGrid:function(){
@@ -183,3 +183,16 @@ function windowFnc(configs){
 	
 	//console.log(JSON.stringify(globalObj));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

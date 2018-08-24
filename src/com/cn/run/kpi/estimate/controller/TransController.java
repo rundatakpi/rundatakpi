@@ -47,7 +47,7 @@ public class TransController {
 		JSONObject jsonObject = new JSONObject();
 		List<TransInfo> list = transformService.getDataSource();
 		if(null!=list&&!list.isEmpty()) {
-			jsonObject.put("trans", list);
+			jsonObject.put("result", list);
 		}
 		return jsonObject;
 	}
@@ -59,11 +59,11 @@ public class TransController {
 	 */
 	@RequestMapping("/getBProtocol")
 	@ResponseBody
-	public JSONObject getBProtocol(TransInfo transInfo) {
+	public JSONObject getBProtocol() {
 		JSONObject jsonObject = new JSONObject();
-		List<TransInfo> list = transformService.getBProtocol(transInfo);
+		List<TransInfo> list = transformService.getBProtocol();
 		if(null!=list&&!list.isEmpty()) {
-			jsonObject.put("trans", list);
+			jsonObject.put("result", list);
 		}
 		return jsonObject;
 	}
@@ -75,11 +75,11 @@ public class TransController {
 	 */
 	@RequestMapping("/getSProtocol")
 	@ResponseBody
-	public JSONObject getSProtocol(TransInfo transInfo) {
+	public JSONObject getSProtocol() {
 		JSONObject jsonObject = new JSONObject();
-		List<TransInfo> list = transformService.getSProtocol(transInfo);
+		List<TransInfo> list = transformService.getSProtocol();
 		if(null!=list&&!list.isEmpty()) {
-			jsonObject.put("trans", list);
+			jsonObject.put("result", list);
 		}
 		return jsonObject;
 	}
@@ -91,16 +91,16 @@ public class TransController {
 	 */
 	@RequestMapping("/getActionType")
 	@ResponseBody
-	public JSONObject getActionType(TransInfo transInfo) {
+	public JSONObject getActionType() {
 		JSONObject jsonObject = new JSONObject();
-		List<TransInfo> list = transformService.getActionType(transInfo);
+		List<TransInfo> list = transformService.getActionType();
 		if(null!=list&&!list.isEmpty()) {
 			for (TransInfo info : list) {
-				String actionTypeDesc = ActionConfig.getValue(info.getActionType());
-				info.setActionTypeDesc(actionTypeDesc);
+				String actionTypeDesc = ActionConfig.getValue(info.getChkVal());
+				info.setChkDisplay(actionTypeDesc);
 			}
 			
-			jsonObject.put("trans", list);
+			jsonObject.put("result", list);
 		}
 		return jsonObject;
 	}
@@ -116,14 +116,16 @@ public class TransController {
 	public Map<String,Object> getList(HttpServletRequest request,TransInfo transformData){
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		try {
+			if(null == transformData) {
+				return resultMap;
+			}
 			
-			Integer start = Integer.valueOf(request.getParameter("start"));
-			Integer length = Integer.valueOf(request.getParameter("length"));
-			transformData.setStart(start);
+			Integer start = Integer.valueOf(request.getParameter("currentPage"));
+			Integer length = Integer.valueOf(request.getParameter("pageSize"));
+			transformData.setStart(start-1);
 			transformData.setLength(length);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String currDate = sdf.format(new Date());
-			transformData.setCreateDate(currDate);
+			transformData.setCreateDate(DateUtil.getDate());
 			
 			List<TransInfo> tanformDatas = transformService.getList(transformData);
 			for (TransInfo transInfo : tanformDatas) {
@@ -133,8 +135,7 @@ public class TransController {
 			}
 			
 			Integer total = transformService.getTotal(transformData);
-			resultMap.put("recordsTotal", total);
-			resultMap.put("recordsFiltered",total);
+			resultMap.put("total",total);
 			resultMap.put("data", tanformDatas);
 		}catch(Exception e) {
 			LOG.error(e.getMessage(), e);
@@ -153,15 +154,14 @@ public class TransController {
 		JSONObject json = new JSONObject();
 		
 		try {
-
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String startDateStr = DateUtil.getDateBefore(new Date(), 7);
-			String endDateStr = sdf.format(new Date());
-			tranformData.setStartTime(startDateStr);
-			tranformData.setEndTime(endDateStr);
-			List<TransInfo> transformList = transformService.selectDetail(tranformData);	
-			json.put("data",transformList);
-
+			if(null!= tranformData) {
+				TransInfo transInfo = transformService.selectById(tranformData.getId());
+				transInfo.setColName(tranformData.getColName());
+				//transInfo.setCreateDate(DateUtil.getDate());
+				List<TransInfo> transformList = transformService.selectDetail(transInfo);	
+				json.put("data",transformList);
+			}
+			
 		} catch (Exception e) {
 			LOG.error(e.getMessage(), e);
 		}

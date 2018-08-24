@@ -5,12 +5,22 @@ $(function(){
 			
 			$(".activeTabBd .activeTabBdBox").eq(i).show().siblings().hide();
 			
-			/*if($.trim($(".activeTabBd .activeTabBdBox").eq(i).html()) === ""){
-				var pageName = i === 0 ? "accountmonitor" : "examplepackmonitor";
+			if($.trim($(".activeTabBd .activeTabBdBox").eq(i).html()) === ""){
+				//var pageName = i === 0 ? "accountmonitor" : "examplepackmonitor";
+				var pageName = "";
+				if(i === 0){
+					pageName = "importdata";
+				}else if(i === 1){
+					pageName = "predealdata";
+				}else if(i === 2){
+					pageName = "logdata";
+				}else if(i === 3){
+					pageName = "objectdata";
+				}
 				include("include/"+pageName+".html",function(text){
 					$('.activeTabBd .activeTabBdBox').eq(i).show().html("").append(text);
 				});
-			}*/
+			}
 			
 			return false;
 		});

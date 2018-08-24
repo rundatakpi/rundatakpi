@@ -1,15 +1,21 @@
 ﻿{"result":[
 	{
-		"chkVal":"0",
+		"chkVal":"1",
 		"chkDisplay":"全部"
 	},{
-		"chkVal":"3",
-		"chkDisplay":"轻微"
-	},{
 		"chkVal":"2",
-		"chkDisplay":"一般"
+		"chkDisplay":"失败原因一"
 	},{
-		"chkVal":"1",
-		"chkDisplay":"严重"
+		"chkVal":"3",
+		"chkDisplay":"失败原因二"
+	},{
+		"chkVal":"4",
+		"chkDisplay":"失败原因三"
+	},{
+		"chkVal":"5",
+		"chkDisplay":"失败原因四"
+	},{
+		"chkVal":"6",
+		"chkDisplay":"失败原因五"
 	}
 ]}

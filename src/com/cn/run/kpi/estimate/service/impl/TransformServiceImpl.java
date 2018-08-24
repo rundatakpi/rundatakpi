@@ -60,24 +60,32 @@ public class TransformServiceImpl implements TransService {
 	 * 获取大协议
 	 */
 	@Override
-	public List<TransInfo> getBProtocol(TransInfo transInfo) {
-		return transformDao.getBProtocol(transInfo);
+	public List<TransInfo> getBProtocol() {
+		return transformDao.getBProtocol();
 	}
 
 	/**
 	 * 获取小协议
 	 */
 	@Override
-	public List<TransInfo> getSProtocol(TransInfo transInfo) {
-		return transformDao.getSProtocol(transInfo);
+	public List<TransInfo> getSProtocol() {
+		return transformDao.getSProtocol();
 	}
 
 	/**
 	 * 获取动作类型
 	 */
 	@Override
-	public List<TransInfo> getActionType(TransInfo transInfo) {
-		return transformDao.getActionType(transInfo);
+	public List<TransInfo> getActionType() {
+		return transformDao.getActionType();
+	}
+
+	/**
+	 * 根据id获取格转接入数据信息
+	 */
+	@Override
+	public TransInfo selectById(long id) {
+		return transformDao.selectById(id);
 	}
 
 }

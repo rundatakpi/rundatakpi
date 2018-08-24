@@ -221,14 +221,16 @@
 
 /*预警中心*/
 .warming{padding:10px 20px;}
-.warmingSift{height:22px; line-height:22px; padding:16px 10px;}
+.warmingSift{height:26px; line-height:26px; padding:16px 10px;}
 .warmingSift label{color:#93a3d4; font-family:"Microsoft YaHei";}
+.warmingSift .emptyBtn_1{margin-top:3px;}
 .deleteTip{line-height:100px; color:#93a3d4; font-size:14px; font-family:"Microsoft YaHei"; text-align:center;}
 
 /*数据质量评估*/
 .importDataMain{padding:10px 20px;}
 .importDataSift{height:22px; line-height:22px; padding:16px 0px;}
 .importDataSift label{color:#93a3d4; font-family:"Microsoft YaHei";}
+.importDataSift .emptyBtn_1{margin-top:3px;}
 .importDataMain .box{margin:0px;}
 .importDataMain .boxHd{padding:0px;}
 
@@ -239,18 +241,55 @@
 .importDataLink{color:#4876b5; text-decoration:underline;}
 .importDataLink:hover{color:#1e73e7; text-decoration:underline;}
 
+/*卡片分页*/
+/*.r-page-content{position:relative;}
+.r-page-align-center{text-align: center;}
+.r-page-align-left{text-align: left;}
+.r-page-align-right{text-align: right;}
+.r-page-pagebox{height: 35px; line-height: 35px;}
+.r-page-numbox{display:inline-block;}
+.r-page-prePage,.r-page-nextPage{margin-right:10px;}
+.r-page-prePage:hover,.r-page-nextPage:hover{color:#297acc;}
+.r-page-prePage.unable,.r-page-nextPage.unable{color: #ccc;}
+.r-page-num{margin-right:10px;}
+.r-page-num:hover{color:#297acc!important;}
+.r-page-num.r-page-cur{color:#297acc;}
+.r-page-point{margin-right:10px;}
+.r-page-pageNum{width: 40px; height: 17px; margin-right: 5px; text-align: center;}
+.r-page-indexPage {height: 35px; line-height: 35px; }
+.r-page-pageGo{display: inline-block; width: 40px; height: 20px; margin-left: 5px; border: 1px solid #ccc; line-height: 20px; text-align: center;}*/
 
+.predealDataGrid table{width:100%;}
+.predealDataGrid th{height:40px; line-height:20px; padding:10px; /*background-color:#37415f;*/ border:1px solid #5b6b9c; text-align:center; font-size:14px; color:#9dabd7; font-family:"microsoft YAHEI"; font-weight:normal;}
+.predealDataGrid td{height:28px; line-height:28px; padding:0px 10px; border:1px solid #3d4867; text-align:center; font-size:12px; color:#64719d; font-family:"microsoft YAHEI";}
+.predealDataGrid tr:hover{background-color:#2d3651;}
+.seeSampleLink{padding-left:14px; background:url(../images/seesampleicon.png) no-repeat left center; color:#3a79cc;}
 
+.logDataGrid table{width:100%;}
+.logDataGrid th{height:40px; line-height:20px; padding:10px; /*background-color:#37415f;*/ border:1px solid #5b6b9c; text-align:center; font-size:14px; color:#9dabd7; font-family:"microsoft YAHEI"; font-weight:normal;}
+.logDataGrid td{height:28px; line-height:28px; padding:0px 10px; border:1px solid #3d4867; text-align:center; font-size:12px; color:#64719d; font-family:"microsoft YAHEI";}
+.logDataGrid tr:hover{background-color:#2d3651;}
 
+.objectDataGrid table{width:100%;}
+.objectDataGrid th{height:40px; line-height:20px; padding:10px; /*background-color:#37415f;*/ border:1px solid #5b6b9c; text-align:center; font-size:14px; color:#9dabd7; font-family:"microsoft YAHEI"; font-weight:normal;}
+.objectDataGrid td{height:28px; line-height:28px; padding:0px 10px; border:1px solid #3d4867; text-align:center; font-size:12px; color:#64719d; font-family:"microsoft YAHEI";}
+.objectDataGrid tr:hover{background-color:#2d3651;}
 
+.title{height:40px; line-height:40px; margin:10px; padding:0px 20px; background-color:#212942; border-radius:5px; color:#fff; font-family:"Microsoft YaHei"; font-size:14px;}
+.search{width:172px; height:26px; line-height:26px; margin-top:6px; padding:0px 15px; background:url(../images/schbg.png) no-repeat;}
+.search input{width:155px; height:26px; line-height:26px; background:none; border:none; color:#8394c6; font-family:"Microsoft YaHei"; outline:none;}
+.search a{width:14px; height:14px; margin-top:6px; background:url(../images/schbtn_1.png) no-repeat;}
+.search a:hover{background:url(../images/schbtn_2.png) no-repeat;}
 
+.logDetail table{width:100%;}
+.logDetail th{height:40px; line-height:20px; padding:10px; /*background-color:#37415f;*/ border:1px solid #5b6b9c; text-align:center; font-size:14px; color:#9dabd7; font-family:"microsoft YAHEI"; font-weight:normal;}
+.logDetail td{height:28px; line-height:28px; padding:0px 10px; border:1px solid #3d4867; text-align:center; font-size:12px; color:#64719d; font-family:"microsoft YAHEI";}
+.logDetail tr:hover{background-color:#2d3651;}
 
-
-
-
-
-
-
+.popTip{height:60px; line-height:60px; font-size:14px; color:#fff; font-family:"Microsoft YaHei"; text-align:center;}
+.percentLink{color:#4876b5; text-decoration:underline;}
+.percentLink:hover{color:#1e73e7; text-decoration:underline;}
+.percentChart{height:460px;}
 
 
 

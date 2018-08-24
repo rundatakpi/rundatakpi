@@ -55,10 +55,6 @@ public class TransInfo implements Serializable{
 	private String inputAccuracy;
 	/*数据生成时间*/
 	private String createDate;
-	/*数据查询开始时间*/
-	private String startTime;
-	/*数据查询结束时间*/
-	private String endTime;
 	/*起始位置*/
 	private int start;
 	/*长度*/
@@ -66,9 +62,9 @@ public class TransInfo implements Serializable{
 	/*列名*/
 	private String colName;
 	/*趋势图的日期*/
-	private String oKey;
+	private String chkVal;
 	/*趋势图的日期对应的数值*/
-	private String oValue;
+	private String chkDisplay;
 	
 	
 	
@@ -119,6 +115,12 @@ public class TransInfo implements Serializable{
 	}
 	public void setActionType(String actionType) {
 		this.actionType = actionType;
+	}
+	public String getActionTypeDesc() {
+		return actionTypeDesc;
+	}
+	public void setActionTypeDesc(String actionTypeDesc) {
+		this.actionTypeDesc = actionTypeDesc;
 	}
 	public long getInputNum() {
 		return inputNum;
@@ -198,18 +200,6 @@ public class TransInfo implements Serializable{
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
-	public String getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-	public String getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
 	public int getStart() {
 		return start;
 	}
@@ -228,25 +218,18 @@ public class TransInfo implements Serializable{
 	public void setColName(String colName) {
 		this.colName = colName;
 	}
-	public String getoKey() {
-		return oKey;
+	public String getChkVal() {
+		return chkVal;
 	}
-	public void setoKey(String oKey) {
-		this.oKey = oKey;
+	public void setChkVal(String chkVal) {
+		this.chkVal = chkVal;
 	}
-	public String getoValue() {
-		return oValue;
+	public String getChkDisplay() {
+		return chkDisplay;
 	}
-	public void setoValue(String oValue) {
-		this.oValue = oValue;
-	}
-	public String getActionTypeDesc() {
-		return actionTypeDesc;
-	}
-	public void setActionTypeDesc(String actionTypeDesc) {
-		this.actionTypeDesc = actionTypeDesc;
+	public void setChkDisplay(String chkDisplay) {
+		this.chkDisplay = chkDisplay;
 	}
 	
-
 	
 }

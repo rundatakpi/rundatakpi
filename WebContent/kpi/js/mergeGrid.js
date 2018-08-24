@@ -11,7 +11,7 @@
 
 
 (function(){
-	Run.define("MergeGrid",(function(){
+	Run.define("MergeGrid_1",(function(){
 		
 
 		return {
@@ -66,54 +66,6 @@
                         	+'<td>82%</td>'
                             +'<td>82%</td>'
                         +'</tr>';
-					/*
-					var that = this,
-						_html = '',
-						_infos = '';
-					$.each(data.list, function(i,tmp) {
-				    	if ($.type(tmp.val)=="array") {
-				    		var _infosB = '';
-				    		 $.each(tmp.val, function (j, val) {
-				    		 	var sTheme = '',
-				    		 		sItem = val.item;
-				    		 	if (val.theme) {
-				    		 		sTheme = val.theme;
-				    		 		if (val.keyword) {
-				    		 			sItem = sItem.replace(val.keyword,'<em class="'+val.theme+'">'+val.keyword+'</em>');
-				    		 		} else{
-				    		 			sItem = '<em class="'+val.theme+'">'+sItem+'</em>'
-				    		 		}
-				    		 	} 
-				    		 	if (j !== 0) {
-				    		 		_infosB += '<em class="left">、</em>';
-				    		 	}
-				    		 	_infosB += '<span class="valItem left"><em class="left">'+sItem+'</em></span>';
-				    		 	if (j >= 2) {
-				    		 		return false;
-				    		 	}
-				    		 });
-				    		 if (tmp.tot > 3) {
-				    		 	_infosB += '<em class="left">.....</em>';
-				    		 }
-				    		 _infosB += '<em class="tot">（共'+tmp.tot+'个）</em>';
-			    		 	_infos += '<li class="item left">'+
-										'<span class="labTxt left">【'+tmp.lab+'】</span>'+
-										'<div class="valItemWrap left">'+
-											_infosB+
-										'</div>'+
-									'</li>';
-				    	} else {
-				    		_infos += that._createItem(tmp);
-				    	}
-				    });
-				    if (_infos!='') {
-					    _html = '<div class="infos">'+
-									'<span class="infos_tit">'+data.tit+'：</span>'+
-									'<ul class="clearfix">'+
-										_infos+
-									'</ul>'+	
-							   '</div>';
-					}*/
 				    return _html;
 				},
 				
@@ -195,22 +147,23 @@
 									_read+
 								'</dd>'+
 							'</dl>';*/
-							
+					//console.log(JSON.stringify(data));
+					//alert(data.col_1)
 					var _html = '<tr>'
-                        	+'<td>144</td>'
-                            +'<td>4G</td>'
-                        	+'<td><a href="#" class="importDataLink">WA_SOUR</a></td>'
-                            +'<td>即时通讯</td>'
-                        	+'<td></td>'
-                            +'<td></td>'
-                        	+'<td>上线</td>'
-                            +'<td>1221条</td>'
-                        	+'<td>321条/秒</td>'
-                            +'<td>82%</td>'
-                        	+'<td>82%</td>'
-                            +'<td>82%</td>'
-                        	+'<td>82%</td>'
-                            +'<td>82%</td>'
+                        	+'<td>' + data.col_1 + '</td>'
+                            +'<td>' + data.col_2 + '</td>'
+                        	+'<td><a href="#" class="importDataLink">' + data.col_3 + '</a></td>'
+                            +'<td>' + data.col_4 + '</td>'
+                        	+'<td>' + data.col_5 + '</td>'
+                            +'<td>' + data.col_6 + '</td>'
+                        	+'<td>' + data.col_7 + '</td>'
+                            +'<td>' + data.col_8 + '</td>'
+                        	+'<td>' + data.col_9 + '</td>'
+                            +'<td>' + data.col_10 + '</td>'
+                        	+'<td>' + data.col_11 + '</td>'
+                            +'<td>' + data.col_12 + '</td>'
+                        	+'<td>' + data.col_13 + '</td>'
+                            +'<td>' + data.col_14 + '</td>'
                         +'</tr>';
 				    
 				    return _html;
@@ -224,62 +177,14 @@
                  */
 				_bindCallBacks:function(){
 					var that = this,
-						class_card = 'cardOb',
+						//class_card = 'cardOb',
 						$container = $('#' + this.id);
 					
 					//卡片：详情
-					$container.off('click','.'+class_card+' .opDetail').on('click','.'+class_card+' .opDetail',function (ev) {
-						var card = $(this).closest('.'+class_card),
-							index = $('#' + that.id).find('.'+class_card).index(card);
-						that.callBacks.handleDetail.apply(card,[ev,that.data.data[index]]);
-					});
-					
-					//卡片：收藏
-					$container.off('click','.'+class_card+' .opCollect').on('click','.'+class_card+' .opCollect',function (ev) {
-						var card = $(this).closest('.'+class_card),
-							index = $('#' + that.id).find('.'+class_card).index(card);
-						that.callBacks.handleCollect.apply(card,[ev,that.data.data[index]]);
-					});
-					
-					//卡片：地图
-					$container.off('click','.'+class_card+' .opMap').on('click','.'+class_card+' .opMap',function (ev) {
-							var card = $(this).closest('.'+class_card),
-							index = $('#' + that.id).find('.'+class_card).index(card),
-							index_infos = $(this).closest('li').index();
-						that.callBacks.handleMap.apply(card,[ev,that.data.data[index],that.data.data[index].infos[index_infos]]);					});
-					
-					//卡片：更多
-					$container.off('mouseover','.'+class_card+' .opMore').on('mouseover','.'+class_card+' .opMore',function (ev) {
-						var $opMore = $(this),
-							w_hook = $opMore.width(),
-							h_hook = $opMore.height(),
-							offs_hook = $opMore.offset(),
-							l_hook = offs_hook.left,
-							t_hook = offs_hook.top,
-							$container = $('#'+that.id),
-							w_container = $container.width(),
-							offs_container = $container.offset(),
-							l_container = offs_container.left,
-							t_container = offs_container.top,
-							w_show = 342,
-							h_show = 20,
-							l = l_hook - l_container,
-							t = t_hook - t_container + h_hook,
-							posClass = 'posR';
-						if (l+w_show>w_container) {
-							posClass = 'posL';
-							l -= w_show;
-						} 
-						$opMore.find('.moreTip').addClass(posClass)
-					});
-					///卡片：家庭成员
-					$container.off('click','.'+class_card+' .anas a').on('click','.'+class_card+' .anas a',function (ev) {
-						var card = $(this).closest('.'+class_card),
-							index = $('#' + that.id).find('.'+class_card).index(card);
-						if ($.isFunction(that.callBacks.handleAnalysis)) {
-							var type = $(this).attr('data-type');
-							that.callBacks.handleAnalysis.apply(card,[ev,that.data.data[index], type]);
-						}	
+					$container.off('click','tr .importDataLink').on('click','tr .importDataLink',function (ev) {
+						var tr = $(this).closest('tr'),
+							index = $('#' + that.id).find('tr').index(tr);
+						that.callBacks.handleImportDataLink.apply(tr,[ev,that.data.data[index]]);
 					});
 				}
 				

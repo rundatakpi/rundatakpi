@@ -21,10 +21,12 @@ public interface TransDao {
 
 	List<TransInfo> getDataSource();
 
-	List<TransInfo> getBProtocol(TransInfo transInfo);
+	List<TransInfo> getBProtocol();
 
-	List<TransInfo> getSProtocol(TransInfo transInfo);
+	List<TransInfo> getSProtocol();
 
-	List<TransInfo> getActionType(TransInfo transInfo);
+	List<TransInfo> getActionType();
+
+	TransInfo selectById(long id);
 
 }

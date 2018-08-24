@@ -106,15 +106,12 @@ function opeFormatter(val,row){
 	//alert(JSON.stringify($(row).html()));
 	
 	var row = JSON.stringify(row);
-	return "<a href='#' class='opeSeeLink' onclick='opeSeeFnc(this,"+row+")'>查看</a><a href='#' class='opeEditLink' onclick='opeEditFnc(this,"+row+")'>修改</a><a href='#' class='opeDeleteLink'>删除</a>";
+	return "<a href='#' class='opeSeeLink' onclick='opeSeeFnc(this,"+row+")'>查看</a><a href='#' class='opeEditLink' onclick='opeEditFnc(this,"+row+")'>修改</a><a href='#' class='opeDeleteLink' onclick='opeDeleteFnc(this,"+row+")'>删除</a>";
 	
 	//var row = JSON.stringify(row);
 	//return "<a href='#' class='opeButton' onclick='formatterOpe(this,"+row+")' title='"+val+"'>"+val+"</a>";
 }
 
-function ser(){
-	alert($(".j_toTimeSS").val());
-}
 //点击查看按钮方法
 function opeSeeFnc(){
 	windowFnc({
@@ -195,6 +192,35 @@ function opeEditFnc(){
 					onSelect : function(combo,record){}
 				}];
 				combobox(configs);
+			}
+		}
+	});
+}
+
+//点击修改按钮方法
+function opeDeleteFnc(){
+	windowFnc({
+		id:"pop",
+		width:300,
+		height:150,
+		//url:"include/editalarminfo_pop.html",
+		title: "删除提示框",
+		message : "<p class='popTip'>是否确定删除整行数据？</p>",
+		buttons:[{
+			'className':'diaSureBtn',
+			'text':'确定',
+			'handle': function (api) {//确定
+				api.close();
+			}
+		},{
+			'className':'diaCancelBtn',
+			'text':'取消',
+			'handle': function (api) {//确定
+				api.close();
+			}
+		}],
+		listeners:{
+			render:function(){
 			}
 		}
 	});

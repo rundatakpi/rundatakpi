@@ -1,23 +1,23 @@
 <div class="importDataMain">
     <div class="importDataSift clearfix">
         <label class="left">数据源：</label>
-        <div id="importDataCombobox_1" class="importDataCombobox_1 left marginR60"></div>
+        <div id="predealCombobox_1" class="predealCombobox_1 left marginR60"></div>
         <label class="left">小协议：</label>
-        <div id="importDataCombobox_2" class="importDataCombobox_2 left marginR60"></div>
-        <label class="left">小协议：</label>
-        <div id="importDataCombobox_3" class="importDataCombobox_3 left marginR60"></div>
+        <div id="predealCombobox_2" class="predealDataCombobox_2 left marginR60"></div>
+        <label class="left">大协议：</label>
+        <div id="predealCombobox_3" class="predealDataCombobox_3 left marginR60"></div>
         <label class="left">动作类型：</label>
-        <div id="importDataCombobox_4" class="importDataCombobox_4 left marginR60"></div>
+        <div id="predealCombobox_4" class="predealDataCombobox_4 left marginR60"></div>
         <a href="#" class="right emptyBtn_1">清空</a>
         <a href="#" class="right schBtn_1">查询</a>
     </div>
     
     <div class="box">
     	<div class="boxHd clearfix">
-        	<h3 class="left">接入数据量（<em id="inputNum" class="boxHdEm"></em>）</h3>
+        	<h3 class="left">预处理数据（<em class="boxHdEm">75</em>）</h3>
         </div>
         <div class="boxBd">
-        	<div class="importDataGrid" id="importDataGrid">
+        	<div class="predealDataGrid" id="predealDataGrid">
             	<table>
                 	<colgroup>
                     	<col width="" />
@@ -34,6 +34,11 @@
                         <col width="" />
                         <col width="" />
                         <col width="" />
+                        <col width="" />
+                        <col width="" />
+                        <col width="" />
+                        <col width="" />
+                        <col width="100" />
                     </colgroup>
                     <thead>
                     	<tr>
@@ -42,6 +47,8 @@
                             <th colspan="2">小协议</th>
                             <th>动作类型</th>
                             <th colspan="7">输入数据</th>
+                            <th colspan="4">输出数据</th>
+                            <th>操作</th>
                         </tr>
                         <tr>
                         	<th>数据源编号</th>
@@ -49,35 +56,24 @@
                             <th>大协议编码</th>
                             <th>大协议描述</th>
                             <th>小协议编码</th>
-                            <th>小协议描述</th>
+                        	<th>小协议描述</th>
                             <th>动作描述</th>
-                        	<th>输入数据条数</th>
+                            <th>输入数据条数</th>
                             <th>输入数据速度</th>
                             <th>输入数据字段填充率</th>
                             <th>输入数据依赖字段组填充率</th>
                             <th>输入数据字段可用率</th>
-                            <th>输入数据依赖字段组可用率</th>
+                        	<th>输入数据依赖字段组可用率</th>
                             <th>输入数据准确率</th>
-                        </tr>
-                        <tr style="display:none">
-                        	<th>dsCode</th>
-                            <th>dsDesc</th>
-                            <th>bProtocolCode</th>
-                            <th>bProtocolDesc</th>
-                            <th>sProtocolCode</th>
-                            <th>sProtocolDesc</th>
-                            <th>actionType</th>
-                        	<th>inputNum</th>
-                            <th>inputSpeed</th>
-                            <th>inputFieldRate</th>
-                            <th>inputGroupRate</th>
-                            <th>inputFieldAvailRate</th>
-                            <th>inputGroupAvailRate</th>
-                            <th>inputAccuracy</th>
+                            <th>输出数据条数</th>
+                            <th>输出数据速率</th>
+                            <th>输出数据字段填充率</th>
+                            <th>输出数据依赖字段组填充率</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
-                    <tbody id="importDataBody">
-                  
+                    <tbody id="predealDataBody">
+                    	
                     </tbody>
                 </table>
             </div>
@@ -86,4 +82,4 @@
 
     
 </div>
-<script type="text/javascript" src="js/importdata.js"></script>
+<script type="text/javascript" src="js/predealdata.js" defer="defer"></script>
