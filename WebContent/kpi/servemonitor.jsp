@@ -27,10 +27,9 @@
     <div class="box">
     	<div class="boxHd clearfix">
         	<h3 class="left">应用调用中间件频次</h3>
-            <!--<span class="right slideWrap"><span class="slideBtn">近7天</span> </span>-->
-            <div class="chooseDay right">
-            	<a href="#" class="left sevenDays slt">近7天</a>
-                <a href="#" class="right thirtyDays">近30天</a>
+            <div class="chooseDay right" >
+            	<a href="#" class="left sevenDays slt" value="7">近7天</a>
+                <a href="#" class="right thirtyDays" value="30">近30天</a>
             </div>
         </div>
         <div class="boxBd">

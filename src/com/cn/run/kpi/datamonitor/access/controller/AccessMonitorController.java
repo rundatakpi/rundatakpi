@@ -114,12 +114,12 @@ public class AccessMonitorController {
 		if (StringUtil.isNotEmpty(inputDay)) {
 			queryCondition.put("inputDay", inputDay);
 		} else {
-			queryCondition.put("inputDay", 7);
+			queryCondition.put("inputDay", Constants.DAY_WEEK);
 		}
 		if (StringUtil.isNotEmpty(discardDay)) {
 			queryCondition.put("discardDay", discardDay);
 		} else {
-			queryCondition.put("discardDay", 7);
+			queryCondition.put("discardDay", Constants.DAY_WEEK);
 		}
 		return queryCondition;
 	}

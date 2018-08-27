@@ -73,4 +73,19 @@ public interface Constants {
 	 * 接入监测-昨日接入输入数据量
 	 */
 	public static final String QUERY_ALL = "全部";
+	
+	/**
+	 * 一个星期
+	 */
+	public static final int DAY_WEEK = 7;
+	
+	/**
+	 * 一个月
+	 */
+	public static final int DAY_MONTH = 30;
+	
+	/**
+	 * 24小时
+	 */
+	public static final int HOUR_ONEDAY = 24;
 }

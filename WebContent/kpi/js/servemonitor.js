@@ -7,6 +7,19 @@ $(function(){
 		}
 	];
 	combobox(configs);
+	
+	$('.chooseDay').off("click").on('click',"a",function(){
+		$(this).addClass("slt").siblings().removeClass("slt");
+		var parent = $(this).parent();
+		var day = $(this).attr('value');
+		var url = parent.attr('url');
+		console.log("day = " + day);
+		console.log("url = " + url);
+		
+		refresh(url, day);
+		return false;
+	});	 
+	
 	var queryCondition = {};
 	
 	$.ajax({
@@ -20,6 +33,31 @@ $(function(){
 		}
 	});
 })
+
+function refresh(url, day) {
+	var queryCondition = {
+		"day" : day
+	};
+	
+	$.ajax({
+		url: '/rundatakpi/access/' + url,
+		method: 'GET',
+		data: queryCondition,
+		dataType: 'json',
+		success: function(data) {
+			if (url == 'input') {
+				//接入数据实时输入数据量
+				insertChart_1("insertChart_1", data);
+			} else if (url == 'discard') {
+				//抛弃数据量
+				insertChart_2("insertChart_2", data);
+			}
+		},
+		error: function(data) {
+			console.log("error");
+		}
+	});
+}
 
 function init(data) {
 	//加载数据统计线图
