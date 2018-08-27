@@ -151,15 +151,15 @@ public class RestoreMonitorController {
 	}
 
 	private Long getYesterdayInputNum(Map<String, Object> queryCondtion) {
-		Long InputNumByDay = 0L;
+		Long inputNumByDay = 0L;
 		try {
 			String date = DateUtil.getDateBefore(new Date(), 1);
 			queryCondtion.put("yesterday", date);
-			InputNumByDay = restoreService.getRestoreInputNumByDay(queryCondtion);
+			inputNumByDay = restoreService.getRestoreInputNumByDay(queryCondtion);
 		} catch (Exception e) {
 			LOG.error(">>>>>get today input num failed...", e);
 		}
-		return StringUtil.isEmpty(InputNumByDay) ? 0L : InputNumByDay;
+		return StringUtil.isEmpty(inputNumByDay) ? 0L : inputNumByDay;
 	}
 
 	private Long getTotalDiscardNum(Map<String, Object> queryCondtion) {

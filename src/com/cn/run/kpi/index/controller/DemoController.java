@@ -27,7 +27,6 @@ public class DemoController {
 	public void testExport(HttpServletResponse response) throws Exception{
 //		List<User> users = userService.listByKey("");
 		
-		System.out.println("testgithub");
 		List<User> users = new ArrayList<User>();
 		ExcelUtil<User> excelUtil = new ExcelUtil<User>();
 		String fileName = "测试导出.xls";
