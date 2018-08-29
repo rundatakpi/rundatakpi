@@ -6,13 +6,13 @@ var globalObj = {
 		"mergeGrid":{}
 	};
 
-$(function(){
+/*$(function(){
 	$('.chooseDay').off("click").on('click',"a",function(){
 		$(this).addClass("slt").siblings().removeClass("slt");
 		return false;
 	});	
 	
-})
+})*/
 
 
 //创建下拉框组件
@@ -188,10 +188,19 @@ function clearCombobox(id){
 	$("#"+id).find("input").val("").end().find(".r-combobox-slt").removeClass("r-combobox-slt");
 }
 
+//获取主机地址之后的目录
+var pathName = window.document.location.pathname;
+var rootPath = pathName.substring(0, pathName.substr(1).indexOf('/')+1);
 
-
-
-
+//获取index传参rid args为传递过来的所有参数，类型为OBJDECT，调用为args();
+var args = function(params){
+    var a = {};
+    params = params || location.search;
+    if(!params) return {};
+    params = decodeURI(params);
+    params.replace(/(?:^\?|&)([^=&]+)(?:\=)([^=&]+)(?=&|$)/g,function(m,k,v){  a[k] = v; });
+    return a;
+};
 
 
 
