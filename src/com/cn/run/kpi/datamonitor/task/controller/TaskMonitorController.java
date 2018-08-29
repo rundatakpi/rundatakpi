@@ -72,7 +72,6 @@ public class TaskMonitorController {
 		} catch (Exception e) {
 			LOG.error(">>>>>get running task failed...", e);
 		}
-		System.out.println(object.toString());
 		return object.toString();
 	}
 
@@ -115,7 +114,6 @@ public class TaskMonitorController {
 		} catch (Exception e) {
 			LOG.error(">>>>>get failed task failed...", e);
 		}
-		System.out.println(object.toString());
 		return object.toString();
 	}
 	
