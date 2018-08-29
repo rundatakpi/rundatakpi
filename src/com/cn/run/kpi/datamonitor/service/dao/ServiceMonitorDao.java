@@ -3,7 +3,6 @@ package com.cn.run.kpi.datamonitor.service.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.cn.run.kpi.datamonitor.service.entity.AppInvokeProtocolEntity;
 import com.cn.run.kpi.datamonitor.service.entity.AppMiddleWareEntity;
 import com.cn.run.kpi.datamonitor.service.entity.AppQueryRecord;
 import com.cn.run.kpi.datamonitor.service.entity.ServiceInvokeException;
@@ -25,7 +24,7 @@ public interface ServiceMonitorDao {
 	 * 获取各应用调用协议频次
 	 * @return
 	 */
-	public List<AppInvokeProtocolEntity> getAppInvokePrototolData(Map<String, Object> queryCondition);
+	public List<String> getAppInvokePrototolData(Map<String, Object> queryCondition);
 
 	/**
 	 * 获取服务调用异常信息列表

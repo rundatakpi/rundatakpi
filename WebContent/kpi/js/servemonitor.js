@@ -2,7 +2,7 @@ $(function(){
 	var configs = [
 		{
 			id : "chooseApp",
-			url : "json/failCause.json",
+			url : "json/app.json",
 			onSelect : function(combo,record){}
 		}
 	];
@@ -12,11 +12,9 @@ $(function(){
 		$(this).addClass("slt").siblings().removeClass("slt");
 		var parent = $(this).parent();
 		var day = $(this).attr('value');
-		var url = parent.attr('url');
 		console.log("day = " + day);
-		console.log("url = " + url);
 		
-		refresh(url, day);
+		refresh(day);
 		return false;
 	});	 
 	
@@ -34,24 +32,18 @@ $(function(){
 	});
 })
 
-function refresh(url, day) {
+function refresh(day) {
 	var queryCondition = {
 		"day" : day
 	};
 	
 	$.ajax({
-		url: '/rundatakpi/access/' + url,
+		url: '/rundatakpi/service/app',
 		method: 'GET',
 		data: queryCondition,
 		dataType: 'json',
 		success: function(data) {
-			if (url == 'input') {
-				//接入数据实时输入数据量
-				insertChart_1("insertChart_1", data);
-			} else if (url == 'discard') {
-				//抛弃数据量
-				insertChart_2("insertChart_2", data);
-			}
+			dataStatistics("dataStatistics", data['invokeMiddlewareJson']);
 		},
 		error: function(data) {
 			console.log("error");
@@ -61,10 +53,10 @@ function refresh(url, day) {
 
 function init(data) {
 	//加载数据统计线图
-	// dataStatistics("dataStatistics", data['invokeMiddlewareJson']);
+	dataStatistics("dataStatistics", data['invokeMiddlewareJson']);
 	
 	//应用调用协议频次
-	// frequencyBar("frequencyBar", data['invokeProtocolJson']);
+	frequencyBar("frequencyBar", data['invokeProtocolJson']);
 	
 	getServerException();
 }

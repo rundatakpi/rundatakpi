@@ -6,7 +6,7 @@ $(function(){
 	}];
 	combobox(configs);
 	
-	$('.chooseDay').off("click").on('click',"a",function(){
+	$('.chooseDay').off("click").on('click',"a",function() {
 		$(this).addClass("slt").siblings().removeClass("slt");
 		var parent = $(this).parent();
 		var day = $(this).attr('value');
@@ -298,7 +298,6 @@ function jobChart_2(id, data) {
 			xAxis: [
 				{
 					type: 'category',
-					//data: ['00：00：00','01：00：00','02：00：00','03：00：00','04：00：00','05：00：00','06：00：00','07：00：00','08：00：00','09：00：00','10：00：00','11：00：00','12：00：00','13：00：00','14：00：00','15：00：00','16：00：00','17：00：00','18：00：00','19：00：00','20：00：00','21：00：00','22：00：00','23：00：00','24：00：00'],
 					data: data['runDate'],
 					axisPointer: {
 						type: 'shadow'
@@ -359,7 +358,6 @@ function jobChart_2(id, data) {
 						}
 					},
 					smooth : true,
-					//data:[75321,12010,19841,35412,21014,54711,65421,12457,98654,9741,15973,13469,76431,64828,68741,24457,34451,17847,85241,84512,15489,33548,94102,64712]
 				    data: data['runningNum']
 				}
 			]

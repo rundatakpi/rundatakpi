@@ -38,14 +38,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </if>
     </sql>
     
-    <select id="getAppInvokePrototolData" parameterType="map" resultMap="appInvokeProtocolMap">
+    <!-- <select id="getAppInvokePrototolData" parameterType="map" resultMap="appInvokeProtocolMap">
         select protocol, sum(invokenum) invokenum from appinvokeprotocol where 1= 1 
         <include refid="appCondition"></include>  
         GROUP BY  protocol ORDER BY app, protocol;
+    </select> -->
+    
+    <select id="getAppInvokePrototolData" parameterType="map" resultType="string">
+        select sqlstr from appqueryrecord where 1= 1 
+        <include refid="appCondition"></include>  
     </select>
     
     <select id="getAppInvokeMiddlewareData" parameterType="map" resultMap="appInvokeMiddleWareMap">
-        SELECT createdate, app, SUM(invokenum) invokenum FROM appinvokemiddleware GROUP BY createdate, app ORDER BY createdate, app
+        SELECT capturetime as createdate, system_id as app, count(system_id) as invokenum FROM `appqueryrecord` GROUP BY capturetime, system_id ORDER BY capturetime, system_id
     </select>
     
     <select id="list" parameterType="map" resultMap="serverExceptionMap">
@@ -96,6 +101,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
     <select id="getApp" parameterType="map" resultType="string">
-        select DISTINCT system_id as app from appqueryrecord ORDER BY createdate;
+        select DISTINCT system_id as app from appqueryrecord ORDER BY capturetime;
     </select>
 </mapper>
