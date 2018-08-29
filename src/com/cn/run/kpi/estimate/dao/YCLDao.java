@@ -3,6 +3,7 @@ package com.cn.run.kpi.estimate.dao;
 import java.util.List;
 
 import com.cn.run.kpi.estimate.entity.YCLInfo;
+import com.cn.run.kpi.estimate.entity.TransInfo;
 import com.cn.run.kpi.estimate.entity.YCLExample;
 
 
@@ -13,32 +14,24 @@ import com.cn.run.kpi.estimate.entity.YCLExample;
  */
 public interface YCLDao {
 
-	/**
-	 * @param transformData
-	 * @return
-	 */
+
 	List<YCLInfo> getList(YCLInfo yclData);
 
-	/**
-	 * @param transformData
-	 * @return
-	 */
 	Integer getTotal(YCLInfo yclData);
 
-	/**
-	 * 
-	 * @param tranformData
-	 * @param colName
-	 * @return
-	 */
 	List<YCLInfo> selectDetail(YCLInfo yclData);
 
-	/**
-	 * 
-	 * @param yclExampleData
-	 * @return
-	 */
 	List<YCLExample> getYCLExample(YCLExample yclExampleData);
+
+	List<YCLInfo> getDataSource();
+
+	List<YCLInfo> getBProtocol();
+
+	List<YCLInfo> getSProtocol();
+
+	List<YCLInfo> getActionType();
+
+	YCLInfo selectById(long id);
 
 	
 

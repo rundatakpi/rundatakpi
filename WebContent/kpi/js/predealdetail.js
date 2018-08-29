@@ -1,14 +1,16 @@
 $(function(){
+	var id = args().id;
+	
 	globalObj.mergeGrid["predealDetailDataBody"] = Run.create('predealDetailGrid',{
 		id : 'predealDetailDataBody',
-		//query : param,
-		url : "json/mergegrid_6.json",
+		query : {"id":1},
+		url : rootPath+"/ycl/getExampleList",
 		//checkAllId:'showCardChbAll',
 		//checkOneCls:'cardOb_chk',
 		cache:true,
 		isMultiple:true,
-		dataSuccess:function(){
-
+		dataSuccess:function(data){
+			$("#exampleData").text(data.total);
 		},
 		usepage : {
 			type:'2',

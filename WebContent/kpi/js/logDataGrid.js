@@ -56,15 +56,15 @@
 				 */
 				_createCard : function (data, i) {
 					var _html = '<tr>'
-                        	+'<td>' + data.col_1 + '</td>'
-                            +'<td>' + data.col_2 + '</td>'
-                            +'<td>' + data.col_3 + '</td>'
-                            +'<td>' + data.col_4 + '</td>'
-                        	+'<td>' + data.col_5 + '</td>'
-                            +'<td>' + data.col_6 + '</td>'
-                        	+'<td>' + data.col_7 + '</td>'
-                            +'<td>' + data.col_8 + '</td>'
-                            +'<td><a href="#" class="seeSampleLink">查看样例</a></td>'
+                        	+'<td>' + data.dsCode + '</td>'
+                            +'<td>' + data.dsDesc + '</td>'
+                            +'<td>' + data.bProtocolCode + '</td>'
+                            +'<td>' + data.bProtocolDesc + '</td>'
+                        	+'<td><a href="#" class="percentLink">' + data.inputNum + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.inputRate + '</a></td>'
+                        	+'<td><a href="#" class="percentLink">' + data.fieldNum + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.accuracy + '</a></td>'
+                            +'<td><a href="#" class="importDataLink">查看详情</a></td>'
                         +'</tr>';
 				    
 				    return _html;
@@ -81,11 +81,24 @@
 						//class_card = 'cardOb',
 						$container = $('#' + this.id);
 					
-					//查看样例
-					$container.off('click','tr .seeSampleLink').on('click','tr .seeSampleLink',function (ev) {
+					//数据详情页面
+					$container.off('click','tr .percentLink').on('click','tr .percentLink',function (ev) {
 						var tr = $(this).closest('tr'),
-							index = $('#' + that.id).find('tr').index(tr);
-						that.callBacks.handleSeeSampleLink.apply(tr,[ev,that.data.data[index]]);
+						index = $('#' + that.id).find('tr').index(tr);
+						//获取列对应的字段名
+						var thisIndex = $(this).parent("td").index();
+						var thIndex = $("#"+that.id).prev("thead").find("tr:hidden").find("th").eq(thisIndex);
+						var colName = $(thIndex).html();
+						
+						that.callBacks.handlePercentLink.apply(tr,[ev,that.data.data[index],colName]);
+					});
+					
+					//大协议详情
+					$container.off('click','tr .importDataLink').on('click','tr .importDataLink',function (ev) {
+						var tr = $(this).closest('tr'),
+						index = $('#' + that.id).find('tr').index(tr);
+						
+						that.callBacks.handleImportDataLink.apply(tr,[ev,that.data.data[index]]);
 					});
 				}
 				

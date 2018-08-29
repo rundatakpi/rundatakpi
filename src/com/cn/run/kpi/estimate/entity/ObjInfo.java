@@ -1,11 +1,13 @@
 package com.cn.run.kpi.estimate.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 /**
  * 对象化提取数据-实体类
  * @author chenyan
  *
  */
+import java.util.List;
 public class ObjInfo implements Serializable{
 
 
@@ -24,7 +26,7 @@ public class ObjInfo implements Serializable{
 	/*特征串编码*/
 	private String aspectCode;
 	/*特征串中文描述*/
-	private String aspectStr;
+	private String aspectDesc;
 	/*特征串个数*/
 	private long aspectNum;
 	/*错误条数*/
@@ -33,6 +35,8 @@ public class ObjInfo implements Serializable{
 	private String accuracy;
 	/*提取量*/
 	private long extractNum;
+	/*7天提取量*/
+	private long weekExtractNum;
 	/*净提取关系个数*/
 	private long netExtractNum;
 	/*净提取关系比例*/
@@ -68,15 +72,18 @@ public class ObjInfo implements Serializable{
 	/*结束个数*/
 	private int length;
 	/*图表展示的key*/
-	private String oKey;
+	private String chkVal;
 	/*图表展示的value*/
-	private String oValue;
+	private String chkDisplay;
 	/*开始时间*/
 	private String startTime;
 	/*结束时间*/
 	private String endTime;
 	/*列名*/
 	private String colName;
+	/*关联字段*/
+	private List<ObjField> objFieldList = new ArrayList<>();
+	
 	
 	
 	public long getId() {
@@ -115,11 +122,11 @@ public class ObjInfo implements Serializable{
 	public void setAspectCode(String aspectCode) {
 		this.aspectCode = aspectCode;
 	}
-	public String getAspectStr() {
-		return aspectStr;
+	public String getAspectDesc() {
+		return aspectDesc;
 	}
-	public void setAspectStr(String aspectStr) {
-		this.aspectStr = aspectStr;
+	public void setAspectDesc(String aspectDesc) {
+		this.aspectDesc = aspectDesc;
 	}
 	public long getAspectNum() {
 		return aspectNum;
@@ -144,6 +151,12 @@ public class ObjInfo implements Serializable{
 	}
 	public void setExtractNum(long extractNum) {
 		this.extractNum = extractNum;
+	}
+	public long getWeekExtractNum() {
+		return weekExtractNum;
+	}
+	public void setWeekExtractNum(long weekExtractNum) {
+		this.weekExtractNum = weekExtractNum;
 	}
 	public long getNetExtractNum() {
 		return netExtractNum;
@@ -247,17 +260,17 @@ public class ObjInfo implements Serializable{
 	public void setLength(int length) {
 		this.length = length;
 	}
-	public String getoKey() {
-		return oKey;
+	public String getChkVal() {
+		return chkVal;
 	}
-	public void setoKey(String oKey) {
-		this.oKey = oKey;
+	public void setChkVal(String chkVal) {
+		this.chkVal = chkVal;
 	}
-	public String getoValue() {
-		return oValue;
+	public String getChkDisplay() {
+		return chkDisplay;
 	}
-	public void setoValue(String oValue) {
-		this.oValue = oValue;
+	public void setChkDisplay(String chkDisplay) {
+		this.chkDisplay = chkDisplay;
 	}
 	public String getStartTime() {
 		return startTime;
@@ -277,6 +290,11 @@ public class ObjInfo implements Serializable{
 	public void setColName(String colName) {
 		this.colName = colName;
 	}
-	
+	public List<ObjField> getObjFieldList() {
+		return objFieldList;
+	}
+	public void setObjFieldList(List<ObjField> objFieldList) {
+		this.objFieldList = objFieldList;
+	}
 	
 }

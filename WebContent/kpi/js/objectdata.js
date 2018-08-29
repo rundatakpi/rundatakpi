@@ -20,13 +20,13 @@ $(function(){
 	globalObj.mergeGrid["objectDataBody"] = Run.create('objectDataGrid',{
 		id : 'objectDataBody',
 		//query : param,
-		url : "json/mergegrid_4.json",
+		url : rootPath+"/obj/getList",
 		//checkAllId:'showCardChbAll',
 		//checkOneCls:'cardOb_chk',
 		cache:true,
 		isMultiple:true,
-		dataSuccess:function(){
-			
+		dataSuccess:function(data){
+			$("#objTotal").text(data.total);
 			
 		},
 		usepage : {

@@ -1,20 +1,29 @@
+var param = {};
 $(function(){
 	var configs = [{
 		id : "predealCombobox_1",
-		url : "json/failCause.json",
-		onSelect : function(combo,record){}
+		url : rootPath+"/ycl/getDataSource",
+		onSelect : function(combo,record){
+			param.dsCode = record.value[0];
+		}
 	},{
 		id : "predealCombobox_2",
-		url : "json/failCause.json",
-		onSelect : function(combo,record){}
+		url : rootPath+"/ycl/getBProtocol",
+		onSelect : function(combo,record){
+			param.bProtocolCode = record.value[0];
+		}
 	},{
 		id : "predealCombobox_3",
-		url : "json/failCause.json",
-		onSelect : function(combo,record){}
+		url : rootPath+"/ycl/getSProtocol",
+		onSelect : function(combo,record){
+			param.sProtocolCode = record.value[0];
+		}
 	},{
 		id : "predealCombobox_4",
-		url : "json/failCause.json",
-		onSelect : function(combo,record){}
+		url : rootPath+"/ycl/getActionType",
+		onSelect : function(combo,record){
+			param.actionType = record.value[0];
+		}
 	}];
 	combobox(configs);
 	
@@ -24,13 +33,13 @@ $(function(){
 	globalObj.mergeGrid["predealDataBody"] = Run.create('predealDataGrid',{
 		id : 'predealDataBody',
 		//query : param,
-		url : "json/mergegrid_2.json",
+		url : rootPath+"/ycl/getList",
 		//checkAllId:'showCardChbAll',
 		//checkOneCls:'cardOb_chk',
 		cache:true,
 		isMultiple:true,
-		dataSuccess:function(){
-			
+		dataSuccess:function(data){
+			$("#yclTotal").text(data.total)
 			
 		},
 		usepage : {
@@ -47,7 +56,8 @@ $(function(){
 			//handleMap:handleMapCardOb,
 			//handleAnalysis:handleAnalysisCardOb
 			handleImportDataLink : handleImportDataFnc,
-			handleSeeSampleLink :  handleSeeSampleFnc
+			handleSeeSampleLink :  handleSeeSampleFnc,
+			handlePercentLink : handlePercentFnc
 		},
 		listeners:{
 			render:function(){
@@ -58,6 +68,22 @@ $(function(){
 			}
 		 }
 	});
+	
+	
+	//点击查询按钮
+	$(".schBtn_1").on("click",function(){
+		globalObj.mergeGrid["predealDataBody"].reloadCards(rootPath+"/ycl/getList",param);
+	})
+	
+	//点击清空按钮
+	$(".emptyBtn_1").on("click",function(){
+		clearCombobox("predealCombobox_1");
+		clearCombobox("predealCombobox_2");
+		clearCombobox("predealCombobox_3");
+		clearCombobox("predealCombobox_4");
+		
+		param = {};
+	})
 
 });
 
@@ -69,14 +95,156 @@ function handleImportDataFnc (ev, row) {
 
 //查看样例点击
 function handleSeeSampleFnc (ev, row) {
-	//alert("大协议编码点击");
-	location.href='predealdetail.html';
+	
+	location.href='predealdetail.jsp?id='+row.id;
+}
+
+//比率
+function handlePercentFnc (ev,row,colName) {
+	
+	windowFnc({
+		id:"pop",
+		width:900,
+		height:490,
+		url:"include/percent_pop.html",
+		title: "字段填充趋势率",
+		listeners:{
+			render:function(){
+				drawChart("percentChart",row.id,colName);
+			}
+		}
+	});
+
+}
+/**
+ * 指标趋势图
+ * @param id
+ * @param rid
+ * @returns
+ */
+function drawChart(id,rid,cname) { 
+	var time = [];
+	var data = [];
+	
+	$.ajax({
+		url:rootPath+"/ycl/getDetail",
+		type:"post",
+		data:{"id":rid,"colName":cname},
+		success:function(d){
+			$.each(d.data,function(){
+				time.unshift(this.chkVal);
+				data.unshift(this.chkDisplay);
+			})
+			
+			showCharts(id,time,data);
+		},
+		error:function(){
+			layer.msg("系统错误！");
+		}
+	});
+	
+	
+
 }
 
 
-
-
-
+function showCharts(id,time,data){
+	var ec = echarts;
+	/*线图*/
+	if (document.getElementById(id)) {
+		chartObj[id] = ec.init(document.getElementById(id));
+		
+		var option = {
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					type: 'cross',
+					crossStyle: {
+						color: '#999'
+					}
+				}
+			},
+			grid : {
+				x : 70,
+				x2 : 70,
+				y : 30,
+				y2 : 40,
+				//show : true,
+				//borderWidth : 20,
+				//borderColor: "#f00"
+				
+			},
+			xAxis: [
+				{
+					type: 'category',
+					data: time,
+					axisPointer: {
+						type: 'shadow'
+					},
+					axisPointer: {
+						type: 'shadow'
+					},
+					axisLabel : {
+						show : true,
+						color : "#8d93ab"
+					},
+					axisLine : {
+						lineStyle : {
+							color : "#404b6c"
+						}
+					}
+				}
+			],
+			yAxis: [
+				{
+					type: 'value',
+					//name: '数据量',
+					//min: 0,
+					//max: 250,
+					//interval: 50,
+					axisLabel: {
+						//formatter: '{value} ml'
+						color : "#8d93ab"
+					},
+					axisLine : {
+						lineStyle : {
+							color : "#404b6c"
+						}
+					},
+					splitLine : {
+						show:true,
+						lineStyle : {
+							color : "#46547d"
+						}
+					}
+				}
+			],
+			series: [
+				{
+					name:'数据大小',
+					type:'line',
+					itemStyle: {
+		                normal: {
+		                   color : "#168370"
+		                },
+						emphasis : {
+							//shadowColor : 'rgba(0,0,0,0.5)'
+						}
+		            },
+					areaStyle : {
+						normal : {
+							color : "rgba(0,201,179,0.2)"
+						}
+					},
+					smooth : true,
+					data:data
+				}
+			]
+		};
+		chartObj[id].setOption(option, true);		
+		
+	}
+}
 
 
 

@@ -5,70 +5,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.cn.run.kpi.estimate.dao.ObjDao">
 
-	<select id="getObjType" resultType="com.cn.run.kpi.estimate.entity.ObjInfo">
-		select distinct objType,objTypeDesc from t_obj_quality
-	</select>
-	
-	<select id="getFeartureString" resultType="com.cn.run.kpi.estimate.entity.ObjInfo">
-		select 
-			distinct aspectCode,aspectStr
-		from t_obj_quality
-		where objType = "virtualIdentity"
-	</select>
-	
-	<select id="getDataSource" resultType="com.cn.run.kpi.estimate.entity.ObjInfo">
-		select 
-			distinct dsCode,dsDesc
-		from t_obj_quality
-	</select>
-
 	<sql id="objCondition">
-		<if test=" objType !=null and objType != '' ">
-			and objType = #{objType}
-		</if>
-		<if test=" aspectCode != null and aspectCode != '' ">
-			and aspectCode = #{aspectCode}
-		</if>
-		<if test=" dsCode != null and dsCode != '' ">
-			and dsCode = #{dsCode}
-		</if>
-		<if test=" startTime != null and startTime != '' ">
-            and createDate <![CDATA[ >= ]]> #{startTime}
+        <if test="null != objType and '' != objType">
+            and objType = #{objType}
         </if>
-        <if test=" endTime != null and endTime != '' ">
-            and createDate <![CDATA[ < ]]> #{endTime}
+        <if test="null != aspectCode and '' != aspectCode">
+            and aspectCode = #{aspectCode}
         </if>
-         <if test="null != createDate and '' != createDate">
+        <if test="null != dsCode and '' != dsCode">
+            and dsCode = #{dsCode}
+        </if>
+		<if test="null != createDate and '' != createDate">
             and createDate = #{createDate}
         </if>
-	</sql>
+    </sql>
+
 
 	<select id="getList" parameterType="com.cn.run.kpi.estimate.entity.ObjInfo" resultType="com.cn.run.kpi.estimate.entity.ObjInfo">
 		select 
 			id,
-			objType,
-			objTypeDesc,
-			dsCode,
-			dsDesc,
 			aspectCode,
-			aspectStr,
-			aspectTotal aspectNum,
-			accuracy,
-			extractTotal extractNum,
-			netExtractTotal netExtractNum,
-			netExtractRate,
-			phoneReTotal phoneReNum,
-			phoneReRate,
-			idCardReTotal idCardReNum,
-			idCardReRate,
-			adslReTotal adslReNum,
-			adslReRate,
-			imeiReTotal imeiReNum,
-			imeiReRate,
-			imsiReTotal imsiReNum,
-			imsiReRate,
-			macReTotal macReNum,
-			macReRate,
+			dsCode,
+			aspectNum,
+			round((aspectNum-errorNum)/aspectNum,2) accuracy,
+			netExtractNum,
+			round(netExtractNum/aspectNum,2) netExtractRate,
+			phoneReNum,
+			round(phoneReNum/aspectNum,2) phoneReRate,
+			idCardReNum,
+			round(idCardReNum/aspectNum,2) idCardReRate,
+			adslReNum,
+			round(adslReNum/aspectNum,2) adslReRate,
+			imeiReNum,
+			round(imeiReNum/aspectNum,2) imeiReRate,
+			imsiReNum,
+			round(imsiReNum/aspectNum,2) imsiReRate,
+			macReNum,
+			round(macReNum/aspectNum,2) macReRate,
 			createDate
 		from t_obj_quality_total
 		<where>
@@ -76,21 +49,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		limit #{start},#{length}
 	</select>
-
-	<select id="getTotal" parameterType="com.cn.run.kpi.estimate.entity.ObjInfo" resultType="java.lang.Integer">
-		SELECT 
-			count(1)
-		FROM t_obj_quality_total
-		<where>
-			<include refid="objCondition"></include>
-		</where>
-	</select>
-
-	<select id="getDetail" parameterType="com.cn.run.kpi.estimate.entity.ObjInfo" resultType="com.cn.run.kpi.estimate.entity.ObjInfo">
+	
+	<select id="getFieldList" parameterType="com.cn.run.kpi.estimate.entity.ObjInfo" resultType="com.cn.run.kpi.estimate.entity.ObjField">
 		select 
-			createDate okey,
-			${colName} oValue 
-		from t_obj_quality
+			a.fieldCode,
+			round(a.count/ b.aspectNum,2) rate
+		from t_obj_quality_more_total a,t_obj_quality_total b
+		where a.srcId = b.id
+		and a.createDate = b.createDate
+		and a.srcId = #{id}
+		and a.createDate = #{createDate}
+	</select>
+	
+	<select id="getTotal" parameterType="com.cn.run.kpi.estimate.entity.ObjInfo" resultType="java.lang.Integer">
+		select 
+			count(1)
+		from t_obj_quality_total
 		<where>
 			<include refid="objCondition"></include>
 		</where>

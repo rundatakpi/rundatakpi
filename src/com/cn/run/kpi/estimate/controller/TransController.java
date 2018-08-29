@@ -16,6 +16,8 @@ import com.cn.run.kpi.estimate.common.ActionConfig;
 import com.cn.run.kpi.estimate.entity.TransInfo;
 import com.cn.run.kpi.estimate.service.TransService;
 import com.cn.run.kpi.utils.DateUtil;
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import net.sf.json.JSONObject;
 
 
@@ -124,15 +126,18 @@ public class TransController {
 			transformData.setCreateDate(DateUtil.getDate());
 			
 			List<TransInfo> tanformDatas = transformService.getList(transformData);
-			for (TransInfo transInfo : tanformDatas) {
-				String actionType = transInfo.getActionType();
-				String actionTypeDesc = ActionConfig.getValue(actionType);
-				transInfo.setActionTypeDesc(actionTypeDesc);
+			if(null != tanformDatas && !tanformDatas.isEmpty()) {
+				for (TransInfo transInfo : tanformDatas) {
+					String actionType = transInfo.getActionType();
+					String actionTypeDesc = ActionConfig.getValue(actionType);
+					transInfo.setActionTypeDesc(actionTypeDesc);
+				}
 			}
 			
 			Integer total = transformService.getTotal(transformData);
 			resultMap.put("total",total);
 			resultMap.put("data", tanformDatas);
+
 		}catch(Exception e) {
 			LOG.error(e.getMessage(), e);
 		}

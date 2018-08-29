@@ -44,6 +44,37 @@ public interface YCLDataService {
 	 */
 	List<YCLExample> getExampleList(YCLExample yclExampleData);
 
+	/**
+	 * 获取数据源类型
+	 * @return
+	 */
+	List<YCLInfo> getDataSource();
+	
+	/**
+	 * 获取大协议类型
+	 * @return
+	 */
+	List<YCLInfo> getBProtocol();
+	
+	/**
+	 * 获取小协议类型
+	 * @return
+	 */
+	List<YCLInfo> getSProtocol();
+	
+	/**
+	 * 获取动作类型
+	 * @return
+	 */
+	List<YCLInfo> getActionType();
+
+	/**
+	 * 根据id查询预处理信息
+	 * @param id
+	 * @return
+	 */
+	YCLInfo selectById(long id);
+
 
 	
 }

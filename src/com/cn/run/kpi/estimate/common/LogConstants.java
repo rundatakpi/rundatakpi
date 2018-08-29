@@ -6,21 +6,21 @@ import java.util.Map;
 public class LogConstants {
 	
 	/*入库日志数据条数*/
-	public static final String STORE_NUM="inputNum";
+	public static final String INPUT_NUM="inputNum";
 	/*入库日志数据条数sql*/
-	public static final String STORE_NUM_SQL="inputNum";
+	public static final String INPUT_NUM_SQL="inputNum";
 	/*入库日志数据入库率*/
-	public static final String STORE_RATE="storageRate";
+	public static final String INPUT_RATE="inputRate";
 	/*入库日志数据入库率sql*/
-	public static final String STORE_RATE_SQL="inputNum/totalNum";
+	public static final String INPUT_RATE_SQL="inputNum/totalNum";
 	/*入库日志数据字段数*/
 	public static final String FIELD_NUM="fieldNum";
 	/*入库日志数据字段数sql*/
 	public static final String FIELD_NUM_SQL="fieldNum";
-	/*入库日志数据准确率*/
-	public static final String ACCURATE_NUM="accuracy";
-	/*入库日志数据准确率sql*/
-	public static final String ACCURATE_NUM_SQL="accurateNum/totalNum";
+	/*大协议入库准确率*/
+	public static final String BIG_ACCURACY = "bAccuracy";
+	/*大协议入库准确率SQL*/
+	public static final String BIG_ACCURACY_SQL = "accurateNum/totalNum";
 	/*小协议数据条数*/
 	public static final String DATA_NUM = "dataNum";
 	/*小协议数据条数sql*/
@@ -30,25 +30,25 @@ public class LogConstants {
 	/*小协议填充率SQL*/
 	public static final String FILL_RATE_SQL = "fillNum/dataNum";
 	/*小协议数据准确率*/
-	public static final String SACCURACY = "sAccuracy";
+	public static final String SMALL_ACCURACY = "sAccuracy";
 	/*小协议数据准确率SQL*/
-	public static final String SACCURACY_SQL = "accurateNum/dataNum";
+	public static final String SMALL_ACCURACY_SQL = "accurateNum/dataNum";
 	/*小协议代码符合度*/
-	public static final String CODE_MATCH = "codeMatch";
+	public static final String CODE_MATCH = "codeMatchRate";
 	/*小协议代码符合度SQL*/
 	public static final String CODE_MATCH_SQL = "codeMatchNum/dataNum";
 	
-	/**入库日志数据列和sql的Map*/
+	/*入库日志数据列和sql的Map*/
 	public static final Map<String, String> COLMAP = new HashMap<String, String>();
 	
 	static {
-		COLMAP.put(STORE_NUM,STORE_NUM_SQL);
-		COLMAP.put(STORE_RATE,STORE_RATE_SQL);
+		COLMAP.put(INPUT_NUM,INPUT_NUM_SQL);
+		COLMAP.put(INPUT_RATE,INPUT_RATE_SQL);
 		COLMAP.put(FIELD_NUM,FIELD_NUM_SQL);
-		COLMAP.put(ACCURATE_NUM,ACCURATE_NUM_SQL);
+		COLMAP.put(BIG_ACCURACY,BIG_ACCURACY_SQL);
 		COLMAP.put(DATA_NUM, DATA_NUM_SQL);
 		COLMAP.put(FILL_RATE, FILL_RATE_SQL);
-		COLMAP.put(SACCURACY, SACCURACY_SQL);
+		COLMAP.put(SMALL_ACCURACY, SMALL_ACCURACY_SQL);
 		COLMAP.put(CODE_MATCH, CODE_MATCH_SQL);
 	}
 	

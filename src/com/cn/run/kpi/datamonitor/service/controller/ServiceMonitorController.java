@@ -180,4 +180,13 @@ public class ServiceMonitorController {
 		queryCondition.put("end", pageSize);
 		return queryCondition;
 	}
+	
+	@RequestMapping("/app")
+	@ResponseBody
+	public String getAppData(HttpServletRequest request) {
+		Map<String, Object> queryCondition = new HashMap<String, Object>();
+		JSONObject object = new JSONObject();
+		getAppInvokeMiddleWareData(queryCondition, object);
+		return object.toString();
+	}
 }

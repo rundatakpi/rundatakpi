@@ -2,6 +2,7 @@ package com.cn.run.kpi.estimate.dao;
 
 import java.util.List;
 
+import com.cn.run.kpi.estimate.entity.ObjField;
 import com.cn.run.kpi.estimate.entity.ObjInfo;
 
 
@@ -11,18 +12,13 @@ import com.cn.run.kpi.estimate.entity.ObjInfo;
  *
  */
 public interface ObjDao {
+
+	List<ObjInfo> getList(ObjInfo objInfo);
+
+	List<ObjField> getFieldList(ObjInfo objInfo2);
+
+	Integer getTotal(ObjInfo objInfo);
 	
-	List<ObjInfo> getObjType();
-
-	List<ObjInfo> getFeartureString();
-
-	List<ObjInfo> getDataSource();
-
-	List<ObjInfo> getList(ObjInfo objDataInfo);
-
-	Integer getTotal(ObjInfo objDataInfo);
-
-	List<ObjInfo> getDetail(ObjInfo objDataInfo);
 
 	
 }

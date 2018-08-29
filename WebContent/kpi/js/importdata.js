@@ -1,6 +1,3 @@
-//获取主机地址之后的目录
-var pathName = window.document.location.pathname;
-var rootPath = pathName.substring(0, pathName.substr(1).indexOf('/')+1);
 var param = {};
 $(function(){
 	var configs = [{
@@ -75,7 +72,6 @@ $(function(){
 	
 	//点击查询按钮
 	$(".schBtn_1").on("click",function(){
-		console.log(param);
 		globalObj.mergeGrid["importDataBody"].reloadCards(rootPath+"/transform/getList",param);
 	})
 	
@@ -85,6 +81,7 @@ $(function(){
 		clearCombobox("importDataCombobox_2");
 		clearCombobox("importDataCombobox_3");
 		clearCombobox("importDataCombobox_4");
+		param = {};
 	})
 
 });

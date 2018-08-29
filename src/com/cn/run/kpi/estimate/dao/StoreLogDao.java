@@ -1,21 +1,39 @@
 package com.cn.run.kpi.estimate.dao;
 
 import java.util.List;
-import com.cn.run.kpi.estimate.entity.StoreFieldData;
-import com.cn.run.kpi.estimate.entity.StoreLogData;
+import com.cn.run.kpi.estimate.entity.LogField;
+import com.cn.run.kpi.estimate.entity.LogInfo;
 
 
 public interface StoreLogDao {
 
-	List<StoreLogData> getList(StoreLogData storeLogData);
+	List<LogInfo> getList(LogInfo storeLogData);
 
-	Integer getTotal(StoreLogData storeLogData);
+	Integer getTotal(LogInfo storeLogData);
 
-	List<StoreLogData> selectDetail(StoreLogData storeLogData);
+	List<LogInfo> getOutDetail(LogInfo storeLogData);
 
-	List<StoreLogData> getProtocolInfo(StoreLogData storeLogData);
+	List<LogInfo> getProtocolInfo(LogInfo storeLogData);
 	
-	List<StoreFieldData> getFieldInfo(StoreLogData storeLog);
+	List<LogField> getFieldInfo(LogInfo storeLog);
 
-	List<StoreLogData> getFeildDetail(StoreLogData storeLogData);
+	List<LogInfo> getFeildDetail(LogInfo storeLogData);
+
+	List<LogInfo> getDataSource();
+
+	List<LogInfo> getBProtocol();
+
+	List<LogInfo> getSProtocol();
+
+	LogInfo selectById(long id);
+
+	List<LogInfo> getSProtocolList(LogInfo logInfo);
+	
+	List<LogField> getFields(LogInfo log);
+
+	Integer getMoreTotal(LogInfo logInfo);
+
+	List<LogField> getInDetail(LogField field);
+
+
 }

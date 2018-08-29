@@ -54,31 +54,47 @@
 				 *  @private
 				 * 
 				 */
-				_createCard : function (data, i) {
+				_createCard : function (data, bi) {
+					console.log(data);
+					
 					var _html = '<tr>'
-                        	+'<td>' + data.col_1 + '</td>'
-                            +'<td>' + data.col_2 + '</td>'
-                            +'<td>' + data.col_3 + '</td>'
-                            +'<td>' + data.col_4 + '</td>'
-                        	+'<td>' + data.col_5 + '</td>'
-                            +'<td>' + data.col_6 + '</td>'
-                        	+'<td>' + data.col_7 + '</td>'
-                            +'<td>' + data.col_8 + '</td>'
-                            +'<td>' + data.col_9 + '</td>'
-                            +'<td>' + data.col_10 + '</td>'
-                            +'<td>' + data.col_11 + '</td>'
-                            +'<td>' + data.col_12 + '</td>'
-                            +'<td>' + data.col_13 + '</td>'
-                            +'<td>' + data.col_14 + '</td>'
-                            +'<td>' + data.col_15 + '</td>'
-                            +'<td>' + data.col_16 + '</td>'
-                            +'<td>' + data.col_17 + '</td>'
-                            +'<td>' + data.col_18 + '</td>'
-                            +'<td>' + data.col_19 + '</td>'
-                            +'<td>' + data.col_20 + '</td>'
-                            +'<td>' + data.col_21 + '</td>'
-                        +'</tr>';
-				    
+                        	+'<td>' + data.aspectDesc + '</td>'
+                            +'<td>' + data.dsCode + '</td>'
+                            +'<td>' + data.dsDesc + '</td>'
+                            +'<td><a href="#" class="percentLink">' + data.aspectNum + '</a></td>'
+                        	+'<td><a href="#" class="percentLink">' + data.accuracy + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.weekExtractNum + '</a></td>'
+                        	+'<td><a href="#" class="percentLink">' + data.netExtractNum + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.netExtractRate + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.phoneReNum + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.phoneReRate + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.idCardReNum + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.idCardReRate + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.adslReNum + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.adslReRate + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.imeiReNum + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.imeiReRate + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.imsiReNum + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.imsiReRate + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.macReNum + '</a></td>'
+                            +'<td><a href="#" class="percentLink">' + data.macReRate + '</a></td>';
+                          
+        
+                    $.each(data.objFieldList,function(si,n){
+						
+						if(bi==0){
+						
+							$("colgroup").append("<col width='' />");
+							/*$("thead tr:eq(0)").append("<th>"+this.fieldDesc+"填充率</th>");*/
+							$("#objectDataGrid tr:eq(0)").append("<th>填充率</th>");
+						}
+						
+						
+						_html += '<td>' + this.rate + '</td>';
+					})
+					
+					_html += '</tr>';
+					   
 				    return _html;
 				},
 				/**

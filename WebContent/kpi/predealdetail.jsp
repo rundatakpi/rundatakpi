@@ -26,7 +26,7 @@
     <div class="clearfix title">WA_SOURCE_005样例详情</div>
     <div class="box">
     	<div class="boxHd clearfix">
-        	<h3 class="left">详情列表（<em class="boxHdEm">75</em>）</h3>
+        	<h3 class="left">详情列表（<em class="boxHdEm" id="exampleData"></em>）</h3>
             <div class="right search">
                 <input type="text" class="left" placeholder="支持模糊搜索" />
                 <a href="#" class="left"></a>

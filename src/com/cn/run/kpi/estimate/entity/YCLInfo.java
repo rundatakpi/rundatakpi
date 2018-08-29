@@ -66,18 +66,14 @@ public class YCLInfo implements Serializable{
 	private String outputGroupRate;
 	/*数据产生时间*/
 	private String createDate;
-	/*查询开始时间*/
-	private String startTime;
-	/*查询结束时间*/
-	private String endTime;
 	/*起始位置*/
 	private int start;
 	/*长度*/
 	private int length;
 	/*属性名*/
-	private String oKey;
+	private String chkVal;
 	/*属性值*/
-	private String oValue;
+	private String chkDisplay;
 	/*列名*/
 	private String colName;
 	
@@ -130,6 +126,12 @@ public class YCLInfo implements Serializable{
 	}
 	public void setActionType(String actionType) {
 		this.actionType = actionType;
+	}
+	public String getActionTypeDesc() {
+		return actionTypeDesc;
+	}
+	public void setActionTypeDesc(String actionTypeDesc) {
+		this.actionTypeDesc = actionTypeDesc;
 	}
 	public long getInputNum() {
 		return inputNum;
@@ -239,18 +241,6 @@ public class YCLInfo implements Serializable{
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
-	public String getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-	public String getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
 	public int getStart() {
 		return start;
 	}
@@ -263,17 +253,17 @@ public class YCLInfo implements Serializable{
 	public void setLength(int length) {
 		this.length = length;
 	}
-	public String getoKey() {
-		return oKey;
+	public String getChkVal() {
+		return chkVal;
 	}
-	public void setoKey(String oKey) {
-		this.oKey = oKey;
+	public void setChkVal(String chkVal) {
+		this.chkVal = chkVal;
 	}
-	public String getoValue() {
-		return oValue;
+	public String getChkDisplay() {
+		return chkDisplay;
 	}
-	public void setoValue(String oValue) {
-		this.oValue = oValue;
+	public void setChkDisplay(String chkDisplay) {
+		this.chkDisplay = chkDisplay;
 	}
 	public String getColName() {
 		return colName;
@@ -281,11 +271,9 @@ public class YCLInfo implements Serializable{
 	public void setColName(String colName) {
 		this.colName = colName;
 	}
-	public String getActionTypeDesc() {
-		return actionTypeDesc;
-	}
-	public void setActionTypeDesc(String actionTypeDesc) {
-		this.actionTypeDesc = actionTypeDesc;
-	}
+	
+	
+	
+	
 	
 }

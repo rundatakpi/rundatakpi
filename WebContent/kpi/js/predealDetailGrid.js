@@ -56,12 +56,12 @@
 				 */
 				_createCard : function (data, i) {
 					var _html = '<tr>'
-                        	+'<td>' + data.col_1 + '</td>'
-                            +'<td>' + data.col_2 + '</td>'
-                            +'<td>' + data.col_3 + '</td>'
-                            +'<td>' + data.col_4 + '</td>'
-                        	+'<td>' + data.col_5 + '</td>'
-                            +'<td>' + data.col_6 + '</td>'
+                        	+'<td>' + data.sourceDesc + '</td>'
+                            +'<td>' + data.authentNumber + '</td>'
+                            +'<td>' + data.authenType + '</td>'
+                            +'<td>' + data.senderName + '</td>'
+                        	+'<td>' + data.receiverName + '</td>'
+                            +'<td>' + data.baseStation + '</td>'
                         +'</tr>';
 				    
 				    return _html;

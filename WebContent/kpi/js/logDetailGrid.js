@@ -54,25 +54,31 @@
 				 *  @private
 				 * 
 				 */
-				_createCard : function (data, i) {
+				_createCard : function (data, bi) {
+					
 					var _html = '<tr>'
-                        	+'<td>' + data.col_1 + '</td>'
-                            +'<td>' + data.col_2 + '</td>'
-                            +'<td>' + data.col_3 + '</td>'
-                            +'<td>' + data.col_4 + '</td>'
-                        	+'<td>' + data.col_5 + '</td>'
-                            +'<td>' + data.col_6 + '</td>'
-                        	+'<td>' + data.col_7 + '</td>'
-                            +'<td>' + data.col_8 + '</td>'
-                            +'<td>' + data.col_9 + '</td>'
-                            +'<td>' + data.col_10 + '</td>'
-                            +'<td>' + data.col_11 + '</td>'
-                            +'<td>' + data.col_12 + '</td>'
-                            +'<td>' + data.col_13 + '</td>'
-                            +'<td>' + data.col_14 + '</td>'
-                            +'<td>' + data.col_15 + '</td>'
-                        +'</tr>';
-				    
+                        	+'<td>' + data.sProtocolCode + '</td>'
+                            +'<td>' + data.sProtocolDesc + '</td>'
+                            +'<td>' + data.actionTypeDesc + '</td>'
+                            +'<td><a href="#" class="percentLink" name="dataNum">' + data.dataNum + '</a></td>';
+                       
+				    	
+					$.each(data.logFieldList,function(si,n){
+						
+						if(bi==0){
+							$("colgroup").append("<col width='' />");
+							$("thead tr:eq(0)").append("<th colspan='3'>"+this.fieldDesc+"</th>");
+							$("thead tr:eq(1)").append("<th>填充率</th><th>准确率</th><th>代码符合</th>");
+						}
+						
+						
+						_html += '<td><a href="#" class="percentLink" name="fillRate" field="'+this.fieldCode+'">' + this.fillRate + '</a></td>';
+						_html += '<td><a href="#" class="percentLink" name="accuracy" field="'+this.fieldCode+'">' + this.accuracy + '</a></td>';
+						_html += '<td><a href="#" class="percentLink" name="codeMatchRate" field="'+this.fieldCode+'">' + this.codeMatchRate + '</a></td>';
+					})
+					
+					_html += '</tr>';
+					
 				    return _html;
 				},
 				/**
@@ -87,11 +93,15 @@
 						//class_card = 'cardOb',
 						$container = $('#' + this.id);
 					
-					//卡片：详情
-					$container.off('click','tr .importDataLink').on('click','tr .importDataLink',function (ev) {
+					//数据详情页面
+					$container.off('click','tr .percentLink').on('click','tr .percentLink',function (ev) {
 						var tr = $(this).closest('tr'),
-							index = $('#' + that.id).find('tr').index(tr);
-						that.callBacks.handleImportDataLink.apply(tr,[ev,that.data.data[index]]);
+						index = $('#' + that.id).find('tr').index(tr);
+						//获取列对应的字段名
+						var name = $(this).attr("name");
+						var field = $(this).attr("field");
+						
+						that.callBacks.handlePercentLink.apply(tr,[ev,that.data.data[index],name,field]);
 					});
 				}
 				

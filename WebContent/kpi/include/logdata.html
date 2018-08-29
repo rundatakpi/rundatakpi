@@ -10,7 +10,7 @@
     
     <div class="box">
     	<div class="boxHd clearfix">
-        	<h3 class="left">日志数量（<em class="boxHdEm">75</em>）</h3>
+        	<h3 class="left">日志数量（<em class="boxHdEm" id="logNum"></em>）</h3>
         </div>
         <div class="boxBd">
         	<div class="logDataGrid" id="logDataGrid">
@@ -43,6 +43,16 @@
                             <th>字段数</th>
                             <th>数据准确率</th>
                             <th>操作</th>
+                        </tr>
+                        <tr style="display:none">
+                        	<th>dsCode</th>
+                        	<th>dsDesc</th>
+                        	<th>bProtocolCode</th>
+                        	<th>bProtocolDesc</th>
+                        	<th>inputNum</th>
+                        	<th>inputRate</th>
+                        	<th>fieldNum</th>
+                        	<th>bAccuracy</th>
                         </tr>
                     </thead>
                     <tbody id="logDataBody">

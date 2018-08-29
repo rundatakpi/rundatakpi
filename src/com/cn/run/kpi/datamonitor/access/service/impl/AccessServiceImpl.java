@@ -116,7 +116,6 @@ public class AccessServiceImpl implements AccessService {
 			
 			JSONObject object = new JSONObject();
 			object.put("result", condition);
-			System.out.println(object.toString());
 			String jsonString = object.toString();
 			String root = Constants.ROOT;
 			if (StringUtil.isNull(root)) {

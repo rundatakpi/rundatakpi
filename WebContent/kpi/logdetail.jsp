@@ -15,7 +15,10 @@
 <script type="text/javascript" src="js/run-min.js"></script>
 <script type="text/javascript" src="js/logDetailGrid.js"></script>
 <script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/charts.js"></script>
 <script type="text/javascript" src="js/logdetail.js"></script>
+
 
 </head>
 
@@ -23,10 +26,10 @@
 <div class="container">
 	<%@ include file="nav.jsp"%>
     
-    <div class="clearfix title">WA_SOURCE_005质量详情</div>
+    <div class="clearfix title" id="bProtocolName"></div>
     <div class="box">
     	<div class="boxHd clearfix">
-        	<h3 class="left">详情列表（<em class="boxHdEm">75</em>）</h3>
+        	<h3 class="left">详情列表（<em class="boxHdEm" id="logMoreTotal"></em>）</h3>
             <div class="right search">
                 <input type="text" class="left" placeholder="支持模糊搜索" />
                 <a href="#" class="left"></a>
@@ -40,45 +43,18 @@
                         <col width="" />
                         <col width="" />
                         <col width="" />
-                        <col width="" />
-                        <col width="" />
-                        <col width="" />
-                        <col width="" />
-                        <col width="" />
-                        <col width="" />
-                        <col width="" />
-                        <col width="" />
-                        <col width="" />
-                        <col width="" />
-                        <col width="" />
                     </colgroup>
                     <thead>
                     	<tr>
                         	<th colspan="2">小协议</th>
                         	<th></th>
                         	<th></th>
-                        	<th colspan="2">认证号码</th>
-                            <th colspan="3">认证类型</th>
-                            <th colspan="2">发送者名称</th>
-                            <th colspan="2">接受者名称</th>
-                            <th colspan="2">基站</th>
                         </tr>
                         <tr>
                         	<th>小协议号</th>
                         	<th>小协议描述</th>
                             <th>动作描述</th>
                             <th>数据条数</th>
-                            <th>填充率</th>
-                            <th>准确率</th>
-                            <th>填充率</th>
-                            <th>准确率</th>
-                        	<th>代码符合</th>
-                            <th>填充率</th>
-                            <th>准确率</th>
-                            <th>填充率</th>
-                            <th>准确率</th>
-                            <th>填充率</th>
-                            <th>准确率</th>
                         </tr>
                     </thead>
                     <tbody id="logDetailDataBody">

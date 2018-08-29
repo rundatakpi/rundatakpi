@@ -18,16 +18,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="null != actionType and '' != actionType">
             and actionType = #{actionType}
         </if>
-        <if test="null != startTime and '' != startTime">
-            and createDate <![CDATA[ >= ]]> #{startTime}
-        </if>
-        <if test="null != endTime and '' != endTime">
-            and createDate <![CDATA[ < ]]> #{endTime}
-        </if>
         <if test="null != createDate and '' != createDate">
             and createDate = #{createDate}
         </if>
     </sql>
+    
+    <select id="getDataSource" resultType="com.cn.run.kpi.estimate.entity.YCLInfo">
+    	select distinct dsCode chkVal,dsDesc chkDisplay from t_ycl_total
+    </select>
+    
+     <select id="getBProtocol"  resultType="com.cn.run.kpi.estimate.entity.YCLInfo">
+    	select distinct bProtocolCode chkVal,bProtocolDesc chkDisplay from t_ycl_total
+    </select>
+    
+     <select id="getSProtocol"  resultType="com.cn.run.kpi.estimate.entity.YCLInfo">
+    	select distinct sProtocolCode chkVal,sProtocolDesc chkDisplay from t_ycl_total
+    </select>
+    
+     <select id="getActionType" resultType="com.cn.run.kpi.estimate.entity.YCLInfo">
+    	select distinct actionType chkVal from t_ycl_total
+    </select>
     
 	<select id="getList" parameterType="com.cn.run.kpi.estimate.entity.YCLInfo" resultType="com.cn.run.kpi.estimate.entity.YCLInfo">
 		select
@@ -58,24 +68,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getTotal" parameterType="com.cn.run.kpi.estimate.entity.YCLInfo" resultType="java.lang.Integer">
-		SELECT count(
-				DISTINCT t.dsCode,
-				t.bProtocolCode,
-				t.sProtocolCode,
-				t.actionType
-			)
-		FROM t_ycl_total t 
+		SELECT count(1) FROM t_ycl_total t 
 		<where>
 			<include refid="yclCondition"></include>
 		</where>
 	</select>
 	
+	<select id="selectById" parameterType="java.lang.Long" resultType="com.cn.run.kpi.estimate.entity.YCLInfo">
+		select 
+		  	t.id, 
+			t.dsCode,
+			t.dsDesc,
+			t.bProtocolCode,
+			t.bProtocolDesc,			
+			t.sProtocolCode,
+			t.sProtocolDesc,
+			t.actionType,
+			t.inputNum,
+			t.inputFieldRate,
+			t.inputGroupRate,
+			t.inputFieldAvailRate,
+			t.inputGroupAvailRate,
+			t.inputAccuracy,
+			t.outputNum,
+			t.outputSpeed,
+			t.outputFieldRate,
+			t.outputGroupRate,
+			t.createDate
+		from t_ycl_total t
+		where t.id = #{_parameter}
+	</select>
+	
+	
 	<select id="selectDetail" parameterType="com.cn.run.kpi.estimate.entity.YCLInfo" resultType="com.cn.run.kpi.estimate.entity.YCLInfo">
-		select createDate as oKey,${colName} as oValue from t_ycl
+		select createDate as chkVal,${colName} as chkDisplay from t_ycl
 		<where>
-			<include refid="yclCondition"></include>
+			<if test="null != dsCode and '' != dsCode">
+	            and dsCode = #{dsCode}
+	        </if>
+	        <if test="null != bProtocolCode and '' != bProtocolCode">
+	            and bProtocolCode = #{bProtocolCode}
+	        </if>
+	        <if test="null != sProtocolCode and '' != sProtocolCode">
+	            and sProtocolCode = #{sProtocolCode}
+	        </if>
+	        <if test="null != actionType and '' != actionType">
+	            and actionType = #{actionType}
+	        </if>
+	         <if test="null != createDate and '' != createDate">
+	            and createDate >= date_sub(#{createDate}, INTERVAL 7 DAY) 
+	        </if>
 		</where>
 	</select>
+
 	
 	<select id="getYCLExample" parameterType="com.cn.run.kpi.estimate.entity.YCLInfo" resultType="com.cn.run.kpi.estimate.entity.YCLExample">
 		select *

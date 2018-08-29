@@ -1,7 +1,5 @@
 package com.cn.run.kpi.estimate.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,13 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cn.run.kpi.estimate.common.ActionConfig;
 import com.cn.run.kpi.estimate.common.LogConstants;
-import com.cn.run.kpi.estimate.entity.StoreLogData;
+import com.cn.run.kpi.estimate.common.YCLConstants;
+import com.cn.run.kpi.estimate.entity.LogField;
+import com.cn.run.kpi.estimate.entity.LogInfo;
 import com.cn.run.kpi.estimate.service.StoreLogService;
 import com.cn.run.kpi.utils.DateUtil;
-import com.sun.org.apache.bcel.internal.classfile.ConstantClass;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
-import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 
 /**
@@ -30,13 +27,66 @@ import net.sf.json.JSONObject;
  *
  */
 @Controller
-@RequestMapping("/storeLog")
+@RequestMapping("/log")
 public class StoreLogController {
 	
-	private static Logger LOG = Logger.getLogger(StoreLogController.class);
+	private static Logger LOGGER = Logger.getLogger(StoreLogController.class);
 
 	@Autowired
 	private StoreLogService storeLogDataService;
+	
+	
+	/**
+	 * 获取数据源类型
+	 */
+	@RequestMapping("/getDataSource")
+	@ResponseBody
+	public JSONObject getDataSource() {
+		JSONObject jsonObject = new JSONObject();
+		try {
+			List<LogInfo> list = storeLogDataService.getDataSource();
+			jsonObject.put("result", list);
+		}catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
+		}
+		return jsonObject;
+		
+	}
+	
+
+	/**
+	 * 获取大协议类型
+	 */
+	@RequestMapping("/getBProtocol")
+	@ResponseBody
+	public JSONObject getBProtocol() {
+		JSONObject jsonObject = new JSONObject();
+		try {
+			List<LogInfo> list = storeLogDataService.getBProtocol();
+			jsonObject.put("result", list);
+		}catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
+		}
+		return jsonObject;
+		
+	}
+	
+	/**
+	 * 获取小协议类型
+	 */
+	@RequestMapping("/getSProtocol")
+	@ResponseBody
+	public JSONObject getSProtocol() {
+		JSONObject jsonObject = new JSONObject();
+		try {
+			List<LogInfo> list = storeLogDataService.getSProtocol();
+			jsonObject.put("result", list);
+		}catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
+		}
+		return jsonObject;
+		
+	}
 	
 	/**
 	 * 查询入库日志数据列表
@@ -44,96 +94,113 @@ public class StoreLogController {
 	 */
 	@RequestMapping("/getList")
 	@ResponseBody
-	public Map<String,Object> getList(HttpServletRequest request,StoreLogData storeLogData){
+	public Map<String,Object> getList(HttpServletRequest request,LogInfo logInfo){
 		Map<String,Object> resultMap = new HashMap<String,Object>();
-		Integer start = Integer.valueOf(request.getParameter("start"));
-		Integer length = Integer.valueOf(request.getParameter("length"));
-		storeLogData.setStart(start);
-		storeLogData.setLength(length);
+		Integer start = Integer.valueOf(request.getParameter("currentPage"));
+		Integer length = Integer.valueOf(request.getParameter("pageSize"));
+		logInfo.setCreateDate(DateUtil.getDate());
+		logInfo.setStart(start-1);
+		logInfo.setLength(length);
 		
-		List<StoreLogData> storeLogDatas = storeLogDataService.getList(storeLogData);
-		Integer total = storeLogDataService.getTotal(storeLogData);
+		List<LogInfo> storeLogDatas = storeLogDataService.getList(logInfo);
+		Integer total = storeLogDataService.getTotal(logInfo);
 		
-		resultMap.put("recordsTotal", total);
-		resultMap.put("recordsFiltered", total);
+		resultMap.put("total", total);
 		resultMap.put("data", storeLogDatas);
 		
 		return resultMap;
 
 	}
 	
+	
 	/**
-	 * 查询某种协议  输入数据条数/输入数据字段填充率...   近一周数据量
+	 * 查询某种大协议下面所有的小协议
 	 * @param transformStr
 	 */
-	@RequestMapping("/getDetail")
+	@RequestMapping("/getMore")
 	@ResponseBody
-	public JSONObject getDetail(StoreLogData storeLogData){
+	public JSONObject getMore(LogInfo logData,HttpServletRequest request){
 		JSONObject json = new JSONObject();
 		
 		try {
-			String newName = LogConstants.getLogSql(storeLogData.getColName());     
-			storeLogData.setColName(newName);
-
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String startDateStr = DateUtil.getDateBefore(new Date(), 7);
-			String endDateStr = sdf.format(new Date());
-			storeLogData.setStartTime(startDateStr);
-			storeLogData.setEndTime(endDateStr);
+			Integer start = Integer.valueOf(request.getParameter("currentPage"));
+			Integer length = Integer.valueOf(request.getParameter("pageSize"));
 			
-			List<StoreLogData> logList = storeLogDataService.selectDetail(storeLogData);
+			LogInfo logInfo = storeLogDataService.selectById(logData.getId());
+			logInfo.setStart(start-1);
+			logInfo.setLength(length);
 			
-			json.put("data",logList);
-
+			List<LogInfo> logInfoList = storeLogDataService.getMore(logInfo);
+			for (LogInfo logInfo2 : logInfoList) {
+				String actionType = logInfo2.getActionType();
+				String actionTypeDesc = ActionConfig.getValue(actionType);
+				logInfo2.setActionTypeDesc(actionTypeDesc);
+			}
+			
+			Integer total = storeLogDataService.getMoreTotal(logInfo);
+			
+			json.put("data",logInfoList);
+			json.put("total",total);
 		} catch (Exception e) {
-			LOG.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 		}
 
 		return json;
 		
 	}
 	
+	
 	/**
-	 * 获取表头的信息
+	 * 查询某种协议  输入数据条数/输入数据字段填充率...   近一周数据量
+	 * @param transformStr
 	 */
-	@RequestMapping("/getTableInfo")
+	@RequestMapping("/getOutDetail")
 	@ResponseBody
-	public JSON getTableInfo(StoreLogData storeLogData) {
-		JSONObject jsonObject = new JSONObject();
-		List<StoreLogData> storeLogs = storeLogDataService.getTableInfo(storeLogData);
-		for (StoreLogData storeLogData2 : storeLogs) {
-			String actionTypeDesc = ActionConfig.getValue(storeLogData2.getActionType());
-			storeLogData2.setActionTypeDesc(actionTypeDesc);
+	public JSONObject getOutDetail(LogInfo logData){
+		JSONObject json = new JSONObject();
+		
+		try {
+			LogInfo logInfo = storeLogDataService.selectById(logData.getId());
+			String colName = LogConstants.getLogSql(logData.getColName());
+			logInfo.setColName(colName);
+
+			List<LogInfo> logList = storeLogDataService.getOutDetail(logInfo);
+			
+			json.put("data",logList);
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
 		}
-		jsonObject.put("logs", storeLogs);
-		return jsonObject;
+
+		return json;
 		
 	}
 	
 	
 	/**
-	 * 获取表头的信息
+	 * 查询某种小协议填充率，准确率，代码符合度，  近一周数据量
+	 * @param transformStr
 	 */
-	@RequestMapping("/getFeildInfo")
+	@RequestMapping("/getInDetail")
 	@ResponseBody
-	public JSON getFeildInfo(StoreLogData storeLogData) {
-		JSONObject jsonObject = new JSONObject();
-		String colName = storeLogData.getColName();
-		String colNameNew = LogConstants.getLogSql(colName);
-		storeLogData.setColName(colNameNew);
-		if("dataNum".equals(colNameNew)) {
-			storeLogData.setFieldCode("");
+	public JSONObject getInDetail(LogField logField){
+		JSONObject json = new JSONObject();
+		
+		try {
+			String colName = LogConstants.getLogSql(logField.getColName());
+			logField.setColName(colName);
+			if(logField.getFieldCode()!=null&&logField.getFieldCode()!="") {
+				logField.setFieldCode(logField.getFieldCode());
+			}
+			
+			List<LogField> logList = storeLogDataService.getInDetail(logField);
+			json.put("data",logList);
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
 		}
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String startDateStr = DateUtil.getDateBefore(new Date(), 7);
-		String endDateStr = sdf.format(new Date());
-		storeLogData.setStartTime(startDateStr);
-		storeLogData.setEndTime(endDateStr);
-		
-		List<StoreLogData> storeLogs = storeLogDataService.getFeildDetail(storeLogData);
-		jsonObject.put("data", storeLogs);
-		return jsonObject;
+
+		return json;
 		
 	}
 }
