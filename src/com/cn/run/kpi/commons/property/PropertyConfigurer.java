@@ -10,6 +10,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
 import com.cn.run.kpi.commons.content.Constants;
+import com.cn.run.kpi.utils.InitUtils;
  
 /**
  * 读取配置文件
@@ -40,7 +41,7 @@ public class PropertyConfigurer extends PropertyPlaceholderConfigurer{
 	        	Constants.RESOURCES.put(key, value);
 	        }
 	        Constants.RESOURCES.put("root", System.getProperty("web.root"));
-	        
+	        InitUtils.init();
 	        
 	    }
 

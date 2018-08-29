@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-08-29 10:20:27
+Date: 2018-08-29 20:45:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -71,35 +71,35 @@ CREATE TABLE `appqueryrecord` (
 -- ----------------------------
 -- Records of appqueryrecord
 -- ----------------------------
-INSERT INTO `appqueryrecord` VALUES ('1', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('2', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('3', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('4', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('5', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('6', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('7', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('8', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('9', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('10', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('11', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('12', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('13', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('14', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('15', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('16', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('17', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('18', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('19', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('20', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('21', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('22', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('23', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('24', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('25', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('26', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('27', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('28', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
-INSERT INTO `appqueryrecord` VALUES ('29', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('1', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9947', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('2', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9950', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('3', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9948', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('4', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9960', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('5', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9962', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('6', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9960', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('7', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9960', 'p', 'XDA', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('8', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9960', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('9', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9960', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('10', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9960', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('11', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9968', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('12', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9968', 'p', 'XDA', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('13', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9968', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('14', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9968', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('15', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9968', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('16', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9968', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('17', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9975', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('18', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9975', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('19', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9975', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('20', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9975', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('21', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9975', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('22', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9975', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('23', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9984', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('24', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9984', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('25', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9984', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('26', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9984', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('27', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9984', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('28', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9984', 'p', '锐搜', '1', '调用异常');
+INSERT INTO `appqueryrecord` VALUES ('29', '2018-08-22 09:56:18', 'select * from WA_OBJECT_Z002_9984', 'p', '锐搜', '1', '调用异常');
 INSERT INTO `appqueryrecord` VALUES ('30', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
 INSERT INTO `appqueryrecord` VALUES ('31', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');
 INSERT INTO `appqueryrecord` VALUES ('32', '2018-08-22 09:56:18', 'select * from hhh', 'p', '锐搜', '1', '调用异常');

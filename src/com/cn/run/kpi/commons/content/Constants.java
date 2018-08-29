@@ -14,6 +14,11 @@ public interface Constants {
 	public static final String TIMESTAMPSTYLE="yyyyMMdd HH:mm:ss";//时间格式
 	public static final String JSON_SUFFIX = ".json";
 	
+	
+	/**
+	 * 协议
+	 */
+	public static Map<String, String> PROTOCOLMAP = new HashMap<String, String>();
 	/**
 	 * 页面大小
 	 */

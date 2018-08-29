@@ -1,10 +1,19 @@
 package com.cn.run.kpi.datamonitor.service.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cn.run.kpi.commons.content.Constants;
 import com.cn.run.kpi.datamonitor.service.entity.AppInvokeProtocolEntity;
 import com.cn.run.kpi.datamonitor.service.entity.AppMiddleWareEntity;
 import com.cn.run.kpi.datamonitor.service.entity.ServiceInvokeException;
@@ -42,7 +52,10 @@ public class ServiceMonitorController {
 	@RequestMapping("/get")
 	@ResponseBody
 	public String init(HttpServletRequest request, HttpServletResponse response) {
+		
+		Map<String, String> map = Constants.PROTOCOLMAP;
 		Map<String, Object> queryCondition = new HashMap<>();
+		queryCondition.put("day", Constants.DAY_WEEK);
 		JSONObject object = new JSONObject();
 		
 		getAppInvokeMiddleWareData(queryCondition, object);
@@ -54,7 +67,8 @@ public class ServiceMonitorController {
 
 	private void getAppInvokeMiddleWareData(Map<String, Object> queryCondition, JSONObject object) {
 		List<String> createDate = new ArrayList<String>();
-		for (int i = 6; i >= 0; i--) {
+		int day = (int) queryCondition.get("day");
+		for (int i = day; i >= 0; i--) {
 			String da = DateUtil.getDateBefore(new Date(), i);
 			createDate.add(da);
 		}
@@ -108,25 +122,74 @@ public class ServiceMonitorController {
 	}
 
 	private void getAppInvokeProtocolData(Map<String, Object> queryCondition, JSONObject object) {
-		List<AppInvokeProtocolEntity> appInvokeProtocol;
+		
+		Map<String, Integer> protocolData = new TreeMap<String, Integer>();
+		List<String> appInvokeProtocol;
 		try {
 			appInvokeProtocol = serviceMonitorService.getAppInvokePrototolData(queryCondition);
 			if (appInvokeProtocol != null && !appInvokeProtocol.isEmpty()) {
+				String pattern = "WA_\\w*";
+				Pattern p = Pattern.compile(pattern);
+				
 				JSONObject invokeProtocolJson = new JSONObject();
-				List<String> protocol = new ArrayList<>();
-				List<Long> invokeNum = new ArrayList<>();
-				for (AppInvokeProtocolEntity appInvokeProtocolEntity : appInvokeProtocol) {
-					protocol.add(appInvokeProtocolEntity.getProtocol());
-					invokeNum.add(appInvokeProtocolEntity.getInvokeNum());
+				for (String appInvokeProtocolEntity : appInvokeProtocol) {
+					/*protocol.add(appInvokeProtocolEntity.getProtocol());
+					invokeNum.add(appInvokeProtocolEntity.getInvokeNum());*/
+					Matcher m = p.matcher(appInvokeProtocolEntity);
+					while (m.find()) {
+						String protocol = m.group(0);
+						if (protocolData.containsKey(protocol)) {
+							Integer invokeNum = protocolData.get(protocol) + 1;
+							protocolData.put(protocol, invokeNum);
+						} else {
+							protocolData.put(protocol, 1);
+						}
+					}
 				}
-				invokeProtocolJson.put("protocol", protocol);
-				invokeProtocolJson.put("invokeNum", invokeNum);
-				object.put("invokeProtocolJson", invokeProtocolJson);
+				Map<String, Integer> sortMap = sortMapByValue(protocolData);
+				if (sortMap != null && !sortMap.isEmpty()) {
+					Set<Entry<String, Integer>> entrySet = sortMap.entrySet();
+					List<String> protocolList = new ArrayList<>();
+					List<Integer> invokeNum = new ArrayList<>();
+					for (Entry<String, Integer> entry : entrySet) {
+						String protocolName = Constants.PROTOCOLMAP.get(entry.getKey());
+						if (StringUtil.isNotEmpty(protocolName)) {
+							protocolList.add(protocolName);
+							invokeNum.add(entry.getValue());
+						}
+					}
+					invokeProtocolJson.put("protocol", protocolList);
+					invokeProtocolJson.put("invokeNum", invokeNum);
+					object.put("invokeProtocolJson", invokeProtocolJson);
+				}
 			}
 		} catch (Exception e) {
 			LOG.error("get app invoke protocol data failed...", e);
 		}
 	}
+	
+	/**
+     * 使用 Map按value进行排序
+     * @param map
+     * @return
+     */
+    public static Map<String, Integer> sortMapByValue(Map<String, Integer> oriMap) {
+        if (oriMap == null || oriMap.isEmpty()) {
+            return null;
+        }
+        Map<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
+        List<Map.Entry<String, Integer>> entryList = new ArrayList<Map.Entry<String, Integer>>(
+                oriMap.entrySet());
+        Collections.sort(entryList, new MapValueComparator());
+
+        Iterator<Map.Entry<String, Integer>> iter = entryList.iterator();
+        Map.Entry<String, Integer> tmpEntry = null;
+        while (iter.hasNext()) {
+            tmpEntry = iter.next();
+            sortedMap.put(tmpEntry.getKey(), tmpEntry.getValue());
+        }
+        return sortedMap;
+    }
 	
 	private List<String> getApp(Map<String, Object> queryCondition) {
 		List<String> app = new ArrayList<>();
@@ -185,8 +248,37 @@ public class ServiceMonitorController {
 	@ResponseBody
 	public String getAppData(HttpServletRequest request) {
 		Map<String, Object> queryCondition = new HashMap<String, Object>();
+		String day = request.getParameter("day");
+		if (StringUtil.isNumeric(day)) {
+			queryCondition.put("day", Integer.parseInt(day));
+		} else {
+			queryCondition.put("day", Constants.DAY_WEEK);
+		}
 		JSONObject object = new JSONObject();
 		getAppInvokeMiddleWareData(queryCondition, object);
 		return object.toString();
 	}
+	
+	public static void main(String[] args) {
+		String pattern = "RWA_\\w*";
+		String test = "'RWA_OBJECT_Z002_9954' Wsodj RWA_OBJECT_Z002_9985 test";
+		
+		Pattern p = Pattern.compile(pattern);
+		Matcher m = p.matcher(test);
+		
+		while (m.find()) {
+			System.out.println(m.group(0));
+//			System.out.println(m.group(1));
+		}
+		
+	}
+}
+
+class MapValueComparator implements Comparator<Map.Entry<String, Integer>> {
+
+    @Override
+    public int compare(Entry<String, Integer> me1, Entry<String, Integer> me2) {
+
+        return me2.getValue().compareTo(me1.getValue());
+    }
 }
